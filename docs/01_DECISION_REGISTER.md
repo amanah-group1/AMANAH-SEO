@@ -142,47 +142,28 @@ Dokumen ini tidak boleh mengubah status PROPOSED menjadi CONFIRMED hanya karena 
 - **Belum diputuskan:** Angka limit, definisi satu website, aturan staging atau development, transfer aktivasi, dan mekanisme reset.
 - **Peringatan:** Angka limit yang pernah dibahas sebelumnya tidak boleh dianggap final tanpa persetujuan eksplisit.
 
-## 6. Pertanyaan Terbuka
+## 6. Indeks Pertanyaan Terbuka
 
-### OPEN-001 — Identity dan account ownership
+Bagian ini adalah indeks ringkas untuk membantu navigasi, bukan daftar pertanyaan kedua yang berdiri sendiri. Daftar rinci dan status setiap pertanyaan berada di `docs/10_OPEN_QUESTIONS.md`. ID `OPEN-xxx` di bawah dipertahankan untuk riwayat Decision Register; ID pertanyaan rinci menggunakan format `Q-xxx`.
 
-Bagaimana akun platform berhubungan dengan akun administrator WordPress, identitas customer, organisasi, dan instalasi produk?
+| ID indeks | Pokok bahasan | Pertanyaan rinci terkait |
+|---|---|---|
+| OPEN-001 | Identitas dan kepemilikan akun | Q-001 sampai Q-003 |
+| OPEN-002 | Otoritas lisensi dan pemeriksaan entitlement | Q-008, Q-012, Q-013 |
+| OPEN-003 | Identitas dan siklus aktivasi | Q-011 |
+| OPEN-004 | Ketersediaan layanan dan kebijakan offline | Q-012 sampai Q-013 |
+| OPEN-005 | Bentuk penempatan aplikasi | Q-018 |
+| OPEN-006 | Cara komunikasi dan versi kontrak | Q-005, Q-020 |
+| OPEN-007 | Pendaftaran produk dan kompatibilitas | Q-004, Q-020 |
+| OPEN-008 | Paket dan batas komersial | Q-009 sampai Q-010 |
+| OPEN-009 | Keamanan dan pengelolaan operasional | Q-021 sampai Q-024, Q-027 |
+| OPEN-010 | Penyimpanan dan masa retensi data | Q-022 sampai Q-023 |
+| OPEN-011 | Kepemilikan data dan navigasi produk | Q-006 sampai Q-007 |
+| OPEN-012 | Kredensial AI dan pembebanan biaya | Q-014 sampai Q-016 |
+| OPEN-013 | Teknologi platform dan database | Q-017, Q-019 |
+| OPEN-014 | Prioritas produk, MVP, dan strategi rilis | Q-025 sampai Q-027 |
 
-### OPEN-002 — License authority
-
-Komponen mana yang menjadi source of truth untuk status lisensi dan entitlement?
-
-### OPEN-003 — Activation identity
-
-Bagaimana instalasi diidentifikasi, dipindahkan, dinonaktifkan, atau dipulihkan setelah kegagalan?
-
-### OPEN-004 — Availability dan offline policy
-
-Bagaimana produk harus berperilaku ketika layanan platform atau lisensi tidak dapat diakses?
-
-### OPEN-005 — Deployment topology
-
-Apakah platform dan layanan pendukung ditempatkan pada satu deployment atau beberapa komponen terpisah?
-
-### OPEN-006 — Integration transport
-
-Mekanisme komunikasi apa yang tersedia dan paling sesuai dengan arsitektur aktual kedua produk?
-
-### OPEN-007 — Compatibility policy
-
-Versi produk apa yang boleh diintegrasikan, bagaimana compatibility diverifikasi, dan bagaimana versi yang tidak kompatibel ditangani?
-
-### OPEN-008 — Commercial model
-
-Paket, harga, batas penggunaan, refund, renewal, dan aturan entitlement apa yang akan disahkan?
-
-### OPEN-009 — Operations and support
-
-Siapa yang bertanggung jawab atas deployment, backup, incident response, support, dan pemulihan layanan?
-
-### OPEN-010 — Data retention
-
-Data akun, lisensi, aktivasi, audit log, dan diagnostik apa yang disimpan, berapa lama, dan bagaimana penghapusannya dilakukan?
+Semua indeks di tabel ini tetap **OPEN** sampai pertanyaan rinci terkait mendapat keputusan yang tercatat. Pertanyaan rinci di `docs/10_OPEN_QUESTIONS.md` tetap menjadi daftar acuan untuk isi, ketergantungan, dan status pertanyaan. Jika keputusan menutup suatu pertanyaan, perbarui kedua dokumen dalam perubahan yang sama dan tautkan keputusan yang disetujui. Jangan menandai pertanyaan selesai hanya karena pemetaan di tabel ini telah dibuat.
 
 ## 7. Cara Menambahkan Keputusan
 
