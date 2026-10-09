@@ -1,6 +1,7 @@
 ﻿# Implementation Plan — [PLAN-ID]
 
-**Status:** PROPOSED — belum disetujui untuk implementasi  
+**Status Dokumen:** DRAFT  
+**Status Rencana:** PROPOSED — belum disetujui untuk implementasi  
 **Tanggal:** [YYYY-MM-DD]  
 **Pemilik:** [Name or Role]  
 **Terkait:** [Audit finding / ADR / Issue / Requirement]
