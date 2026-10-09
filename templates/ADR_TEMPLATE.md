@@ -1,6 +1,7 @@
 ﻿# ADR-[NUMBER] — [Decision Title]
 
-**Status:** PROPOSED  
+**Status Dokumen:** DRAFT  
+**Status Keputusan:** PROPOSED  
 **Tanggal dibuat:** [YYYY-MM-DD]  
 **Pengusul:** [Name or Role]  
 **Pihak yang menyetujui:** [Pending / Name or Role]  
