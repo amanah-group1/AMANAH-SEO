@@ -1,6 +1,6 @@
 ﻿# AMANAH SEO — Security and Secrets
 
-**Status:** DRAFT — perlu ditinjau dan disetujui  
+**Status:** APPROVED — baseline kebijakan yang diusulkan disetujui; implementasi kontrol belum diverifikasi  
 **Jenis dokumen:** Security baseline  
 **Cakupan:** Platform induk AMANAH SEO dan batas integrasinya dengan produk terpisah
 
