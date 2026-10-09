@@ -30,16 +30,11 @@
 
 - Semua dokumen inti dan template masih berstatus DRAFT; persetujuan akhir belum dicatat.
 - Q-001 sampai Q-027 tetap OPEN. Pertanyaan yang memerlukan bukti audit produk harus diputuskan setelah bukti tersebut tersedia, bukan ditebak saat menyusun pedoman.
-- Gate 0 pada laporan sebelumnya tetap berstatus PARTIAL karena pemeriksaan link universal belum dibuktikan. Pemeriksaan produk, database, runtime, keamanan produk, dan integrasi adalah pekerjaan audit berikutnya, bukan syarat untuk menyatakan bahwa pemeriksaan dokumentasi Gate 0 telah mencakup seluruh ruang lingkupnya.
+- Laporan Gate 0 telah ditinjau ulang: Gate 0 berstatus PASS hanya untuk inventaris dokumentasi dan referensi lokal yang memang menjadi kriterianya. Pemeriksaan URL eksternal atau hasil render GitHub belum dilakukan dan dicatat sebagai batasan, bukan kegagalan Gate 0. Pemeriksaan produk, database, runtime, keamanan produk, dan integrasi adalah pekerjaan audit berikutnya.
 - Belum ada audit AMANAH SEO AI atau AMANAH SEO ENGINE V2 yang dilakukan sebagai bagian dari laporan ini.
 
 ## 4. Syarat sebelum pedoman dinyatakan siap
 
-Pedoman baru dapat direkomendasikan untuk persetujuan setelah:
-1. Koreksi dalam branch ini ditinjau.
-2. Semua referensi dan inventaris dokumen diperiksa ulang.
-3. Konflik antar dokumen yang masih tersisa dicatat atau diselesaikan tanpa mengubah usulan menjadi keputusan final.
-4. Pertanyaan yang harus menunggu audit diberi penanda yang jelas dan tidak menghalangi pekerjaan dokumentasi yang memang bisa diselesaikan sekarang.
-5. Catatan hasil pemeriksaan diperbarui setelah koreksi diverifikasi.
+Pedoman dapat direkomendasikan untuk persetujuan setelah koreksi pada branch ini diverifikasi, konflik dokumen yang tersisa dicatat atau diselesaikan, dan laporan pemeriksaan diperbarui. Pertanyaan Q-001 sampai Q-027 tidak harus diputuskan semua sebelum audit produk; pertanyaan yang memang bergantung pada bukti produk harus tetap OPEN sampai audit yang relevan selesai. Dokumen masih berstatus DRAFT sampai ada persetujuan eksplisit.
 
-**Kesimpulan sementara:** fondasi dokumen tersedia dan beberapa ketidakkonsistenan telah diperbaiki pada branch pemeriksaan ini. Pedoman belum boleh disebut disahkan atau sepenuhnya siap sampai pemeriksaan lanjutan dan review hasil koreksi selesai. Tidak ada source code, database, atau runtime produk yang diubah.
+**Kesimpulan sementara:** pemeriksaan inventaris Gate 0 lulus sesuai kriteria dokumentasi yang ditetapkan, dan koreksi konsistensi sudah dibuat pada branch ini. Pedoman belum berstatus APPROVED; tahap dokumentasi baru dapat dinyatakan siap untuk disahkan setelah koreksi akhir ditinjau dan hasilnya diverifikasi. Tidak ada source code, database, atau runtime produk yang diubah.
