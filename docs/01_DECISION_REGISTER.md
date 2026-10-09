@@ -22,6 +22,8 @@ Gunakan status berikut secara konsisten:
 | ASSUMPTION | Asumsi kerja yang belum diverifikasi. |
 | SUPERSEDED | Digantikan oleh keputusan lain; riwayat harus tetap dipertahankan. |
 
+Status di atas adalah status keputusan, bukan status dokumen. Status dokumen ditetapkan dalam `docs/07_DOCUMENT_GOVERNANCE.md`; status hasil audit ditetapkan dalam `docs/08_AUDIT_AND_READINESS.md`.
+
 Dokumen ini tidak boleh mengubah status PROPOSED menjadi CONFIRMED hanya karena suatu usulan terlihat masuk akal atau telah ditulis dalam dokumen.
 
 ## 3. Keputusan Dasar yang Telah Dikonfirmasi
