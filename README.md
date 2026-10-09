@@ -115,11 +115,11 @@ Belum ada klaim bahwa:
 
 ## 9. Next Steps
 
-1. Review Project Charter.
-2. Review dan sahkan Decision Register.
-3. Audit AMANAH SEO AI dan AMANAH SEO ENGINE V2 secara terpisah tanpa mengubah keduanya.
-4. Perbarui architecture blueprint berdasarkan audit evidence.
-5. Sahkan integration contracts sebelum implementation planning.
+1. Gunakan Project Charter dan Decision Register yang telah disetujui sebagai acuan.
+2. Mulai audit AMANAH SEO AI dan AMANAH SEO ENGINE V2 secara terpisah hanya setelah ada persetujuan eksplisit untuk tahap audit.
+3. Perbarui architecture blueprint berdasarkan bukti audit produk.
+4. Selesaikan keputusan kontrak integrasi berdasarkan temuan dan persetujuan yang tercatat.
+5. Ajukan rencana implementasi terkontrol sebelum perubahan kode.
 
 ---
 
