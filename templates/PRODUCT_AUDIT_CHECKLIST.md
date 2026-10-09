@@ -1,6 +1,7 @@
 ﻿# Product Audit Checklist — [PRODUCT-NAME]
 
-**Status:** NOT STARTED  
+**Status Dokumen:** DRAFT  
+**Status Audit Produk:** NOT STARTED  
 **Tanggal audit:** [YYYY-MM-DD]  
 **Auditor:** [Name or Role]  
 **Repository:** [Repository path or URL]  
