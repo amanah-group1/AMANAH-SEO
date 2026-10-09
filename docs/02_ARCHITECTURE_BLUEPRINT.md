@@ -2,7 +2,7 @@
 
 ## 1. Status Dokumen
 
-- **Status:** DRAFT — Menunggu architecture review
+- **Status:** APPROVED — disetujui sebagai blueprint konseptual; opsi berstatus PROPOSED tetap belum diputuskan
 - **Jenis:** Logical architecture blueprint
 - **Implementasi:** Belum dimulai berdasarkan dokumen ini
 - **Audit produk:** Belum dinyatakan selesai
