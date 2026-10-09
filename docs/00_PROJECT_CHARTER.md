@@ -2,7 +2,7 @@
 
 ## 1. Status Dokumen
 
-- **Status:** DRAFT — Menunggu persetujuan
+- **Status:** APPROVED — disetujui sebagai pedoman fondasi; bukan bukti implementasi atau kesiapan produk
 - **Jenis:** Project charter dan batasan ruang lingkup
 - **Bahasa:** Bahasa Indonesia dengan istilah teknis standar dalam bahasa Inggris
 - **Repository:** AMANAH SEO
