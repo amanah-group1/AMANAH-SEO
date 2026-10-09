@@ -1,6 +1,6 @@
 ﻿# AMANAH SEO — Document Governance
 
-**Status:** DRAFT — perlu ditinjau dan disetujui  
+**Status:** APPROVED — aturan tata kelola dokumentasi disetujui  
 **Cakupan:** Dokumentasi, keputusan arsitektur, audit, dan perubahan proyek AMANAH SEO
 
 ## 1. Tujuan
@@ -58,7 +58,7 @@ Daftar ini dapat berkembang melalui proses perubahan yang terkendali.
 
 ## 5. Source of Truth
 
-Aturan source of truth yang masih perlu ditinjau sebelum menjadi kebijakan final:
+Aturan source of truth yang disetujui untuk tata kelola dokumentasi:
 
 - Repository `AMANAH-SEO` menjadi sumber utama dokumentasi platform induk.
 - Repository `AMANAH-SEO-AI` tetap menjadi sumber kode dan dokumentasi proyek AMANAH SEO AI.
@@ -66,7 +66,7 @@ Aturan source of truth yang masih perlu ditinjau sebelum menjadi kebijakan final
 - Bukti runtime harus menyebut lingkungan, waktu pemeriksaan, versi kode, dan langkah reproduksi yang relevan.
 - Catatan percakapan atau ingatan tidak menggantikan bukti kode dan pengujian untuk klaim teknis.
 
-Aturan ini harus ditinjau sebelum dianggap sebagai kebijakan tata kelola final.
+Aturan ini menetapkan lokasi acuan dokumentasi dan bukti; aturan ini tidak menyatakan bahwa isi produk atau implementasinya telah diaudit.
 
 ## 6. Decision Register dan ADR
 
@@ -185,4 +185,4 @@ Jika dua dokumen bertentangan:
 | 0.1 | DRAFT | Tata kelola dokumentasi awal |
 
 ---
-**Peringatan:** aturan dalam dokumen ini masih berupa baseline usulan sampai ditinjau dan disetujui.
+**Batas persetujuan:** tata kelola dokumentasi dalam dokumen ini telah disetujui. Persetujuan ini tidak mengesahkan usulan arsitektur, keputusan komersial yang masih terbuka, rencana implementasi, atau kesiapan produk.
