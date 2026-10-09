@@ -2,7 +2,7 @@
 
 ## 1. Status Dokumen
 
-- **Status:** DRAFT — Menunggu review dan persetujuan
+- **Status:** APPROVED — kerangka tata kelola lisensi disetujui; model lisensi, paket, harga, dan protokol aktivasi tetap belum diputuskan
 - **Model lisensi final:** Belum ditetapkan
 - **Paket dan harga:** Belum disahkan
 - **Activation protocol:** Belum diputuskan
