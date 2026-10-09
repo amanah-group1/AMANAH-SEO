@@ -1,5 +1,7 @@
 ﻿# AMANAH SEO — Decision Register
 
+**Status Dokumen:** DRAFT — baseline awal; status keputusan dicatat per entri di bawah.
+
 ## 1. Tujuan
 
 Dokumen ini mencatat keputusan, usulan, asumsi, dan pertanyaan terbuka yang memengaruhi arah pengembangan AMANAH SEO.

@@ -1,6 +1,6 @@
 ﻿# AMANAH SEO — Open Questions
 
-**Status:** OPEN — pertanyaan belum seluruhnya diputuskan  
+**Status Dokumen:** DRAFT — daftar pertanyaan belum seluruhnya diputuskan  
 **Tujuan:** Mencatat keputusan yang diperlukan sebelum arsitektur dan implementasi difinalisasi
 
 ## 1. Aturan Penggunaan Dokumen

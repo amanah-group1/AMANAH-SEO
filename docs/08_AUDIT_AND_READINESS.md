@@ -155,7 +155,7 @@ Tingkat risiko harus disertai alasan, bukan hanya label.
 **Tujuan:** memastikan baseline dokumentasi dapat ditinjau secara konsisten. Gate 0 tidak dapat dinyatakan PASS hanya karena file tersedia.
 
 Kriteria yang harus dibuktikan:
-- [ ] Seluruh 11 dokumen inti dan 4 template yang tercantum di README tersedia pada path yang benar.
+- [ ] Seluruh 11 dokumen inti dan 4 template yang dicantumkan secara eksplisit di README tersedia pada path yang benar.
 - [ ] Status dokumen menggunakan kosakata governance; status keputusan dan audit dipisahkan.
 - [ ] Batas platform induk, AMANAH SEO AI, dan AMANAH SEO ENGINE V2 dijelaskan tanpa klaim implementasi yang belum dibuktikan.
 - [ ] Semua pertanyaan yang belum diputuskan tercatat sebagai OPEN dan tidak dipresentasikan sebagai keputusan final.

@@ -1,6 +1,6 @@
 ﻿# AMANAH SEO — Platform Foundation
 
-**Status:** Foundation Draft — Pending Review  
+**Status Dokumen:** DRAFT — pending review  
 **Documentation Language:** Bahasa Indonesia dengan istilah teknis standar dalam bahasa Inggris.
 
 ## 1. Project Overview
@@ -57,7 +57,12 @@ Platform induk yang direncanakan mengelola shared capabilities dan mengintegrasi
 - `docs/08_AUDIT_AND_READINESS.md` — audit methodology dan readiness criteria.
 - `docs/09_ROADMAP_AND_GATES.md` — proposed phases dan approval gates.
 - `docs/10_OPEN_QUESTIONS.md` — keputusan yang belum dibuat.
-- `templates/` — reusable templates untuk audit, ADR, dan implementation planning.
+### Reusable templates
+
+- `templates/ADR_TEMPLATE.md` — template Architecture Decision Record.
+- `templates/AUDIT_FINDING_TEMPLATE.md` — template temuan audit.
+- `templates/PRODUCT_AUDIT_CHECKLIST.md` — checklist audit baseline produk.
+- `templates/IMPLEMENTATION_PLAN_TEMPLATE.md` — template rencana implementasi.
 
 ## 5. Status Conventions
 

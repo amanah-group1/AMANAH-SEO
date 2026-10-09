@@ -1,8 +1,9 @@
 ﻿# Audit Finding — [FINDING-ID]
 
-**Status:** OPEN  
+**Status Dokumen:** DRAFT  
+**Status Temuan:** OPEN  
 **Severity:** [CRITICAL / HIGH / MEDIUM / LOW / INFO]  
-**Audit status:** [FAIL / PARTIAL / BLOCKED / NOT TESTED]  
+**Status Audit:** [FAIL / PARTIAL / BLOCKED / NOT TESTED]  
 **Tanggal ditemukan:** [YYYY-MM-DD]  
 **Auditor:** [Name or Role]
 
