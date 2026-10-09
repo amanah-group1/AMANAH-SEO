@@ -17,9 +17,10 @@
 | G0-03 | README lists the exact core-document paths | PASS | `README.md`, section 4. |
 | G0-04 | README lists all four template paths explicitly | PASS after correction | `README.md`, section 4, correction branch. |
 | G0-05 | Platform and product boundaries are explicit | PASS | `README.md`, `docs/00_PROJECT_CHARTER.md`, and `docs/03_PRODUCT_BOUNDARIES.md` distinguish the parent platform from both products and avoid asserting unverified implementation. |
-| G0-06 | Decision, document, and audit status concepts are separated | PASS after correction | The Decision Register declares `Status Dokumen: DRAFT`; all four templates now declare `Status Dokumen: DRAFT` and use separately named fields for the underlying decision, finding, product audit, or plan workflow. This follows the vocabulary in `docs/07_DOCUMENT_GOVERNANCE.md`, sections 3 and 12. |
-| G0-07 | Explicit Markdown references to documentation/template paths resolve | PASS for checked references | 23 references matching `docs/*.md` or `templates/*.md` were extracted from the 16 inventoried files; no missing targets were found. This check does not validate every possible link syntax. |
+| G0-06 | Decision, document, and audit status concepts are separated | PASS after correction | The Decision Register and all four templates use a formal document status separately from each decision or record lifecycle. The status vocabulary follows `docs/07_DOCUMENT_GOVERNANCE.md`, section 3. This follows the vocabulary in `docs/07_DOCUMENT_GOVERNANCE.md`, sections 3 and 12. |
+| G0-07 | Explicit Markdown references to documentation/template paths resolve | PASS for checked references | Expanded scan of the 16 inventoried files found 27 local path references matching `docs/*.md` or `templates/*.md`; all targets exist. No inline Markdown links, Markdown reference definitions, or HTML `href`/`src` attributes were detected by the patterns checked. This is a pattern-based scan, not a universal Markdown parser. |
 | G0-08 | Gate 0 inventory criterion matches README | PASS after correction | `docs/08_AUDIT_AND_READINESS.md` now says the 11 core documents and four templates must be explicitly listed in README and exist at the expected paths. |
+| G0-09 | Document-status vocabulary is consistent across README, 11 core docs, and 4 templates | PASS after correction | All 16 inventory files use `DRAFT` as their document status; record workflow statuses such as `OPEN` remain attached to individual records. README and `docs/10_OPEN_QUESTIONS.md` were corrected in this update. |
 
 ## 2. Controlled corrections
 
@@ -27,6 +28,8 @@
 2. `docs/01_DECISION_REGISTER.md`: added an explicit document status of DRAFT, while preserving individual decision statuses.
 3. `docs/08_AUDIT_AND_READINESS.md`: aligned the Gate 0 inventory criterion with the README's explicit template list.
 4. This report records the checks, evidence scope, and remaining limitation.
+5. `README.md`: changed the document-status label/value to `Status Dokumen: DRAFT`, keeping review readiness as descriptive text.
+6. `docs/10_OPEN_QUESTIONS.md`: changed the document status to `DRAFT`; individual question statuses remain `OPEN`.
 
 ## 3. Remaining item
 
@@ -38,6 +41,6 @@ Correction: each of the four reusable templates now declares `Status Dokumen: DR
 
 **Overall Gate 0: PARTIAL.**
 
-The file inventory, checked path references, and status-field separation pass within the documented checks. Gate 0 is not marked PASS because the reference scan is limited to the explicit Markdown path patterns described above and therefore does not establish that every possible link syntax was validated.
+The file inventory, checked local path references, status vocabulary, and separation of document status from record workflow status pass within the documented checks. Overall Gate 0 remains PARTIAL because the path-reference scan is pattern-based and does not constitute a full parser for every possible Markdown or embedded-link syntax.
 
 No product code, product database, or runtime was changed or tested as part of this documentation-only audit.
