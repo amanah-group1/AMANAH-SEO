@@ -1,6 +1,6 @@
 ﻿# AMANAH SEO — Roadmap and Gates
 
-**Status:** DRAFT — roadmap usulan, belum disetujui sebagai komitmen implementasi  
+**Status:** APPROVED — roadmap acuan disetujui; bukan komitmen jadwal atau persetujuan implementasi  
 **Cakupan:** Pengembangan platform induk AMANAH SEO dan rencana integrasi produk
 
 ## 1. Tujuan
