@@ -46,6 +46,9 @@ This is a limitation of verification coverage, not evidence that a particular li
 
 **Overall Gate 0: PARTIAL.**
 
-The declared document/template inventory, reviewed status conventions, listed open-question statuses, stated project boundaries, and checked local path patterns pass within their documented scope. Gate 0 remains PARTIAL because universal Markdown/link validation has not been performed and the repository/product, database, runtime, security, and integration audits are outside this documentation-only scope.
+The declared document/template inventory, reviewed status conventions, listed open-question statuses, stated project boundaries, and checked local path patterns pass within their documented scope. Gate 0 remains PARTIAL because universal Markdown/link validation has not been performed. Repository/product, database, runtime, security, and integration audits are outside Gate 0's documentation-only scope; their absence is not itself a Gate 0 failure and must be assessed in the relevant later gates.
 
 No product source code, product database, or runtime was changed or tested as part of this documentation-only audit.
+
+
+**Clarification recorded during foundation consistency review (2026-10-09):** the PARTIAL decision above is based on the documented link-validation limitation only. Product, database, runtime, security, and integration audits remain NOT TESTED and belong to their respective later audit stages; they are not reasons to downgrade the documentation-only Gate 0 by themselves.
