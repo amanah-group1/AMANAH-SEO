@@ -1,0 +1,22 @@
+﻿# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Dependencies and generated test files
+/vendor/
+/node_modules/
+/.phpunit.cache/
+/.phpunit.result.cache
+phpunit.phar
+coverage/
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
