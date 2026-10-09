@@ -21,14 +21,16 @@ Dokumen ini tidak memberikan izin otomatis untuk mengubah kode, database, konfig
 
 ## 3. Status Dokumen
 
-Gunakan status berikut secara konsisten:
+Gunakan status dokumen berikut secara konsisten di seluruh repository:
 
 - **DRAFT:** masih disusun atau belum disetujui.
-- **UNDER REVIEW:** sedang ditinjau oleh pihak yang berwenang.
+- **IN_REVIEW:** sedang ditinjau oleh pihak yang berwenang.
 - **APPROVED:** telah mendapat persetujuan yang tercatat.
 - **SUPERSEDED:** digantikan oleh versi atau dokumen lain.
 - **DEPRECATED:** tidak lagi direkomendasikan untuk penggunaan baru.
 - **ARCHIVED:** disimpan sebagai rekaman historis.
+
+Jangan gunakan status keputusan (`CONFIRMED`, `PROPOSED`, `OPEN`, `ASSUMPTION`, `SUPERSEDED`) atau status audit (`PASS`, `PARTIAL`, `BLOCKED`, `FAIL`, `NOT TESTED`, `NOT APPLICABLE`) sebagai status dokumen. `VERIFIED` adalah keterangan untuk klaim/evidence yang diverifikasi, bukan status dokumen.
 
 Status APPROVED tidak berarti implementasi telah selesai atau lulus pengujian.
 
@@ -56,7 +58,7 @@ Daftar ini dapat berkembang melalui proses perubahan yang terkendali.
 
 ## 5. Source of Truth
 
-Aturan awal yang diusulkan:
+Aturan source of truth yang masih perlu ditinjau sebelum menjadi kebijakan final:
 
 - Repository `AMANAH-SEO` menjadi sumber utama dokumentasi platform induk.
 - Repository `AMANAH-SEO-AI` tetap menjadi sumber kode dan dokumentasi proyek AMANAH SEO AI.

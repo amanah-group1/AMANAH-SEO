@@ -39,14 +39,15 @@ Keluaran:
 - Template audit, keputusan, dan rencana implementasi.
 
 Kriteria penerimaan:
-- [ ] Seluruh dokumen inti tersedia.
-- [ ] Status DRAFT dan usulan terlihat jelas.
-- [ ] Batas antara platform induk dan produk lama dijelaskan.
-- [ ] Keputusan terbuka dicatat.
-- [ ] Referensi silang dan struktur repository diperiksa.
+- [ ] Seluruh 11 dokumen inti dan 4 template yang tercantum di README tersedia pada path yang benar.
+- [ ] Status dokumen konsisten dengan Document Governance; status keputusan dan audit tidak digunakan sebagai status dokumen.
+- [ ] Batas antara platform induk, AMANAH SEO AI, dan AMANAH SEO ENGINE V2 dijelaskan tanpa klaim implementasi yang belum dibuktikan.
+- [ ] Pertanyaan terbuka tercatat dan tidak dipresentasikan sebagai keputusan final.
+- [ ] Referensi silang, nama file, dan struktur repository telah diperiksa.
+- [ ] Hasil setiap pemeriksaan dicatat dan dapat ditinjau ulang.
 - [ ] Dokumen ditinjau sebelum disetujui.
 
-**Gate 0:** dokumentasi ditinjau dan keputusan awal dicatat.
+**Gate 0:** dokumentasi ditinjau dan keputusan awal dicatat. Gate 0 tidak PASS hanya karena dokumen tersedia; semua kriteria wajib harus diverifikasi dan didukung evidence. Item yang belum diperiksa atau terhalang harus dicatat sebagai NOT TESTED atau BLOCKED.
 
 ## 4. Phase 1 — Existing Product Audits
 

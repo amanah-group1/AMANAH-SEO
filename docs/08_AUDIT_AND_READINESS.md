@@ -151,10 +151,19 @@ Tingkat risiko harus disertai alasan, bukan hanya label.
 ## 7. Readiness Gates
 
 ### Gate 0 — Dokumentasi Awal
-- [ ] Dokumen inti tersedia.
-- [ ] Status keputusan jelas.
-- [ ] Batas antarp roduk terdokumentasi.
-- [ ] Pertanyaan terbuka tercatat.
+
+**Tujuan:** memastikan baseline dokumentasi dapat ditinjau secara konsisten. Gate 0 tidak dapat dinyatakan PASS hanya karena file tersedia.
+
+Kriteria yang harus dibuktikan:
+- [ ] Seluruh 11 dokumen inti dan 4 template yang tercantum di README tersedia pada path yang benar.
+- [ ] Status dokumen menggunakan kosakata governance; status keputusan dan audit dipisahkan.
+- [ ] Batas platform induk, AMANAH SEO AI, dan AMANAH SEO ENGINE V2 dijelaskan tanpa klaim implementasi yang belum dibuktikan.
+- [ ] Semua pertanyaan yang belum diputuskan tercatat sebagai OPEN dan tidak dipresentasikan sebagai keputusan final.
+- [ ] Referensi silang ke dokumen dan template yang disebutkan dapat ditemukan.
+- [ ] Struktur repository dan nama file cocok dengan daftar di README.
+- [ ] Hasil pemeriksaan dicatat, termasuk setiap item yang BLOCKED atau NOT TESTED.
+
+**Exit criteria:** Gate 0 berstatus PASS hanya jika seluruh kriteria wajib di atas telah diperiksa dan lulus dengan bukti yang dapat ditinjau. Jika ada kriteria wajib yang gagal, belum diperiksa, atau tidak memiliki bukti, gunakan PARTIAL, FAIL, BLOCKED, atau NOT TESTED sesuai keadaan; jangan menyimpulkan PASS.
 
 ### Gate 1 — Baseline Produk
 - [ ] Repository dan branch telah diverifikasi.

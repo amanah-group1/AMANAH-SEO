@@ -59,16 +59,26 @@ Platform induk yang direncanakan mengelola shared capabilities dan mengintegrasi
 - `docs/10_OPEN_QUESTIONS.md` — keputusan yang belum dibuat.
 - `templates/` — reusable templates untuk audit, ADR, dan implementation planning.
 
-## 5. Document Status Convention
+## 5. Status Conventions
+
+### 5.1 Document status
 
 - `DRAFT` — belum disahkan.
 - `IN_REVIEW` — sedang ditinjau.
 - `APPROVED` — telah disahkan oleh pihak yang berwenang.
-- `SUPERSEDED` — digantikan keputusan atau dokumen baru.
-- `VERIFIED` — didukung evidence yang dapat ditelusuri.
-- `PROPOSED` — usulan yang belum disahkan.
-- `ASSUMPTION` — asumsi yang masih perlu divalidasi.
-- `OPEN` — keputusan belum dibuat.
+- `SUPERSEDED` — digantikan oleh dokumen atau versi baru.
+- `DEPRECATED` — tidak direkomendasikan untuk penggunaan baru.
+- `ARCHIVED` — disimpan sebagai rekaman historis.
+
+### 5.2 Decision status
+
+Gunakan status keputusan yang didefinisikan di `docs/01_DECISION_REGISTER.md`: `CONFIRMED`, `PROPOSED`, `OPEN`, `ASSUMPTION`, dan `SUPERSEDED`. Status ini bukan status dokumen.
+
+### 5.3 Audit status
+
+Gunakan status hasil audit yang didefinisikan di `docs/08_AUDIT_AND_READINESS.md`: `PASS`, `PARTIAL`, `BLOCKED`, `FAIL`, `NOT TESTED`, dan `NOT APPLICABLE`.
+
+`VERIFIED` menjelaskan klaim atau evidence yang telah diverifikasi; ini bukan status dokumen atau keputusan.
 
 ## 6. Audit and Integration Policy
 
