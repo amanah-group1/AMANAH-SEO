@@ -38,3 +38,11 @@
 Verifikasi setelah penggabungan ke `main` telah selesai: 18 file dokumentasi berhasil diambil ulang, 27 pertanyaan rinci tetap berurutan, referensi lokal eksplisit ke dokumen/template yang diperiksa tersedia, dan dua salah ketik yang ditandai sudah tidak muncul lagi. Tidak ditemukan konflik dokumentasi tambahan dalam cakupan pemeriksaan ini. Pertanyaan Q-001 sampai Q-027 tetap OPEN sampai keputusan atau bukti yang diperlukan tersedia. Tidak ada source code, database, atau runtime produk yang diubah.
 
 **Kesimpulan:** pedoman fondasi AMANAH SEO disetujui untuk digunakan sebagai acuan tata kelola dan persiapan audit. Persetujuan ini tidak menyatakan produk telah diaudit, tidak mengesahkan keputusan yang masih PROPOSED/OPEN, dan tidak memberi izin implementasi.
+
+## 5. Catatan Persetujuan
+
+- **Tanggal:** 2026-10-09.
+- **Pemberi persetujuan:** pemilik proyek, melalui persetujuan eksplisit di percakapan.
+- **Ruang lingkup:** README dan 11 dokumen inti AMANAH SEO disetujui sebagai pedoman fondasi; laporan Gate 0 dan laporan pemeriksaan konsistensi disahkan sebagai catatan pemeriksaan.
+- **Batasan:** persetujuan ini tidak mengubah pertanyaan Q-001–Q-027 yang masih OPEN, tidak mengubah usulan menjadi keputusan final, tidak mengesahkan harga atau model lisensi, dan tidak memberi izin implementasi atau menyatakan kesiapan produk.
+- **Verifikasi:** status APPROVED dan koreksi yang tercatat diperiksa kembali pada branch `main`.
