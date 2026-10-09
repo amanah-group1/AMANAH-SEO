@@ -111,7 +111,7 @@ Persyaratan yang diusulkan:
 - Hindari memasukkan data sensitif ke prompt atau layanan eksternal tanpa dasar dan persetujuan yang sesuai.
 - Gunakan pesan kesalahan yang aman bagi pengguna dan detail teknis terbatas untuk log internal.
 
-## 9. Integrasi Antarp roduk
+## 9. Integrasi Antarproduk
 
 Nama produk yang digunakan dalam dokumen ini:
 

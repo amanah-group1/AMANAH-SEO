@@ -52,7 +52,7 @@ Kandidat:
 **Status:** OPEN  
 **Ketergantungan:** audit AMANAH SEO AI dan AMANAH SEO ENGINE V2.
 
-### Q-005 — Model komunikasi antarp roduk
+### Q-005 — Model komunikasi antarproduk
 Bagaimana platform induk akan berkomunikasi dengan produk?
 
 Opsi untuk dievaluasi:
