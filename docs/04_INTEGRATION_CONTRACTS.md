@@ -2,7 +2,7 @@
 
 ## 1. Status Dokumen
 
-- **Status:** DRAFT — Menunggu review
+- **Status:** APPROVED — prinsip dan kebutuhan kontrak disetujui; kontrak teknis final dan protokol tetap belum disetujui
 - **Tujuan:** Mendefinisikan kebutuhan kontrak integrasi lintas produk
 - **Kontrak final:** Belum disetujui
 - **Implementasi integrasi:** Belum dinyatakan tersedia
