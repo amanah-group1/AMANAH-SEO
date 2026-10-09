@@ -2,7 +2,7 @@
 
 ## 1. Status Dokumen
 
-- **Status:** DRAFT — Menunggu review
+- **Status:** APPROVED — batas tanggung jawab dan aturan perubahan disetujui; baseline produk tetap menunggu audit
 - **Tujuan:** Menentukan batas tanggung jawab dan aturan perubahan antarproduk
 - **Implementasi:** Belum disahkan oleh dokumen ini
 - **Baseline produk:** Harus diverifikasi melalui audit
