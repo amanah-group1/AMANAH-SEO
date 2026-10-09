@@ -1,7 +1,7 @@
 # Gate 0 Verification — Documentation Baseline
 
-**Status Dokumen:** DRAFT  
-**Audit status:** PARTIAL  
+**Status Dokumen:** APPROVED — laporan verifikasi Gate 0 untuk cakupan dokumentasi  
+**Audit status:** PASS — hanya untuk inventaris dokumentasi dan referensi lokal dalam cakupan Gate 0  
 **Baseline examined:** `52ec71d83720d82e5a78df18ed0c402b59ece1e9` (`main`)  
 **Correction branch:** `controlled/doc-foundation-gate0-verification`  
 **Audit date:** 2026-10-09  
@@ -20,7 +20,7 @@
 | G0-06 | Document, decision, and audit status concepts are separated | PASS for reviewed conventions | `README.md`, section 5; `docs/01_DECISION_REGISTER.md`, sections 2 and 9; and all four templates distinguish document status from decision/record lifecycle status. Audit result vocabulary is defined in `docs/08_AUDIT_AND_READINESS.md`, section 3. |
 | G0-07 | Local documentation/template path references resolve | PASS within the stated Gate 0 scope | The pattern-based scan of the 16 inventoried files found 27 local references matching `docs/*.md` or `templates/*.md`; every matched target exists. A follow-up review of all 17 current documentation files found no inline Markdown link destinations, and all exact local document/template paths referenced in backticks resolve to files in the declared inventory. External URLs and rendered destinations are not certified by this local-path check. |
 | G0-08 | Gate 0 inventory requirement agrees with README | PASS | `docs/08_AUDIT_AND_READINESS.md`, Gate 0, requires all 11 core documents and four templates to be explicitly listed in README and present at expected paths. |
-| G0-09 | Document-status vocabulary is consistent across README, 11 core docs, and 4 templates | PASS for explicit document-status fields | The 16 inventoried files declare document status as DRAFT. Workflow statuses such as OPEN, PROPOSED, or NOT STARTED remain attached to the relevant record/question rather than replacing document status. |
+| G0-09 | Document-status vocabulary is consistent across README, 11 core docs, and 4 templates | PASS for explicit document-status fields | The 11 core documents and README are now APPROVED as guidance; the four reusable templates remain DRAFT as blank starting templates. Workflow statuses such as OPEN, PROPOSED, or NOT STARTED remain attached to the relevant record/question rather than replacing document status. |
 | G0-10 | Unresolved questions are recorded as OPEN, not presented as final decisions | PASS for the two reviewed registers | `docs/10_OPEN_QUESTIONS.md` labels Q-001 through Q-027 as OPEN. `docs/01_DECISION_REGISTER.md`, section 6, labels OPEN-001 through OPEN-010 as open questions, and section 9 says they remain OPEN until documented answers exist. This confirms these listed entries; it does not prove that no unrecorded question exists elsewhere. |
 | G0-11 | Repository structure and filenames match the README inventory | PASS for the declared inventory | The 11 core-document paths and four template paths in README were fetched successfully from the correction branch. This verifies the declared inventory, not every unrelated file in the repository. |
 | G0-12 | Results include evidence and disclose unchecked/limited areas | PASS | This report records a result and scope limitation per criterion. Product source, database, runtime, security, and integration testing are explicitly out of scope and were not performed. |
