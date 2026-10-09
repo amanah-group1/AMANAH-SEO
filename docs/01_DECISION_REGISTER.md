@@ -1,6 +1,6 @@
 ﻿# AMANAH SEO — Decision Register
 
-**Status Dokumen:** DRAFT — baseline awal; status keputusan dicatat per entri di bawah.
+**Status Dokumen:** APPROVED — struktur pencatatan disetujui; status setiap keputusan tetap mengikuti entri masing-masing.
 
 ## 1. Tujuan
 
