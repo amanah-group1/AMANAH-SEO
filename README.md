@@ -1,6 +1,6 @@
 ﻿# AMANAH SEO — Platform Foundation
 
-**Status:** Foundation Draft — Pending Review  
+**Status Dokumen:** DRAFT — pending review  
 **Documentation Language:** Bahasa Indonesia dengan istilah teknis standar dalam bahasa Inggris.
 
 ## 1. Project Overview
