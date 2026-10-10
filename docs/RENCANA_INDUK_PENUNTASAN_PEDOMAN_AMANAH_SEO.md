@@ -139,7 +139,7 @@ Sebelum menyatakan selesai:
 | Tahap | Status awal | Bukti/hasil yang diperlukan untuk menutup |
 |---|---|---|
 | A — Baseline dan inventaris | **COMPLETE — GitHub `main` tervalidasi** | Struktur root, `docs/`, `docs/audits/`, `templates/`, README, 11 dokumen inti, 12 catatan audit, 4 template, dan rencana induk cocok pada baseline `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 file terdokumentasi.
-| B — Audit konsistensi | PARTIAL — CDR-013–CDR-015 dicatat pada re-audit; koreksi editorial masih terbuka | Temuan konsistensi lengkap, koreksi terverifikasi, dan disposisi keputusan terbuka |
+| B — Audit konsistensi | PARTIAL — CDR-013–CDR-015 RESOLVED setelah koreksi editorial terverifikasi; CDR-011 dan audit konsistensi yang lebih luas masih terbuka | Temuan konsistensi lengkap, koreksi terverifikasi, dan disposisi keputusan terbuka |
 | C — Rekonsiliasi keputusan | BLOCKED/PARTIAL — keputusan terbuka masih ada | Decision Register dan Open Questions konsisten |
 | D — Revisi terkendali | NOT STARTED dalam rencana ini | Commit perubahan yang didukung temuan |
 | E — Verifikasi dan penutupan | NOT STARTED dalam rencana ini | Checklist final, bukti, dan persetujuan eksplisit |
@@ -174,7 +174,8 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 |---|---|---|
 | 0.1 | DRAFT | Membentuk rencana induk, batas scope, aturan wajib baca, urutan kerja, dan kriteria penutupan. |
 | 0.2 | DRAFT | Mencatat validasi inventaris GitHub `main` pada commit `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 artefak dokumentasi (30 file total termasuk `.gitignore`); README dan register diperbarui untuk memasukkan rencana induk. |
-| 0.3 | DRAFT | Mencatat CDR-013–CDR-015 sebagai temuan konsistensi metadata/status yang masih OPEN; Tahap B tetap PARTIAL.
+| 0.3 | DRAFT | Mencatat CDR-013–CDR-015 sebagai temuan konsistensi metadata/status yang masih OPEN; Tahap B tetap PARTIAL. |
+| 0.4 | DRAFT | Mencatat koreksi editorial CDR-013–CDR-015 di `main`; ketiganya RESOLVED dalam scope masing-masing, sementara Tahap B tetap PARTIAL karena CDR-011 dan audit konsistensi lebih luas belum ditutup. |
 
 ---
 **Penting:** dokumen ini dibuat untuk mengakhiri pekerjaan secara terarah, bukan membuka proyek baru tanpa batas. Prioritas tunggal sampai gerbang dokumentasi terpenuhi adalah menuntaskan Pedoman AMANAH SEO.
@@ -189,3 +190,14 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 - **Batasan:** pemeriksaan GitHub-only. Tidak ada sinkronisasi lokal/WordPress, audit runtime, atau perubahan AMANAH SEO AI / AMANAH SEO ENGINE V2.
 - **Tahap aktif:** B — Audit konsistensi, PARTIAL.
 - **Satu langkah berikutnya:** lakukan koreksi editorial terkendali untuk CDR-013–CDR-015 pada catatan kanonis terkait, lalu verifikasi ulang perubahan di `main`.
+
+
+## 9C. Catatan sesi — koreksi editorial CDR-013–CDR-015 (2026-10-10)
+
+- **Baseline saat memulai koreksi:** `54942dd5569246c056c5d245be669ca9a2f76afb` pada GitHub `main`.
+- **Koreksi yang dilakukan pada catatan kanonis:** ASE-AUD-005 kini membedakan hitungan historis 27 dari inventaris terkini 30 file total/29 artefak; re-audit dan Roadmap Phase 2 Readiness Assessment kini menyatakan bukti persetujuan 11/11 dokumen inti sebagai status terkini untuk scope terbatas; Gate 0 §2 dan item 4 kini secara eksplisit menandai catatan DRAFT sebagai status historis correction branch, bukan inventaris status `main` saat ini.
+- **Commit bukti:** register `57c83e327e80ab58b9a36805308c639a8c8d3b4b`; re-audit status `b98975e00df7b93b5502dbc58de8865e4459c40e`, disposition `087c524d4228b276d4986b073a3888f00cdbab38`, dan bukti final `d0f1d8b142fa222ccbc8a9de01bd86264f64ad13`; Gate 0 `7a0bdba343fbdaeb46f64e5bf856dda242ac4d2c`; readiness assessment `579a8beefe1b85f2b4741690f6a5b34f592446c7`.
+- **Status temuan:** CDR-013, CDR-014, dan CDR-015 ditandai RESOLVED pada addendum re-audit setelah koreksi sumber tercatat. Tidak ada keputusan produk/arsitektur/komersial yang diubah.
+- **Status yang tidak berubah:** CDR-011 tetap OPEN; Q-001–Q-027 tetap OPEN; Roadmap Phase 2/Gate 2 tetap BLOCKED / NOT PASS. Tahap B tetap PARTIAL.
+- **Batasan:** GitHub-only. Tidak ada sinkronisasi lokal/WordPress, perubahan kode, database, konfigurasi, atau runtime; AMANAH SEO AI dan AMANAH SEO ENGINE V2 tidak diubah.
+- **Satu langkah berikutnya:** baca ulang dari `main` register, re-audit, Gate 0, readiness assessment, dan rencana ini; cocokkan hasil dengan CDR-013–CDR-015 serta pastikan status dan riwayat audit konsisten.
