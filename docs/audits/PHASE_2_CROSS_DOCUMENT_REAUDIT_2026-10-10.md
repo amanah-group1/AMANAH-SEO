@@ -212,3 +212,26 @@ The current audit records distinguish:
 - Product audits and runtime/database evidence, which remain partial or NOT TESTED as their own reports specify.
 
 This closeout authorizes moving to **Tahap C — Rekonsiliasi keputusan** for documentation review only. It does not approve any answer to an open question, authorize implementation or local/WordPress synchronization, or change official Roadmap Phase 2/Gate 2 from BLOCKED / NOT PASS.
+
+
+## 10. Addendum — Tahap C Decision Register ↔ Open Questions reconciliation (2026-10-10)
+
+### Scope and baseline
+
+- Canonical baseline reviewed: GitHub `main` at `8347e390f0282268b1eb7f8a19cb26dd546a1123`.
+- Files reconciled: `docs/01_DECISION_REGISTER.md`, `docs/10_OPEN_QUESTIONS.md`, and current status references in the Rencana Induk and README.
+- All entries DEC-001–DEC-007, PROP-001–PROP-008, Q-001–Q-028, and OPEN-001–OPEN-015 were checked.
+
+### Results
+
+1. DEC-001–DEC-007 remain CONFIRMED as already recorded; no new confirmed decision was added.
+2. PROP-001–PROP-008 remain PROPOSED. The Decision Register now contains an explicit dependency crosswalk to the related open questions; this is a reference map, not approval.
+3. Q-001–Q-028 remain OPEN. The Open Questions register now records the reconciliation outcome and its boundaries.
+4. OPEN-001–OPEN-015 collectively cover Q-001–Q-028. Q-006/Q-007 are mapped to OPEN-011; Q-028 to OPEN-015; Q-027 remains primarily under OPEN-014 and is cross-referenced under OPEN-009; Q-012/Q-013 are cross-referenced across relevant topic groupings.
+5. Deferred items now have an explicit impact and reopening condition in the Decision Register. CDR-011/Q-028 and ASE-MISS-007 remain open/unverified respectively.
+
+### Disposition
+
+**Tahap C — COMPLETE for consistency/status reconciliation in the recorded GitHub documentation scope.** No OPEN question was closed and no PROPOSED item was made final. This disposition does not close CDR-011, establish global source completeness, approve product implementation, or change Gate 1 / Roadmap Phase 2/Gate 2 from BLOCKED / NOT PASS. Product audits remain PARTIAL and live runtime/database evidence remains NOT TESTED.
+
+Next authorized stage: Tahap D — controlled documentation revisions, limited to corrections supported by recorded evidence. No changes to AMANAH SEO AI or AMANAH SEO ENGINE V2 code/runtime/database/configuration and no local/WordPress synchronization were performed.
