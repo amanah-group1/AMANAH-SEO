@@ -13,7 +13,7 @@
 | Pemeriksaan | Hasil | Bukti dan batasan |
 |---|---|---|
 | Inventaris dokumentasi | PASS untuk inventaris yang dinyatakan | README mencantumkan 11 dokumen inti dan 4 template; seluruh path yang dinyatakan berhasil diambil dari repository. Laporan audit sebelumnya juga tersedia. |
-| Status dokumen dan keputusan | PASS untuk konvensi yang diperiksa | Dokumen inti dan template yang diperiksa membedakan status dokumen dari status keputusan, pertanyaan, audit, temuan, atau rencana. Dokumen masih DRAFT; pemeriksaan ini tidak mengesahkannya. |
+| Status dokumen dan keputusan | PASS untuk konvensi yang diperiksa | README dan 11 dokumen inti berstatus APPROVED sebagai pedoman; empat template tetap DRAFT sebagai formulir awal. Status dokumen dibedakan dari status keputusan, pertanyaan, audit, temuan, dan rencana. Persetujuan dokumentasi tidak membuktikan bahwa implementasi atau kesiapan produk telah diverifikasi. |
 | Keterkaitan daftar pertanyaan | CORRECTED IN BRANCH | Decision Register sebelumnya memiliki 10 pertanyaan ringkas terpisah dari 27 pertanyaan rinci, tanpa pemetaan eksplisit. Section 6 sekarang memetakan indeks OPEN-001–OPEN-014 ke Q-001–Q-027. Semua pertanyaan tetap OPEN; pemetaan bukan keputusan substantif. |
 | Salah ketik yang ditemukan | CORRECTED IN BRANCH | Memperbaiki salah ketik pada kata “antarproduk” di judul bagian Security and Secrets dan Q-005 Open Questions. |
 | Referensi path dokumen | PASS untuk pola referensi yang diperiksa | Referensi path dokumen dan template yang ditulis sebagai path di dalam backticks mengarah ke file yang tersedia pada inventaris yang diperiksa. Pemeriksaan ini tidak memvalidasi URL eksternal atau seluruh kemungkinan sintaks Markdown. |
@@ -28,7 +28,7 @@
 
 ## 3. Hal yang belum dinyatakan selesai
 
-- Dokumen inti dan README telah disetujui sebagai pedoman. Empat template tetap DRAFT karena merupakan formulir kosong yang harus diisi untuk pekerjaan mendatang.
+- README dan 11 dokumen inti telah disetujui sebagai pedoman fondasi AMANAH SEO. Empat template tetap DRAFT karena merupakan formulir kosong yang harus diisi untuk pekerjaan mendatang. Status APPROVED pada dokumen inti tidak berarti setiap keputusan atau usulan di dalamnya telah disetujui secara substantif.
 - Q-001 sampai Q-027 tetap OPEN. Pertanyaan yang memerlukan bukti audit produk harus diputuskan setelah bukti tersebut tersedia, bukan ditebak saat menyusun pedoman.
 - Laporan Gate 0 telah ditinjau ulang: Gate 0 berstatus PASS hanya untuk inventaris dokumentasi dan referensi lokal yang memang menjadi kriterianya. Pemeriksaan URL eksternal atau hasil render GitHub belum dilakukan dan dicatat sebagai batasan, bukan kegagalan Gate 0. Pemeriksaan produk, database, runtime, keamanan produk, dan integrasi adalah pekerjaan audit berikutnya.
 - Belum ada audit AMANAH SEO AI atau AMANAH SEO ENGINE V2 yang dilakukan sebagai bagian dari laporan ini.
@@ -46,3 +46,13 @@ Verifikasi setelah penggabungan ke `main` telah selesai: 18 file dokumentasi ber
 - **Ruang lingkup:** README dan 11 dokumen inti AMANAH SEO disetujui sebagai pedoman fondasi; laporan Gate 0 dan laporan pemeriksaan konsistensi disahkan sebagai catatan pemeriksaan.
 - **Batasan:** persetujuan ini tidak mengubah pertanyaan Q-001–Q-027 yang masih OPEN, tidak mengubah usulan menjadi keputusan final, tidak mengesahkan harga atau model lisensi, dan tidak memberi izin implementasi atau menyatakan kesiapan produk.
 - **Verifikasi:** status APPROVED dan koreksi yang tercatat diperiksa kembali pada branch `main`.
+
+## 6. Klarifikasi Status dan Batas Klaim
+
+- Status APPROVED pada laporan ini menunjukkan bahwa laporan pemeriksaan disahkan sebagai catatan hasil pemeriksaan dalam cakupan yang disebutkan. Status tersebut bukan sertifikasi bahwa seluruh pedoman, keputusan, atau implementasi produk telah selesai.
+- Status PASS hanya berlaku untuk kriteria pemeriksaan yang dinyatakan dan didukung bukti. Hasil PARTIAL tetap menunjukkan bahwa keselarasan arsitektur, lisensi, dan keamanan belum sepenuhnya diputuskan atau diverifikasi.
+- README dan 11 dokumen inti berstatus APPROVED sebagai pedoman fondasi. Empat template tetap DRAFT. Status dokumen tidak boleh digunakan untuk menyimpulkan status setiap keputusan, pertanyaan, temuan audit, rencana, atau implementasi.
+- Q-001 sampai Q-027 tetap OPEN sampai keputusan atau bukti yang diperlukan dicatat sesuai tata kelola dokumen.
+- Label DRAFT pada riwayat versi merupakan catatan status versi historis dan tidak otomatis bertentangan dengan status dokumen saat ini.
+- Persetujuan fondasi dokumentasi tidak mengesahkan harga, model lisensi, arsitektur yang masih diusulkan, kredensial, strategi deployment, prioritas produk, maupun keputusan lain yang belum diputuskan.
+- Tidak ada perubahan source code, database, runtime, atau integrasi produk yang diotorisasi atau dinyatakan telah dilakukan oleh laporan ini.
