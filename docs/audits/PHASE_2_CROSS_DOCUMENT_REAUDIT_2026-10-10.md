@@ -177,3 +177,11 @@ This addendum records inconsistencies found while continuing the parent-guide co
 **CDR-011 remains OPEN — PARTIALLY ADVANCED, focused on requirements-to-component-to-executable-acceptance-test traceability and the data/UI-navigation scope decision.** Its earlier label “SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED” was too broad because it conflated source authority with requirements/scope decisions. The source authority for this work is already established as GitHub `main`; global/local source completeness remains separately tracked as ASE-MISS-007.
 
 No new requirement is created, no owner decision is inferred, and no child-product source/runtime/database/configuration is changed.
+
+### Follow-up — Q-028 keterlacakan kebutuhan ke tes (2026-10-10)
+
+- Q-028 ditambahkan ke docs/10_OPEN_QUESTIONS.md untuk menanyakan bagaimana kebutuhan yang disetujui dihubungkan ke bagian produk yang dikerjakan dan tes penerimaan, termasuk tingkat rincian catatan/bukti yang diwajibkan.
+- docs/01_DECISION_REGISTER.md mengindeksnya sebagai OPEN-015.
+- **Status Q-028: OPEN.** Ini pertanyaan resmi untuk diputuskan, bukan keputusan final; belum menetapkan format matriks, dokumen terpisah, teknologi, atau kriteria produk.
+- **CDR-011 tetap OPEN — PARTIALLY ADVANCED.** Q-028 memperjelas satu celah pertanyaan, tetapi tidak menutup kebutuhan traceability end-to-end maupun keputusan data/UI-navigation.
+- Tidak ada kode, runtime, database, konfigurasi, atau repository AMANAH SEO AI/AMANAH SEO ENGINE V2 yang diubah.
