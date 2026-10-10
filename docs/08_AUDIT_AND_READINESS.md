@@ -1,6 +1,7 @@
 ﻿# AMANAH SEO — Audit and Readiness
 
 **Status:** APPROVED — metodologi dan kriteria audit disetujui; status audit tetap ditentukan oleh bukti aktual  
+**Bukti persetujuan baseline:** [commit b4436c358b3f89aa52d232c125c4694405cdd3c6](https://github.com/amanahgroup123/AMANAH-SEO/commit/b4436c358b3f89aa52d232c125c4694405cdd3c6) (2026-10-09).  
 **Cakupan:** Dokumentasi, produk, integrasi, keamanan, dan kesiapan implementasi AMANAH SEO
 
 ## 1. Tujuan
