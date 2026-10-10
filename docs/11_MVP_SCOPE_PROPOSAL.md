@@ -38,7 +38,7 @@ Kecuali pemilik secara eksplisit menyatakan sebaliknya, jangan jadikan hal berik
 
 Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas sudah tersedia atau telah diimplementasikan.
 
-## 4. Keputusan yang benar-benar harus dibuat pemilik
+## 4. Keputusan MVP yang telah disetujui pemilik
 
 | ID | Keputusan | Rekomendasi | Status |
 |---|---|---|---|
@@ -68,9 +68,12 @@ MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 9. Pengujian mencakup jalur sukses, kegagalan, akses ditolak, data tidak tersedia, dan percobaan ulang yang aman.
 10. Tidak ada klaim bahwa fitur integrasi/AI/ENGINE berjalan sebelum pengujian integrasi membuktikannya.
 
-## 7. Cara menyelesaikan keputusan tanpa menunda terus
+## 7. Penutupan keputusan MVP
 
-- Pemilik cukup menyetujui atau mengubah tujuh keputusan MVP-01 sampai MVP-07.
-- Pertanyaan yang tidak mengubah siklus utama atau keamanan minimum dipindahkan ke backlog.
-- Setelah keputusan tersebut disepakati, pedoman dapat ditutup; rincian teknis implementasi disusun sebagai pekerjaan terpisah.
-- Jangan membuat dokumen atau fase baru kecuali ada keputusan konkret yang belum dapat dicatat di pedoman induk dan usulan MVP ini.
+Ketujuh rekomendasi MVP-01 sampai MVP-07 telah disetujui pemilik pada 2026-10-11 dan menjadi dasar lingkup MVP. Tidak perlu meminta persetujuan ulang untuk keputusan yang sama.
+
+- Prinsip sumber data terkecil yang dapat diverifikasi disetujui; nama sumber tertentu tetap harus dipilih dan dibuktikan sebelum implementasi.
+- Verifikasi kemampuan AI/ENGINE merupakan syarat sebelum integrasi tertentu dipilih, bukan syarat untuk MVP berdiri sendiri.
+- Pertanyaan komersial, arsitektur rinci, perluasan tim/website, dan KPI numerik dipindahkan ke backlog sesuai waktu kebutuhan pada Pedoman Induk.
+- Implementasi dan merge PR tetap membutuhkan persetujuan terpisah.
+- Jangan membuat dokumen atau fase baru kecuali ada keputusan konkret yang tidak dapat dicatat di dua dokumen acuan ini.
