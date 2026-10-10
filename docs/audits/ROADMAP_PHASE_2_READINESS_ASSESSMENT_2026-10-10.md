@@ -25,13 +25,13 @@ Audit inventaris dokumen dan audit silang sebelumnya bukan audit produk. Owner s
 - `docs/01_DECISION_REGISTER.md` membedakan keputusan CONFIRMED dari usulan PROPOSED dan pertanyaan OPEN.
 - `docs/02_ARCHITECTURE_BLUEPRINT.md`, `docs/03_PRODUCT_BOUNDARIES.md`, `docs/04_INTEGRATION_CONTRACTS.md`, `docs/05_LICENSE_AND_ENTITLEMENTS.md`, dan `docs/06_SECURITY_AND_SECRETS.md` menyediakan baseline tematik, sambil menyatakan pilihan arsitektur/kontrak/komersial yang belum diputuskan.
 - `docs/08_AUDIT_AND_READINESS.md` dan `docs/09_ROADMAP_AND_GATES.md` mensyaratkan evidence audit, keputusan, risiko, dan persetujuan pada gate terkait.
-- `docs/10_OPEN_QUESTIONS.md` mempertahankan Q-001 sampai Q-027 sebagai OPEN.
+- `docs/10_OPEN_QUESTIONS.md` saat ini mempertahankan Q-001 sampai Q-028 sebagai OPEN; Q-028 adalah pertanyaan tambahan tentang keterlacakan kebutuhan ke pengerjaan dan tes penerimaan.
 - [Foundation Requirements Traceability Baseline](FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md) memetakan delapan tujuan Charter ke sumber, kandidat tanggung jawab komponen, kriteria roadmap, dan status evidence; ini belum merupakan test-case traceability end-to-end.
 - Pencarian Library menemukan dua artefak terkait ENGINE V2; keduanya bukan otoritas platform induk.
 
 ### Assessment
 1. **Cukup untuk arah dan batas platform pada tingkat tinggi:** Charter dan dokumen tematik yang tersedia dapat dipakai sebagai baseline konseptual untuk menyiapkan audit produk. Bukti yang tersedia tidak membenarkan klaim bahwa Product Master/Brief/Direction terpisah wajib dibuat sebelum audit produk.
-2. **Belum cukup untuk memfinalkan arsitektur dan kontrak:** matriks traceability tingkat fondasi kini tersedia, tetapi belum ada traceability end-to-end dari kebutuhan ke komponen implementasi dan test cases yang dapat dijalankan; belum ada hasil audit aktual kedua produk yang dapat menjadi evidence untuk keputusan kontrak; Q-001–Q-027 masih OPEN.
+2. **Belum cukup untuk memfinalkan arsitektur dan kontrak:** matriks traceability tingkat fondasi kini tersedia, tetapi belum ada traceability end-to-end dari kebutuhan ke komponen implementasi dan test cases yang dapat dijalankan; belum ada hasil audit aktual kedua produk yang dapat menjadi evidence untuk keputusan kontrak; Q-001–Q-028 masih OPEN.
 3. **Kebutuhan data model dan UI/navigation:** dokumen khusus belum ditemukan dalam repository yang diperiksa. Ini adalah gap yang harus dinilai berdasarkan hasil audit dan keputusan scope arsitektur; keberadaannya tidak boleh diasumsikan wajib sebagai dokumen mandiri tanpa keputusan.
 4. **Batas sumber:** owner telah menetapkan GitHub repository sebagai sumber acuan utama dan menyatakan local akan disinkronkan setelah dokumentasi selesai. Maka inventaris kanonis untuk gate ini berbasis repository GitHub; tidak perlu menahan gate hanya untuk membandingkan salinan local yang belum disinkronkan. Library tetap sumber sekunder, bukan otoritas platform induk.
 
@@ -74,7 +74,7 @@ Roadmap §5 defines these criteria:
 
 | Gate 2 criterion | Result | Evidence / reason |
 |---|---|---|
-| Important decisions recorded in Decision Register or ADR | PARTIAL | DEC-001–DEC-007 are confirmed; multiple architecture and commercial proposals remain PROPOSED and Q-001–Q-027 remain OPEN |
+| Important decisions recorded in Decision Register or ADR | PARTIAL | DEC-001–DEC-007 are confirmed; multiple architecture and commercial proposals remain PROPOSED and Q-001–Q-028 remain OPEN |
 | Contracts use actual product findings | BLOCKED | Product audit findings are not evidenced in the current documentation audit |
 | Component responsibility boundaries are clear | PARTIAL | High-level boundaries are documented; implementation-level responsibilities depend on audit and architecture decisions |
 | Threat model and major risks reviewed | NOT EVIDENCED | Security baseline exists, but this assessment does not establish a completed threat-model review based on product findings |

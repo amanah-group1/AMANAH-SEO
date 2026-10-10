@@ -36,7 +36,7 @@
 - Matriks ini memperbaiki traceability **kebutuhan fondasi → dokumen/komponen kandidat → kriteria roadmap**, tetapi belum membuktikan traceability end-to-end ke komponen implementasi dan test cases yang dapat dijalankan.
 - Belum ada dasar untuk menyatakan acceptance tests implementasi lulus: platform induk belum masuk implementasi berdasarkan dokumen, dan audit teknis kedua produk belum dilakukan dalam scope ini.
 - Detail data model dan UI/navigation tetap dicatat sebagai gap scope (ASE-MISS-005/006); matriks ini tidak menyimpulkan bahwa dokumen data/UI terpisah wajib dibuat.
-- Q-001–Q-027 tetap mengikuti status masing-masing di Open Questions. Matriks ini tidak menutup atau mengubah status pertanyaan.
+- Q-001–Q-028 tetap mengikuti status masing-masing di Open Questions. Q-028 ditambahkan setelah baseline matriks ini disusun; pencantumannya di sini hanya memperbarui rujukan status dan tidak memperluas cakupan matriks menjadi test-case traceability end-to-end. Matriks ini tidak menutup atau mengubah status pertanyaan.
 
 ## 4. Disposition CDR-011
 
