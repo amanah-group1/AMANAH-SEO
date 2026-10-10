@@ -2,33 +2,35 @@
 
 **AMANAH SEO adalah sistem utama untuk membantu pemilik website mengelola, memelihara, dan meningkatkan kualitas SEO secara terarah, terukur, dan berkelanjutan.**
 
-## Mulai dari sini
+## Dokumen acuan
 
-Baca **[Pedoman Induk AMANAH SEO](docs/PEDOMAN_INDUK_AMANAH_SEO.md)**. Dokumen tersebut adalah sumber utama untuk tujuan produk, prinsip, alur kerja, batas produk, keputusan yang menunggu persetujuan, serta syarat penyelesaian pedoman.
+1. **[Pedoman Induk AMANAH SEO](docs/PEDOMAN_INDUK_AMANAH_SEO.md)** — sumber utama untuk visi, prinsip, pembagian produk, alur end-to-end, kontrol pemilik, status keputusan, backlog, dan gerbang sebelum implementasi.
+2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — definisi MVP dan catatan persetujuan tujuh keputusan dasar.
+
+Dokumen lama yang bertanda **SUPERSEDED** dipertahankan sebagai rekam jejak historis dan bukan sumber aturan aktif kecuali diadopsi kembali secara eksplisit. Laporan audit historis tidak otomatis menjadi bukti kondisi runtime saat ini.
 
 ## Batas tiga produk
 
-- **AMANAH SEO** — produk utama yang mengelola konteks website, kondisi, prioritas pekerjaan, alur persetujuan, status, dan pemantauan hasil.
-- **AMANAH SEO AI** — produk AI/SEO tersendiri; tidak wajib bagi produk lain.
-- **AMANAH SEO ENGINE V2** — produk workflow SEO/konten terstruktur tersendiri; tidak wajib bagi produk lain.
+- **AMANAH SEO** — produk utama yang mengelola konteks website, kondisi, prioritas pekerjaan, tugas, persetujuan, status, dan pemantauan hasil.
+- **AMANAH SEO AI** — produk AI/SEO tersendiri; bukan dependensi wajib.
+- **AMANAH SEO ENGINE V2** — produk workflow SEO/konten terstruktur tersendiri; bukan dependensi wajib.
 
-Integrasi kedua produk pendamping bersifat opsional. Kemampuan aktual harus dibuktikan melalui audit; nama fitur atau rencana bukan bukti bahwa fitur sudah berjalan.
+Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau integrasi tersedia sampai repositori/versi, kontrak, dan perilakunya benar-benar diverifikasi.
 
-## Aturan kerja saat ini
+## Status pedoman
 
-1. Fokus hanya menyelesaikan pedoman AMANAH SEO.
-2. Selama tahap pedoman, repositori AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya boleh diperiksa secara baca-saja.
-3. Jangan mengubah kode, konfigurasi, database, runtime, atau WordPress kedua produk pendamping.
-4. Jangan menyinkronkan ke lingkungan lokal/WordPress atau memulai implementasi sebelum pedoman dan lingkup MVP disetujui.
-5. Tandai keputusan yang belum disetujui sebagai **PERLU PERSETUJUAN**. Jangan mengubah usulan menjadi keputusan final tanpa persetujuan eksplisit.
-6. Gunakan satu pedoman induk. Dokumen lama yang bertentangan bukan aturan aktif sampai ditinjau dan diadopsi kembali secara eksplisit.
-7. Pertahankan laporan audit historis sebagai evidence; arsipkan atau tandai dokumen lama sebagai **SUPERSEDED** setelah referensinya dipetakan, jangan menghapus bukti yang masih diperlukan.
+- Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
+- Lingkup MVP telah dikonsolidasikan: satu siklus **website → kondisi/temuan → prioritas beralasan → tugas → keputusan/pemeriksaan pemilik → hasil → langkah berikutnya**.
+- Sumber data SEO spesifik harus dipilih dan diverifikasi sebelum implementasi.
+- Kemampuan integrasi AI/ENGINE belum dinyatakan terverifikasi; integrasi tidak wajib untuk MVP.
+- Keputusan komersial dan teknis non-pemblokir dipindahkan ke backlog agar tidak menghambat penutupan pedoman.
+- Pedoman berada di branch `controlled/rebuild-product-pedoman` sebagai **DRAFT FINAL UNTUK PERSETUJUAN PENUTUPAN**. Belum digabung ke `main`.
 
-## Status
+## Batas kerja
 
-Pedoman induk baru telah disusun pada branch controlled/rebuild-product-pedoman sebagai **DRAFT**. Ini belum berarti pedoman final telah disetujui atau produk telah siap diimplementasikan.
-
-**Langkah berikutnya:** tinjau pedoman induk, selesaikan keputusan yang memblokir MVP, lalu minta persetujuan eksplisit untuk menutup tahap pedoman.
-
-
-Untuk menuntaskan keputusan tanpa memperluas pekerjaan tanpa batas, lihat juga [Usulan Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md). Usulan ini belum disetujui dan tidak mengizinkan implementasi otomatis.
+Sebelum pedoman ditutup dan implementasi disetujui secara terpisah:
+1. Fokus pada penyelesaian dan persetujuan pedoman AMANAH SEO.
+2. Pemeriksaan AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya baca-saja.
+3. Jangan mengubah kode, konfigurasi, database, runtime, lisensi, atau WordPress kedua produk pendamping.
+4. Jangan menyinkronkan atau menjalankan implementasi sebagai bagian dari pekerjaan pedoman.
+5. Pertahankan bukti historis dan jangan menyebut hal yang belum diperiksa sebagai PASS.
