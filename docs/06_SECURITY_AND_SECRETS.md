@@ -1,12 +1,13 @@
-﻿# AMANAH SEO — Security and Secrets
+# AMANAH SEO — Security and Secrets
 
-**Status:** APPROVED — baseline kebijakan yang diusulkan disetujui; implementasi kontrol belum diverifikasi  
+**Status Dokumen:** APPROVED — dokumen persyaratan keamanan disetujui sebagai baseline tata kelola; status implementasi kontrol belum diverifikasi  
+**Status Persyaratan:** Baseline untuk audit dan perencanaan; butir yang bergantung pada keputusan arsitektur atau operasi belum otomatis menjadi keputusan final  
 **Jenis dokumen:** Security baseline  
 **Cakupan:** Platform induk AMANAH SEO dan batas integrasinya dengan produk terpisah
 
 ## 1. Tujuan
 
-Dokumen ini menetapkan baseline keamanan yang diusulkan untuk AMANAH SEO. Ketentuan di sini belum dianggap sebagai implementasi yang sudah berjalan atau sebagai hasil audit keamanan.
+Dokumen ini menetapkan baseline persyaratan keamanan untuk AMANAH SEO. Persetujuan dokumen berarti baseline ini dapat digunakan sebagai acuan audit dan perencanaan; persetujuan tersebut tidak berarti setiap kontrol telah diputuskan sebagai desain final, diterapkan, atau lulus pengujian. Ketentuan yang bergantung pada pilihan arsitektur, deployment, penyedia identitas, atau model operasi tetap harus diselaraskan dengan keputusan terkait sebelum implementasi. Dokumen ini bukan bukti bahwa kontrol sudah berjalan atau audit keamanan telah lulus.
 
 Tujuan utama:
 - Melindungi akun, data, konfigurasi, dan kredensial.
@@ -217,4 +218,5 @@ Keputusan final harus dicatat melalui Decision Register atau Architecture Decisi
 | 0.1 | DRAFT | Baseline keamanan awal untuk ditinjau |
 
 ---
-**Peringatan:** dokumen ini menetapkan persyaratan yang diusulkan, bukan bukti bahwa implementasi sudah aman atau sudah diaudit.
+
+**Peringatan:** status APPROVED berlaku untuk dokumen sebagai baseline persyaratan dan acuan tata kelola. Status itu tidak mengubah usulan atau pertanyaan terbuka menjadi keputusan final, bukan bukti bahwa implementasi sudah aman, dan bukan hasil audit keamanan. Riwayat versi 0.1 berstatus DRAFT adalah catatan historis dan tidak menggantikan status dokumen saat ini.
