@@ -1,7 +1,8 @@
 # PEDOMAN INDUK AMANAH SEO
-**Versi:** 1.0-draft  
+**Versi:** 1.0-candidate  
 **Tanggal penyusunan:** 2026-10-10  
-**Status:** DRAFT TERKENDALI — tujuh keputusan dasar MVP telah disetujui; keputusan lain yang masih bertanda PERLU PERSETUJUAN tetap terbuka  
+**Tanggal konsolidasi keputusan:** 2026-10-11  
+**Status:** DRAFT FINAL UNTUK PERSETUJUAN PENUTUPAN — arah dan lingkup MVP telah disetujui; keputusan non-pemblokir dipindahkan ke backlog  
 **Pemilik keputusan:** Pemilik produk AMANAH SEO
 
 > Dokumen ini adalah titik awal baru untuk konsep dan arah produk AMANAH SEO. Dokumen lama di repository tidak boleh mengubah atau menimpa konsep dalam dokumen ini. Catatan audit lama hanya dipakai sebagai rekam jejak/evidence, bukan sebagai sumber visi produk. AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya ditinjau baca-saja selama penyusunan pedoman ini.
@@ -158,20 +159,34 @@ Sampai pedoman induk selesai dan disetujui:
 
 Setiap langkah menghasilkan artefak/keputusan yang dapat ditinjau. Jangan mengulang langkah yang telah ditutup kecuali ada bukti baru yang mengubah keputusan. Temuan yang tidak memblokir MVP masuk backlog, bukan alasan untuk menunda penutupan.
 
-## 11. Keputusan yang masih memerlukan persetujuan pemilik
+## 11. Status keputusan dan backlog
 
-Hal berikut **belum final** dan tidak boleh diasumsikan:
-1. **[PERLU PERSETUJUAN]** Sasaran pengguna utama dan tipe website yang menjadi fokus MVP pertama.
-2. **[PERLU PERSETUJUAN]** Batas MVP: jumlah website yang dikelola, koneksi/sumber data yang wajib, dan fitur minimum saat peluncuran.
-3. **[PERLU PERSETUJUAN]** Apakah MVP harus menyediakan pemantauan performa dari sumber eksternal tertentu atau cukup mengelola temuan/tugas terlebih dahulu.
-4. **[PERLU PERSETUJUAN]** Tindakan apa yang selalu memerlukan persetujuan manusia dan apakah otomatisasi terbatas diizinkan.
-5. **[PERLU PERSETUJUAN]** Model akun, peran, organisasi/tim, dan pemisahan data antarwebsite.
-6. **[PERLU PERSETUJUAN]** Model lisensi, paket, harga, batas website, trial, renewal, dan bundling produk.
-7. **[PERLU PERSETUJUAN]** Kebijakan retensi, ekspor, dan penghapusan data serta kebutuhan kepatuhan yang relevan.
-8. **[PERLU PERSETUJUAN]** Pilihan arsitektur dan kontrak integrasi setelah kebutuhan MVP dan kemampuan aktual produk diverifikasi.
-9. **[PERLU PERSETUJUAN]** Definisi metrik keberhasilan MVP dan periode evaluasinya.
+### 11.1 Keputusan dasar MVP yang sudah disetujui
 
-Keputusan yang tidak diperlukan untuk membangun dan menguji MVP tidak boleh dipakai sebagai pemblokir. Setiap keputusan yang disetujui dicatat dengan tanggal, alasan, dampak, dan pihak yang menyetujui.
+Ketujuh keputusan MVP-01 sampai MVP-07 disetujui pemilik pada 2026-10-11. Rincian, alasan, dan batas persetujuan tercatat di [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md). Persetujuan ini menetapkan WordPress sebagai platform pertama, cakupan satu website per ruang kerja/pengaturan, prinsip sumber data terkecil yang dapat diverifikasi, persetujuan manusia untuk perubahan/publikasi, model akses awal owner/admin, integrasi AI/ENGINE yang opsional, dan kriteria keberhasilan berbasis siklus inti.
+
+### 11.2 Satu gerbang yang wajib diselesaikan sebelum implementasi
+
+- **GATE-DATA-01 — Verifikasi sumber data awal.** Sebelum kode MVP dirancang untuk mengonsumsi sumber tertentu, pilih dan buktikan satu sumber data yang dapat diakses secara sah, memiliki data yang relevan, dan dapat diuji. Catat pemilik akses, cakupan data, keterkinian, batas penggunaan, metode pengambilan, kondisi gagal, dan bukti pengujian. Ini adalah gerbang implementasi, bukan penghalang penutupan pedoman konsep.
+- **GATE-CAPABILITY-01 — Verifikasi kemampuan produk pendamping bila integrasi diusulkan.** Jangan mengandalkan AI atau ENGINE sebagai dependensi MVP. Jika suatu integrasi kelak diusulkan, audit repository/versi yang tepat, kontrak, autentikasi/otorisasi, alur data, penanganan gagal, dan tes terlebih dahulu. Sampai bukti tersebut tersedia, status kemampuan integrasi adalah **BELUM TERVERIFIKASI**.
+
+### 11.3 Keputusan non-pemblokir yang dipindahkan ke backlog
+
+Hal-hal berikut tidak perlu diputuskan untuk menutup pedoman atau membuktikan siklus MVP awal. Tidak ada nilai atau pilihan yang boleh dianggap disetujui hanya karena dicantumkan di sini.
+
+| ID backlog | Topik | Kapan diputuskan |
+|---|---|---|
+| BL-01 | Model komersial, harga, paket, trial, renewal, bundling, batas lisensi | Sebelum penawaran/komersialisasi yang relevan |
+| BL-02 | Kebijakan retensi, ekspor, penghapusan, backup, pemulihan, dan kepatuhan spesifik | Sebelum menyimpan data produksi atau meluncurkan layanan |
+| BL-03 | Framework, topologi deployment, database, dan arsitektur rinci | Setelah kebutuhan MVP dan verifikasi lingkungan diselesaikan, sebelum implementasi teknis |
+| BL-04 | Protokol integrasi, product manifest, identity federation, versioning, dan kontrak teknis AI/ENGINE | Hanya jika integrasi tertentu dipilih; sebelum integrasi dibangun |
+| BL-05 | Banyak website per workspace, organisasi/tim kompleks, customer portal | Setelah kebutuhan penggunaan nyata melampaui MVP |
+| BL-06 | Target numerik KPI dan periode evaluasi | Setelah baseline dan sumber pengukuran yang dapat dipercaya tersedia |
+| BL-07 | Otomatisasi terbatas di masa depan | Hanya melalui persetujuan perubahan ruang lingkup dan kontrol risiko tersendiri |
+
+Model akses awal owner/admin dan larangan tindakan website otonom pada MVP sudah diputuskan; backlog ini hanya mencakup perluasan atau rincian yang tidak dibutuhkan untuk lingkup awal.
+
+
 
 ## 12. Cara mengelola dokumen lama
 
@@ -183,20 +198,20 @@ Keputusan yang tidak diperlukan untuk membangun dan menguji MVP tidak boleh dipa
 
 ## 13. Definisi selesai
 
-Pedoman AMANAH SEO dinyatakan **SELESAI** hanya ketika:
-1. Tujuan dan batas tiga produk jelas serta disetujui.
-2. Alur end-to-end dan titik kontrol pemilik dipahami.
-3. Lingkup MVP dan hal di luar MVP ditentukan.
-4. Kemampuan AI/ENGINE yang relevan telah dicocokkan dengan evidence baca-saja; ketidakpastian dicatat.
-5. Keputusan yang memblokir MVP disetujui atau diselesaikan; keputusan non-blocking dipindahkan ke backlog.
-6. Kriteria penerimaan, keamanan minimum, dan batas klaim ditulis dengan jelas.
-7. Satu dokumen induk dan satu daftar keputusan menjadi sumber acuan tanpa kontradiksi aktif.
-8. Pemilik memberikan persetujuan eksplisit atas pedoman dan lingkup MVP.
+Pedoman dinyatakan **SIAP DITUTUP** ketika:
+1. Tujuan, prinsip, batas tiga produk, dan larangan klaim yang tidak terbukti ditetapkan dengan jelas.
+2. Alur end-to-end, status, titik persetujuan, penanganan kegagalan, dan siklus perbaikan telah dijelaskan.
+3. Lingkup MVP dan hal di luar MVP tercatat dalam dokumen yang ditautkan.
+4. Bukti produk pendamping ditinjau dengan label yang jujur; hal yang belum diverifikasi tidak dinyatakan tersedia atau siap integrasi.
+5. Semua keputusan yang memblokir definisi MVP diselesaikan; gerbang sebelum implementasi dan backlog dicatat terpisah.
+6. Kriteria penerimaan, keamanan minimum, dan batas klaim ditulis.
+7. Satu dokumen induk menjadi sumber acuan, keputusan MVP memiliki catatan persetujuan, dan dokumen lama yang bertentangan ditandai superseded.
+8. Pemilik memberi persetujuan eksplisit untuk menutup pedoman.
 
-Persetujuan pedoman **bukan** persetujuan otomatis untuk mengubah kode, menggabungkan pull request, mengubah runtime, atau menerbitkan produk. Implementasi membutuhkan scope dan approval terpisah.
+**Status saat ini:** butir 1–3, 5–7 telah dikonsolidasikan di branch ini. Butir 4 baru terpenuhi sebagian: bukti dokumentasi AMANAH SEO AI tersedia secara baca-saja, tetapi status/runtime terkini dan kemampuan integrasi belum diverifikasi; dokumen sumber utama ENGINE V2 belum berhasil diidentifikasi dari path yang dapat diakses pada pemeriksaan ini. Kekurangan bukti tersebut dicatat secara eksplisit dan tidak dipakai untuk mengklaim integrasi tersedia. Karena integrasi bersifat opsional, kekurangan ini bukan penghalang penutupan pedoman konseptual. Butir 8 menunggu persetujuan penutupan dari pemilik.
 
----
-**Aturan akhir:** Bangun AMANAH SEO untuk membantu pemilik website mengambil keputusan SEO yang lebih baik dan menjalankan perbaikan secara terarah serta berkelanjutan. Semua fitur, dokumen, dan integrasi harus mendukung tujuan itu; bila tidak, jangan masukkan ke MVP.
+Persetujuan pedoman bukan persetujuan otomatis untuk mengubah kode, menggabungkan pull request, mengubah runtime, atau menerbitkan produk. Implementasi membutuhkan ruang lingkup dan persetujuan terpisah.
+
 
 
 ## 14. Lingkup MVP dan keputusan pemilik
