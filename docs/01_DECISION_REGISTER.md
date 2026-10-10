@@ -163,12 +163,13 @@ Bagian ini adalah indeks ringkas untuk membantu navigasi, bukan daftar pertanyaa
 | OPEN-012 | Kredensial AI dan pembebanan biaya | Q-014 sampai Q-016 |
 | OPEN-013 | Teknologi platform dan database | Q-017, Q-019 |
 | OPEN-014 | Prioritas produk, MVP, dan strategi rilis | Q-025 sampai Q-027 |
+| OPEN-015 | Keterlacakan kebutuhan, pengerjaan, dan tes penerimaan | Q-028 |
 
-Indeks `OPEN-001` sampai `OPEN-014` merupakan pengelompokan untuk navigasi, bukan keputusan mandiri dan bukan pengganti status pertanyaan rinci. Satu pertanyaan `Q-xxx` dapat muncul pada lebih dari satu indeks apabila relevan terhadap beberapa pokok bahasan. Kemunculan berulang tersebut merupakan referensi silang, bukan pertanyaan baru dan bukan keputusan tambahan.
+Indeks `OPEN-001` sampai `OPEN-015` merupakan pengelompokan untuk navigasi, bukan keputusan mandiri dan bukan pengganti status pertanyaan rinci. Satu pertanyaan `Q-xxx` dapat muncul pada lebih dari satu indeks apabila relevan terhadap beberapa pokok bahasan. Kemunculan berulang tersebut merupakan referensi silang, bukan pertanyaan baru dan bukan keputusan tambahan.
 
 Khusus **Q-027 — Strategi rilis**, indeks utama berdasarkan pokok bahasannya adalah `OPEN-014 — Prioritas produk, MVP, dan strategi rilis`. Pencantuman Q-027 pada `OPEN-009 — Keamanan dan pengelolaan operasional` dipertahankan hanya sebagai referensi silang karena strategi rilis juga dapat memengaruhi kesiapan operasional dan keamanan. Pemetaan ini tidak memutuskan isi Q-027.
 
-Status setiap pertanyaan tetap mengacu pada `docs/10_OPEN_QUESTIONS.md`. Seluruh indeks tetap `OPEN` selama pertanyaan rinci terkait belum memiliki keputusan yang disetujui dan terdokumentasi. Jika keputusan dibuat, perbarui Decision Register dan Open Questions dalam perubahan yang sama serta cantumkan referensi keputusan dan bukti persetujuannya. Jangan menandai pertanyaan selesai hanya karena pemetaan indeks telah diperjelas.
+Status setiap pertanyaan tetap mengacu pada `docs/10_OPEN_QUESTIONS.md`. Q-028 tercatat pada `OPEN-015` sebagai pertanyaan terbuka; indeks ini bukan keputusan dan tidak mengesahkan format atau tingkat rincian traceability. Seluruh indeks tetap `OPEN` selama pertanyaan rinci terkait belum memiliki keputusan yang disetujui dan terdokumentasi. Jika keputusan dibuat, perbarui Decision Register dan Open Questions dalam perubahan yang sama serta cantumkan referensi keputusan dan bukti persetujuannya. Jangan menandai pertanyaan selesai hanya karena pemetaan indeks telah diperjelas.
 
 ## 7. Cara Menambahkan Keputusan
 

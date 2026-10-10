@@ -2,7 +2,7 @@
 
 **Status dokumen:** DRAFT — menunggu tinjauan dan persetujuan pemilik proyek  
 **Status operasional:** **WAJIB DIBACA SEBELUM SETIAP PEKERJAAN** terkait AMANAH SEO  
-**Versi:** 0.6  
+**Versi:** 0.7  
 **Tanggal:** 2026-10-10  
 **Sumber acuan:** GitHub `amanahgroup123/AMANAH-SEO`, branch `main`  
 **Cakupan:** Menuntaskan Pedoman AMANAH SEO (produk induk) saja.
@@ -178,6 +178,7 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 | 0.4 | DRAFT | Mencatat koreksi editorial CDR-013–CDR-015 di `main`; ketiganya RESOLVED dalam scope masing-masing, sementara Tahap B tetap PARTIAL karena CDR-011 dan audit konsistensi lebih luas belum ditutup. |
 | 0.5 | DRAFT | Memisahkan pada CDR-011 antara baseline kanonis GitHub, batas inventaris lokal/global (ASE-MISS-007), traceability implementasi yang belum lengkap, dan keputusan scope data/UI yang masih menunggu review evidence serta keputusan owner. |
 | 0.6 | DRAFT | Mencatat pemeriksaan silang Decision Register dengan Open Questions: Q-006/Q-007 sudah dipetakan dengan benar; celah traceability ke tes belum memiliki pertanyaan khusus dan memerlukan persetujuan owner sebelum menambah pertanyaan baru. Menyelaraskan metadata versi dokumen. |
+| 0.7 | DRAFT | Atas pilihan pemilik proyek, mencatat Q-028 sebagai pertanyaan terbuka tentang keterlacakan kebutuhan, pengerjaan, dan tes penerimaan; menyelaraskan Decision Register, Open Questions, re-audit, dan register dokumen. Tidak ada keputusan final yang diasumsikan. |
 
 ---
 **Penting:** dokumen ini dibuat untuk mengakhiri pekerjaan secara terarah, bukan membuka proyek baru tanpa batas. Prioritas tunggal sampai gerbang dokumentasi terpenuhi adalah menuntaskan Pedoman AMANAH SEO.
@@ -228,3 +229,12 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 - **Tindakan:** tidak menambah pertanyaan baru tanpa persetujuan pemilik proyek. Metadata versi Rencana Induk diselaraskan dengan riwayat versi yang sudah ada; Register Dokumen juga akan diperbarui agar versinya cocok.
 - **Batas kerja:** hanya dokumentasi AMANAH SEO di GitHub. Tidak ada perubahan pada AMANAH SEO AI, AMANAH SEO ENGINE, kode, database, konfigurasi, atau runtime. Tidak ada sinkronisasi lokal/WordPress.
 - **Satu langkah berikutnya:** minta keputusan pemilik proyek apakah celah traceability tersebut perlu dicatat sebagai pertanyaan terbuka baru, atau cukup dikelola di bawah CDR-011 sampai audit produk ditinjau.
+
+## 9F. Catatan sesi — pencatatan pertanyaan resmi Q-028 (2026-10-10)
+
+- **Baseline yang diperiksa:** GitHub main; rencana induk, README, Decision Register, Open Questions, Phase 2 Cross-Document Re-Audit, dan Phase 1 Document Register dibaca ulang.
+- **Keputusan pemilik proyek untuk sesi ini:** pilihan B — siapkan pertanyaan resmi baru tentang cara menghubungkan kebutuhan yang disetujui, pekerjaan produk, dan tes penerimaan. Ini mengizinkan pencatatan pertanyaan, bukan penetapan jawaban final.
+- **Perubahan dokumentasi:** Q-028 ditambahkan dengan status OPEN; Decision Register menambahkan indeks OPEN-015; re-audit mencatat batas dan hubungan dengan CDR-011; versi rencana dan register dokumen diselaraskan ke 0.7.
+- **Status yang tidak berubah:** CDR-011 OPEN / PARTIALLY ADVANCED; Q-001–Q-027 tetap sesuai status masing-masing; Q-028 OPEN; ASE-MISS-007 belum diverifikasi global; audit produk tetap PARTIAL; Gate 1/Gate 2 tetap BLOCKED / NOT PASS.
+- **Batas kerja:** dokumentasi AMANAH SEO saja. Tidak ada perubahan kode, database, konfigurasi, runtime, atau repository AMANAH SEO AI / AMANAH SEO ENGINE V2. Tidak ada sinkronisasi lokal/WordPress.
+- **Satu langkah berikutnya:** verifikasi semua perubahan pada branch ini, lalu ajukan perubahan terkendali untuk ditinjau sebelum menggabungkan ke main.
