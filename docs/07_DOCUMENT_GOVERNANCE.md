@@ -1,3 +1,7 @@
+> **STATUS: DOKUMEN LAMA / TIDAK BERLAKU SEBAGAI PEDOMAN AKTIF.** Mulai 2026-10-10, visi, tujuan, batas produk, dan alur utama ditentukan oleh [Pedoman Induk AMANAH SEO](PEDOMAN_INDUK_AMANAH_SEO.md). Dokumen ini dipertahankan untuk penelusuran historis dan tidak boleh dipakai untuk mengesampingkan pedoman induk baru. Jika ada isi yang masih berguna, adopsi kembali secara eksplisit setelah ditinjau; status keputusan lama tidak otomatis menjadi keputusan aktif.
+
+---
+
 ﻿# AMANAH SEO — Document Governance
 
 **Status:** APPROVED — aturan tata kelola dokumentasi disetujui  
