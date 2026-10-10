@@ -53,7 +53,7 @@ Ini adalah hasil assessment berbasis evidence yang tersedia, bukan keputusan own
 | Header evidence links | Nine previously unlinked core-document headers now link to their individual approval commits and dates; Document Governance and Roadmap already had links | VERIFIED — 11/11 |
 | Templates | Current inventory identifies reusable templates as DRAFT; no promotion to APPROVED is required merely because the template exists | CONSISTENT WITH REGISTER |
 
-**Disposition:** ASE-MISS-008 is **RESOLVED for the 11 core documents** at the inspected baseline. Approval evidence is now documented per document and linked from each current header. APPROVED remains limited to each document's stated role; it does not finalize proposed architecture/commercial options or authorize implementation.
+**Current disposition (2026-10-10):** ASE-MISS-008 is **RESOLVED for the 11 core documents** at the inspected baseline. This is the current disposition for the defined scope and supersedes any earlier report wording that marked the core-document approval-evidence check PARTIAL. Approval evidence is documented per document and linked from each current header. This resolution does not extend to templates, audit records, external sources, product decisions, or implementation approval. APPROVED remains limited to each document's stated role; it does not finalize proposed architecture/commercial options or authorize implementation.
 
 ## 4. Official Roadmap Phase 2 Entry Assessment
 
