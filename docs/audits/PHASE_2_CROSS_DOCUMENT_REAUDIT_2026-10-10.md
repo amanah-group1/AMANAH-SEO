@@ -234,4 +234,25 @@ This closeout authorizes moving to **Tahap C — Rekonsiliasi keputusan** for do
 
 **Tahap C — COMPLETE for consistency/status reconciliation in the recorded GitHub documentation scope.** No OPEN question was closed and no PROPOSED item was made final. This disposition does not close CDR-011, establish global source completeness, approve product implementation, or change Gate 1 / Roadmap Phase 2/Gate 2 from BLOCKED / NOT PASS. Product audits remain PARTIAL and live runtime/database evidence remains NOT TESTED.
 
-Next authorized stage: Tahap D — controlled documentation revisions, limited to corrections supported by recorded evidence. No changes to AMANAH SEO AI or AMANAH SEO ENGINE V2 code/runtime/database/configuration and no local/WordPress synchronization were performed.
+At the time of this Tahap C addendum, the next authorized stage was Tahap D. The current disposition and next stage are recorded in §11 below. No changes to AMANAH SEO AI or AMANAH SEO ENGINE V2 code/runtime/database/configuration and no local/WordPress synchronization were performed.
+
+
+## 11. Addendum — Tahap D controlled documentation revisions (2026-10-10)
+
+### Baseline and scope
+
+- Baseline reviewed: GitHub `main` at `b6d541839e9285bf9daf1f15cb1568d7c2d1b27e`, after the Phase C Decision Register ↔ Open Questions reconciliation.
+- Current-state sources rechecked: the Rencana Induk, README, Decision Register, Open Questions, this re-audit, Phase 1 Document Register, Roadmap Phase 2 Readiness Assessment, and Foundation Requirements Traceability Baseline.
+- Scope: documentation-only controlled revisions in the parent AMANAH SEO repository. No child-product or runtime work.
+
+### Disposition
+
+- The Phase C crosswalk and current-status corrections are present in the canonical Decision Register, Open Questions, and audit records. Editorial findings CDR-013–CDR-016 are recorded as RESOLVED only within their stated scopes.
+- The Rencana Induk and README now identify Tahap D as complete for the recorded GitHub documentation scope and point to Tahap E for final verification and explicit owner approval.
+- No further substantive correction was made to unresolved product requirements or architecture. CDR-011/Q-028 depend on owner decisions and reviewed product-audit evidence; ASE-MISS-007 remains unverified because local/global sources were not inspected. Creating a requirements matrix or separate data/UI specification would exceed the evidence/approval currently recorded.
+- DEC-001–DEC-007 remain CONFIRMED; PROP-001–PROP-008 remain PROPOSED; Q-001–Q-028 remain OPEN. No new decision or approval was inferred.
+- Product GitHub audits remain PARTIAL; runtime/database remain NOT TESTED; official Roadmap Phase 2/Gate 2 remains BLOCKED / NOT PASS.
+
+### Scope boundary and next step
+
+No source code, database, configuration, runtime, or repository content in AMANAH SEO AI or AMANAH SEO ENGINE V2 was changed. No local or WordPress synchronization was performed. **Tahap D is complete only for controlled documentation revisions in the recorded GitHub scope.** Tahap E must verify the acceptance checklist, remaining exceptions, links/statuses, and obtain explicit owner approval before declaring the guide complete.
