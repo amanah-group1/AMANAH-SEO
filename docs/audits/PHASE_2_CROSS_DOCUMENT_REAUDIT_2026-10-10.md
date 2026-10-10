@@ -138,7 +138,7 @@ This addendum records inconsistencies found while continuing the parent-guide co
 - **Type:** Audit-record status synchronization / historical disposition.
 - **Impact:** MEDIUM. The repository presents two different dispositions without a sufficiently prominent statement that the earlier status is superseded by later evidence.
 - **Disposition:** RESOLVED for the defined core-document approval-evidence scope. The re-audit §3 and this report's historical disposition now cross-reference the later 11/11 verification; the Roadmap Phase 2 Readiness Assessment explicitly states the current resolution and its limits. This does not extend to templates, audit records, external sources, product decisions, or implementation approval.
-- **Evidence:** Approval Evidence Revalidation blob `76fe6c8ebb8d1b258e9d25aeaaf49a469534d312`; updated re-audit blob to be recorded by the resulting commit; updated readiness assessment blob `4cc987c0bb08384b2cdb4d5b89e7bd9f040d912f`; updated register blob `852dfeb11314ff0d421058f93ef9ed6fb8a8a695`.
+- **Evidence:** Approval Evidence Revalidation blob `76fe6c8ebb8d1b258e9d25aeaaf49a469534d312`; this re-audit's updated status and disposition are recorded in its current `main` version; updated readiness assessment blob `4cc987c0bb08384b2cdb4d5b89e7bd9f040d912f`; updated register blob `852dfeb11314ff0d421058f93ef9ed6fb8a8a695`.
 
 ### CDR-015 — Gate 0 report mixes historical branch status with current-main status
 
