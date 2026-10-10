@@ -68,6 +68,7 @@ Platform induk yang direncanakan mengelola shared capabilities dan mengintegrasi
 - `docs/audits/PHASE_2_CROSS_DOCUMENT_REAUDIT_2026-10-10.md` — revalidasi temuan CDR-001–CDR-012.
 - `docs/audits/ROADMAP_PHASE_2_READINESS_ASSESSMENT_2026-10-10.md` — assessment prasyarat resmi Roadmap Phase 2, bukti ASE-MISS-008, disposition CDR-011, dan kriteria Gate 2.
 - `docs/audits/APPROVAL_EVIDENCE_REVALIDATION_2026-10-10.md` — verifikasi commit approval individual untuk 11 dokumen inti; tidak mengesahkan keputusan arsitektur atau implementasi.
+- `docs/audits/FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md` — pemetaan delapan tujuan Charter ke dokumentasi, komponen konseptual, kriteria roadmap, dan status evidence; CDR-011 tetap terbuka untuk traceability implementasi.
 
 ### Reusable templates
 
@@ -116,7 +117,7 @@ Setiap angka atau model komersial yang pernah dibahas harus dianggap sebagai usu
 
 ## 8. Current Status
 
-Repositori ini berada pada tahap fondasi dokumentasi dan rekonsiliasi audit silang sumber yang dapat diakses. Hasil audit silang dokumentasi adalah **PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS** untuk repository dan Library yang dapat diakses; ini bukan penutupan Roadmap Phase 2 / Gate 2. Assessment resmi kesiapan Phase 2 menyatakan **BLOCKED**: audit Phase 1 kedua produk belum dibuktikan selesai/reviewed dalam scope ini; CDR-011 tetap OPEN; ASE-MISS-008 telah ditutup untuk bukti approval 11 dokumen inti setelah revalidasi; GitHub `main` ditetapkan sebagai sumber acuan utama; local akan disinkronkan setelah dokumentasi selesai.
+Repositori ini berada pada tahap fondasi dokumentasi dan rekonsiliasi audit silang sumber yang dapat diakses. Hasil audit silang dokumentasi adalah **PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS** untuk repository dan Library yang dapat diakses; ini bukan penutupan Roadmap Phase 2 / Gate 2. Assessment resmi kesiapan Phase 2 menyatakan **BLOCKED**: audit Phase 1 kedua produk belum dibuktikan selesai/reviewed dalam scope ini; CDR-011 tetap OPEN (PARTIALLY ADVANCED melalui matriks traceability tingkat fondasi); ASE-MISS-008 telah ditutup untuk bukti approval 11 dokumen inti setelah revalidasi; GitHub `main` ditetapkan sebagai sumber acuan utama; local akan disinkronkan setelah dokumentasi selesai.
 
 Audit teknis kedua produk belum dinyatakan selesai atau disetujui untuk dimulai. Belum ada klaim bahwa:
 - Kedua produk telah lulus integration readiness audit.

@@ -26,17 +26,19 @@ Audit inventaris dokumen dan audit silang sebelumnya bukan audit produk, bukan k
 - `docs/02_ARCHITECTURE_BLUEPRINT.md`, `docs/03_PRODUCT_BOUNDARIES.md`, `docs/04_INTEGRATION_CONTRACTS.md`, `docs/05_LICENSE_AND_ENTITLEMENTS.md`, dan `docs/06_SECURITY_AND_SECRETS.md` menyediakan baseline tematik, sambil menyatakan pilihan arsitektur/kontrak/komersial yang belum diputuskan.
 - `docs/08_AUDIT_AND_READINESS.md` dan `docs/09_ROADMAP_AND_GATES.md` mensyaratkan evidence audit, keputusan, risiko, dan persetujuan pada gate terkait.
 - `docs/10_OPEN_QUESTIONS.md` mempertahankan Q-001 sampai Q-027 sebagai OPEN.
+- [Foundation Requirements Traceability Baseline](FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md) memetakan delapan tujuan Charter ke sumber, kandidat tanggung jawab komponen, kriteria roadmap, dan status evidence; ini belum merupakan test-case traceability end-to-end.
 - Pencarian Library menemukan dua artefak terkait ENGINE V2; keduanya bukan otoritas platform induk.
 
 ### Assessment
 1. **Cukup untuk arah dan batas platform pada tingkat tinggi:** Charter dan dokumen tematik yang tersedia dapat dipakai sebagai baseline konseptual untuk menyiapkan audit produk. Bukti yang tersedia tidak membenarkan klaim bahwa Product Master/Brief/Direction terpisah wajib dibuat sebelum audit produk.
-2. **Belum cukup untuk memfinalkan arsitektur dan kontrak:** belum ada hasil audit aktual kedua produk yang dapat menjadi evidence untuk keputusan kontrak; belum ada traceability end-to-end lengkap dari kebutuhan ke komponen dan acceptance tests; Q-001–Q-027 masih OPEN.
+2. **Belum cukup untuk memfinalkan arsitektur dan kontrak:** matriks traceability tingkat fondasi kini tersedia, tetapi belum ada traceability end-to-end dari kebutuhan ke komponen implementasi dan test cases yang dapat dijalankan; belum ada hasil audit aktual kedua produk yang dapat menjadi evidence untuk keputusan kontrak; Q-001–Q-027 masih OPEN.
 3. **Kebutuhan data model dan UI/navigation:** dokumen khusus belum ditemukan dalam repository yang diperiksa. Ini adalah gap yang harus dinilai berdasarkan hasil audit dan keputusan scope arsitektur; keberadaannya tidak boleh diasumsikan wajib sebagai dokumen mandiri tanpa keputusan.
 4. **Batas sumber:** owner telah menetapkan GitHub repository sebagai sumber acuan utama dan menyatakan local akan disinkronkan setelah dokumentasi selesai. Maka inventaris kanonis untuk gate ini berbasis repository GitHub; tidak perlu menahan gate hanya untuk membandingkan salinan local yang belum disinkronkan. Library tetap sumber sekunder, bukan otoritas platform induk.
 
 ### Disposition
-**CDR-011 tetap OPEN**, dengan rekomendasi terukur berikut:
+**CDR-011 tetap OPEN — PARTIALLY ADVANCED**, dengan rekomendasi terukur berikut:
 - Pertahankan Charter dan dokumen tematik sebagai baseline arah/scope sementara.
+- Gunakan Foundation Requirements Traceability Baseline sebagai pemetaan tingkat fondasi; jangan memperlakukannya sebagai matriks test-case implementasi yang sudah lengkap.
 - Jangan membuat Product Master/Brief/Direction baru hanya untuk mengisi nama dokumen yang hilang.
 - Setelah audit produk disetujui dan selesai, putuskan melalui Decision Register/ADR apakah perlu requirements-to-test matrix dan dokumen data/UI terpisah.
 - Gunakan GitHub `main` sebagai baseline tunggal; pull ke local dilakukan setelah dokumentasi selesai. Catat sumber baru hanya bila owner kemudian menambahkannya sebagai sumber resmi.
@@ -86,7 +88,7 @@ Roadmap §5 defines these criteria:
 2. Preserve the verified 11-document approval matrix and apply the same header-link convention to future core documents or lifecycle changes.
 3. Obtain and record separate explicit authorization to perform the two product audits, without modifying either product.
 4. Execute and review the two Phase 1 product audits separately, recording repository/branch/commit, documentation, tests, relevant database/runtime evidence, risks, and integration gaps.
-5. Revisit CDR-011 after those audits. Decide in Decision Register/ADR whether requirements-to-test traceability, data model, and UI/navigation baselines should be separate artifacts or controlled sections in existing documents.
+5. Revisit CDR-011 after those audits. Extend the existing foundation traceability matrix with evidence-backed components and executable acceptance tests; decide in Decision Register/ADR whether data model and UI/navigation baselines should be separate artifacts or controlled sections in existing documents.
 6. Only then refine architecture/contracts, update decisions and risk review, and request the official Gate 2 approval.
 
 ## 7. Scope and Non-Claims
