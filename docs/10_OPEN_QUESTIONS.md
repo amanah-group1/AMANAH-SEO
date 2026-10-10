@@ -224,7 +224,7 @@ Jika suatu pertanyaan ditunda, catat alasannya, dampaknya, dan kondisi yang dipe
 
 | Versi | Status | Perubahan |
 |---|---|---|
-| 0.1 | OPEN | Daftar pertanyaan awal untuk keputusan arsitektur, produk, dan operasional |
+| 0.1 | DRAFT  | Daftar pertanyaan awal untuk keputusan arsitektur, produk, dan operasional |
 
 ---
 **Peringatan:** semua pertanyaan berstatus OPEN sampai ada keputusan yang dapat ditelusuri dan disetujui.
