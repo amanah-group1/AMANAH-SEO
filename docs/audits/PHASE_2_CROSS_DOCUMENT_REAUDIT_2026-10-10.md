@@ -112,3 +112,51 @@ See `docs/audits/ROADMAP_PHASE_2_READINESS_ASSESSMENT_2026-10-10.md`.
 - **Official Roadmap Phase 2 entry:** BLOCKED pending evidence and review of the separate Phase 1 audits for both products, explicit authorization for those audits, and disposition of remaining requirements-traceability questions.
 - **Official Roadmap Gate 2:** NOT PASS / BLOCKED. The criteria requiring actual product findings, approved contract decisions, reviewed threat/risk model, and resolved or explicitly deferred critical questions are not all evidenced.
 - This addendum does not authorize product audits, implementation, integration, or any child-product code/database/configuration/runtime changes.
+
+## 7. Addendum — Consistency Revalidation Against Current Inventory (2026-10-10)
+
+**Baseline revalidated:** `main` at `59d43bb75001cc125d0e908cf333293f2d527899`.
+**Scope:** Documentation metadata and audit-record status only. No product source, database, configuration, or runtime was inspected or changed.
+
+This addendum records inconsistencies found while continuing the parent-guide consistency audit. It does not silently revise the source documents or decide substantive product questions.
+
+### CDR-013 — Document Register retains a stale repository-file count
+
+- **Documents / exact location:** `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md`, row ASE-AUD-005 in §2; compare §5 and the current validated inventory summary.
+- **Rule A:** The ASE-AUD-005 row still says “27 file repo”.
+- **Rule B:** The current inventory summary records 30 tracked repository files including `.gitignore`, with 29 documentation/artifact files excluding `.gitignore`.
+- **Type:** Inventory metadata drift.
+- **Impact:** MEDIUM. A reader may treat a historical count as the current inventory, despite the current total being stated elsewhere in the same register.
+- **Recommended disposition:** Update the row to identify 27 as a historical count tied to its earlier baseline, or replace it with the current 30/29 figures and keep the prior count only where historically relevant. Do not imply the local/global inventory was checked.
+- **Status:** OPEN — editorial correction required.
+- **Evidence:** Current register blob `eecf7766a50b062eeeff1549af9496074953f382`; current `main` commit `59d43bb75001cc125d0e908cf333293f2d527899`.
+
+### CDR-014 — Approval-evidence status is stale in the re-audit narrative
+
+- **Documents / exact location:** This report §3 and the Roadmap Phase 2 Readiness Assessment, where ASE-MISS-008 is described as PARTIAL because individual approval commits for all core documents had not yet been verified; compare `docs/audits/APPROVAL_EVIDENCE_REVALIDATION_2026-10-10.md` §§2–3 and the current Phase 1 Document Register.
+- **Rule A:** The earlier re-audit/assessment says only Document Governance and Roadmap approval evidence was verified and records ASE-MISS-008 as PARTIAL.
+- **Rule B:** The approval evidence revalidation report identifies the approval commit and date for all 11 core documents, states 11/11 VERIFIED, and marks ASE-MISS-008 RESOLVED for that defined scope.
+- **Type:** Audit-record status synchronization / historical disposition.
+- **Impact:** MEDIUM. The repository presents two different dispositions without a sufficiently prominent statement that the earlier status is superseded by later evidence.
+- **Recommended disposition:** Preserve the historical assessment, but add a dated cross-reference that supersedes its ASE-MISS-008 status for the 11 core documents only. Do not extend this conclusion to templates, audit records, external sources, product decisions, or implementation approval.
+- **Status:** OPEN — editorial reconciliation required.
+- **Evidence:** `docs/audits/APPROVAL_EVIDENCE_REVALIDATION_2026-10-10.md` blob `76fe6c8ebb8d1b258e9d25aeaaf49a469534d312`; `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md` blob `eecf7766a50b062eeeff1549af9496074953f382`.
+
+### CDR-015 — Gate 0 report mixes historical branch status with current-main status
+
+- **Documents / exact location:** `docs/audits/GATE_0_VERIFICATION_2026-10-09.md` §2 item 4 and §5; compare current `docs/10_OPEN_QUESTIONS.md` header and the report's historical baseline metadata.
+- **Rule A:** The Gate 0 correction list says Open Questions declares document status DRAFT, reflecting the historical correction branch/baseline.
+- **Rule B:** The current `main` version of Open Questions is APPROVED as a question register, while Q-001–Q-027 remain OPEN. Gate 0 §5 already acknowledges the current-main APPROVED status.
+- **Type:** Historical/current status narrative inconsistency.
+- **Impact:** LOW–MEDIUM. Readers may confuse a status recorded on a historical correction branch with the current lifecycle status.
+- **Recommended disposition:** Label §2 as a record of changes made on the historical correction branch and state that it is not a current-main status inventory. Retain §5's distinction between document status and individual question status.
+- **Status:** OPEN — editorial clarification required.
+- **Evidence:** Current `docs/10_OPEN_QUESTIONS.md` blob `8157d946cbaa9de8d00dbd52e890653a6ae26fb3`; `docs/audits/GATE_0_VERIFICATION_2026-10-09.md` blob `118b32569a8f1439f358febdc8300eebf7319467`.
+
+### Updated disposition
+
+- CDR-001–CDR-012 retain their previously recorded dispositions, subject to the later evidence explicitly linked above.
+- CDR-013–CDR-015 are newly recorded and remain OPEN pending controlled editorial reconciliation.
+- No new substantive architecture or commercial decision is inferred. Q-001–Q-027 remain OPEN unless individually decided through the approved governance process.
+- This addendum does not change the official Roadmap Phase 2 / Gate 2 result: it remains BLOCKED / NOT PASS.
+- Next authorized documentation step: correct the three metadata/status inconsistencies in their canonical records, then re-fetch the affected files from `main` and verify the corrections.
