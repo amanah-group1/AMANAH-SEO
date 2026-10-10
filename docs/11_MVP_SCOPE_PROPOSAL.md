@@ -1,5 +1,5 @@
 # Usulan Lingkup MVP AMANAH SEO
-**Status:** DISETUJUI PEMILIK SEBAGAI DASAR LINGKUP MVP  
+**Status:** DISETUJUI PEMILIK — DASAR LINGKUP MVP  
 **Tanggal:** 2026-10-11  
 **Tujuan:** Mempersempit keputusan agar pedoman dapat selesai tanpa membuat daftar fitur yang terus membesar.
 
@@ -40,9 +40,9 @@ Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas s
 
 ## 4. Keputusan MVP yang telah disetujui pemilik
 
-| ID | Keputusan | Rekomendasi | Status |
+| ID | Keputusan | Keputusan yang disetujui | Status |
 |---|---|---|---|
-| MVP-01 | Platform website pertama | WordPress sebagai platform pertama; keputusan dicatat setelah persetujuan pemilik. | DISETUJUI 2026-10-11 |
+| MVP-01 | Platform website pertama | WordPress sebagai platform pertama. | DISETUJUI 2026-10-11 |
 | MVP-02 | Cakupan awal | Satu website per ruang kerja/pengaturan pada MVP, dengan rancangan tidak menghalangi perluasan kemudian. | DISETUJUI 2026-10-11 |
 | MVP-03 | Sumber data wajib | Mulai dengan sumber data paling kecil yang dapat dibuktikan tersedia; jangan membuat integrasi multi-provider sebagai syarat awal. Nama sumber spesifik tetap diverifikasi sebelum implementasi. | DISETUJUI 2026-10-11 (prinsip); sumber spesifik menunggu verifikasi |
 | MVP-04 | Pelaksanaan tindakan | Semua perubahan website dan publikasi membutuhkan persetujuan eksplisit; MVP hanya mengatur tugas dan hasil, bukan melakukan tindakan otonom. | DISETUJUI 2026-10-11 |
