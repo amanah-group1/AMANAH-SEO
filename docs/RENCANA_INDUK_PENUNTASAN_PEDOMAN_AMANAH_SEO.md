@@ -180,7 +180,7 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 ---
 **Penting:** dokumen ini dibuat untuk mengakhiri pekerjaan secara terarah, bukan membuka proyek baru tanpa batas. Prioritas tunggal sampai gerbang dokumentasi terpenuhi adalah menuntaskan Pedoman AMANAH SEO.
 
-## 9B. Catatan sesi — audit konsistensi lanjutan (2026-10-10)
+## 9B. Catatan sesi — audit konsistensi lanjutan (2026-10-10; status historis, diperbarui oleh §9C)
 
 - **Baseline GitHub `main` sebelum pencatatan:** `59d43bb75001cc125d0e908cf333293f2d527899`.
 - **Pemeriksaan:** rencana induk, README, register inventaris, Decision Register, Open Questions, Phase 2 Cross-Document Re-Audit, Approval Evidence Revalidation, dan Gate 0 Verification dibaca ulang dari GitHub.
