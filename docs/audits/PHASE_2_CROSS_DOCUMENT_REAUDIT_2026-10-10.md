@@ -3,7 +3,7 @@
 **Status:** IN REVIEW — read-only re-audit report  
 **Repository:** `amanahgroup123/AMANAH-SEO`  
 **Baseline:** `main` at `5e7b78ee1506afd6511ade715634878375d0ae91` (the baseline on which this review began)  
-**Related Phase 1 register:** [PR #5](https://github.com/amanahgroup123/AMANAH-SEO/pull/5), still open at the time of this report  
+**Related Phase 1 register:** `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md` (merged to main at `bceb08b3cc2c41f33b9115a851d0ecb0b59d1fdf`)  
 **Scope:** The 20 documentation/audit/template files listed in the repository inventory, checked against the prior Phase 2 findings and gate closure. This review also considers the inventory gaps surfaced during the Phase 1 re-run.  
 **Excluded:** Product source code, database, configuration, WordPress runtime, and product implementation. No such assets were changed.
 
@@ -34,7 +34,7 @@ The previous audit's “0 critical conflicts” statement is still supportable *
 - **Type:** Document structure / reference ambiguity.
 - **Impact:** MEDIUM. References to “§18” are ambiguous, and the table appears after the stated final-status section. The content of the traceability table is useful, but its numbering/order was not correctly reconciled during the prior correction.
 - **Recommendation:** Renumber and reorder the sections consistently (e.g. make the traceability section §19 and move “Status Akhir” to the final section number), then update any references to those section numbers. Do not change the underlying Q statuses.
-- **Status:** OPEN — correction required.
+- **Status:** CORRECTED IN CONTROLLED BRANCH — pending merge-time reference validation.
 - **Decision / evidence:** No substantive product decision required; document correction and revalidation evidence required.
 
 ### CDR-010 — Current approval status and approval/version-history evidence are not uniformly traceable
@@ -45,7 +45,7 @@ The previous audit's “0 critical conflicts” statement is still supportable *
 - **Type:** Governance metadata / status interpretation.
 - **Impact:** MEDIUM. The statuses may be compatible (historical draft followed by approval), but the approval transition/evidence is not consistently visible in the affected files; readers cannot determine from the document alone which version was approved or where approval was recorded.
 - **Recommendation:** Preserve historical entries; add a consistent current-version and approval-evidence reference (for example, approval PR/decision and date) or a short clarification that the history row records the initial draft and the header is the current lifecycle status. Clarify the Roadmap warning so it distinguishes an approved roadmap of gated proposals from approval to execute those phases.
-- **Status:** OPEN — governance clarification required.
+- **Status:** RESOLVED BY EVIDENCE AND METADATA CLARIFICATION — approval commits `76cc6ab16b99a69148ced4a21a23cc6964669ead` (Document Governance) and `c1ed45e8d000830c1239fe934f75e7d0a1a132f1` (Roadmap), dated 2026-10-09, were found in repository history and are now referenced in the respective document headers. Historical DRAFT rows are retained.
 - **Decision / evidence:** No change to architecture or commercial decisions. Approval evidence must be checked against repository review/merge history before marking resolved.
 
 ### CDR-011 — Product direction and requirements traceability are not represented as a dedicated baseline
@@ -56,7 +56,7 @@ The previous audit's “0 critical conflicts” statement is still supportable *
 - **Type:** Missing source / traceability gap, not a proven contradiction.
 - **Impact:** MEDIUM, potentially HIGH before architecture or implementation is finalized. The existing Charter is a valid high-level source, but requirements-to-component-to-acceptance-test traceability is not yet available as a complete matrix.
 - **Recommendation:** Keep missing sources explicitly recorded. Decide whether the Charter and existing thematic documents are intentionally sufficient or whether a controlled Product Direction / requirements baseline and data/UI inventory must be created. Do not fabricate requirements or import child-product assumptions.
-- **Status:** OPEN — owner decision and/or source search required.
+- **Status:** OPEN — SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED. No new requirements are inferred. Existing Charter and thematic docs remain high-level sources, not a substitute for a dedicated traceability baseline unless the owner explicitly confirms they are sufficient.
 - **Decision / evidence:** The current inventory records Product Master, Master Brief, Product Direction and specialized specifications as not found in accessible sources; local folders and external drives remain unverified.
 
 ## 3. Phase 2 checklist results
@@ -73,21 +73,19 @@ The previous audit's “0 critical conflicts” statement is still supportable *
 
 ## 4. Decision and gate
 
-**Re-audit result: PARTIAL — do not close the cross-document audit gate yet.**
+**Re-audit result: PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS — for repository + accessible Library scope only.**
 
 Reason:
-1. The previous CDR-001–CDR-008 remain largely valid, with the residual defect in CDR-002 recorded as CDR-009.
-2. Three additional findings/gaps are now recorded (CDR-009–CDR-011), each with impact, recommendation, status and next action.
-3. No new CRITICAL contradiction is confirmed from the examined repository documents.
-4. The section-numbering and approval-evidence issues need controlled correction/verification.
-5. The absence of parent Product Master/Master Brief/Product Direction and dedicated requirements/data/UI specifications must remain a recorded gap until a source is found or the owner explicitly decides the existing documents are sufficient.
-6. The local project folders and external storage have not been directly inspected, so global completeness cannot be claimed.
+1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected in the controlled reconciliation branch and must pass the final diff/reference check before merge.
+2. CDR-010 is resolved by locating the approval commits and adding explicit metadata references while preserving historical DRAFT entries.
+3. CDR-011 remains an explicit open source/owner decision; the gap is recorded with an action and no invented requirement.
+4. No new CRITICAL contradiction is confirmed from the examined repository documents.
+5. The repository and accessible Library sources are registered, but local project folders/external storage were not directly inspected; global inventory completeness cannot be claimed.
 
 ## 5. Required next actions
 
-1. Review and merge the Phase 1 inventory register only after its scope limitations and missing-source records are accepted: [PR #5](https://github.com/amanahgroup123/AMANAH-SEO/pull/5).
-2. Correct CDR-009 in a controlled documentation-only change; re-check every section reference in Integration Contracts.
-3. Resolve CDR-010 by checking approval evidence/PR history and clarifying current status versus historical version status without deleting history.
-4. Decide whether CDR-011 requires new parent-platform product/requirements documents or whether existing approved docs are sufficient; do not fill the gap by inference.
-5. Revalidate the full inventory and all cross-references, then update the Gate Closure record. Until that revalidation passes, the prior “PASS WITH RECORDED OPEN DECISIONS” must be treated as the result for the earlier, narrower audit scope—not the current re-audit.
-6. This report does not authorize Roadmap Phase 2 implementation, product audits, product code changes, or integration.
+1. Verify the corrected section sequence and every cross-reference in Integration Contracts.
+2. Keep CDR-011 OPEN until the owner confirms whether external/local sources exist or whether the current parent-platform documentation is sufficient.
+3. Retain the explicit inventory scope limitation; do not claim global source completeness.
+4. Update the Gate Closure record to distinguish the accessible-source audit result from official Roadmap Phase 2.
+5. This report does not authorize Roadmap Phase 2 implementation, product audits, product code changes, or integration.
