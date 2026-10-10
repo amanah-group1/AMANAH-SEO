@@ -2,7 +2,7 @@
 
 **Status dokumen:** DRAFT — menunggu tinjauan dan persetujuan pemilik proyek  
 **Status operasional:** **WAJIB DIBACA SEBELUM SETIAP PEKERJAAN** terkait AMANAH SEO  
-**Versi:** 0.8  
+**Versi:** 0.9  
 **Tanggal:** 2026-10-10  
 **Sumber acuan:** GitHub `amanahgroup123/AMANAH-SEO`, branch `main`  
 **Cakupan:** Menuntaskan Pedoman AMANAH SEO (produk induk) saja.
@@ -140,8 +140,8 @@ Sebelum menyatakan selesai:
 |---|---|---|
 | A — Baseline dan inventaris | **COMPLETE — GitHub `main` tervalidasi** | Struktur root, `docs/`, `docs/audits/`, `templates/`, README, 11 dokumen inti, 12 catatan audit, 4 template, dan rencana induk cocok pada baseline `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 file terdokumentasi.
 | B — Audit konsistensi | **COMPLETE — untuk cakupan audit konsistensi dokumentasi GitHub yang tercatat**; CDR-001–CDR-016 telah memiliki disposisi; CDR-011 dan keterbatasan sumber tetap terbuka secara eksplisit | Temuan dalam cakupan telah dicatat, koreksi editorial yang disetujui telah diverifikasi, dan keputusan/batas sumber yang belum selesai diserahkan ke Tahap C atau tetap dinyatakan sebagai keterbatasan |
-| C — Rekonsiliasi keputusan | **READY TO START** — keputusan tetap terbuka dan tidak dianggap final | Cocokkan Decision Register dengan Open Questions; klasifikasikan keputusan yang telah disetujui, usulan, dan yang perlu persetujuan owner; catat keputusan yang ditunda beserta dampak dan syarat pembukaan kembali |
-| D — Revisi terkendali | NOT STARTED dalam rencana ini | Commit perubahan yang didukung temuan |
+| C — Rekonsiliasi keputusan | **COMPLETE — untuk konsistensi dan pemetaan status pada dokumentasi GitHub yang tercatat**; seluruh Q-001–Q-028 dan PROP-001–PROP-008 mempertahankan statusnya | Crosswalk usulan ↔ pertanyaan, pemeriksaan indeks OPEN-001–OPEN-015, daftar keputusan tertunda beserta dampak/syarat pembukaan kembali; tidak ada jawaban final baru |
+| D — Revisi terkendali | NOT STARTED — belum dimulai dalam sesi ini | Terapkan koreksi dokumen hanya bila ada dasar dan scope; perubahan rekonsiliasi Tahap C di atas bukan persetujuan implementasi produk |
 | E — Verifikasi dan penutupan | NOT STARTED dalam rencana ini | Checklist final, bukti, dan persetujuan eksplisit |
 
 Perbarui tabel ini setelah ada bukti baru; jangan menandai tahap selesai hanya karena pekerjaan telah dibahas.
@@ -180,6 +180,7 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 | 0.6 | DRAFT | Mencatat pemeriksaan silang Decision Register dengan Open Questions: Q-006/Q-007 sudah dipetakan dengan benar; celah traceability ke tes belum memiliki pertanyaan khusus dan memerlukan persetujuan owner sebelum menambah pertanyaan baru. Menyelaraskan metadata versi dokumen. |
 | 0.7 | DRAFT | Atas pilihan pemilik proyek, mencatat Q-028 sebagai pertanyaan terbuka tentang keterlacakan kebutuhan, pengerjaan, dan tes penerimaan; menyelaraskan Decision Register, Open Questions, re-audit, dan register dokumen. Tidak ada keputusan final yang diasumsikan. |
 | 0.8 | DRAFT | Menutup Tahap B untuk cakupan audit konsistensi dokumentasi GitHub yang tercatat setelah revalidasi CDR-011, pencatatan dan koreksi rujukan status Q-028, serta verifikasi batas keputusan dan sumber yang masih terbuka. Tahap C dinyatakan siap dimulai; tidak ada keputusan substantif, persetujuan Gate 2, atau hasil runtime yang diasumsikan. |
+| 0.9 | DRAFT | Menyelesaikan rekonsiliasi Decision Register ↔ Open Questions pada cakupan GitHub yang tercatat. Memetakan PROP-001–PROP-008 ke pertanyaan terkait, memeriksa indeks OPEN-001–OPEN-015, mencatat dampak dan syarat pembukaan kembali; seluruh Q-001–Q-028 tetap OPEN dan seluruh PROP tetap PROPOSED. Tidak ada keputusan final baru atau perubahan status Gate. |
 
 ---
 **Penting:** dokumen ini dibuat untuk mengakhiri pekerjaan secara terarah, bukan membuka proyek baru tanpa batas. Prioritas tunggal sampai gerbang dokumentasi terpenuhi adalah menuntaskan Pedoman AMANAH SEO.
@@ -250,3 +251,15 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 - **Status yang tidak berubah:** laporan audit GitHub AMANAH SEO AI dan AMANAH SEO ENGINE V2 tetap PARTIAL; Gate 1 dan Roadmap Phase 2/Gate 2 tetap BLOCKED / NOT PASS; runtime/database tetap NOT TESTED untuk pekerjaan ini.
 - **Batas kerja:** hanya dokumentasi AMANAH SEO pada branch terkendali. Tidak ada perubahan kode, database, konfigurasi, runtime, atau repository AI/ENGINE. Tidak ada sinkronisasi lokal/WordPress.
 - **Satu langkah berikutnya:** mulai Tahap C dengan rekonsiliasi Decision Register ↔ Open Questions, tanpa mengubah pertanyaan menjadi keputusan final tanpa persetujuan eksplisit.
+
+
+## 9H. Catatan sesi — penyelesaian Tahap C (2026-10-10)
+
+- **Baseline GitHub `main` yang diperiksa:** `8347e390f0282268b1eb7f8a19cb26dd546a1123`.
+- **Dokumen yang diperiksa:** Rencana Induk, README, Decision Register, Open Questions, Phase 2 Cross-Document Re-Audit; status rujukan diperiksa kembali terhadap Document Register dan laporan readiness yang masih relevan.
+- **Pemeriksaan:** DEC-001–DEC-007, PROP-001–PROP-008, seluruh Q-001–Q-028, dan indeks OPEN-001–OPEN-015; khususnya Q-006/Q-007, Q-012/Q-013, Q-027, serta Q-028/CDR-011.
+- **Hasil:** 28 pertanyaan berurutan dan semuanya OPEN; 8 usulan dan semuanya PROPOSED; 7 keputusan dasar tetap CONFIRMED. OPEN-001–OPEN-015 mencakup seluruh pertanyaan. Rujukan silang yang berulang (Q-012/Q-013 dan Q-027) dipertahankan dengan alasan yang terdokumentasi, bukan dianggap sebagai pertanyaan/keputusan tambahan.
+- **Tahap C:** COMPLETE untuk rekonsiliasi konsistensi/pemetaan pada dokumentasi GitHub yang tercatat. Tidak ada status keputusan yang diubah dan tidak ada jawaban final baru yang diasumsikan.
+- **Hal yang tetap terbuka:** CDR-011/Q-028, seluruh keputusan arsitektur/kontrak/komersial yang belum disetujui, dan ASE-MISS-007 (kelengkapan sumber lokal/global belum diverifikasi). Gate 1 dan Roadmap Phase 2/Gate 2 tetap BLOCKED / NOT PASS; laporan audit AI/ENGINE tetap PARTIAL; runtime/database tetap NOT TESTED.
+- **Batas kerja:** dokumentasi AMANAH SEO saja; tidak ada perubahan kode, database, konfigurasi, runtime, atau repository AI/ENGINE; tidak ada sinkronisasi lokal/WordPress.
+- **Satu langkah berikutnya:** Tahap D — revisi dokumen secara terkendali, dibatasi pada koreksi yang didukung temuan dan tanpa memfinalkan keputusan OPEN/PROPOSED.
