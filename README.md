@@ -7,7 +7,7 @@
 1. **[Pedoman Induk AMANAH SEO](docs/PEDOMAN_INDUK_AMANAH_SEO.md)** — sumber utama untuk visi, prinsip, pembagian produk, alur end-to-end, kontrol pemilik, status keputusan, backlog, dan gerbang sebelum implementasi.
 2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — definisi MVP dan catatan persetujuan tujuh keputusan dasar.
 
-Dokumen lama yang bertanda **SUPERSEDED** dipertahankan sebagai rekam jejak historis dan bukan sumber aturan aktif kecuali diadopsi kembali secara eksplisit. Laporan audit historis tidak otomatis menjadi bukti kondisi runtime saat ini.
+Dokumen lama yang sudah digantikan dipindahkan ke [arsip dokumentasi](docs/archive/README.md), tetap dipertahankan sebagai rekam jejak historis, dan bukan sumber aturan aktif kecuali diadopsi kembali secara eksplisit. Laporan audit historis tetap terpisah di `docs/audits/` dan tidak otomatis menjadi bukti kondisi runtime saat ini.
 
 ## Batas tiga produk
 
