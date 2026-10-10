@@ -163,7 +163,7 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 
 - **Baseline GitHub `main`:** `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`.
 - **Pemeriksaan:** root, `docs/`, `docs/audits/`, dan `templates/` diperiksa langsung melalui GitHub Contents API; README, register inventaris, dan rencana induk dibaca.
-- **Hasil:** 29 file repository teridentifikasi: 1 README, 11 dokumen inti, 1 rencana induk penuntasan, 12 catatan audit, dan 4 template. Tidak ada item hilang dari empat kelompok tersebut pada baseline ini.
+- **Hasil:** GitHub tree berisi 30 file total termasuk `.gitignore`. Sebanyak 29 file dokumentasi/artefak teridentifikasi: 1 README, 11 dokumen inti, 1 rencana induk penuntasan, 12 catatan audit, dan 4 template. `.gitignore` sengaja tidak dihitung sebagai dokumentasi. Tidak ada item hilang dari empat kelompok dokumentasi tersebut pada baseline ini.
 - **Koreksi:** rencana induk sebelumnya belum menjadi baris inventaris; register kini mencatatnya sebagai ASE-DOC-013, README mengindeksnya, dan hitungan inventaris diperbarui.
 - **Batasan:** ini validasi struktur repository GitHub saja. Folder/drive lokal dan runtime tidak diperiksa; inventaris global di luar GitHub tidak diklaim lengkap.
 - **Tahap aktif berikutnya:** Tahap B — audit konsistensi pedoman.
