@@ -17,7 +17,8 @@
 
 | Document ID | Nama | Lokasi | Versi | Status | Otoritas | Dokumen Induk | Relasi | Tindakan |
 |---|---|---|---|---|---|---|---|---|
-| ASE-DOC-001 | README / Platform Foundation | `README.md` | Tidak dideklarasikan | APPROVED (sesuai isi) | Indeks proyek dan struktur dokumen; bukan pengganti dokumen tematik | Project Charter; Document Governance | Merujuk 11 dokumen inti dan 4 template | Pertahankan sebagai indeks; validasi setiap referensi saat perubahan struktur |
+| ASE-DOC-001 | README / Platform Foundation | `README.md` | Tidak dideklarasikan | APPROVED (sesuai isi) | Indeks proyek dan struktur dokumen; bukan pengganti dokumen tematik | Project Charter; Document Governance | Merujuk 11 dokumen inti, rencana induk penuntasan, 12 catatan audit, dan 4 template | Pertahankan sebagai indeks; validasi setiap referensi saat perubahan struktur |
+| ASE-DOC-013 | Rencana Induk Penuntasan Pedoman AMANAH SEO | `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` | 0.1 | DRAFT — menunggu persetujuan pemilik proyek | Rencana operasional untuk menuntaskan pedoman; bukan keputusan produk atau approval implementasi | Project Charter; Document Governance; Roadmap and Gates | Menetapkan scope GitHub-only, tahapan A–E, kriteria penerimaan, dan aturan wajib baca sebelum pekerjaan | Perbarui progres berdasarkan bukti; jangan menyamakan status DRAFT dengan persetujuan kebijakan permanen |
 | ASE-DOC-002 | Project Charter | `docs/00_PROJECT_CHARTER.md` | Tidak dideklarasikan | APPROVED (sesuai isi) | Otoritatif untuk visi, tujuan, prinsip, scope, urutan kerja dan batas kewenangan | — (dokumen pengarah utama) | Mengatur batas terhadap dua produk dan mengacu ke register keputusan, roadmap, audit/readiness | Gunakan sebagai sumber utama arah/scope; status audit/implementasi tetap butuh evidence |
 | ASE-DOC-003 | Decision Register | `docs/01_DECISION_REGISTER.md` | Tidak dideklarasikan | APPROVED (struktur register; status tiap entri berbeda) | Otoritatif untuk status keputusan/usulan/asumsi | Project Charter; Document Governance | Terkait Open Questions, Architecture Blueprint, Integration Contracts, License & Entitlements | Audit setiap ID dan evidence persetujuan; jangan mengubah PROPOSED/OPEN menjadi final tanpa approval |
 | ASE-DOC-004 | Architecture Blueprint | `docs/02_ARCHITECTURE_BLUEPRINT.md` | Tidak dideklarasikan | APPROVED sebagai blueprint konseptual | Otoritatif untuk rancangan arsitektur konseptual, bukan pilihan final yang masih PROPOSED | Project Charter; Decision Register | Terkait Product Boundaries, Integration Contracts, Security, Open Questions | Pertahankan opsi sebagai PROPOSED sampai keputusan dan audit evidence tersedia |
@@ -71,8 +72,8 @@ Artefak di bawah adalah dokumen produk terpisah yang ditemukan di Library. Dokum
 
 ## 5. Ringkasan inventarisasi dan gerbang Phase 1
 
-- Repository berisi **28 file dokumentasi/artefak** pada struktur yang diperiksa setelah dua laporan audit Phase 1 ditambahkan: README (1), dokumen inti (11), audit records (12), dan template (4).
-- **27 file tersebut terdaftar** di bagian 2.
+- Repository berisi **29 file dokumentasi/artefak** pada struktur `main` yang diperiksa: README (1), dokumen inti (11), rencana induk penuntasan (1), audit records (12), dan template (4).
+- **29 file tersebut terdaftar** di bagian 2.
 - Dua dokumen Library yang ditemukan terkait ENGINE V2 terdaftar terpisah sebagai sumber produk eksternal, bukan dokumen induk.
 - Sumber yang dicari tetapi belum ditemukan atau belum dapat diverifikasi dicatat pada bagian 4.
 - Dokumen induk yang tersedia sudah dapat diidentifikasi: Project Charter untuk visi/scope, Decision Register untuk keputusan, Document Governance untuk kontrol dokumen, Roadmap untuk urutan fase, dan Open Questions untuk pertanyaan terbuka.
