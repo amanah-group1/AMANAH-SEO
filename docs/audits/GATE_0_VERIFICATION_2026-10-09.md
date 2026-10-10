@@ -50,3 +50,11 @@ No product source code, product database, or runtime was changed or tested as pa
 
 
 **Reassessment recorded during foundation consistency review (2026-10-09):** Gate 0 is PASS for its stated documentation-inventory and local-reference acceptance criteria. External URL and rendered-destination validation remains NOT TESTED and is not a Gate 0 requirement. Product, database, runtime, security, and integration audits remain NOT TESTED and belong to their respective later audit stages; they are not reasons to downgrade the documentation-only Gate 0.
+
+## 5. Klarifikasi Status Dokumen Setelah Gate 0
+
+Laporan ini merekam hasil pemeriksaan Gate 0 berdasarkan baseline dan correction branch yang dicantumkan pada metadata laporan. Pernyataan mengenai status dokumen pada saat pemeriksaan merupakan catatan historis dan tidak otomatis mencerminkan status pada `main` saat ini.
+
+Pada `main` yang diperiksa dalam audit silang Phase 2, `docs/10_OPEN_QUESTIONS.md` berstatus dokumen `APPROVED` sebagai daftar acuan pertanyaan. Status setiap pertanyaan `Q-001` sampai `Q-027` tetap `OPEN` sampai keputusan terkait disetujui dan dicatat. Dengan demikian, persetujuan dokumen tidak berarti pertanyaan-pertanyaan di dalamnya telah diputuskan.
+
+Klarifikasi ini tidak mengubah hasil Gate 0 sebelumnya, tidak memperluas cakupan pengujian, dan tidak menyatakan bahwa audit source code, database, runtime, keamanan, atau integrasi produk telah dilakukan. Hasil Gate 0 tetap terbatas pada kriteria inventaris dokumentasi dan referensi lokal yang dinyatakan dalam laporan ini.
