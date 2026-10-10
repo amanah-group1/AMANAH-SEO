@@ -4,7 +4,7 @@
 **Repository:** `amanahgroup123/AMANAH-SEO`  
 **Baseline:** `main` at `5e7b78ee1506afd6511ade715634878375d0ae91` (the baseline on which this review began)  
 **Related Phase 1 register:** `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md` (merged to main at `bceb08b3cc2c41f33b9115a851d0ecb0b59d1fdf`)  
-**Scope:** The 20 documentation/audit/template files listed in the repository inventory, checked against the prior Phase 2 findings and gate closure. This review also considers the inventory gaps surfaced during the Phase 1 re-run.  
+**Scope:** The repository inventory was updated to 22 documentation/audit/template files (README, 11 core documents, 6 audit records including this report and the Phase 1 register, and 4 templates). Cross-document re-audit covers the relevant core documents, prior findings and gate closure. This review also considers the inventory gaps surfaced during the Phase 1 re-run.  
 **Excluded:** Product source code, database, configuration, WordPress runtime, and product implementation. No such assets were changed.
 
 ## 1. Audit of the previous audit
@@ -22,7 +22,7 @@ The earlier register `PHASE_2_CROSS_DOCUMENT_FINDINGS_2026-10-10.md` remains use
 | CDR-007 — deployment topology and integration mechanism | OPEN — INTENTIONAL; revalidated | Blueprint, Decision Register, Integration Contracts and Open Questions consistently treat topology/protocol/versioning as undecided. |
 | CDR-008 — commercial model, entitlement limits and release strategy | OPEN — INTENTIONAL; revalidated | README, Decision Register, License and Entitlements, and Open Questions consistently preserve the decisions as open/proposed. |
 
-The previous audit's “0 critical conflicts” statement is still supportable **only for its stated 18-file baseline and its stated conflict criteria**. The re-audit adds gaps and a section-numbering defect; it does not find evidence that CDR-007 or CDR-008 should be silently decided.
+The previous audit's “0 critical conflicts” statement remains supportable **only for its original 18-file baseline and stated conflict criteria**; the current 22-file inventory has a wider, explicitly bounded source scope. The re-audit adds gaps and a section-numbering defect; it does not find evidence that CDR-007 or CDR-008 should be silently decided.
 
 ## 2. New and residual findings
 
