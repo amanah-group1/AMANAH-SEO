@@ -3,6 +3,7 @@
 ## 1. Status Dokumen
 
 - **Status:** APPROVED — disetujui sebagai blueprint konseptual; opsi berstatus PROPOSED tetap belum diputuskan
+- **Bukti persetujuan baseline:** [commit 322a75f94ff01869cacbb0fcad525cf73916cb76](https://github.com/amanahgroup123/AMANAH-SEO/commit/322a75f94ff01869cacbb0fcad525cf73916cb76) (2026-10-09).
 - **Jenis:** Logical architecture blueprint
 - **Implementasi:** Belum dimulai berdasarkan dokumen ini
 - **Audit produk:** Belum dinyatakan selesai

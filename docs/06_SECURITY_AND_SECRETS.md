@@ -1,6 +1,7 @@
 # AMANAH SEO — Security and Secrets
 
 **Status Dokumen:** APPROVED — dokumen persyaratan keamanan disetujui sebagai baseline tata kelola; status implementasi kontrol belum diverifikasi  
+**Bukti persetujuan baseline:** [commit df3251c44b17cb517e2599ca458e693658517cb8](https://github.com/amanahgroup123/AMANAH-SEO/commit/df3251c44b17cb517e2599ca458e693658517cb8) (2026-10-09).  
 **Status Persyaratan:** Baseline untuk audit dan perencanaan; butir yang bergantung pada keputusan arsitektur atau operasi belum otomatis menjadi keputusan final  
 **Jenis dokumen:** Security baseline  
 **Cakupan:** Platform induk AMANAH SEO dan batas integrasinya dengan produk terpisah

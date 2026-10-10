@@ -3,6 +3,7 @@
 ## 1. Status Dokumen
 
 - **Status:** APPROVED — disetujui sebagai pedoman fondasi; bukan bukti implementasi atau kesiapan produk
+- **Bukti persetujuan baseline:** [commit d4522810afdce33112127565c27d86e556ad3ebd](https://github.com/amanahgroup123/AMANAH-SEO/commit/d4522810afdce33112127565c27d86e556ad3ebd) (2026-10-09).
 - **Jenis:** Project charter dan batasan ruang lingkup
 - **Bahasa:** Bahasa Indonesia dengan istilah teknis standar dalam bahasa Inggris
 - **Repository:** AMANAH SEO

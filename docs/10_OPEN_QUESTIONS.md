@@ -1,6 +1,7 @@
 ﻿# AMANAH SEO — Open Questions
 
-**Status Dokumen:** APPROVED — daftar acuan pertanyaan disetujui; status setiap pertanyaan tetap OPEN sampai diputuskan  
+**Status Dokumen:** APPROVED — daftar acuan pertanyaan disetujui; status setiap pertanyaan tetap OPEN sampai diputuskan
+**Bukti persetujuan baseline:** [commit e8a6074ccdf80586bead7f94e1b9e9bbde9548b5](https://github.com/amanahgroup123/AMANAH-SEO/commit/e8a6074ccdf80586bead7f94e1b9e9bbde9548b5) (2026-10-09).  
 **Tujuan:** Mencatat keputusan yang diperlukan sebelum arsitektur dan implementasi difinalisasi
 
 ## 1. Aturan Penggunaan Dokumen

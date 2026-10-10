@@ -3,6 +3,7 @@
 ## 1. Status Dokumen
 
 - **Status:** APPROVED — kerangka tata kelola lisensi disetujui; model lisensi, paket, harga, dan protokol aktivasi tetap belum diputuskan
+- **Bukti persetujuan baseline:** [commit 0a6f591eb28dc2e28f1b2b3cd9fee953806363f2](https://github.com/amanahgroup123/AMANAH-SEO/commit/0a6f591eb28dc2e28f1b2b3cd9fee953806363f2) (2026-10-09).
 - **Model lisensi final:** Belum ditetapkan
 - **Paket dan harga:** Belum disahkan
 - **Activation protocol:** Belum diputuskan
