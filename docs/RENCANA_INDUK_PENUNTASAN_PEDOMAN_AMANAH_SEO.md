@@ -47,7 +47,7 @@ Penyelesaian pedoman **tidak** berarti platform telah diimplementasikan, produk 
 
 Status berikut adalah titik awal yang harus dikonfirmasi lagi saat pekerjaan dimulai; bukan klaim bahwa seluruh audit telah ditutup.
 
-- README mencatat inventaris 28 artefak: 1 README, 11 dokumen inti, 12 catatan audit, dan 4 template.
+- Inventaris `main` telah diverifikasi pada commit `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`: **29 file** = 1 README + 11 dokumen inti + 1 rencana induk penuntasan + 12 catatan audit + 4 template. Rencana induk kini tercatat pada README dan register inventaris.
 - Roadmap `docs/09_ROADMAP_AND_GATES.md` berstatus **APPROVED** untuk roadmap saja. Persetujuan itu tidak sama dengan persetujuan seluruh pedoman.
 - Assessment kesiapan Phase 2/Gate 2 berstatus **BLOCKED / NOT PASS** dalam laporan audit yang tercatat.
 - CDR-011 masih tercatat terbuka dan memerlukan disposisi lanjutan.
@@ -138,7 +138,7 @@ Sebelum menyatakan selesai:
 
 | Tahap | Status awal | Bukti/hasil yang diperlukan untuk menutup |
 |---|---|---|
-| A — Baseline dan inventaris | IN PROGRESS — perlu revalidasi | Inventaris GitHub tervalidasi |
+| A — Baseline dan inventaris | **COMPLETE — GitHub `main` tervalidasi** | Struktur root, `docs/`, `docs/audits/`, `templates/`, README, 11 dokumen inti, 12 catatan audit, 4 template, dan rencana induk cocok pada baseline `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 file terdokumentasi.
 | B — Audit konsistensi | PARTIAL — berdasarkan audit tercatat | Temuan konsistensi lengkap dan terdisposisi |
 | C — Rekonsiliasi keputusan | BLOCKED/PARTIAL — keputusan terbuka masih ada | Decision Register dan Open Questions konsisten |
 | D — Revisi terkendali | NOT STARTED dalam rencana ini | Commit perubahan yang didukung temuan |
@@ -159,11 +159,21 @@ Setiap sesi kerja harus memperbarui catatan progres di GitHub dengan:
 
 Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali format baru memang diperlukan; utamakan memperbarui register atau catatan kanonis yang tepat.
 
+## 9A. Catatan sesi — validasi inventaris (2026-10-10)
+
+- **Baseline GitHub `main`:** `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`.
+- **Pemeriksaan:** root, `docs/`, `docs/audits/`, dan `templates/` diperiksa langsung melalui GitHub Contents API; README, register inventaris, dan rencana induk dibaca.
+- **Hasil:** 29 file repository teridentifikasi: 1 README, 11 dokumen inti, 1 rencana induk penuntasan, 12 catatan audit, dan 4 template. Tidak ada item hilang dari empat kelompok tersebut pada baseline ini.
+- **Koreksi:** rencana induk sebelumnya belum menjadi baris inventaris; register kini mencatatnya sebagai ASE-DOC-013, README mengindeksnya, dan hitungan inventaris diperbarui.
+- **Batasan:** ini validasi struktur repository GitHub saja. Folder/drive lokal dan runtime tidak diperiksa; inventaris global di luar GitHub tidak diklaim lengkap.
+- **Tahap aktif berikutnya:** Tahap B — audit konsistensi pedoman.
+
 ## 10. Riwayat perubahan
 
 | Versi | Status | Perubahan |
 |---|---|---|
 | 0.1 | DRAFT | Membentuk rencana induk, batas scope, aturan wajib baca, urutan kerja, dan kriteria penutupan. |
+| 0.2 | DRAFT | Mencatat validasi inventaris GitHub `main` pada commit `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 file; README dan register diperbarui untuk memasukkan rencana induk.
 
 ---
 **Penting:** dokumen ini dibuat untuk mengakhiri pekerjaan secara terarah, bukan membuka proyek baru tanpa batas. Prioritas tunggal sampai gerbang dokumentasi terpenuhi adalah menuntaskan Pedoman AMANAH SEO.
