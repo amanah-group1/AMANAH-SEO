@@ -29,3 +29,6 @@ Integrasi kedua produk pendamping bersifat opsional. Kemampuan aktual harus dibu
 Pedoman induk baru telah disusun pada branch controlled/rebuild-product-pedoman sebagai **DRAFT**. Ini belum berarti pedoman final telah disetujui atau produk telah siap diimplementasikan.
 
 **Langkah berikutnya:** tinjau pedoman induk, selesaikan keputusan yang memblokir MVP, lalu minta persetujuan eksplisit untuk menutup tahap pedoman.
+
+
+Untuk menuntaskan keputusan tanpa memperluas pekerjaan tanpa batas, lihat juga [Usulan Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md). Usulan ini belum disetujui dan tidak mengizinkan implementasi otomatis.
