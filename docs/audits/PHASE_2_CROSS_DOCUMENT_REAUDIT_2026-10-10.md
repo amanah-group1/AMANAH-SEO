@@ -56,9 +56,9 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Rule B:** The current repository has no separate parent-platform Product Master, Master Brief, Product Direction, formal requirements catalog, data-model specification, or UI/UX/navigation specification. The Phase 1 search also did not find parent-platform versions of these documents in the accessible Library; two located master/QA documents belong to ENGINE V2 and are not authoritative for the parent platform.
 - **Type:** Missing source / traceability gap, not a proven contradiction.
 - **Impact:** MEDIUM, potentially HIGH before architecture or implementation is finalized. The existing Charter is a valid high-level source, but requirements-to-component-to-acceptance-test traceability is not yet available as a complete matrix.
-- **Recommendation:** Keep missing sources explicitly recorded. Decide whether the Charter and existing thematic documents are intentionally sufficient or whether a controlled Product Direction / requirements baseline and data/UI inventory must be created. Do not fabricate requirements or import child-product assumptions.
-- **Status:** OPEN — SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED. No new requirements are inferred. Existing Charter and thematic docs remain high-level sources, not a substitute for a dedicated traceability baseline unless the owner explicitly confirms they are sufficient.
-- **Decision / evidence:** The current inventory records Product Master, Master Brief, Product Direction and specialized specifications as not found in accessible sources; GitHub `main` is the canonical source per owner instruction; local synchronization is deferred until documentation completion.
+- **Recommendation:** Keep the missing items explicitly recorded, but distinguish source discovery from requirements/scope decisions. For this work, GitHub `main` is the owner-designated canonical baseline; the unsynchronized local copy is not a competing authority and is not a prerequisite to this documentation audit. Do not claim that local/global storage was searched: that limitation remains ASE-MISS-007. After reviewing the bounded product-audit evidence and before architecture is finalized, decide whether a more detailed requirements-to-test matrix and separate data/UI-navigation baselines are necessary. Do not fabricate requirements or import child-product assumptions.
+- **Status:** OPEN — REQUIREMENTS TRACEABILITY / DATA-UI SCOPE DECISION. The high-level direction is documented, and the Foundation Requirements Traceability Baseline partially maps the Charter objectives, but implementation-level requirements-to-component-to-executable-acceptance-test traceability is incomplete. No separate Product Master/Brief/Direction or data/UI specification was found in the checked GitHub repository; accessible Library findings did not provide parent-platform authority. Global/local source completeness is not claimed and is tracked separately as ASE-MISS-007.
+- **Decision / evidence:** `docs/audits/FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md` maps FTR-001–FTR-008 only to conceptual component candidates and roadmap criteria; it explicitly excludes final requirements, schema/UI decisions, product tests, and implementation claims. The Readiness Assessment states the current evidence does not justify requiring separate Product Master/Brief/Direction documents before product audits. Q-001–Q-027 remain OPEN.
 
 ### CDR-012 — README status vocabulary and audit-record index stale after corrections
 
@@ -90,14 +90,14 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 Reason:
 1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected, validated, and merged to `main` in PR #7.
 2. CDR-010 is resolved by locating the approval commits and adding explicit metadata references while preserving historical DRAFT entries.
-3. CDR-011 remains an explicit open source/owner decision; the gap is recorded with an action and no invented requirement.
+3. CDR-011 remains OPEN for requirements traceability and data/UI-navigation scope decisions; source authority for this exercise is GitHub `main`, while global/local inventory completeness remains a separate limitation (ASE-MISS-007). No new requirement is inferred.
 4. No new CRITICAL contradiction is confirmed from the examined repository documents. CDR-012 recorded the stale README governance vocabulary/index and is resolved by the correction merged in PR #9.
-5. The repository is the canonical inventory for this work per owner instruction. Library items are secondary context only; local synchronization is intentionally deferred until documentation completion. CDR-012's README correction is merged in PR #9; the remaining source-completeness limitation is CDR-011.
+5. The repository is the canonical inventory for this work per owner instruction. Library items are secondary context only; local synchronization is intentionally deferred until documentation completion. CDR-012's README correction is merged in PR #9. Requirements traceability/data-UI scope remains CDR-011; unverified local/global source completeness is tracked separately as ASE-MISS-007.
 
 ## 5. Required next actions
 
 1. Verify the corrected section sequence and every cross-reference in Integration Contracts.
-2. Keep CDR-011 OPEN until the owner confirms whether external/local sources exist or whether the current parent-platform documentation is sufficient.
+2. Keep CDR-011 OPEN for the requirements-traceability and data/UI-navigation scope decision. Use the current Foundation Traceability Baseline only for its documented conceptual scope; review the bounded product-audit evidence before deciding whether a detailed requirements-to-test matrix or separate data/UI baselines are needed. Do not block this GitHub-only documentation pass solely on the unsynchronized local copy; ASE-MISS-007 continues to record global/local source-completeness limits.
 3. Retain the explicit inventory scope limitation; do not claim global source completeness.
 4. Update the Gate Closure record to distinguish the accessible-source audit result from official Roadmap Phase 2.
 5. This report does not authorize Roadmap Phase 2 implementation, product audits, product code changes, or integration.
@@ -107,7 +107,7 @@ Reason:
 
 See `docs/audits/ROADMAP_PHASE_2_READINESS_ASSESSMENT_2026-10-10.md`.
 
-- **CDR-011:** remains OPEN for the source boundary/owner confirmation. Assessment conclusion: Charter and thematic documents are sufficient to express high-level platform direction and boundaries; current evidence does not justify inventing a requirement for a separate Product Master/Brief/Direction before product audits. However, complete requirements-to-component-to-acceptance-test traceability is absent, and data/UI/navigation details must be evaluated based on actual product audit findings and the approved Phase 2 scope. The local copy will be synchronized after documentation completion and is not a competing authority during this audit.
+- **CDR-011:** remains OPEN for requirements-to-component-to-executable-acceptance-test traceability and the data/UI-navigation scope decision. The Charter and thematic documents express high-level direction and boundaries; current evidence does not justify requiring separate Product Master/Brief/Direction documents before product audits. The Foundation Requirements Traceability Baseline is partial conceptual mapping, not an implementation test matrix. Evaluate data/UI needs after review of bounded product-audit evidence and before architecture is finalized. GitHub `main` remains the canonical source for this documentation task; local/global source completeness is a separate limitation under ASE-MISS-007.
 - **ASE-MISS-008:** The PARTIAL disposition in the earlier re-audit is a historical status and is superseded for the 11 core documents by [Approval Evidence Revalidation](APPROVAL_EVIDENCE_REVALIDATION_2026-10-10.md), which verified 11/11 individual approval transitions and header evidence links. **ASE-MISS-008 is RESOLVED only for approval evidence for those 11 core documents.** Templates, audit records, external sources, product decisions, and implementation approval are outside that resolution. CDR-011 remains OPEN.
 - **Official Roadmap Phase 2 entry:** BLOCKED pending evidence and review of the separate Phase 1 audits for both products, explicit authorization for those audits, and disposition of remaining requirements-traceability questions.
 - **Official Roadmap Gate 2:** NOT PASS / BLOCKED. The criteria requiring actual product findings, approved contract decisions, reviewed threat/risk model, and resolved or explicitly deferred critical questions are not all evidenced.
@@ -157,3 +157,23 @@ This addendum records inconsistencies found while continuing the parent-guide co
 - No new substantive architecture or commercial decision is inferred. Q-001–Q-027 remain OPEN unless individually decided through the approved governance process.
 - This addendum does not change the official Roadmap Phase 2 / Gate 2 result: it remains BLOCKED / NOT PASS.
 - Next authorized documentation step: re-fetch the corrected source records and this addendum from `main`, verify exact text and current HEAD, then continue the remaining Phase B audit without reopening these resolved findings absent new evidence.
+
+
+## 8. Addendum — CDR-011 evidence-boundary revalidation (2026-10-10)
+
+**Baseline:** GitHub `main` at the start of this review; see the commit recorded in the linked Rencana Induk session note.
+
+### Findings
+
+1. **Source authority for this work is established:** the owner-designated canonical source is this repository's `main`. The unsynchronized local copy is explicitly deferred until the documentation gate; it is not a competing baseline for this audit.
+2. **Global/local source completeness is not established:** the local drive and other external storage were not inspected. The remaining limitation belongs under ASE-MISS-007 in the Document Register; neither this report nor CDR-011 should imply a global search.
+3. **High-level parent-platform direction exists:** the Project Charter and thematic documents define goals, boundaries, principles, and candidate architecture. The current evidence does not justify creating separate Product Master, Master Brief, or Product Direction documents solely because those filenames are absent.
+4. **Foundation traceability is partial, not end-to-end:** `FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md` maps FTR-001–FTR-008 to source documents, conceptual component candidates, and roadmap criteria. It does not map requirements to verified implementation components and executable acceptance tests; its own scope excludes final requirements, schema/UI decisions, product tests, and implementation.
+5. **Data/UI/navigation scope remains undecided:** ASE-MISS-005/006 record that dedicated data-model and UI/navigation specifications were not found in the checked GitHub repository. Their absence does not prove separate documents are mandatory. Their need and granularity should be decided after reviewing the bounded product-audit reports and before finalizing architecture/contract scope.
+6. **No runtime or implementation claim:** both product audit reports are GitHub-only and PARTIAL; live database/runtime and executable validation remain NOT TESTED or otherwise unresolved as their reports specify. Gate 1 and Roadmap Gate 2 remain BLOCKED / NOT PASS.
+
+### Disposition
+
+**CDR-011 remains OPEN — PARTIALLY ADVANCED, focused on requirements-to-component-to-executable-acceptance-test traceability and the data/UI-navigation scope decision.** Its earlier label “SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED” was too broad because it conflated source authority with requirements/scope decisions. The source authority for this work is already established as GitHub `main`; global/local source completeness remains separately tracked as ASE-MISS-007.
+
+No new requirement is created, no owner decision is inferred, and no child-product source/runtime/database/configuration is changed.
