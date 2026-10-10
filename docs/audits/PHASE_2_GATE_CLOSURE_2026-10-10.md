@@ -159,3 +159,16 @@ These are separate, bounded GitHub source/documentation audits. They do not clai
 **Official Roadmap Phase 2 / Gate 2: remains BLOCKED / NOT PASS.** Architecture/contract refinement and integration design are not authorized by these audit reports. Next step is owner review of both reports separately; only after review may a bounded plan be approved for local synchronization and read-only runtime/database verification.
 
 No product implementation, fixes, or cross-product changes were performed.
+
+
+## 11. Addendum — Phase 1 Evidence Closure Follow-up (2026-10-10)
+
+The separate [Phase 1 Evidence Closure Follow-up](PHASE_1_EVIDENCE_CLOSURE_FOLLOWUP_2026-10-10.md) records a read-only revalidation of both product baselines and more detailed evidence from the ENGINE V2 release-gate log.
+
+- The AMANAH SEO AI and ENGINE V2 `main` HEADs still match the baseline commits recorded in their respective audit reports.
+- AI-F-001 remains a confirmed source-level Entity Profile slug mismatch; AI-F-002 remains an open license-key storage contract/security decision; AI-F-003 and AI-F-004 remain documentation/test-evidence gaps.
+- ENG-F-001 is now supported by the detailed log: PHP syntax validation passed, PHPUnit reported 112 tests / 275 assertions / 12 errors / 4 failures, and package build/validation were skipped. The log exposes multiple test/runtime-harness mismatches; it does not itself approve a particular correction.
+- ENG-F-002 schema version-domain ambiguity and ENG-F-003 predictable fallback-key risk were rechecked at source level. ENG-F-004 remains documentation drift.
+- No source code, tests, database, configuration, or runtime in either product was changed. No test rerun or new CI workflow was triggered.
+
+**Disposition:** both Phase 1 audits remain **PARTIAL / Gate 1 BLOCKED** because local runtime/database evidence and executable validation remain incomplete. Official Roadmap Phase 2 / Gate 2 remains **BLOCKED**. The follow-up does not authorize implementation, integration, or local synchronization of the child products. The parent repository inventory is now 28 artifacts: README (1), core documents (11), audit records (12), and templates (4).
