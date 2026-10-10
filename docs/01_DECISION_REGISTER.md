@@ -1,6 +1,7 @@
 ﻿# AMANAH SEO — Decision Register
 
 **Status Dokumen:** APPROVED — struktur pencatatan disetujui; status setiap keputusan tetap mengikuti entri masing-masing.
+**Bukti persetujuan baseline:** [commit 4fd80b0e9875604e2e8fa849daf572dfa9a26bc5](https://github.com/amanahgroup123/AMANAH-SEO/commit/4fd80b0e9875604e2e8fa849daf572dfa9a26bc5) (2026-10-09).
 
 ## 1. Tujuan
 
