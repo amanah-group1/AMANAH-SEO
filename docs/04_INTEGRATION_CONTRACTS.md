@@ -415,25 +415,6 @@ Sebelum kontrak berstatus CONFIRMED:
 
 Semua pertanyaan tersebut harus tercatat di `10_OPEN_QUESTIONS.md` dan ditutup melalui keputusan terdokumentasi.
 
-## 18. Dokumen Terkait
-
-- `00_PROJECT_CHARTER.md`
-- `01_DECISION_REGISTER.md`
-- `02_ARCHITECTURE_BLUEPRINT.md`
-- `03_PRODUCT_BOUNDARIES.md`
-- `05_LICENSE_AND_ENTITLEMENTS.md`
-- `06_SECURITY_AND_SECRETS.md`
-- `08_AUDIT_AND_READINESS.md`
-- `10_OPEN_QUESTIONS.md`
-- `templates/ADR_TEMPLATE.md`
-- `templates/AUDIT_FINDING_TEMPLATE.md`
-
-## 19. Status Akhir
-
-Semua kontrak dalam dokumen ini berstatus kandidat. Belum ada schema, endpoint, token format, atau protocol yang dinyatakan final.
-
-Kontrak hanya dapat disahkan setelah audit, security review, compatibility assessment, dan approval sesuai governance proyek.
-
 ## 18. Traceability ke Open Questions
 
 Bagian ini adalah indeks traceability untuk memastikan kontrak kandidat tidak disalahartikan sebagai keputusan final. Referensi Q mengarah ke docs/10_OPEN_QUESTIONS.md; seluruh Q yang disebutkan tetap berstatus OPEN sampai keputusan disetujui dan dicatat.
@@ -451,3 +432,22 @@ Bagian ini adalah indeks traceability untuk memastikan kontrak kandidat tidak di
 | Error Contract | §12 | Q-005, Q-013, Q-020, Q-024 | Transport, retry, versioning, dan perilaku saat dependency gagal belum final |
 
 Matriks ini menunjukkan ketergantungan dokumentasi, bukan penyelesaian pertanyaan. Jika satu area memerlukan pertanyaan tambahan, tambahkan pertanyaan di Open Questions dan referensikan kembali di sini; jangan mengubah status Q tanpa keputusan yang tercatat.
+
+## 19. Dokumen Terkait
+
+- `00_PROJECT_CHARTER.md`
+- `01_DECISION_REGISTER.md`
+- `02_ARCHITECTURE_BLUEPRINT.md`
+- `03_PRODUCT_BOUNDARIES.md`
+- `05_LICENSE_AND_ENTITLEMENTS.md`
+- `06_SECURITY_AND_SECRETS.md`
+- `08_AUDIT_AND_READINESS.md`
+- `10_OPEN_QUESTIONS.md`
+- `templates/ADR_TEMPLATE.md`
+- `templates/AUDIT_FINDING_TEMPLATE.md`
+
+## 20. Status Akhir
+
+Semua kontrak dalam dokumen ini berstatus kandidat. Belum ada schema, endpoint, token format, atau protocol yang dinyatakan final.
+
+Kontrak hanya dapat disahkan setelah audit, security review, compatibility assessment, dan approval sesuai governance proyek.
