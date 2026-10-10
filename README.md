@@ -49,6 +49,7 @@ Platform induk yang direncanakan mengelola shared capabilities dan mengintegrasi
 
 ## 4. Repository Structure
 
+- `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` — rencana operasional untuk menuntaskan pedoman AMANAH SEO; masih DRAFT dan tidak menggantikan keputusan/approval produk.
 - `docs/00_PROJECT_CHARTER.md` — project vision, objectives, scope, dan principles.
 - `docs/01_DECISION_REGISTER.md` — keputusan, usulan, asumsi, dan status persetujuan.
 - `docs/02_ARCHITECTURE_BLUEPRINT.md` — target architecture.
