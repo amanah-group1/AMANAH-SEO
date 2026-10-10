@@ -113,3 +113,30 @@ This section is separate from the historical cross-document audit result above. 
 - GitHub `main` is the declared canonical source for this work. Local synchronization is intentionally deferred until documentation completion.
 
 **Decision:** Do not declare official Roadmap Phase 2 ready to start or Gate 2 PASS. Next action is to retain GitHub `main` as the baseline, complete documentation readiness, and obtain explicit, separate approval for the two product audits. No child-product code, database, configuration, or runtime was changed.
+
+
+## 9. Addendum — Documentation Gate Revalidation After Approval and Traceability Corrections (2026-10-10)
+
+**Canonical baseline:** GitHub `main`, commit `eff5e8919cb5a150d88f1e092d35360b4ad5c245`. This addendum supersedes the older evidence dispositions in §8 where the underlying documentation state has since changed; historical records are retained.
+
+### Revalidation evidence
+
+- **Approval evidence / ASE-MISS-008:** PR [#13](https://github.com/amanahgroup123/AMANAH-SEO/pull/13), merged as commit [`165835d49caa87fb4923f254adb411b21cfda844`](https://github.com/amanahgroup123/AMANAH-SEO/commit/165835d49caa87fb4923f254adb411b21cfda844), verified the DRAFT → APPROVED transition for all 11 core documents and linked the corresponding approval commit/date in each current header. ASE-MISS-008 is **RESOLVED for those 11 documents**. This does not approve proposals or implementation.
+- **Foundation traceability / CDR-011:** PR [#14](https://github.com/amanahgroup123/AMANAH-SEO/pull/14), merged as commit [`eff5e8919cb5a150d88f1e092d35360b4ad5c245`](https://github.com/amanahgroup123/AMANAH-SEO/commit/eff5e8919cb5a150d88f1e092d35360b4ad5c245), added [Foundation Requirements Traceability Baseline](FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md). It maps all eight existing Charter objectives to source documents, conceptual component responsibilities, roadmap acceptance criteria, and current evidence status.
+- **Inventory:** the canonical repository inventory now records 25 repository artifacts: README (1), core documents (11), audit records (9), and templates (4). The two ENGINE V2 Library artifacts remain secondary context and are not included in that repository count.
+- **Validation:** all eight FTR rows exist; the 11 core-document approval links and SHAs were checked; the inventory and README index the new records; no child-product paths were changed.
+
+### Documentation-only gate disposition
+
+**Cross-document documentation review: CLOSED — PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS**, limited to the canonical GitHub repository and the Library sources explicitly listed in the register. This closes the bounded documentation consistency/revalidation work; it does not mean every architecture question is decided or that all external/local storage has been inspected.
+
+Remaining controlled decisions:
+- **CDR-011 remains OPEN — PARTIALLY ADVANCED.** High-level foundation traceability is recorded, but component-to-executable-acceptance-test mapping, final data/UI baseline scope, and product-derived integration contracts remain incomplete.
+- **Q-001–Q-027 remain OPEN** according to `docs/10_OPEN_QUESTIONS.md`; no question was silently converted to a final decision.
+- **ASE-MISS-001–ASE-MISS-007 remain as recorded** in the inventory; closing ASE-MISS-008 does not resolve the other source/requirements gaps.
+
+### Official Roadmap Phase 2 / Gate 2
+
+**Official Roadmap Phase 2 remains BLOCKED; official Gate 2 remains NOT PASS / BLOCKED.** The documentation-only gate closure is not Roadmap Gate 2. Phase 1 audits of AMANAH SEO AI and AMANAH SEO ENGINE V2 remain unstarted/unverified in this scope and require explicit separate authorization. After that authorization, each audit must be executed and reviewed separately before architecture/contract refinement.
+
+No child-product source code, database, configuration, or runtime was audited or changed by this documentation work.
