@@ -216,6 +216,8 @@ Persetujuan pedoman bukan persetujuan otomatis untuk mengubah kode, menggabungka
 
 ## 14. Lingkup MVP dan keputusan pemilik
 
-Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan MVP-01 sampai MVP-07. Pada 2026-10-11, pemilik menyetujui ketujuh rekomendasi tersebut sebagai dasar lingkup MVP. Catatan persetujuan dan status masing-masing keputusan ada di dokumen usulan MVP.
+Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan MVP-01 sampai MVP-07. Ketujuh keputusan dasar tersebut disetujui pemilik pada 2026-10-11. Keputusan non-pemblokir yang tidak dibutuhkan untuk menetapkan siklus utama, keamanan minimum, atau kriteria penerimaan telah dipindahkan ke backlog pada Bagian 11.
 
-Persetujuan ini menyelesaikan keputusan arah dasar MVP, tetapi tidak otomatis menyetujui keputusan lain yang masih ditandai **PERLU PERSETUJUAN** dalam pedoman ini. Keputusan non-blocking yang tidak diperlukan untuk menetapkan siklus utama, keamanan minimum, atau kriteria penerimaan dipindahkan ke backlog agar tidak menahan penyelesaian pedoman. Persetujuan ini juga bukan persetujuan implementasi atau penggabungan pull request.
+**Status penutupan:** pedoman ini telah dikonsolidasikan sebagai draft final. Satu persetujuan yang tersisa adalah persetujuan eksplisit pemilik untuk menutup pedoman. Sumber data tertentu harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
+
+Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisasi runtime, atau penggabungan pull request. Semua itu memerlukan persetujuan terpisah.
