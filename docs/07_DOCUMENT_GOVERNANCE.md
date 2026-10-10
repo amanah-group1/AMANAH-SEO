@@ -1,6 +1,9 @@
 ﻿# AMANAH SEO — Document Governance
 
 **Status:** APPROVED — aturan tata kelola dokumentasi disetujui  
+**Versi aktif:** 0.1 (status lifecycle saat ini: APPROVED)  
+**Bukti persetujuan:** commit [`76cc6ab16b99a69148ced4a21a23cc6964669ead`](https://github.com/amanahgroup123/AMANAH-SEO/commit/76cc6ab16b99a69148ced4a21a23cc6964669ead), “docs: approve AMANAH SEO foundation guidance” (2026-10-09).  
+**Catatan riwayat:** baris 0.1 berstatus DRAFT pada §14 merekam status awal saat penyusunan; tidak menggantikan status lifecycle saat ini.
 **Cakupan:** Dokumentasi, keputusan arsitektur, audit, dan perubahan proyek AMANAH SEO
 
 ## 1. Tujuan
@@ -24,10 +27,9 @@ Dokumen ini tidak memberikan izin otomatis untuk mengubah kode, database, konfig
 Gunakan status dokumen berikut secara konsisten di seluruh repository:
 
 - **DRAFT:** masih disusun atau belum disetujui.
-- **IN_REVIEW:** sedang ditinjau oleh pihak yang berwenang.
+- **IN REVIEW:** sedang ditinjau oleh pihak yang berwenang.
 - **APPROVED:** telah mendapat persetujuan yang tercatat.
 - **SUPERSEDED:** digantikan oleh versi atau dokumen lain.
-- **DEPRECATED:** tidak lagi direkomendasikan untuk penggunaan baru.
 - **ARCHIVED:** disimpan sebagai rekaman historis.
 
 Jangan gunakan status keputusan (`CONFIRMED`, `PROPOSED`, `OPEN`, `ASSUMPTION`, `SUPERSEDED`) atau status audit (`PASS`, `PARTIAL`, `BLOCKED`, `FAIL`, `NOT TESTED`, `NOT APPLICABLE`) sebagai status dokumen. `VERIFIED` adalah keterangan untuk klaim/evidence yang diverifikasi, bukan status dokumen.
