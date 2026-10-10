@@ -71,6 +71,7 @@ Platform induk yang direncanakan mengelola shared capabilities dan mengintegrasi
 - `docs/audits/FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md` — pemetaan delapan tujuan Charter ke dokumentasi, komponen konseptual, kriteria roadmap, dan status evidence; CDR-011 tetap terbuka untuk traceability implementasi.
 - `docs/audits/PHASE_1_GITHUB_AUDIT_AMANAH_SEO_AI_2026-10-10.md` — audit baca-saja GitHub AMANAH SEO AI; temuan AI-F-001–AI-F-004; Gate 1 tetap PARTIAL/BLOCKED.
 - `docs/audits/PHASE_1_GITHUB_AUDIT_AMANAH_SEO_ENGINE_V2_2026-10-10.md` — audit baca-saja GitHub ENGINE V2; temuan ENG-F-001–ENG-F-004; Gate 1 tetap PARTIAL/BLOCKED.
+- `docs/audits/PHASE_1_EVIDENCE_CLOSURE_FOLLOWUP_2026-10-10.md` — verifikasi ulang baseline kedua produk dan rincian log PHPUnit ENGINE V2; Gate 1 kedua produk tetap PARTIAL/BLOCKED.
 
 ### Reusable templates
 
