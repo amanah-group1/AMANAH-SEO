@@ -1,5 +1,8 @@
 ﻿# AMANAH SEO — Platform Foundation
 
+> **WAJIB BACA DULU SEBELUM SETIAP PEKERJAAN:** baca [Rencana Induk Penuntasan Pedoman AMANAH SEO](docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md) dan periksa register progres serta temuan terbuka terbaru di branch `main`. Sampai gerbang dokumentasi dinyatakan selesai, fokus kerja adalah menuntaskan Pedoman AMANAH SEO. Repository AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya boleh diperiksa secara baca-saja sebagai referensi pendukung; jangan mengubah kode, runtime, database, atau konfigurasi keduanya. Jangan menyinkronkan ke lokal/WordPress sebelum gerbang dokumentasi terpenuhi.
+
+
 **Status Dokumen:** APPROVED — disetujui sebagai pedoman fondasi; usulan implementasi dan keputusan komersial tetap memerlukan persetujuan tersendiri  
 **Documentation Language:** Bahasa Indonesia dengan istilah teknis standar dalam bahasa Inggris.
 
