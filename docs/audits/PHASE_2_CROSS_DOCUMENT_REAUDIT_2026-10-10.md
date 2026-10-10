@@ -26,7 +26,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 
 ## 2. New and residual findings
 
-### CDR-009 — Duplicate and out-of-order section number in Integration Contracts
+### CDR-009 — Duplicate and out-of-order section number in Integration Contracts (corrected in controlled branch)
 
 - **Documents / exact location:** `docs/04_INTEGRATION_CONTRACTS.md`, §§18–19 and the final section.
 - **Rule A:** §18 is titled “Dokumen Terkait”.
@@ -64,11 +64,11 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 | Audit criterion | Result | Evidence / disposition |
 |---|---|---|
 | Purpose and scope clear | PASS WITH LIMITATION | Charter defines platform scope and exclusions; detailed product direction documents are not found (CDR-011). |
-| Terms consistent | PARTIAL | Core distinctions among license, entitlement, activation, AI key and platform credentials are explicit. Duplicate section numbering remains (CDR-009). |
+| Terms consistent | PASS WITH CORRECTION RECORDED | Core distinctions among license, entitlement, activation, AI key and platform credentials are explicit. Duplicate numbering in Integration Contracts has been corrected to unique ordered sections §18–§20 in the controlled branch (CDR-009). |
 | Rules operationally clear | PARTIAL | Security/authorization principles are explicit; several design choices intentionally remain open in Q-001–Q-027. |
 | Rules traceable to requirements/tests | PARTIAL | Architecture and security describe test categories, but no complete parent-platform requirements-to-test matrix is present (CDR-011). |
 | Dependencies explained | PARTIAL | Cross-reference matrices exist for integration and licensing; topology, protocol, identity, failure policy and commercial choices remain open (CDR-007/008). |
-| Approval status evidenced | PARTIAL | Document status is declared, but approval evidence/version transitions are not uniform in the document files (CDR-010). |
+| Approval status evidenced | PARTIAL AT INVENTORY LEVEL | Approval evidence for Document Governance and Roadmap was located and linked in their headers (CDR-010). This does not prove that every document in the inventory has equally explicit approval evidence; the remaining metadata gap stays recorded in the inventory (ASE-MISS-008). |
 | Superseded or outdated rules identified | PARTIAL | No superseded parent-platform master was confirmed in the accessible repository/Library. Local/external source search remains unverified; do not assume none exists. |
 
 ## 4. Decision and gate
