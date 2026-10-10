@@ -1,3 +1,5 @@
+> **STATUS: DOKUMEN LAMA / SUPERSEDED (2026-10-10).** Sumber acuan aktif untuk visi, tujuan, batas produk, dan alur utama adalah [Pedoman Induk AMANAH SEO](../PEDOMAN_INDUK_AMANAH_SEO.md). Isi di bawah dipertahankan hanya sebagai catatan historis; tidak boleh mengesampingkan pedoman induk baru. Materi lama hanya boleh diadopsi kembali setelah ditinjau dan disetujui secara eksplisit.
+
 ﻿# AMANAH SEO — Integration Contracts
 
 ## 1. Status Dokumen
