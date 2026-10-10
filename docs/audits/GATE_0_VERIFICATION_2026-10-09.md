@@ -30,7 +30,7 @@
 1. `README.md`: lists all 11 core documents and each of the four template paths explicitly.
 2. `docs/01_DECISION_REGISTER.md`: declares document status separately from individual decision statuses.
 3. `docs/08_AUDIT_AND_READINESS.md`: aligns the Gate 0 inventory criterion with README and defines the evidence-based exit rule.
-4. `docs/10_OPEN_QUESTIONS.md`: declares document status as DRAFT while retaining OPEN on individual unresolved questions.
+4. `docs/10_OPEN_QUESTIONS.md`: the DRAFT status recorded here reflects the historical baseline/correction branch reviewed for this PR; it is not the current-main status inventory. On current `main` checked during the 2026-10-10 re-audit, the document is APPROVED as the question register while Q-001–Q-027 remain OPEN. See §5 below for the current-main clarification.
 5. All four reusable templates: separate `Status Dokumen: DRAFT` from the relevant decision, finding, audit, or plan lifecycle status.
 6. This report: maps each Gate 0 criterion to a result and states what each check does and does not establish.
 
