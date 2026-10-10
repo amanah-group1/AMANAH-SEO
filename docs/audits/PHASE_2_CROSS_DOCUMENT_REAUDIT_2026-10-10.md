@@ -60,12 +60,23 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Status:** OPEN — SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED. No new requirements are inferred. Existing Charter and thematic docs remain high-level sources, not a substitute for a dedicated traceability baseline unless the owner explicitly confirms they are sufficient.
 - **Decision / evidence:** The current inventory records Product Master, Master Brief, Product Direction and specialized specifications as not found in accessible sources; local folders and external drives remain unverified.
 
+### CDR-012 — README status vocabulary and audit-record index stale after corrections
+
+- **Documents / exact location:** `README.md` §§4, 5.1, 8–9 compared with `docs/07_DOCUMENT_GOVERNANCE.md` §3 and the current audit records.
+- **Rule A:** Document Governance specifies the five lifecycle statuses DRAFT, IN REVIEW, APPROVED, SUPERSEDED, and ARCHIVED.
+- **Rule B:** README still used IN_REVIEW and DEPRECATED and did not index the new Phase 1 register, re-audit, and updated gate record. Its Current Status/Next Steps section also did not summarize the scoped re-audit result or the unresolved source boundary.
+- **Type:** Governance vocabulary / repository index / status synchronization.
+- **Impact:** MEDIUM. Readers could apply inconsistent lifecycle labels or miss the authoritative current audit records and scope limitations.
+- **Recommendation:** Align README status vocabulary with Document Governance, index all audit records, and state the current scoped result and next actions without implying Roadmap Phase 2 or product audits are complete.
+- **Status:** CORRECTED IN CONTROLLED BRANCH — README now uses the five lifecycle statuses, links all six audit records, and states the current scoped result and source limitations. Final merge verification pending.
+- **Decision / evidence:** Editorial/governance correction only; no product or architecture decision changed.
+
 ## 3. Phase 2 checklist results
 
 | Audit criterion | Result | Evidence / disposition |
 |---|---|---|
 | Purpose and scope clear | PASS WITH LIMITATION | Charter defines platform scope and exclusions; detailed product direction documents are not found (CDR-011). |
-| Terms consistent | PASS WITH CORRECTION RECORDED | Core distinctions among license, entitlement, activation, AI key and platform credentials are explicit. Duplicate numbering in Integration Contracts has been corrected to unique ordered sections §18–§20 in the controlled branch (CDR-009). |
+| Terms consistent | PASS WITH CORRECTIONS RECORDED | Core distinctions among license, entitlement, activation, AI key and platform credentials are explicit. Duplicate numbering in Integration Contracts has been corrected to unique ordered sections §18–§20 in the controlled branch (CDR-009). |
 | Rules operationally clear | PARTIAL | Security/authorization principles are explicit; several design choices intentionally remain open in Q-001–Q-027. |
 | Rules traceable to requirements/tests | PARTIAL | Architecture and security describe test categories, but no complete parent-platform requirements-to-test matrix is present (CDR-011). |
 | Dependencies explained | PARTIAL | Cross-reference matrices exist for integration and licensing; topology, protocol, identity, failure policy and commercial choices remain open (CDR-007/008). |
@@ -80,8 +91,8 @@ Reason:
 1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected, validated, and merged to `main` in PR #7.
 2. CDR-010 is resolved by locating the approval commits and adding explicit metadata references while preserving historical DRAFT entries.
 3. CDR-011 remains an explicit open source/owner decision; the gap is recorded with an action and no invented requirement.
-4. No new CRITICAL contradiction is confirmed from the examined repository documents.
-5. The repository and accessible Library sources are registered, but local project folders/external storage were not directly inspected; global inventory completeness cannot be claimed.
+4. No new CRITICAL contradiction is confirmed from the examined repository documents. CDR-012 records the stale README governance vocabulary/index and is corrected in the controlled branch.
+5. The repository and accessible Library sources are registered, but local project folders/external storage were not directly inspected; global inventory completeness cannot be claimed. CDR-012's README correction must be merged before the re-audit records are fully synchronized.
 
 ## 5. Required next actions
 
