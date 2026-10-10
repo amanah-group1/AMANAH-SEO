@@ -21,7 +21,7 @@ Commit approval ini menyetujui baseline dokumentasi untuk perannya masing-masing
 
 | ID | Dokumen | Commit bukti persetujuan | Tanggal | Hasil |
 |---|---|---|---|---|
-| ASE-DOC-001 | [Project Charter](../00_PROJECT_CHARTER.md) | [d4522810afdce33112127565c27d86e556ad3ebd](https://github.com/amanahgroup123/AMANAH-SEO/commit/d4522810afdce33112127565c27d86e556ad3ebd) | 2026-10-09 | VERIFIED — DRAFT → APPROVED |
+| ASE-DOC-002 | [Project Charter](../00_PROJECT_CHARTER.md) | [d4522810afdce33112127565c27d86e556ad3ebd](https://github.com/amanahgroup123/AMANAH-SEO/commit/d4522810afdce33112127565c27d86e556ad3ebd) | 2026-10-09 | VERIFIED — DRAFT → APPROVED |
 | ASE-DOC-003 | [Decision Register](../01_DECISION_REGISTER.md) | [4fd80b0e9875604e2e8fa849daf572dfa9a26bc5](https://github.com/amanahgroup123/AMANAH-SEO/commit/4fd80b0e9875604e2e8fa849daf572dfa9a26bc5) | 2026-10-09 | VERIFIED — DRAFT → APPROVED |
 | ASE-DOC-004 | [Architecture Blueprint](../02_ARCHITECTURE_BLUEPRINT.md) | [322a75f94ff01869cacbb0fcad525cf73916cb76](https://github.com/amanahgroup123/AMANAH-SEO/commit/322a75f94ff01869cacbb0fcad525cf73916cb76) | 2026-10-09 | VERIFIED — DRAFT → APPROVED |
 | ASE-DOC-005 | [Product Boundaries](../03_PRODUCT_BOUNDARIES.md) | [9000780320feb0f7050cfe2711aa451fee1fab0e](https://github.com/amanahgroup123/AMANAH-SEO/commit/9000780320feb0f7050cfe2711aa451fee1fab0e) | 2026-10-09 | VERIFIED — DRAFT → APPROVED |
