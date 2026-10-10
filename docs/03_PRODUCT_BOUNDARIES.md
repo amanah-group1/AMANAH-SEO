@@ -3,6 +3,7 @@
 ## 1. Status Dokumen
 
 - **Status:** APPROVED — batas tanggung jawab dan aturan perubahan disetujui; baseline produk tetap menunggu audit
+- **Bukti persetujuan baseline:** [commit 9000780320feb0f7050cfe2711aa451fee1fab0e](https://github.com/amanahgroup123/AMANAH-SEO/commit/9000780320feb0f7050cfe2711aa451fee1fab0e) (2026-10-09).
 - **Tujuan:** Menentukan batas tanggung jawab dan aturan perubahan antarproduk
 - **Implementasi:** Belum disahkan oleh dokumen ini
 - **Baseline produk:** Harus diverifikasi melalui audit
