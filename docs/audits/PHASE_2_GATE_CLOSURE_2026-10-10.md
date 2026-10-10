@@ -91,4 +91,4 @@ This addendum supersedes any interpretation of §§3–5 as a statement that the
 
 This result closes only the cross-document review for the accessible sources with recorded limitations. It does **not** close official Roadmap Phase 2, approve architecture/contract choices, authorize child-product audits, or permit implementation.
 
-- CDR-012: README status vocabulary, audit-record index, and current-status/next-step summary are corrected in the controlled README reconciliation branch; merge-time verification remains required.
+- CDR-012: README status vocabulary, audit-record index, and current-status/next-step summary were corrected and merged via PR #9, commit [`0cd6c9102fd142a21c39951ace838d979af269dd`](https://github.com/amanahgroup123/AMANAH-SEO/commit/0cd6c9102fd142a21c39951ace838d979af269dd).
