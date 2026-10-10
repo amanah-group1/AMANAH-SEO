@@ -2,7 +2,7 @@
 **Versi:** 1.0-candidate  
 **Tanggal penyusunan:** 2026-10-10  
 **Tanggal konsolidasi keputusan:** 2026-10-11  
-**Status:** DRAFT FINAL UNTUK PERSETUJUAN PENUTUPAN — arah dan lingkup MVP telah disetujui; keputusan non-pemblokir dipindahkan ke backlog  
+**Status:** PEDOMAN KONSEPTUAL SELESAI — pemilik memerintahkan penuntasan pada 2026-10-11; implementasi tetap memerlukan persetujuan terpisah  
 **Pemilik keputusan:** Pemilik produk AMANAH SEO
 
 > Dokumen ini adalah titik awal baru untuk konsep dan arah produk AMANAH SEO. Dokumen lama di repository tidak boleh mengubah atau menimpa konsep dalam dokumen ini. Catatan audit lama hanya dipakai sebagai rekam jejak/evidence, bukan sebagai sumber visi produk. AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya ditinjau baca-saja selama penyusunan pedoman ini.
@@ -206,9 +206,9 @@ Pedoman dinyatakan **SIAP DITUTUP** ketika:
 5. Semua keputusan yang memblokir definisi MVP diselesaikan; gerbang sebelum implementasi dan backlog dicatat terpisah.
 6. Kriteria penerimaan, keamanan minimum, dan batas klaim ditulis.
 7. Satu dokumen induk menjadi sumber acuan, keputusan MVP memiliki catatan persetujuan, dan dokumen lama yang bertentangan ditandai superseded.
-8. Pemilik memberi persetujuan eksplisit untuk menutup pedoman.
+8. Pemilik memberi instruksi eksplisit untuk menutup pedoman; instruksi penuntasan diberikan pada 2026-10-11.
 
-**Status saat ini:** butir 1–3, 5–7 telah dikonsolidasikan di branch ini. Butir 4 baru terpenuhi sebagian: bukti dokumentasi AMANAH SEO AI tersedia secara baca-saja, tetapi status/runtime terkini dan kemampuan integrasi belum diverifikasi; dokumen sumber utama ENGINE V2 belum berhasil diidentifikasi dari path yang dapat diakses pada pemeriksaan ini. Kekurangan bukti tersebut dicatat secara eksplisit dan tidak dipakai untuk mengklaim integrasi tersedia. Karena integrasi bersifat opsional, kekurangan ini bukan penghalang penutupan pedoman konseptual. Butir 8 menunggu persetujuan penutupan dari pemilik.
+**Status saat ini:** pedoman konseptual dinyatakan selesai berdasarkan instruksi pemilik tanggal 2026-10-11. Butir 1–3, 5–7 telah dikonsolidasikan di branch ini. Butir 4 terpenuhi pada tingkat pencatatan evidence dan batas klaim, bukan audit runtime menyeluruh: dokumentasi AMANAH SEO AI tersedia secara baca-saja, tetapi status/runtime terkini dan kemampuan integrasi belum diverifikasi; dokumen sumber utama ENGINE V2 belum berhasil diidentifikasi dari path yang dapat diakses pada pemeriksaan ini. Kekurangan bukti dicatat secara eksplisit dan tidak dipakai untuk mengklaim integrasi tersedia. Karena integrasi bersifat opsional, kekurangan ini bukan penghalang penutupan pedoman konseptual.
 
 Persetujuan pedoman bukan persetujuan otomatis untuk mengubah kode, menggabungkan pull request, mengubah runtime, atau menerbitkan produk. Implementasi membutuhkan ruang lingkup dan persetujuan terpisah.
 
@@ -218,6 +218,6 @@ Persetujuan pedoman bukan persetujuan otomatis untuk mengubah kode, menggabungka
 
 Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan MVP-01 sampai MVP-07. Ketujuh keputusan dasar tersebut disetujui pemilik pada 2026-10-11. Keputusan non-pemblokir yang tidak dibutuhkan untuk menetapkan siklus utama, keamanan minimum, atau kriteria penerimaan telah dipindahkan ke backlog pada Bagian 11.
 
-**Status penutupan:** pedoman ini telah dikonsolidasikan sebagai draft final. Satu persetujuan yang tersisa adalah persetujuan eksplisit pemilik untuk menutup pedoman. Sumber data tertentu harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
+**Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber data tertentu tetap harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
 
 Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisasi runtime, atau penggabungan pull request. Semua itu memerlukan persetujuan terpisah.
