@@ -33,7 +33,7 @@ Commit approval ini menyetujui baseline dokumentasi untuk perannya masing-masing
 | ASE-DOC-011 | [Roadmap and Gates](../09_ROADMAP_AND_GATES.md) | [c1ed45e8d000830c1239fe934f75e7d0a1a132f1](https://github.com/amanahgroup123/AMANAH-SEO/commit/c1ed45e8d000830c1239fe934f75e7d0a1a132f1) | 2026-10-09 | VERIFIED — DRAFT → APPROVED |
 | ASE-DOC-012 | [Open Questions](../10_OPEN_QUESTIONS.md) | [e8a6074ccdf80586bead7f94e1b9e9bbde9548b5](https://github.com/amanahgroup123/AMANAH-SEO/commit/e8a6074ccdf80586bead7f94e1b9e9bbde9548b5) | 2026-10-09 | VERIFIED — DRAFT → APPROVED |
 
-**Result: 11/11 core-document approval transitions verified.** The nine previously unlinked headers have been updated on the controlled branch to point to their individual approval commits; Document Governance and Roadmap already contained evidence links. The Open Questions evidence URL must use the exact SHA shown in this matrix.
+**Result: 11/11 core-document approval transitions verified.** The nine previously unlinked headers have been updated on the controlled branch to point to their individual approval commits; Document Governance and Roadmap already contained evidence links. The Open Questions header reference was corrected to the exact SHA shown in this matrix.
 
 ## 3. Disposition of ASE-MISS-008
 
