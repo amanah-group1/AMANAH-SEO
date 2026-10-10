@@ -33,7 +33,8 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Rule B:** §19 is titled “Status Akhir”, but the traceability matrix is then introduced as another “§18. Traceability ke Open Questions”.
 - **Type:** Document structure / reference ambiguity.
 - **Impact:** MEDIUM. References to “§18” are ambiguous, and the table appears after the stated final-status section. The content of the traceability table is useful, but its numbering/order was not correctly reconciled during the prior correction.
-- **Recommendation:** Renumber and reorder the sections consistently (e.g. make the traceability section §19 and move “Status Akhir” to the final section number), then update any references to those section numbers. Do not change the underlying Q statuses.
+- **Original recommendation:** Renumber and reorder the sections consistently and update references without changing Q statuses.
+- **Implemented resolution:** Traceability is now §18, Dokumen Terkait §19, and Status Akhir §20. The section headings are unique and ordered; the Phase 1 register and Gate Closure references were updated.
 - **Status:** CORRECTED AND VALIDATED IN CONTROLLED BRANCH — section sequence is unique and ordered §18–§20; register/gate references were checked. Acceptance into main awaits merge of the controlled reconciliation PR.
 - **Decision / evidence:** No substantive product decision required; document correction and revalidation evidence required.
 
@@ -46,7 +47,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Impact:** MEDIUM. The statuses may be compatible (historical draft followed by approval), but the approval transition/evidence is not consistently visible in the affected files; readers cannot determine from the document alone which version was approved or where approval was recorded.
 - **Recommendation:** Preserve historical entries; add a consistent current-version and approval-evidence reference (for example, approval PR/decision and date) or a short clarification that the history row records the initial draft and the header is the current lifecycle status. Clarify the Roadmap warning so it distinguishes an approved roadmap of gated proposals from approval to execute those phases.
 - **Status:** RESOLVED BY EVIDENCE AND METADATA CLARIFICATION — approval commits `76cc6ab16b99a69148ced4a21a23cc6964669ead` (Document Governance) and `c1ed45e8d000830c1239fe934f75e7d0a1a132f1` (Roadmap), dated 2026-10-09, were found in repository history and are now referenced in the respective document headers. Historical DRAFT rows are retained.
-- **Decision / evidence:** No change to architecture or commercial decisions. Approval evidence must be checked against repository review/merge history before marking resolved.
+- **Decision / evidence:** No architecture or commercial decision changed. Repository history contains the approval commits cited above, and both document headers now link to the corresponding evidence.
 
 ### CDR-011 — Product direction and requirements traceability are not represented as a dedicated baseline
 
