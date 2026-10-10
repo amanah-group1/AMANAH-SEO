@@ -115,7 +115,7 @@ Setiap angka atau model komersial yang pernah dibahas harus dianggap sebagai usu
 
 ## 8. Current Status
 
-Repositori ini berada pada tahap fondasi dokumentasi dan rekonsiliasi audit silang sumber yang dapat diakses. Hasil audit silang dokumentasi adalah **PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS** untuk repository dan Library yang dapat diakses; ini bukan penutupan Roadmap Phase 2 / Gate 2. Assessment resmi kesiapan Phase 2 menyatakan **BLOCKED**: audit Phase 1 kedua produk belum dibuktikan selesai/reviewed dalam scope ini; CDR-011 dan ASE-MISS-008 tetap OPEN; folder lokal/drive eksternal belum diperiksa langsung.
+Repositori ini berada pada tahap fondasi dokumentasi dan rekonsiliasi audit silang sumber yang dapat diakses. Hasil audit silang dokumentasi adalah **PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS** untuk repository dan Library yang dapat diakses; ini bukan penutupan Roadmap Phase 2 / Gate 2. Assessment resmi kesiapan Phase 2 menyatakan **BLOCKED**: audit Phase 1 kedua produk belum dibuktikan selesai/reviewed dalam scope ini; CDR-011 dan ASE-MISS-008 tetap OPEN; GitHub `main` ditetapkan sebagai sumber acuan utama; local akan disinkronkan setelah dokumentasi selesai.
 
 Audit teknis kedua produk belum dinyatakan selesai atau disetujui untuk dimulai. Belum ada klaim bahwa:
 - Kedua produk telah lulus integration readiness audit.
@@ -125,9 +125,9 @@ Audit teknis kedua produk belum dinyatakan selesai atau disetujui untuk dimulai.
 
 ## 9. Next Steps
 
-1. Tutup batas inventaris sumber yang belum diverifikasi: periksa folder lokal/drive eksternal atau catat konfirmasi owner bahwa tidak ada sumber tambahan.
+1. Pertahankan GitHub `main` sebagai baseline kanonis; setelah dokumentasi dan readiness selesai, pull/sinkronkan baseline tersebut ke local.
 2. Lengkapi bukti approval per dokumen; dua commit untuk Document Governance dan Roadmap sudah diverifikasi, tetapi bukti semua dokumen lain belum.
-3. Selesaikan disposition CDR-011 setelah batas sumber jelas; Charter/dokumen tematik memadai untuk arah tingkat tinggi, sementara kebutuhan requirements/data/UI baseline terpisah harus ditentukan berdasarkan audit dan scope, bukan diasumsikan.
+3. Selesaikan disposition CDR-011 untuk traceability persyaratan dan kebutuhan baseline data/UI setelah audit produk; jangan mengasumsikan dokumen terpisah wajib tanpa keputusan.
 4. Dapatkan persetujuan eksplisit terpisah untuk audit AMANAH SEO AI dan AMANAH SEO ENGINE V2, lalu audit keduanya secara independen.
 5. Revisit arsitektur/kontrak berdasarkan temuan aktual produk; Gate 2 tidak PASS sebelum kriteria resmi memiliki evidence dan persetujuan.
 

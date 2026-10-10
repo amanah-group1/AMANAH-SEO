@@ -78,7 +78,7 @@ This addendum supersedes any interpretation of §§3–5 as a statement that the
 - CDR-009: Integration Contracts section order is corrected and validated in the controlled reconciliation branch: §18 Traceability, §19 Dokumen Terkait, §20 Status Akhir. No duplicate section heading remains; the inventory and gate references to §18 were checked. The correction was merged into `main` in PR #7, commit [`e94abeb8d741ad80dc7cbc91579523d01fac3a58`](https://github.com/amanahgroup123/AMANAH-SEO/commit/e94abeb8d741ad80dc7cbc91579523d01fac3a58).
 - CDR-010: approval history was verified in repository commit history. Document Governance approval evidence: [`76cc6ab16b99a69148ced4a21a23cc6964669ead`](https://github.com/amanahgroup123/AMANAH-SEO/commit/76cc6ab16b99a69148ced4a21a23cc6964669ead); Roadmap approval evidence: [`c1ed45e8d000830c1239fe934f75e7d0a1a132f1`](https://github.com/amanahgroup123/AMANAH-SEO/commit/c1ed45e8d000830c1239fe934f75e7d0a1a132f1). The current document headers now link to these commits. Historical DRAFT rows are retained as initial-draft history.
 - CDR-011 remains OPEN — SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED. No new product requirements are inferred. Existing parent Charter and thematic documents are high-level sources; the owner must confirm whether they are sufficient or whether dedicated Product Direction/requirements/data/UI baselines are required. Do not import requirements from either child product.
-- The register now accounts for 22 repository documentation/audit/template files and separately lists the two related ENGINE V2 Library artifacts. It does not claim that local project folders or external drives were inspected.
+- The register now accounts for 22 repository documentation/audit/template files and separately lists the two related ENGINE V2 Library artifacts. GitHub `main` is the canonical source for this workflow per owner instruction; local synchronization is deferred until documentation completion.
 
 ### Current disposition
 
@@ -87,7 +87,7 @@ This addendum supersedes any interpretation of §§3–5 as a statement that the
 - CDR-010: resolved by recorded approval commits and metadata clarification.
 - CDR-011: remains an explicit open source/owner decision with a recorded action.
 - No new critical contradiction is confirmed in the accessible repository documents.
-- The source-completeness limitation is explicit; do not call the inventory globally complete until local/external sources are checked or the owner confirms no other source exists.
+- The inventory is complete for the declared canonical GitHub repository scope; this does not claim inspection of unsynchronized local copies.
 
 This result closes only the cross-document review for the accessible sources with recorded limitations. It does **not** close official Roadmap Phase 2, approve architecture/contract choices, authorize child-product audits, or permit implementation.
 
@@ -108,8 +108,8 @@ This section is separate from the historical cross-document audit result above. 
 - Critical dependencies have not been demonstrated as resolved or explicitly deferred through an approved Gate 2 decision.
 
 **Source and approval evidence disposition:**
-- CDR-011 remains OPEN for owner/source-boundary confirmation. Charter and thematic documents suffice for high-level direction; a separate Product Master is not assumed mandatory. Requirements-to-test traceability and possible data/UI specifications must be assessed after product audits.
+- CDR-011 remains OPEN for requirements-to-test traceability and the decision on data/UI baseline scope; GitHub-first source authority is resolved by owner instruction. Charter and thematic documents suffice for high-level direction; a separate Product Master is not assumed mandatory. Requirements-to-test traceability and possible data/UI specifications must be assessed after product audits.
 - ASE-MISS-008 is PARTIAL: approval commits were verified for Document Governance and Roadmap; individual approval evidence for every other core document remains unverified.
-- Local project folders and external storage remain uninspected in this workflow; global inventory completeness is not claimed.
+- GitHub `main` is the declared canonical source for this work. Local synchronization is intentionally deferred until documentation completion.
 
-**Decision:** Do not declare official Roadmap Phase 2 ready to start or Gate 2 PASS. Next authorized action is to resolve the source boundary and obtain explicit, separate approval for the two product audits. No child-product code, database, configuration, or runtime was changed.
+**Decision:** Do not declare official Roadmap Phase 2 ready to start or Gate 2 PASS. Next action is to retain GitHub `main` as the baseline, complete documentation readiness, and obtain explicit, separate approval for the two product audits. No child-product code, database, configuration, or runtime was changed.
