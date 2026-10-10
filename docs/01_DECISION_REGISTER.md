@@ -163,7 +163,11 @@ Bagian ini adalah indeks ringkas untuk membantu navigasi, bukan daftar pertanyaa
 | OPEN-013 | Teknologi platform dan database | Q-017, Q-019 |
 | OPEN-014 | Prioritas produk, MVP, dan strategi rilis | Q-025 sampai Q-027 |
 
-Semua indeks di tabel ini tetap **OPEN** sampai pertanyaan rinci terkait mendapat keputusan yang tercatat. Pertanyaan rinci di `docs/10_OPEN_QUESTIONS.md` tetap menjadi daftar acuan untuk isi, ketergantungan, dan status pertanyaan. Jika keputusan menutup suatu pertanyaan, perbarui kedua dokumen dalam perubahan yang sama dan tautkan keputusan yang disetujui. Jangan menandai pertanyaan selesai hanya karena pemetaan di tabel ini telah dibuat.
+Indeks `OPEN-001` sampai `OPEN-014` merupakan pengelompokan untuk navigasi, bukan keputusan mandiri dan bukan pengganti status pertanyaan rinci. Satu pertanyaan `Q-xxx` dapat muncul pada lebih dari satu indeks apabila relevan terhadap beberapa pokok bahasan. Kemunculan berulang tersebut merupakan referensi silang, bukan pertanyaan baru dan bukan keputusan tambahan.
+
+Khusus **Q-027 — Strategi rilis**, indeks utama berdasarkan pokok bahasannya adalah `OPEN-014 — Prioritas produk, MVP, dan strategi rilis`. Pencantuman Q-027 pada `OPEN-009 — Keamanan dan pengelolaan operasional` dipertahankan hanya sebagai referensi silang karena strategi rilis juga dapat memengaruhi kesiapan operasional dan keamanan. Pemetaan ini tidak memutuskan isi Q-027.
+
+Status setiap pertanyaan tetap mengacu pada `docs/10_OPEN_QUESTIONS.md`. Seluruh indeks tetap `OPEN` selama pertanyaan rinci terkait belum memiliki keputusan yang disetujui dan terdokumentasi. Jika keputusan dibuat, perbarui Decision Register dan Open Questions dalam perubahan yang sama serta cantumkan referensi keputusan dan bukti persetujuannya. Jangan menandai pertanyaan selesai hanya karena pemetaan indeks telah diperjelas.
 
 ## 7. Cara Menambahkan Keputusan
 
