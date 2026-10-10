@@ -9,7 +9,7 @@
 
 ## 1. Audit of the previous audit
 
-The earlier register `PHASE_2_CROSS_DOCUMENT_FINDINGS_2026-10-10.md` remains useful, but its gate result must be read narrowly: it assessed the cross-document scope then listed, not the completeness of all external/local sources and not Roadmap Phase 2.
+The earlier register `PHASE_2_CROSS_DOCUMENT_FINDINGS_2026-10-10.md` remains useful, but its gate result must be read narrowly: it assessed the cross-document scope then listed, not Roadmap Phase 2. Per owner instruction, GitHub `main` is the canonical source for this work; local synchronization is deferred until documentation completion.
 
 | Prior finding | Re-audit disposition | Evidence / remaining boundary |
 |---|---|---|
@@ -58,7 +58,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Impact:** MEDIUM, potentially HIGH before architecture or implementation is finalized. The existing Charter is a valid high-level source, but requirements-to-component-to-acceptance-test traceability is not yet available as a complete matrix.
 - **Recommendation:** Keep missing sources explicitly recorded. Decide whether the Charter and existing thematic documents are intentionally sufficient or whether a controlled Product Direction / requirements baseline and data/UI inventory must be created. Do not fabricate requirements or import child-product assumptions.
 - **Status:** OPEN — SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED. No new requirements are inferred. Existing Charter and thematic docs remain high-level sources, not a substitute for a dedicated traceability baseline unless the owner explicitly confirms they are sufficient.
-- **Decision / evidence:** The current inventory records Product Master, Master Brief, Product Direction and specialized specifications as not found in accessible sources; local folders and external drives remain unverified.
+- **Decision / evidence:** The current inventory records Product Master, Master Brief, Product Direction and specialized specifications as not found in accessible sources; GitHub `main` is the canonical source per owner instruction; local synchronization is deferred until documentation completion.
 
 ### CDR-012 — README status vocabulary and audit-record index stale after corrections
 
@@ -81,7 +81,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 | Rules traceable to requirements/tests | PARTIAL | Architecture and security describe test categories, but no complete parent-platform requirements-to-test matrix is present (CDR-011). |
 | Dependencies explained | PARTIAL | Cross-reference matrices exist for integration and licensing; topology, protocol, identity, failure policy and commercial choices remain open (CDR-007/008). |
 | Approval status evidenced | PARTIAL AT INVENTORY LEVEL | Approval evidence for Document Governance and Roadmap was located and linked in their headers (CDR-010). This does not prove that every document in the inventory has equally explicit approval evidence; the remaining metadata gap stays recorded in the inventory (ASE-MISS-008). |
-| Superseded or outdated rules identified | PARTIAL | No superseded parent-platform master was confirmed in the accessible repository/Library. Local/external source search remains unverified; do not assume none exists. |
+| Superseded or outdated rules identified | PARTIAL | No superseded parent-platform master was confirmed in the accessible repository/Library. GitHub `main` is canonical per owner instruction; do not treat the unsynchronized local copy as a competing baseline. |
 
 ## 4. Decision and gate
 
@@ -92,7 +92,7 @@ Reason:
 2. CDR-010 is resolved by locating the approval commits and adding explicit metadata references while preserving historical DRAFT entries.
 3. CDR-011 remains an explicit open source/owner decision; the gap is recorded with an action and no invented requirement.
 4. No new CRITICAL contradiction is confirmed from the examined repository documents. CDR-012 recorded the stale README governance vocabulary/index and is resolved by the correction merged in PR #9.
-5. The repository and accessible Library sources are registered, but local project folders/external storage were not directly inspected; global inventory completeness cannot be claimed. CDR-012's README correction is merged in PR #9; the remaining source-completeness limitation is CDR-011.
+5. The repository is the canonical inventory for this work per owner instruction. Library items are secondary context only; local synchronization is intentionally deferred until documentation completion. CDR-012's README correction is merged in PR #9; the remaining source-completeness limitation is CDR-011.
 
 ## 5. Required next actions
 
@@ -107,8 +107,8 @@ Reason:
 
 See `docs/audits/ROADMAP_PHASE_2_READINESS_ASSESSMENT_2026-10-10.md`.
 
-- **CDR-011:** remains OPEN for the source boundary/owner confirmation. Assessment conclusion: Charter and thematic documents are sufficient to express high-level platform direction and boundaries; current evidence does not justify inventing a requirement for a separate Product Master/Brief/Direction before product audits. However, complete requirements-to-component-to-acceptance-test traceability is absent, and data/UI/navigation details must be evaluated based on actual product audit findings and the approved Phase 2 scope. This is a recommendation based on accessible evidence, not confirmation that local/external sources do not exist.
+- **CDR-011:** remains OPEN for the source boundary/owner confirmation. Assessment conclusion: Charter and thematic documents are sufficient to express high-level platform direction and boundaries; current evidence does not justify inventing a requirement for a separate Product Master/Brief/Direction before product audits. However, complete requirements-to-component-to-acceptance-test traceability is absent, and data/UI/navigation details must be evaluated based on actual product audit findings and the approved Phase 2 scope. The local copy will be synchronized after documentation completion and is not a competing authority during this audit.
 - **ASE-MISS-008:** PARTIAL. Approval commit evidence was verified for Document Governance and Roadmap. Individual approval evidence for every other core document has not been verified one by one and remains an evidence gap; status headers alone are not treated as proof of a specific approval event.
-- **Official Roadmap Phase 2 entry:** BLOCKED pending evidence and review of the separate Phase 1 audits for both products, explicit authorization for those audits, and disposition of the source boundary.
+- **Official Roadmap Phase 2 entry:** BLOCKED pending evidence and review of the separate Phase 1 audits for both products, explicit authorization for those audits, and disposition of remaining requirements-traceability questions.
 - **Official Roadmap Gate 2:** NOT PASS / BLOCKED. The criteria requiring actual product findings, approved contract decisions, reviewed threat/risk model, and resolved or explicitly deferred critical questions are not all evidenced.
 - This addendum does not authorize product audits, implementation, integration, or any child-product code/database/configuration/runtime changes.
