@@ -43,7 +43,7 @@ Audit inventaris dokumen dan audit silang sebelumnya bukan audit produk. Owner s
 - Setelah audit produk disetujui dan selesai, putuskan melalui Decision Register/ADR apakah perlu requirements-to-test matrix dan dokumen data/UI terpisah.
 - Gunakan GitHub `main` sebagai baseline tunggal; pull ke local dilakukan setelah dokumentasi selesai. Catat sumber baru hanya bila owner kemudian menambahkannya sebagai sumber resmi.
 
-Ini adalah hasil assessment berbasis evidence yang tersedia, bukan keputusan owner yang mengesampingkan sumber lokal yang belum diperiksa.
+Ini adalah assessment berbasis evidence yang tersedia, bukan klaim bahwa sumber lokal/global tidak ada. Untuk pekerjaan dokumentasi ini, owner telah menetapkan GitHub `main` sebagai baseline kanonis; keberadaan dan isi sumber lokal/global tetap belum diverifikasi dan dicatat terpisah sebagai ASE-MISS-007.
 
 ## 3. Disposition ASE-MISS-008 — Approval Evidence
 
