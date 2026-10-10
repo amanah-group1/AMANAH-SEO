@@ -26,9 +26,9 @@ Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau inte
 - Keputusan komersial dan teknis non-pemblokir dipindahkan ke backlog agar tidak menghambat penutupan pedoman.
 - Pedoman konseptual dinyatakan **SELESAI** atas instruksi pemilik pada 2026-10-11 dan berada di branch `controlled/rebuild-product-pedoman`. Branch belum digabung ke `main`; implementasi belum disetujui.
 
-## Batas kerja
+## Batas pekerjaan tahap pedoman (tahap ini telah ditutup)
 
-Sebelum pedoman ditutup dan implementasi disetujui secara terpisah:
+Batas berikut tetap berlaku untuk mencegah perluasan ruang lingkup tanpa persetujuan:
 1. Fokus pada penyelesaian dan persetujuan pedoman AMANAH SEO.
 2. Pemeriksaan AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya baca-saja.
 3. Jangan mengubah kode, konfigurasi, database, runtime, lisensi, atau WordPress kedua produk pendamping.
