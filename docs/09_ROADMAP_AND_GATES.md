@@ -1,6 +1,9 @@
 ﻿# AMANAH SEO — Roadmap and Gates
 
 **Status:** APPROVED — roadmap acuan disetujui; bukan komitmen jadwal atau persetujuan implementasi  
+**Versi aktif:** 0.1 (status lifecycle saat ini: APPROVED)  
+**Bukti persetujuan:** commit [`c1ed45e8d000830c1239fe934f75e7d0a1a132f1`](https://github.com/amanahgroup123/AMANAH-SEO/commit/c1ed45e8d000830c1239fe934f75e7d0a1a132f1), “docs: approve AMANAH SEO foundation guidance” (2026-10-09).  
+**Catatan riwayat:** baris 0.1 pada §12 merekam status awal saat penyusunan; tidak menggantikan status lifecycle saat ini.
 **Cakupan:** Pengembangan platform induk AMANAH SEO dan rencana integrasi produk
 
 ## 1. Tujuan

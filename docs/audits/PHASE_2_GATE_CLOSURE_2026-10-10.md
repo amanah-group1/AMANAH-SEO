@@ -2,7 +2,7 @@
 
 **Status Dokumen:** APPROVED — rekaman hasil validasi audit silang dokumentasi  
 **Gate:** Phase 2 cross-document audit (bukan Roadmap Phase 2 / Gate 2)  
-**Gate result:** PASS WITH RECORDED OPEN DECISIONS  
+**Historical gate result:** PASS WITH RECORDED OPEN DECISIONS (original narrow scope; see §7 for current re-audit disposition)  
 **Baseline examined:** `main` at `d802a9df9226098054591683a92df3b4ea54ea91`  
 **Correction branch:** `controlled/phase-2-cross-document-audit`  
 **Date:** 2026-10-10
@@ -63,3 +63,30 @@ Gate ini bukan Roadmap Gate 2 dan tidak mengesahkan Architecture and Contract Re
 ## 6. Next Authorized Step
 
 Langkah berikutnya hanya penggabungan koreksi dokumentasi ke `main` melalui review perubahan ini. Setelah penggabungan, verifikasi commit pada `main`. Audit produk tetap menunggu persetujuan eksplisit yang terpisah.
+
+
+## 7. Addendum — Re-Audit and Inventory Reconciliation (2026-10-10)
+
+This addendum supersedes any interpretation of §§3–5 as a statement that the broader, updated document inventory is fully reconciled. The original result applies only to the baseline and scope stated above.
+
+**Current re-audit disposition:** PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS — repository and accessible Library scope only; not the official Roadmap Phase 2 / Gate 2.
+
+### Evidence and corrections
+
+- Phase 1 inventory register was added and merged to `main` in commit [`bceb08b3cc2c41f33b9115a851d0ecb0b59d1fdf`](https://github.com/amanahgroup123/AMANAH-SEO/commit/bceb08b3cc2c41f33b9115a851d0ecb0b59d1fdf).
+- The Phase 2 re-audit was added and merged to `main` in commit [`ebc6a81693e8bf345a6814c8d2350169cffe1f33`](https://github.com/amanahgroup123/AMANAH-SEO/commit/ebc6a81693e8bf345a6814c8d2350169cffe1f33).
+- CDR-009: Integration Contracts section order is corrected and validated in the controlled reconciliation branch: §18 Traceability, §19 Dokumen Terkait, §20 Status Akhir. No duplicate section heading remains; the inventory and gate references to §18 were checked. Acceptance into `main` awaits merge of the controlled reconciliation PR.
+- CDR-010: approval history was verified in repository commit history. Document Governance approval evidence: [`76cc6ab16b99a69148ced4a21a23cc6964669ead`](https://github.com/amanahgroup123/AMANAH-SEO/commit/76cc6ab16b99a69148ced4a21a23cc6964669ead); Roadmap approval evidence: [`c1ed45e8d000830c1239fe934f75e7d0a1a132f1`](https://github.com/amanahgroup123/AMANAH-SEO/commit/c1ed45e8d000830c1239fe934f75e7d0a1a132f1). The current document headers now link to these commits. Historical DRAFT rows are retained as initial-draft history.
+- CDR-011 remains OPEN — SOURCE NOT FOUND / OWNER CONFIRMATION REQUIRED. No new product requirements are inferred. Existing parent Charter and thematic documents are high-level sources; the owner must confirm whether they are sufficient or whether dedicated Product Direction/requirements/data/UI baselines are required. Do not import requirements from either child product.
+- The register now accounts for 22 repository documentation/audit/template files and separately lists the two related ENGINE V2 Library artifacts. It does not claim that local project folders or external drives were inspected.
+
+### Current disposition
+
+- CDR-001–CDR-008: retained with the re-audit dispositions in `PHASE_2_CROSS_DOCUMENT_REAUDIT_2026-10-10.md`.
+- CDR-009: correction made in the controlled branch; gate acceptance waits for final diff/reference validation and merge.
+- CDR-010: resolved by recorded approval commits and metadata clarification.
+- CDR-011: remains an explicit open source/owner decision with a recorded action.
+- No new critical contradiction is confirmed in the accessible repository documents.
+- The source-completeness limitation is explicit; do not call the inventory globally complete until local/external sources are checked or the owner confirms no other source exists.
+
+This result closes only the cross-document review for the accessible sources with recorded limitations. It does **not** close official Roadmap Phase 2, approve architecture/contract choices, authorize child-product audits, or permit implementation.
