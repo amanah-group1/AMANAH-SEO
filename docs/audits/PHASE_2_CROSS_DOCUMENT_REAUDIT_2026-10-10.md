@@ -34,7 +34,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Type:** Document structure / reference ambiguity.
 - **Impact:** MEDIUM. References to “§18” are ambiguous, and the table appears after the stated final-status section. The content of the traceability table is useful, but its numbering/order was not correctly reconciled during the prior correction.
 - **Recommendation:** Renumber and reorder the sections consistently (e.g. make the traceability section §19 and move “Status Akhir” to the final section number), then update any references to those section numbers. Do not change the underlying Q statuses.
-- **Status:** CORRECTED IN CONTROLLED BRANCH — pending merge-time reference validation.
+- **Status:** CORRECTED AND VALIDATED IN CONTROLLED BRANCH — section sequence is unique and ordered §18–§20; register/gate references were checked. Acceptance into main awaits merge of the controlled reconciliation PR.
 - **Decision / evidence:** No substantive product decision required; document correction and revalidation evidence required.
 
 ### CDR-010 — Current approval status and approval/version-history evidence are not uniformly traceable
@@ -76,7 +76,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 **Re-audit result: PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS — for repository + accessible Library scope only.**
 
 Reason:
-1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected in the controlled reconciliation branch and must pass the final diff/reference check before merge.
+1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected and the section sequence plus documented §18 references were validated in the controlled reconciliation branch.
 2. CDR-010 is resolved by locating the approval commits and adding explicit metadata references while preserving historical DRAFT entries.
 3. CDR-011 remains an explicit open source/owner decision; the gap is recorded with an action and no invented requirement.
 4. No new CRITICAL contradiction is confirmed from the examined repository documents.
