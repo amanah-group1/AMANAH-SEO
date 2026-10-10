@@ -124,7 +124,7 @@ Setiap angka atau model komersial yang pernah dibahas harus dianggap sebagai usu
 
 ## 8. Current Status
 
-Tahap B — audit konsistensi pedoman — telah **COMPLETE untuk cakupan audit dokumen GitHub yang tercatat**, dengan keputusan terbuka dan keterbatasan sumber dinyatakan eksplisit. Langkah berikutnya adalah Tahap C — rekonsiliasi keputusan; Q-001–Q-028 tetap mengikuti status masing-masing, dan CDR-011 masih OPEN / PARTIALLY ADVANCED. ASE-MISS-007 (kelengkapan sumber lokal/global) belum diverifikasi. Hasil ini bukan penutupan Roadmap Phase 2 / Gate 2: assessment resmi kesiapan Phase 2 tetap **BLOCKED**. GitHub `main` tetap menjadi sumber acuan; sinkronisasi lokal ditunda sampai gerbang dokumentasi selesai.
+Tahap B — audit konsistensi pedoman — dan Tahap C — rekonsiliasi keputusan — telah **COMPLETE untuk cakupan dokumentasi GitHub yang tercatat**. Tahap C memetakan PROP-001–PROP-008 ke pertanyaan terkait; seluruh Q-001–Q-028 tetap OPEN, seluruh PROP tetap PROPOSED, dan DEC-001–DEC-007 tetap CONFIRMED sesuai catatan yang sudah ada. CDR-011 masih OPEN / PARTIALLY ADVANCED dan ASE-MISS-007 (kelengkapan sumber lokal/global) belum diverifikasi. Hasil ini bukan penutupan Roadmap Phase 2 / Gate 2: assessment resmi kesiapan Phase 2 tetap **BLOCKED**. GitHub `main` tetap menjadi sumber acuan; sinkronisasi lokal ditunda sampai gerbang dokumentasi selesai.
 
 Dua laporan audit baca-saja berbasis GitHub telah disusun secara terpisah; keduanya berstatus PARTIAL karena database/runtime live belum diperiksa dan ada prasyarat pengujian yang belum PASS. Belum ada klaim bahwa:
 - Kedua produk telah lulus integration readiness audit.
@@ -136,7 +136,7 @@ Dua laporan audit baca-saja berbasis GitHub telah disusun secara terpisah; kedua
 
 1. Pertahankan GitHub `main` sebagai baseline kanonis; setelah dokumentasi dan readiness selesai, pull/sinkronkan baseline tersebut ke local.
 2. Tinjau laporan audit Phase 1 untuk AMANAH SEO AI dan AMANAH SEO ENGINE V2; kedua laporan GitHub-only berstatus PARTIAL dan tidak mengklaim runtime/database PASS.
-3. Masuk Tahap C dengan merekonsiliasi Decision Register dan Open Questions; pertahankan CDR-011 dan Q-028 sebagai OPEN sampai evidence dan keputusan yang diperlukan tersedia. Nilai kebutuhan traceability rinci serta baseline data/UI setelah laporan audit produk ditinjau; jangan mengasumsikan dokumen terpisah wajib.
+3. Tahap C telah direkonsiliasi pada cakupan dokumen GitHub. Langkah berikutnya adalah Tahap D — revisi dokumen secara terkendali; jangan ubah Q-001–Q-028 dari OPEN atau PROP-001–PROP-008 dari PROPOSED tanpa persetujuan yang dapat ditelusuri. CDR-011/Q-028 dan keputusan data/UI tetap terbuka sampai evidence audit produk ditinjau.
 4. Tinjau laporan audit Phase 1 kedua produk secara terpisah; Gate 1 tetap BLOCKED sampai evidence database/runtime dan validasi yang diperlukan tersedia.
 5. Revisit arsitektur/kontrak berdasarkan temuan aktual produk; Gate 2 tidak PASS sebelum kriteria resmi memiliki evidence dan persetujuan.
 
