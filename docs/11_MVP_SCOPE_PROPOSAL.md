@@ -1,5 +1,5 @@
 # Usulan Lingkup MVP AMANAH SEO
-**Status:** USULAN UNTUK KEPUTUSAN PEMILIK — belum disetujui  
+**Status:** DISETUJUI PEMILIK SEBAGAI DASAR LINGKUP MVP  
 **Tanggal:** 2026-10-11  
 **Tujuan:** Mempersempit keputusan agar pedoman dapat selesai tanpa membuat daftar fitur yang terus membesar.
 
@@ -42,15 +42,19 @@ Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas s
 
 | ID | Keputusan | Rekomendasi | Status |
 |---|---|---|---|
-| MVP-01 | Platform website pertama | Mulai dari WordPress karena dua produk pendamping berorientasi WordPress; jangan menganggap ini final tanpa persetujuan. | PERLU PERSETUJUAN |
-| MVP-02 | Cakupan awal | Satu website per ruang kerja/pengaturan pada MVP, dengan rancangan tidak menghalangi perluasan kemudian. | PERLU PERSETUJUAN |
-| MVP-03 | Sumber data wajib | Mulai dengan sumber data paling kecil yang dapat dibuktikan tersedia; jangan membuat integrasi multi-provider sebagai syarat awal. Nama sumber harus diputuskan setelah kemampuan akses diperiksa. | PERLU PERSETUJUAN |
-| MVP-04 | Pelaksanaan tindakan | Semua perubahan website dan publikasi membutuhkan persetujuan eksplisit; MVP hanya mengatur tugas dan hasil, bukan melakukan tindakan otonom. | PERLU PERSETUJUAN |
-| MVP-05 | Akun dan akses | Minimal pengguna terautentikasi dengan hak akses pemilik/admin yang jelas; multi-tenant/tim kompleks ditunda. | PERLU PERSETUJUAN |
-| MVP-06 | Integrasi AI/ENGINE | Opsional; tidak menjadi prasyarat MVP. Kontrak integrasi disusun hanya jika fungsi MVP benar-benar membutuhkannya. | PERLU PERSETUJUAN |
-| MVP-07 | Keberhasilan MVP | Siklus utama selesai, setiap rekomendasi memiliki alasan/sumber atau label ketidakpastian, persetujuan tercatat, dan kegagalan terlihat. Tetapkan target angka setelah baseline tersedia. | PERLU PERSETUJUAN |
+| MVP-01 | Platform website pertama | WordPress sebagai platform pertama; keputusan dicatat setelah persetujuan pemilik. | DISETUJUI 2026-10-11 |
+| MVP-02 | Cakupan awal | Satu website per ruang kerja/pengaturan pada MVP, dengan rancangan tidak menghalangi perluasan kemudian. | DISETUJUI 2026-10-11 |
+| MVP-03 | Sumber data wajib | Mulai dengan sumber data paling kecil yang dapat dibuktikan tersedia; jangan membuat integrasi multi-provider sebagai syarat awal. Nama sumber spesifik tetap diverifikasi sebelum implementasi. | DISETUJUI 2026-10-11 (prinsip); sumber spesifik menunggu verifikasi |
+| MVP-04 | Pelaksanaan tindakan | Semua perubahan website dan publikasi membutuhkan persetujuan eksplisit; MVP hanya mengatur tugas dan hasil, bukan melakukan tindakan otonom. | DISETUJUI 2026-10-11 |
+| MVP-05 | Akun dan akses | Minimal pengguna terautentikasi dengan hak akses pemilik/admin yang jelas; multi-tenant/tim kompleks ditunda. | DISETUJUI 2026-10-11 |
+| MVP-06 | Integrasi AI/ENGINE | Opsional; tidak menjadi prasyarat MVP. Kontrak integrasi disusun hanya jika fungsi MVP benar-benar membutuhkannya. | DISETUJUI 2026-10-11 |
+| MVP-07 | Keberhasilan MVP | Siklus utama selesai, setiap rekomendasi memiliki alasan/sumber atau label ketidakpastian, persetujuan tercatat, dan kegagalan terlihat. Tetapkan target angka setelah baseline tersedia. | DISETUJUI 2026-10-11 |
 
-## 5. Kriteria penerimaan MVP yang dapat diuji
+## 5. Catatan persetujuan pemilik
+
+Pada 2026-10-11, pemilik menyetujui ketujuh rekomendasi MVP-01 sampai MVP-07 sebagai dasar pedoman AMANAH SEO. Persetujuan MVP-03 mencakup prinsip memilih sumber data terkecil yang dapat diverifikasi, bukan pemilihan nama penyedia tertentu. Sumber data spesifik tetap harus diverifikasi sebelum implementasi. Persetujuan ini menetapkan arah produk dan lingkup MVP; bukan persetujuan untuk implementasi, perubahan kode/runtime, atau penggabungan pull request.
+
+## 6. Kriteria penerimaan MVP yang dapat diuji
 
 MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 1. Pengguna yang berwenang dapat mendaftarkan dan mengelola website dalam batas yang disetujui.
@@ -64,7 +68,7 @@ MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 9. Pengujian mencakup jalur sukses, kegagalan, akses ditolak, data tidak tersedia, dan percobaan ulang yang aman.
 10. Tidak ada klaim bahwa fitur integrasi/AI/ENGINE berjalan sebelum pengujian integrasi membuktikannya.
 
-## 6. Cara menyelesaikan keputusan tanpa menunda terus
+## 7. Cara menyelesaikan keputusan tanpa menunda terus
 
 - Pemilik cukup menyetujui atau mengubah tujuh keputusan MVP-01 sampai MVP-07.
 - Pertanyaan yang tidak mengubah siklus utama atau keamanan minimum dipindahkan ke backlog.
