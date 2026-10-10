@@ -25,7 +25,9 @@
 | G0-11 | Repository structure and filenames match the README inventory | PASS for the declared inventory | The 11 core-document paths and four template paths in README were fetched successfully from the correction branch. This verifies the declared inventory, not every unrelated file in the repository. |
 | G0-12 | Results include evidence and disclose unchecked/limited areas | PASS | This report records a result and scope limitation per criterion. Product source, database, runtime, security, and integration testing are explicitly out of scope and were not performed. |
 
-## 2. Controlled corrections recorded in this PR
+## 2. Historical controlled corrections recorded in this PR
+
+This section lists changes made on the historical correction branch/baseline for this Gate 0 record. It is not a status inventory of current `main`; current lifecycle status is clarified in §5 and must be checked against the current canonical files.
 
 1. `README.md`: lists all 11 core documents and each of the four template paths explicitly.
 2. `docs/01_DECISION_REGISTER.md`: declares document status separately from individual decision statuses.
