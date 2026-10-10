@@ -24,7 +24,7 @@ Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau inte
 - Sumber data SEO spesifik harus dipilih dan diverifikasi sebelum implementasi.
 - Kemampuan integrasi AI/ENGINE belum dinyatakan terverifikasi; integrasi tidak wajib untuk MVP.
 - Keputusan komersial dan teknis non-pemblokir dipindahkan ke backlog agar tidak menghambat penutupan pedoman.
-- Pedoman berada di branch `controlled/rebuild-product-pedoman` sebagai **DRAFT FINAL UNTUK PERSETUJUAN PENUTUPAN**. Belum digabung ke `main`.
+- Pedoman konseptual dinyatakan **SELESAI** atas instruksi pemilik pada 2026-10-11 dan berada di branch `controlled/rebuild-product-pedoman`. Branch belum digabung ke `main`; implementasi belum disetujui.
 
 ## Batas kerja
 
