@@ -217,7 +217,19 @@ Bagaimana setiap kebutuhan AMANAH SEO yang telah disetujui akan dihubungkan ke b
 
 Pertanyaan ini belum menetapkan format matriks, teknologi, dokumen terpisah, atau kriteria produk tertentu. Hal-hal tersebut tidak boleh dianggap diputuskan sebelum ada persetujuan.
 
-## 10. Format Penyelesaian Pertanyaan
+## 10. Hasil Rekonsiliasi dengan Decision Register (2026-10-10)
+
+Pemeriksaan silang Tahap C mencocokkan semua ID Q-001–Q-028 dengan indeks OPEN-001–OPEN-015 pada `docs/01_DECISION_REGISTER.md`.
+
+- **Jumlah dan status:** 28 pertanyaan tercatat berurutan; semuanya tetap **OPEN**. Tidak ada pertanyaan yang ditutup atau dijawab oleh rekonsiliasi ini.
+- **Kelompok yang telah dicocokkan:** Q-006/Q-007 → OPEN-011; Q-028 → OPEN-015; Q-027 → OPEN-014 sebagai indeks utama dan OPEN-009 sebagai referensi silang yang disengaja; Q-012/Q-013 memiliki dua indeks karena cakupan topiknya saling beririsan.
+- **Usulan terkait:** PROP-001–PROP-008 tetap **PROPOSED**. Kaitan tiap usulan dengan pertanyaan ditulis pada Decision Register sebagai peta dependensi, bukan persetujuan.
+- **Batas keputusan:** DEC-001–DEC-007 tetap **CONFIRMED** sesuai catatan yang sudah ada; rekonsiliasi tidak menciptakan keputusan baru.
+- **Yang masih menunggu:** CDR-011/Q-028 (traceability dan cakupan data/UI), pertanyaan arsitektur, integrasi, keamanan, operasional dan komersial, serta ASE-MISS-007 untuk sumber lokal/global yang belum diverifikasi.
+
+Untuk keputusan yang masih terbuka, dokumentasikan alasan penundaan, dampak, kondisi untuk dibuka kembali, dan bukti/persetujuan yang dibutuhkan. Status hanya boleh berubah setelah keputusan yang dapat ditelusuri disetujui secara eksplisit.
+
+## 11. Format Penyelesaian Pertanyaan
 
 Setiap pertanyaan yang diputuskan harus memiliki:
 - ID pertanyaan.
@@ -231,12 +243,13 @@ Setiap pertanyaan yang diputuskan harus memiliki:
 
 Jika suatu pertanyaan ditunda, catat alasannya, dampaknya, dan kondisi yang diperlukan untuk membukanya kembali.
 
-## 11. Riwayat Perubahan
+## 12. Riwayat Perubahan
 
 | Versi | Status | Perubahan |
 |---|---|---|
 | 0.1 | DRAFT  | Daftar pertanyaan awal untuk keputusan arsitektur, produk, dan operasional |
 | 0.2 | APPROVED sebagai daftar | Menambahkan Q-028 sebagai pertanyaan terbuka tentang keterlacakan kebutuhan, pengerjaan, dan tes penerimaan; tidak menetapkan keputusan final. |
+| 0.3 | APPROVED sebagai daftar | Menambahkan hasil rekonsiliasi Tahap C terhadap Decision Register; semua Q-001–Q-028 tetap OPEN dan PROP-001–PROP-008 tetap PROPOSED. Tidak ada jawaban final baru. |
 
 ---
 **Peringatan:** semua pertanyaan berstatus OPEN sampai ada keputusan yang dapat ditelusuri dan disetujui.

@@ -171,6 +171,55 @@ Khusus **Q-027 — Strategi rilis**, indeks utama berdasarkan pokok bahasannya a
 
 Status setiap pertanyaan tetap mengacu pada `docs/10_OPEN_QUESTIONS.md`. Q-028 tercatat pada `OPEN-015` sebagai pertanyaan terbuka; indeks ini bukan keputusan dan tidak mengesahkan format atau tingkat rincian traceability. Seluruh indeks tetap `OPEN` selama pertanyaan rinci terkait belum memiliki keputusan yang disetujui dan terdokumentasi. Jika keputusan dibuat, perbarui Decision Register dan Open Questions dalam perubahan yang sama serta cantumkan referensi keputusan dan bukti persetujuannya. Jangan menandai pertanyaan selesai hanya karena pemetaan indeks telah diperjelas.
 
+## 6A. Hasil Rekonsiliasi Tahap C — Decision Register ↔ Open Questions (2026-10-10)
+
+**Status rekonsiliasi:** selesai untuk konsistensi dan pemetaan catatan pada GitHub `main`; ini bukan berarti semua keputusan telah dibuat.
+
+### A. Keputusan dasar yang sudah dikonfirmasi
+
+- **DEC-001 sampai DEC-007 — CONFIRMED.** Status dan isi keputusan dasar dipertahankan sesuai entri yang sudah tercatat. DEC-001/002 menetapkan bahwa platform induk berbeda dari kedua produk; DEC-003/005/006 menetapkan prinsip audit dahulu, scope dan persetujuan sebelum implementasi, serta klaim berdasarkan evidence; DEC-004 membatasi perubahan produk yang ada; DEC-007 mengatur bahasa dokumentasi.
+- Keputusan dasar tersebut tidak menjawab otomatis detail teknis, komersial, atau operasional pada Q-001–Q-028.
+- Tidak ada keputusan CONFIRMED baru yang dibuat dalam sesi rekonsiliasi ini.
+
+### B. Pemetaan usulan terhadap pertanyaan yang masih terbuka
+
+| Entri usulan | Pertanyaan terkait | Hasil rekonsiliasi |
+|---|---|---|
+| PROP-001 — Platform induk sebagai control plane | Q-001–Q-003, Q-006–Q-007, Q-017–Q-019, Q-025–Q-026 | Tetap PROPOSED; batas identitas, data, navigasi, teknologi, deployment, database, prioritas dan MVP belum diputuskan. |
+| PROP-002 — Integrasi melalui explicit contracts | Q-004–Q-007, Q-018, Q-020–Q-021, Q-025 | Tetap PROPOSED; mekanisme komunikasi, metadata, versioning, keamanan dan urutan integrasi memerlukan audit/review. |
+| PROP-003 — Pemeriksaan entitlement pada operasi terlindungi | Q-008, Q-011–Q-013, Q-021, Q-024 | Tetap PROPOSED; model lisensi, aktivasi, offline/failure behavior, keamanan dan respons operasional belum diputuskan. |
+| PROP-004 — Product registry | Q-004–Q-005, Q-020 | Tetap PROPOSED; isi registry, source of truth, discovery dan versioning belum diputuskan. |
+| PROP-005 — Pemisahan credential berdasarkan fungsi | Q-014–Q-015, Q-021, Q-024 | Tetap PROPOSED; kepemilikan secret, penyimpanan, rotasi dan operasi keamanan belum diputuskan. |
+| PROP-006 — Tier lisensi | Q-009–Q-010, Q-026 | Tetap PROPOSED; nama paket, harga, fitur dan kuota belum disetujui. |
+| PROP-007 — Bundle produk | Q-008–Q-010, Q-016, Q-025–Q-026 | Tetap PROPOSED; hak penggunaan, harga, pembebanan biaya, urutan integrasi dan MVP belum diputuskan. |
+| PROP-008 — Website limit | Q-010–Q-011 | Tetap PROPOSED; angka limit dan definisi website/instalasi belum disetujui. |
+
+Pemetaan ini hanya menunjukkan ketergantungan/topik yang perlu direview. Pemetaan **tidak** mengesahkan usulan dan tidak menggantikan teks atau status pertanyaan di Open Questions.
+
+### C. Pemeriksaan indeks OPEN-001–OPEN-015
+
+- Indeks OPEN-001–OPEN-015 mencakup Q-001 sampai Q-028.
+- Q-006 dan Q-007 tetap berada di OPEN-011; keduanya OPEN.
+- Q-028 tetap berada di OPEN-015; statusnya OPEN.
+- Q-027 berada pada indeks utama OPEN-014 dan juga muncul pada OPEN-009 sebagai referensi silang yang disengaja. Ini bukan duplikasi pertanyaan atau keputusan.
+- Q-012 dan Q-013 juga muncul pada dua indeks karena masing-masing menyentuh lisensi/entitlement dan kebijakan ketersediaan layanan; ini adalah pengelompokan navigasi, bukan keputusan.
+- Tidak ditemukan alasan berbasis evidence untuk mengubah status CONFIRMED, PROPOSED, atau OPEN dalam sesi ini. Semua 28 pertanyaan tetap OPEN; seluruh delapan PROP tetap PROPOSED.
+
+### D. Keputusan yang ditunda, dampak, dan syarat dibuka kembali
+
+| Kelompok | Status | Dampak jika belum diputuskan | Syarat untuk dibuka kembali |
+|---|---|---|---|
+| Q-001–Q-003, Q-006–Q-007, Q-017–Q-019 | OPEN | Model identitas, kepemilikan data, navigasi, teknologi, deployment dan database belum dapat difinalkan. | Review kebutuhan dan bukti audit; persetujuan eksplisit owner. |
+| Q-004–Q-005, Q-020 | OPEN | Kontrak dan kompatibilitas integrasi belum dapat difinalkan. | Audit produk, kebutuhan komunikasi, dan review keamanan/arsitektur. |
+| Q-008–Q-013 | OPEN | Model lisensi, entitlement, aktivasi, paket dan kegagalan layanan belum dapat difinalkan. | Keputusan bisnis dan review keamanan/operasional. |
+| Q-014–Q-016, Q-021–Q-024 | OPEN | Pengelolaan kredensial, biaya AI, baseline keamanan dan operasi belum dapat difinalkan. | Audit produk, threat/risk review, kebutuhan bisnis dan persetujuan owner. |
+| Q-025–Q-027 | OPEN | Prioritas, MVP dan rencana rilis belum dapat dikunci. | Hasil audit, prioritas bisnis, kriteria penerimaan dan persetujuan owner. |
+| Q-028 / CDR-011 | OPEN / PARTIALLY ADVANCED | Tingkat rincian traceability kebutuhan → pengerjaan → tes penerimaan, serta cakupan data/UI-navigation, belum ditetapkan. | Review audit produk dan keputusan eksplisit owner; ASE-MISS-007 tetap perlu verifikasi sumber lokal/global secara terpisah. |
+
+### E. Hasil Tahap C
+
+**Tahap C — Rekonsiliasi keputusan: COMPLETE untuk pemeriksaan konsistensi dan pemetaan status pada dokumentasi GitHub yang tercatat.** Semua pertanyaan dan usulan tetap pada statusnya; tidak ada pertanyaan yang ditutup hanya karena pemetaannya diperjelas. Tahap ini tidak menyatakan seluruh keputusan bisnis/arsitektur selesai, tidak menutup CDR-011 atau ASE-MISS-007, dan tidak mengubah Gate 1/Gate 2.
+
 ## 7. Cara Menambahkan Keputusan
 
 Setiap keputusan baru wajib memuat:
