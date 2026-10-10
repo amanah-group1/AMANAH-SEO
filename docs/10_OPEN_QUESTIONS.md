@@ -207,7 +207,17 @@ Bagaimana versi beta, rilis stabil, dan kompatibilitas produk akan dikelola?
 **Status:** OPEN  
 **Ketergantungan:** proses pengujian, deployment, dan dukungan.
 
-## 9. Format Penyelesaian Pertanyaan
+## 9. Kebutuhan, pengerjaan, dan pengujian
+
+### Q-028 — Keterlacakan kebutuhan ke pengerjaan dan tes penerimaan
+Bagaimana setiap kebutuhan AMANAH SEO yang telah disetujui akan dihubungkan ke bagian produk yang perlu dikerjakan dan tes penerimaan yang membuktikan hasilnya? Tingkat rincian catatan serta bukti yang wajib disimpan juga perlu ditentukan.
+
+**Status:** OPEN  
+**Ketergantungan:** peninjauan hasil audit produk yang tersedia, penetapan kebutuhan yang disetujui, dan keputusan pemilik proyek tentang tingkat rincian serta bukti yang diwajibkan.
+
+Pertanyaan ini belum menetapkan format matriks, teknologi, dokumen terpisah, atau kriteria produk tertentu. Hal-hal tersebut tidak boleh dianggap diputuskan sebelum ada persetujuan.
+
+## 10. Format Penyelesaian Pertanyaan
 
 Setiap pertanyaan yang diputuskan harus memiliki:
 - ID pertanyaan.
@@ -221,11 +231,12 @@ Setiap pertanyaan yang diputuskan harus memiliki:
 
 Jika suatu pertanyaan ditunda, catat alasannya, dampaknya, dan kondisi yang diperlukan untuk membukanya kembali.
 
-## 10. Riwayat Perubahan
+## 11. Riwayat Perubahan
 
 | Versi | Status | Perubahan |
 |---|---|---|
 | 0.1 | DRAFT  | Daftar pertanyaan awal untuk keputusan arsitektur, produk, dan operasional |
+| 0.2 | APPROVED sebagai daftar | Menambahkan Q-028 sebagai pertanyaan terbuka tentang keterlacakan kebutuhan, pengerjaan, dan tes penerimaan; tidak menetapkan keputusan final. |
 
 ---
 **Peringatan:** semua pertanyaan berstatus OPEN sampai ada keputusan yang dapat ditelusuri dan disetujui.
