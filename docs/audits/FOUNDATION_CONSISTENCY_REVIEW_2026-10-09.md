@@ -56,3 +56,9 @@ Verifikasi setelah penggabungan ke `main` telah selesai: 18 file dokumentasi ber
 - Label DRAFT pada riwayat versi merupakan catatan status versi historis dan tidak otomatis bertentangan dengan status dokumen saat ini.
 - Persetujuan fondasi dokumentasi tidak mengesahkan harga, model lisensi, arsitektur yang masih diusulkan, kredensial, strategi deployment, prioritas produk, maupun keputusan lain yang belum diputuskan.
 - Tidak ada perubahan source code, database, runtime, atau integrasi produk yang diotorisasi atau dinyatakan telah dilakukan oleh laporan ini.
+
+## 7. Batas Cakupan terhadap Audit Silang Phase 2
+
+Kesimpulan pada laporan ini tetap berlaku untuk cakupan review awal yang dinyatakan pada §1: inventaris, konvensi status, referensi dokumen, pemetaan indeks pertanyaan, dan pemeriksaan editorial. Laporan ini tidak dimaksudkan sebagai register lengkap konflik semantik dan traceability lintas semua dokumen.
+
+Audit silang dokumentasi yang lebih luas dicatat terpisah pada [Phase 2 Cross-Document Findings Register](PHASE_2_CROSS_DOCUMENT_FINDINGS_2026-10-10.md). Register tersebut merekam urutan audit produk, traceability kontrak dan lifecycle, serta keputusan arsitektur/komersial yang tetap terbuka. Penambahan register tersebut tidak membatalkan hasil review awal; ia memperluas cakupan audit dan memperjelas temuan yang memerlukan koreksi atau keputusan berikutnya.

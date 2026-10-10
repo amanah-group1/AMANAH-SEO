@@ -356,3 +356,19 @@ Keputusan tersebut harus dicatat dalam `01_DECISION_REGISTER.md` dan `10_OPEN_QU
 Dokumen ini adalah rancangan licensing dan entitlement. Dokumen ini tidak menetapkan harga, tier, kuota, protokol aktivasi, atau implementasi final.
 
 Semua keputusan yang memengaruhi akses pengguna, keamanan, dan hak komersial harus disetujui secara eksplisit serta divalidasi melalui audit dan pengujian.
+
+## 19. Traceability Lifecycle ke Open Questions
+
+Tabel berikut menghubungkan rancangan lisensi, entitlement, aktivasi, dan enforcement dengan pertanyaan yang belum diputuskan di docs/10_OPEN_QUESTIONS.md. Pemetaan ini tidak menutup atau mengubah status pertanyaan.
+
+| Area | Bagian terkait | Pertanyaan terkait | Status / batasan |
+|---|---|---|---|
+| License lifecycle dan status | §5 | Q-008, Q-009 | Lifecycle kandidat; model lisensi dan paket komersial belum disahkan |
+| Activation lifecycle | §6 | Q-011, Q-013, Q-018, Q-019 | Definisi instalasi, failure behavior, deployment, dan persistence belum final |
+| Entitlement model dan feature limits | §7–§8 | Q-008, Q-009, Q-010, Q-012 | Capability, paket, limit, dan mekanisme pemeriksaan belum final |
+| AI credentials dan cost allocation | §3.7, §12, §16 | Q-014, Q-015, Q-016 | Kepemilikan key, penyimpanan secret, dan pembebanan biaya menunggu keputusan/evidence |
+| Authorization dan security enforcement | §11–§12 | Q-003, Q-021 | Role/permission dan security baseline perlu keputusan serta validasi |
+| Audit trail dan operational recovery | §13–§14 | Q-022, Q-023, Q-024 | Retensi, backup, monitoring, dan respons insiden belum ditentukan |
+| Contract compatibility | §16 | Q-005, Q-020 | Protokol komunikasi dan versioning belum final |
+
+Jika temuan audit produk menghasilkan kebutuhan baru, perbarui Open Questions dan Decision Register secara konsisten. Status APPROVED pada dokumen ini menyetujui kerangka dan persyaratan, bukan lifecycle, harga, entitlement matrix, atau protokol aktivasi yang masih PROPOSED/OPEN.

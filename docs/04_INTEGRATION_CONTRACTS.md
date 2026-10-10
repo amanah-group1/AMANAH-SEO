@@ -433,3 +433,21 @@ Semua pertanyaan tersebut harus tercatat di `10_OPEN_QUESTIONS.md` dan ditutup m
 Semua kontrak dalam dokumen ini berstatus kandidat. Belum ada schema, endpoint, token format, atau protocol yang dinyatakan final.
 
 Kontrak hanya dapat disahkan setelah audit, security review, compatibility assessment, dan approval sesuai governance proyek.
+
+## 18. Traceability ke Open Questions
+
+Bagian ini adalah indeks traceability untuk memastikan kontrak kandidat tidak disalahartikan sebagai keputusan final. Referensi Q mengarah ke docs/10_OPEN_QUESTIONS.md; seluruh Q yang disebutkan tetap berstatus OPEN sampai keputusan disetujui dan dicatat.
+
+| Area kontrak | Bagian terkait | Pertanyaan terkait | Batas status |
+|---|---|---|---|
+| Product Manifest / product registry | §4 | Q-004, Q-020 | Field, source of truth, dan versioning final belum diputuskan |
+| Identity Context | §5 | Q-001, Q-002, Q-003, Q-021 | Identity model, organisasi, role, dan security baseline belum diputuskan |
+| Authorization | §6 | Q-003, Q-021 | Model permission dan standar keamanan tetap menunggu keputusan |
+| Entitlement Check | §7 | Q-008, Q-009, Q-010, Q-012, Q-013 | Model lisensi, paket, limit, pemeriksaan, dan failure policy belum final |
+| Activation Lifecycle | §8 | Q-011, Q-013, Q-018, Q-019 | Definisi instalasi, kegagalan, deployment, dan persistence perlu keputusan/evidence |
+| Navigation / Product Entry Point | §9 | Q-007 | Pola navigasi dan deep link belum diputuskan |
+| Diagnostics / Health Status | §10 | Q-022, Q-024 | Audit event, monitoring, dan respons insiden belum diputuskan |
+| Audit Events | §11 | Q-021, Q-022, Q-023, Q-024 | Security baseline, retensi, backup, monitoring, dan ownership belum final |
+| Error Contract | §12 | Q-005, Q-013, Q-020, Q-024 | Transport, retry, versioning, dan perilaku saat dependency gagal belum final |
+
+Matriks ini menunjukkan ketergantungan dokumentasi, bukan penyelesaian pertanyaan. Jika satu area memerlukan pertanyaan tambahan, tambahkan pertanyaan di Open Questions dan referensikan kembali di sini; jangan mengubah status Q tanpa keputusan yang tercatat.

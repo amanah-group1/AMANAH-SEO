@@ -63,7 +63,7 @@ Urutan serta implementasi aktual wajib diverifikasi terhadap master documentatio
 ### 5.1 Termasuk dalam fase fondasi
 
 - Dokumentasi charter dan decision register.
-- Audit baseline dua produk.
+- Penyusunan kriteria dan rencana audit baseline dua produk. Audit produk aktual dilakukan pada tahap berikutnya, setelah pedoman fondasi dan audit silang dokumentasi ditutup serta persetujuan eksplisit untuk audit produk dicatat.
 - Definisi arsitektur logis.
 - Definisi batas produk.
 - Rancangan integration contracts.
@@ -138,16 +138,20 @@ Kesiapan fondasi dokumentasi tidak otomatis berarti kesiapan implementasi atau p
 
 ## 10. Urutan Kerja
 
-1. Menyelesaikan dan meninjau dokumentasi fondasi.
-2. Menyetujui charter serta decision register.
-3. Mengaudit AMANAH SEO AI secara terpisah.
-4. Mengaudit AMANAH SEO ENGINE V2 secara terpisah.
-5. Membandingkan hasil audit dan mengidentifikasi risiko integrasi.
-6. Memperbarui architecture blueprint dan integration contracts berdasarkan evidence.
-7. Menyusun implementation plan yang memiliki scope serta acceptance criteria.
-8. Meminta persetujuan eksplisit sebelum implementasi dimulai.
-9. Melakukan implementasi bertahap setelah readiness gate terpenuhi.
-10. Memvalidasi hasil melalui pengujian yang dapat diulang.
+1. Menyelesaikan seluruh dokumen pedoman fondasi dan meninjau referensi silang.
+2. Melakukan audit silang dokumentasi Phase 2, mencatat semua konflik, kesenjangan, keputusan terbuka, serta evidence dalam register temuan.
+3. Melakukan koreksi dokumentasi yang telah berada dalam scope, memvalidasi ulang seluruh inventaris, dan menutup Gate audit dokumentasi dengan bukti.
+4. Mencatat persetujuan eksplisit bahwa pedoman fondasi telah selesai dan bahwa audit produk boleh dimulai.
+5. Mengaudit AMANAH SEO AI secara terpisah setelah persetujuan pada langkah 4.
+6. Mengaudit AMANAH SEO ENGINE V2 secara terpisah setelah persetujuan pada langkah 4.
+7. Membandingkan hasil audit dan mengidentifikasi risiko integrasi.
+8. Memperbarui architecture blueprint dan integration contracts berdasarkan evidence audit produk.
+9. Menyusun implementation plan dengan scope, acceptance criteria, pengujian, risiko, dan rollback.
+10. Meminta persetujuan eksplisit sebelum implementasi dimulai.
+11. Melakukan implementasi bertahap setelah readiness gate terpenuhi.
+12. Memvalidasi hasil melalui pengujian yang dapat diulang.
+
+**Batas urutan:** audit silang dokumentasi AMANAH SEO bukan audit teknis produk. Tidak boleh memulai audit, mengubah source code, database, konfigurasi, atau runtime AMANAH SEO AI maupun AMANAH SEO ENGINE V2 sebelum langkah 1–4 selesai dan persetujuan eksplisit untuk audit produk tercatat.
 
 ## 11. Batas Kewenangan Dokumen
 
