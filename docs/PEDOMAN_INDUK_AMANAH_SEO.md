@@ -138,8 +138,8 @@ Tidak semua metrik wajib dipakai untuk semua website. Baseline, definisi, sumber
 
 ## 9. Batas ruang lingkup tahap pedoman
 
-Sampai pedoman induk selesai dan disetujui:
-- Fokus hanya pada konsep, batas produk, alur kerja, kebutuhan, keputusan, dan kriteria kesiapan AMANAH SEO.
+Selama tahap penyusunan pedoman (tahap konseptual kini telah ditutup):
+- Fokus pekerjaan tahap tersebut hanya pada konsep, batas produk, alur kerja, kebutuhan, keputusan, dan kriteria kesiapan AMANAH SEO.
 - Audit repositori AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya baca-saja dan hanya untuk memeriksa kemampuan nyata serta risiko integrasi.
 - Dilarang mengubah kode, branch, konfigurasi, database, runtime, lisensi, atau WordPress dari kedua produk pendamping.
 - Jangan melakukan sinkronisasi lokal/WordPress sebagai bagian dari tahap ini.
@@ -193,7 +193,7 @@ Model akses awal owner/admin dan larangan tindakan website otonom pada MVP sudah
 - Dokumen ini menjadi sumber utama untuk visi, tujuan, prinsip, pembagian produk, alur utama, dan proses penyelesaian pedoman.
 - Dokumen lama yang bertentangan tidak berlaku sebagai aturan aktif sampai isinya ditinjau dan secara eksplisit dimasukkan kembali.
 - Laporan audit historis dipertahankan sebagai rekam jejak; laporan tersebut tidak otomatis menjadi keputusan produk.
-- Dokumen lama yang masih berguna akan dipindahkan ke arsip atau ditandai **SUPERSEDED** setelah pemetaan referensi. Jangan menghapus bukti audit atau riwayat keputusan yang dibutuhkan untuk keterlacakan.
+- Dokumen lama yang digantikan telah dipindahkan ke `docs/archive/` dan diberi penanda historis **SUPERSEDED**. Tautan menuju pedoman aktif harus tetap valid dari lokasi arsip. Jangan menghapus bukti audit atau riwayat keputusan yang dibutuhkan untuk keterlacakan.
 - README dan indeks harus mengarahkan pembaca ke dokumen ini. Jangan mempertahankan beberapa sumber kebenaran yang saling bertentangan.
 
 ## 13. Definisi selesai
