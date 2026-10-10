@@ -197,3 +197,8 @@ Persetujuan pedoman **bukan** persetujuan otomatis untuk mengubah kode, menggabu
 
 ---
 **Aturan akhir:** Bangun AMANAH SEO untuk membantu pemilik website mengambil keputusan SEO yang lebih baik dan menjalankan perbaikan secara terarah serta berkelanjutan. Semua fitur, dokumen, dan integrasi harus mendukung tujuan itu; bila tidak, jangan masukkan ke MVP.
+
+
+## 14. Lingkup MVP yang sedang diputuskan
+
+Untuk mencegah pedoman terus melebar, gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan yang perlu ditinjau pemilik. Usulan tersebut belum final. Keputusan MVP-01 sampai MVP-07 harus disetujui atau diubah secara eksplisit; hal non-blocking masuk backlog. Setelah keputusan inti itu diselesaikan, pedoman dapat ditutup tanpa menunggu seluruh roadmap masa depan.
