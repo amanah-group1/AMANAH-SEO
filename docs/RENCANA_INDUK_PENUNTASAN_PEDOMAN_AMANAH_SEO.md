@@ -139,7 +139,7 @@ Sebelum menyatakan selesai:
 | Tahap | Status awal | Bukti/hasil yang diperlukan untuk menutup |
 |---|---|---|
 | A — Baseline dan inventaris | **COMPLETE — GitHub `main` tervalidasi** | Struktur root, `docs/`, `docs/audits/`, `templates/`, README, 11 dokumen inti, 12 catatan audit, 4 template, dan rencana induk cocok pada baseline `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 file terdokumentasi.
-| B — Audit konsistensi | PARTIAL — berdasarkan audit tercatat | Temuan konsistensi lengkap dan terdisposisi |
+| B — Audit konsistensi | PARTIAL — CDR-013–CDR-015 dicatat pada re-audit; koreksi editorial masih terbuka | Temuan konsistensi lengkap, koreksi terverifikasi, dan disposisi keputusan terbuka |
 | C — Rekonsiliasi keputusan | BLOCKED/PARTIAL — keputusan terbuka masih ada | Decision Register dan Open Questions konsisten |
 | D — Revisi terkendali | NOT STARTED dalam rencana ini | Commit perubahan yang didukung temuan |
 | E — Verifikasi dan penutupan | NOT STARTED dalam rencana ini | Checklist final, bukti, dan persetujuan eksplisit |
@@ -173,7 +173,19 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 | Versi | Status | Perubahan |
 |---|---|---|
 | 0.1 | DRAFT | Membentuk rencana induk, batas scope, aturan wajib baca, urutan kerja, dan kriteria penutupan. |
-| 0.2 | DRAFT | Mencatat validasi inventaris GitHub `main` pada commit `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 file; README dan register diperbarui untuk memasukkan rencana induk.
+| 0.2 | DRAFT | Mencatat validasi inventaris GitHub `main` pada commit `c7b1a0c23ddaa37f670d777e950a0ecb4d57a2d3`; jumlah 29 artefak dokumentasi (30 file total termasuk `.gitignore`); README dan register diperbarui untuk memasukkan rencana induk. |
+| 0.3 | DRAFT | Mencatat CDR-013–CDR-015 sebagai temuan konsistensi metadata/status yang masih OPEN; Tahap B tetap PARTIAL.
 
 ---
 **Penting:** dokumen ini dibuat untuk mengakhiri pekerjaan secara terarah, bukan membuka proyek baru tanpa batas. Prioritas tunggal sampai gerbang dokumentasi terpenuhi adalah menuntaskan Pedoman AMANAH SEO.
+
+## 9B. Catatan sesi — audit konsistensi lanjutan (2026-10-10)
+
+- **Baseline GitHub `main` sebelum pencatatan:** `59d43bb75001cc125d0e908cf333293f2d527899`.
+- **Pemeriksaan:** rencana induk, README, register inventaris, Decision Register, Open Questions, Phase 2 Cross-Document Re-Audit, Approval Evidence Revalidation, dan Gate 0 Verification dibaca ulang dari GitHub.
+- **Hasil:** tiga ketidaksesuaian metadata/status dicatat sebagai CDR-013 (hitungan ASE-AUD-005 masih 27 dibanding inventaris terkini 30 file total/29 artefak dokumentasi), CDR-014 (status bukti persetujuan 11 dokumen inti masih disebut PARTIAL dalam narasi audit lama meskipun laporan verifikasi kemudian menyatakan 11/11 VERIFIED), dan CDR-015 (Gate 0 mencampurkan catatan status historis correction branch dengan status Open Questions pada `main`).
+- **Bukti perubahan:** temuan ditambahkan ke `docs/audits/PHASE_2_CROSS_DOCUMENT_REAUDIT_2026-10-10.md`, commit `d0a4c080763ec0f06137148d7e803e2198535f1f`. Tiga temuan berstatus OPEN; belum ada koreksi pada dokumen sumbernya.
+- **Keputusan terbuka:** CDR-011 tetap OPEN; Q-001–Q-027 tetap OPEN. Tidak ada keputusan arsitektur/komersial yang diubah.
+- **Batasan:** pemeriksaan GitHub-only. Tidak ada sinkronisasi lokal/WordPress, audit runtime, atau perubahan AMANAH SEO AI / AMANAH SEO ENGINE V2.
+- **Tahap aktif:** B — Audit konsistensi, PARTIAL.
+- **Satu langkah berikutnya:** lakukan koreksi editorial terkendali untuk CDR-013–CDR-015 pada catatan kanonis terkait, lalu verifikasi ulang perubahan di `main`.
