@@ -68,7 +68,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Type:** Governance vocabulary / repository index / status synchronization.
 - **Impact:** MEDIUM. Readers could apply inconsistent lifecycle labels or miss the authoritative current audit records and scope limitations.
 - **Recommendation:** Align README status vocabulary with Document Governance, index all audit records, and state the current scoped result and next actions without implying Roadmap Phase 2 or product audits are complete.
-- **Status:** CORRECTED IN CONTROLLED BRANCH — README now uses the five lifecycle statuses, links all six audit records, and states the current scoped result and source limitations. Final merge verification pending.
+- **Status:** RESOLVED — README now uses the five lifecycle statuses, links all six audit records, and states the current scoped result and source limitations; merged in PR #9, commit `0cd6c9102fd142a21c39951ace838d979af269dd`.
 - **Decision / evidence:** Editorial/governance correction only; no product or architecture decision changed.
 
 ## 3. Phase 2 checklist results
@@ -91,8 +91,8 @@ Reason:
 1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected, validated, and merged to `main` in PR #7.
 2. CDR-010 is resolved by locating the approval commits and adding explicit metadata references while preserving historical DRAFT entries.
 3. CDR-011 remains an explicit open source/owner decision; the gap is recorded with an action and no invented requirement.
-4. No new CRITICAL contradiction is confirmed from the examined repository documents. CDR-012 records the stale README governance vocabulary/index and is corrected in the controlled branch.
-5. The repository and accessible Library sources are registered, but local project folders/external storage were not directly inspected; global inventory completeness cannot be claimed. CDR-012's README correction must be merged before the re-audit records are fully synchronized.
+4. No new CRITICAL contradiction is confirmed from the examined repository documents. CDR-012 recorded the stale README governance vocabulary/index and is resolved by the correction merged in PR #9.
+5. The repository and accessible Library sources are registered, but local project folders/external storage were not directly inspected; global inventory completeness cannot be claimed. CDR-012's README correction is merged in PR #9; the remaining source-completeness limitation is CDR-011.
 
 ## 5. Required next actions
 
