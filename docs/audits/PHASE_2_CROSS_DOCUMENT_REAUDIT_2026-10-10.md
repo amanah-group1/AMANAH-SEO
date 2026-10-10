@@ -58,7 +58,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Impact:** MEDIUM, potentially HIGH before architecture or implementation is finalized. The existing Charter is a valid high-level source, but requirements-to-component-to-acceptance-test traceability is not yet available as a complete matrix.
 - **Recommendation:** Keep the missing items explicitly recorded, but distinguish source discovery from requirements/scope decisions. For this work, GitHub `main` is the owner-designated canonical baseline; the unsynchronized local copy is not a competing authority and is not a prerequisite to this documentation audit. Do not claim that local/global storage was searched: that limitation remains ASE-MISS-007. After reviewing the bounded product-audit evidence and before architecture is finalized, decide whether a more detailed requirements-to-test matrix and separate data/UI-navigation baselines are necessary. Do not fabricate requirements or import child-product assumptions.
 - **Status:** OPEN — REQUIREMENTS TRACEABILITY / DATA-UI SCOPE DECISION. The high-level direction is documented, and the Foundation Requirements Traceability Baseline partially maps the Charter objectives, but implementation-level requirements-to-component-to-executable-acceptance-test traceability is incomplete. No separate Product Master/Brief/Direction or data/UI specification was found in the checked GitHub repository; accessible Library findings did not provide parent-platform authority. Global/local source completeness is not claimed and is tracked separately as ASE-MISS-007.
-- **Decision / evidence:** `docs/audits/FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md` maps FTR-001–FTR-008 only to conceptual component candidates and roadmap criteria; it explicitly excludes final requirements, schema/UI decisions, product tests, and implementation claims. The Readiness Assessment states the current evidence does not justify requiring separate Product Master/Brief/Direction documents before product audits. Q-001–Q-027 remain OPEN.
+- **Decision / evidence:** `docs/audits/FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md` maps FTR-001–FTR-008 only to conceptual component candidates and roadmap criteria; it explicitly excludes final requirements, schema/UI decisions, product tests, and implementation claims. The Readiness Assessment states the current evidence does not justify requiring separate Product Master/Brief/Direction documents before product audits. Q-001–Q-028 remain OPEN; Q-028 was added after the earlier foundation traceability baseline and is recorded as OPEN in the current Open Questions register.
 
 ### CDR-012 — README status vocabulary and audit-record index stale after corrections
 
@@ -77,7 +77,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 |---|---|---|
 | Purpose and scope clear | PASS WITH LIMITATION | Charter defines platform scope and exclusions; detailed product direction documents are not found (CDR-011). |
 | Terms consistent | PASS WITH CORRECTIONS RECORDED | Core distinctions among license, entitlement, activation, AI key and platform credentials are explicit. Duplicate numbering in Integration Contracts has been corrected to unique ordered sections §18–§20 in the controlled branch (CDR-009). |
-| Rules operationally clear | PARTIAL | Security/authorization principles are explicit; several design choices intentionally remain open in Q-001–Q-027. |
+| Rules operationally clear | PARTIAL | Security/authorization principles are explicit; several design choices intentionally remain open in Q-001–Q-028. |
 | Rules traceable to requirements/tests | PARTIAL | Architecture and security describe test categories, but no complete parent-platform requirements-to-test matrix is present (CDR-011). |
 | Dependencies explained | PARTIAL | Cross-reference matrices exist for integration and licensing; topology, protocol, identity, failure policy and commercial choices remain open (CDR-007/008). |
 | Approval status evidenced | PARTIAL AT INVENTORY LEVEL — HISTORICAL ASSESSMENT, SUPERSEDED FOR CORE-DOCUMENT APPROVAL EVIDENCE | At the time of this earlier assessment, evidence for Document Governance and Roadmap had been located and linked (CDR-010). The subsequent [Approval Evidence Revalidation](APPROVAL_EVIDENCE_REVALIDATION_2026-10-10.md) verified 11/11 core-document approval transitions and resolves ASE-MISS-008 for that defined scope only. This does not establish approval evidence for templates, audit records, external sources, product decisions, or implementation. |
@@ -144,10 +144,10 @@ This addendum records inconsistencies found while continuing the parent-guide co
 
 - **Documents / exact location:** `docs/audits/GATE_0_VERIFICATION_2026-10-09.md` §2 item 4 and §5; compare current `docs/10_OPEN_QUESTIONS.md` header and the report's historical baseline metadata.
 - **Rule A:** The Gate 0 correction list says Open Questions declares document status DRAFT, reflecting the historical correction branch/baseline.
-- **Rule B:** The current `main` version of Open Questions is APPROVED as a question register, while Q-001–Q-027 remain OPEN. Gate 0 §5 already acknowledges the current-main APPROVED status.
+- **Rule B:** The current `main` version of Open Questions is APPROVED as a question register, while Q-001–Q-028 remain OPEN. Gate 0 §5 already acknowledges the current-main APPROVED status.
 - **Type:** Historical/current status narrative inconsistency.
 - **Impact:** LOW–MEDIUM. Readers may confuse a status recorded on a historical correction branch with the current lifecycle status.
-- **Disposition:** RESOLVED — §2 is now explicitly titled as a historical correction list and states that it is not a current-main status inventory. §2 item 4 and §5 preserve the distinction: current `main` marks the question-register document APPROVED while Q-001–Q-027 remain OPEN.
+- **Disposition:** RESOLVED — §2 is now explicitly titled as a historical correction list and states that it is not a current-main status inventory. §2 item 4 and §5 preserve the distinction: current `main` marks the question-register document APPROVED while Q-001–Q-028 remain OPEN.
 - **Evidence:** Current `docs/10_OPEN_QUESTIONS.md` blob `8157d946cbaa9de8d00dbd52e890653a6ae26fb3`; updated Gate 0 Verification blob `ab47cfff5767905c499e839509f2bf3457a86817`; correction commit `7a0bdba343fbdaeb46f64e5bf856dda242ac4d2c`.
 
 ### Updated disposition
@@ -185,3 +185,30 @@ No new requirement is created, no owner decision is inferred, and no child-produ
 - **Status Q-028: OPEN.** Ini pertanyaan resmi untuk diputuskan, bukan keputusan final; belum menetapkan format matriks, dokumen terpisah, teknologi, atau kriteria produk.
 - **CDR-011 tetap OPEN — PARTIALLY ADVANCED.** Q-028 memperjelas satu celah pertanyaan, tetapi tidak menutup kebutuhan traceability end-to-end maupun keputusan data/UI-navigation.
 - Tidak ada kode, runtime, database, konfigurasi, atau repository AMANAH SEO AI/AMANAH SEO ENGINE V2 yang diubah.
+
+
+## 9. Addendum — current question-range references and Tahap B closeout (2026-10-10)
+
+### CDR-016 — Current-status summaries were not synchronized after Q-028 was added
+
+- **Documents / exact locations:** this report's current re-audit summary; `docs/audits/FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md` §3; `docs/audits/ROADMAP_PHASE_2_READINESS_ASSESSMENT_2026-10-10.md` §§2 and 5; and the current audit-record index in `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md`.
+- **Rule A:** Q-028 was added to `docs/10_OPEN_QUESTIONS.md` and indexed as OPEN-015 in the current Decision Register. Q-028 is OPEN, not a final decision.
+- **Rule B:** some current summaries still referred only to Q-001–Q-027 or described the re-audit scope as CDR-001–CDR-012, which could be read as a complete current inventory after the newer changes.
+- **Type:** Current-status/reference synchronization.
+- **Impact:** LOW–MEDIUM. Readers could overlook Q-028 or mistake a prior audit baseline for the latest state.
+- **Correction:** Current summaries now refer to Q-001–Q-028 where appropriate; the Foundation Traceability Baseline explicitly retains its limited scope and does not claim to resolve Q-028; the readiness assessment and Document Register identify the current status and CDR-016. Older reports that accurately state the counts at their original historical baseline are retained as historical records.
+- **Disposition:** **RESOLVED for the current-status references listed above.** Q-028 remains OPEN; no substantive decision was made.
+- **Evidence:** the corrected current-main files are the Foundation Requirements Traceability Baseline, Roadmap Phase 2 Readiness Assessment, this re-audit, the Phase 1 Document Register, and the updated Rencana Induk.
+
+### Tahap B closeout
+
+**Tahap B — Audit konsistensi: COMPLETE for the recorded GitHub documentation scope, with explicit open decisions and source limitations.**
+
+The current audit records distinguish:
+- Editorial inconsistencies CDR-013–CDR-016, now corrected/resolved within their stated scope.
+- Intentional open decisions, including CDR-007, CDR-008, and CDR-011.
+- Q-001–Q-028, whose individual status remains authoritative in `docs/10_OPEN_QUESTIONS.md`.
+- ASE-MISS-007, which remains unverified for local/global source completeness.
+- Product audits and runtime/database evidence, which remain partial or NOT TESTED as their own reports specify.
+
+This closeout authorizes moving to **Tahap C — Rekonsiliasi keputusan** for documentation review only. It does not approve any answer to an open question, authorize implementation or local/WordPress synchronization, or change official Roadmap Phase 2/Gate 2 from BLOCKED / NOT PASS.
