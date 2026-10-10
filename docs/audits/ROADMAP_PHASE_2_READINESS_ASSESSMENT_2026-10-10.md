@@ -47,12 +47,11 @@ Ini adalah hasil assessment berbasis evidence yang tersedia, bukan keputusan own
 
 | Item | Evidence | Result |
 |---|---|---|
-| Document Governance | Commit [`76cc6ab16b99a69148ced4a21a23cc6964669ead`](https://github.com/amanahgroup123/AMANAH-SEO/commit/76cc6ab16b99a69148ced4a21a23cc6964669ead), 2026-10-09, changes lifecycle status to APPROVED | VERIFIED |
-| Roadmap and Gates | Commit [`c1ed45e8d000830c1239fe934f75e7d0a1a132f1`](https://github.com/amanahgroup123/AMANAH-SEO/commit/c1ed45e8d000830c1239fe934f75e7d0a1a132f1), 2026-10-09, changes lifecycle status to APPROVED | VERIFIED |
-| Other core documents | Headers currently state APPROVED, but this assessment did not locate and verify an individual approval commit/PR/decision for every remaining document | PARTIAL / EVIDENCE GAP |
+| All 11 core documents | Individual GitHub history entries were checked; each approval commit has the expected path, the approval message, and a patch changing DRAFT to APPROVED. See [Approval Evidence Revalidation](APPROVAL_EVIDENCE_REVALIDATION_2026-10-10.md). | VERIFIED — 11/11 |
+| Header evidence links | Nine previously unlinked core-document headers now link to their individual approval commits and dates; Document Governance and Roadmap already had links | VERIFIED — 11/11 |
 | Templates | Current inventory identifies reusable templates as DRAFT; no promotion to APPROVED is required merely because the template exists | CONSISTENT WITH REGISTER |
 
-**Disposition:** ASE-MISS-008 remains OPEN for per-document evidence collection. The two verified commits must not be generalized to all documents. A header status alone is not treated as complete approval-history evidence.
+**Disposition:** ASE-MISS-008 is **RESOLVED for the 11 core documents** at the inspected baseline. Approval evidence is now documented per document and linked from each current header. APPROVED remains limited to each document's stated role; it does not finalize proposed architecture/commercial options or authorize implementation.
 
 ## 4. Official Roadmap Phase 2 Entry Assessment
 
@@ -84,7 +83,7 @@ Roadmap §5 defines these criteria:
 ## 6. Controlled Next Actions
 
 1. Use GitHub `main` as the canonical baseline; after documentation readiness is completed, pull/sync to local and validate the same commit.
-2. Collect and verify approval history per core document; retain an explicit evidence gap for any document whose approval cannot be proved.
+2. Preserve the verified 11-document approval matrix and apply the same header-link convention to future core documents or lifecycle changes.
 3. Obtain and record separate explicit authorization to perform the two product audits, without modifying either product.
 4. Execute and review the two Phase 1 product audits separately, recording repository/branch/commit, documentation, tests, relevant database/runtime evidence, risks, and integration gaps.
 5. Revisit CDR-011 after those audits. Decide in Decision Register/ADR whether requirements-to-test traceability, data model, and UI/navigation baselines should be separate artifacts or controlled sections in existing documents.
@@ -93,7 +92,7 @@ Roadmap §5 defines these criteria:
 ## 7. Scope and Non-Claims
 
 - This assessment does not close the earlier cross-document audit globally.
-- It does not close CDR-011 or ASE-MISS-008.
+- It does not close CDR-011. ASE-MISS-008 is resolved only for the approval evidence of the 11 core documents, as recorded in the linked revalidation matrix.
 - It does not declare official Roadmap Phase 2 complete or Gate 2 PASS.
 - It does not authorize product audit execution, implementation, integration, or changes to product code, database, configuration, or runtime.
 - No product requirements were inferred from ENGINE V2 or AMANAH SEO AI documents.
