@@ -2,7 +2,7 @@
 
 **Status dokumen:** DRAFT — menunggu tinjauan dan persetujuan pemilik proyek  
 **Status operasional:** **WAJIB DIBACA SEBELUM SETIAP PEKERJAAN** terkait AMANAH SEO  
-**Versi:** 0.1  
+**Versi:** 0.6  
 **Tanggal:** 2026-10-10  
 **Sumber acuan:** GitHub `amanahgroup123/AMANAH-SEO`, branch `main`  
 **Cakupan:** Menuntaskan Pedoman AMANAH SEO (produk induk) saja.
@@ -177,6 +177,7 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 | 0.3 | DRAFT | Mencatat CDR-013–CDR-015 sebagai temuan konsistensi metadata/status yang masih OPEN; Tahap B tetap PARTIAL. |
 | 0.4 | DRAFT | Mencatat koreksi editorial CDR-013–CDR-015 di `main`; ketiganya RESOLVED dalam scope masing-masing, sementara Tahap B tetap PARTIAL karena CDR-011 dan audit konsistensi lebih luas belum ditutup. |
 | 0.5 | DRAFT | Memisahkan pada CDR-011 antara baseline kanonis GitHub, batas inventaris lokal/global (ASE-MISS-007), traceability implementasi yang belum lengkap, dan keputusan scope data/UI yang masih menunggu review evidence serta keputusan owner. |
+| 0.6 | DRAFT | Mencatat pemeriksaan silang Decision Register dengan Open Questions: Q-006/Q-007 sudah dipetakan dengan benar; celah traceability ke tes belum memiliki pertanyaan khusus dan memerlukan persetujuan owner sebelum menambah pertanyaan baru. Menyelaraskan metadata versi dokumen. |
 
 ---
 **Penting:** dokumen ini dibuat untuk mengakhiri pekerjaan secara terarah, bukan membuka proyek baru tanpa batas. Prioritas tunggal sampai gerbang dokumentasi terpenuhi adalah menuntaskan Pedoman AMANAH SEO.
@@ -216,3 +217,14 @@ Jangan membuat laporan progres baru yang menduplikasi sumber yang ada kecuali fo
 - **Keputusan yang menunggu pemilik proyek:** setelah review laporan audit produk yang masih PARTIAL, putuskan apakah dibutuhkan (a) requirements-to-test matrix yang lebih rinci dan (b) baseline data model/UI-navigation terpisah atau diperluas di dokumen yang ada. Tidak ada keputusan ini yang diasumsikan atau disahkan oleh koreksi editorial.
 - **Status yang tidak berubah:** CDR-011 OPEN / PARTIALLY ADVANCED; ASE-MISS-007 belum diverifikasi global; Q-001–Q-027 tetap OPEN; laporan audit produk tetap PARTIAL; Gate 1/Gate 2 tetap BLOCKED / NOT PASS. Tidak ada runtime, database, konfigurasi, atau source code produk yang diubah.
 - **Satu langkah berikutnya:** audit konsistensi pemetaan Decision Register ↔ Open Questions untuk memastikan pertanyaan terkait traceability, data ownership, dan navigasi (termasuk Q-006/Q-007 serta keputusan arsitektur terkait) direferensikan secara tepat tanpa membuat keputusan baru.
+
+
+## 9E. Catatan sesi — pemeriksaan silang keputusan dan pertanyaan (2026-10-10)
+
+- **Baseline:** GitHub `main`, HEAD `cd48b14e3b77c62cc835562ebff033309f7eb80e` sebelum pencatatan sesi ini.
+- **Dokumen yang diperiksa:** Rencana Induk Penuntasan, README, Decision Register, Open Questions, dan Phase 1 Document Register.
+- **Hasil sederhana:** Q-006 (kepemilikan data) dan Q-007 (navigasi produk) sudah tercantum dengan benar di kelompok OPEN-011 pada Decision Register. Keduanya tetap OPEN; belum ada keputusan produk yang dibuat.
+- **Hal yang masih belum punya pertanyaan khusus:** kebutuhan membuat daftar yang menghubungkan kebutuhan produk ke bagian yang akan dibangun dan tes penerimaannya. Hal ini sudah dicatat di CDR-011, tetapi belum menjadi pertanyaan tersendiri dalam Q-001–Q-027.
+- **Tindakan:** tidak menambah pertanyaan baru tanpa persetujuan pemilik proyek. Metadata versi Rencana Induk diselaraskan dengan riwayat versi yang sudah ada; Register Dokumen juga akan diperbarui agar versinya cocok.
+- **Batas kerja:** hanya dokumentasi AMANAH SEO di GitHub. Tidak ada perubahan pada AMANAH SEO AI, AMANAH SEO ENGINE, kode, database, konfigurasi, atau runtime. Tidak ada sinkronisasi lokal/WordPress.
+- **Satu langkah berikutnya:** minta keputusan pemilik proyek apakah celah traceability tersebut perlu dicatat sebagai pertanyaan terbuka baru, atau cukup dikelola di bawah CDR-011 sampai audit produk ditinjau.
