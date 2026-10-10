@@ -3,6 +3,7 @@
 ## 1. Status Dokumen
 
 - **Status:** APPROVED — prinsip dan kebutuhan kontrak disetujui; kontrak teknis final dan protokol tetap belum disetujui
+- **Bukti persetujuan baseline:** [commit dfbaed6b3a79b77a7837fc002f9712241cf08192](https://github.com/amanahgroup123/AMANAH-SEO/commit/dfbaed6b3a79b77a7837fc002f9712241cf08192) (2026-10-09).
 - **Tujuan:** Mendefinisikan kebutuhan kontrak integrasi lintas produk
 - **Kontrak final:** Belum disetujui
 - **Implementasi integrasi:** Belum dinyatakan tersedia
