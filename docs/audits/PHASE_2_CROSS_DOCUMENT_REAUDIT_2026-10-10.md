@@ -268,3 +268,12 @@ No source code, database, configuration, runtime, or repository content in AMANA
 - Kriteria dokumentasi yang dapat diverifikasi PASS atau PASS WITH EXCEPTIONS sesuai Rencana Induk §9J. Kriteria persetujuan eksplisit owner BLOCKED sampai keputusan tersebut diberikan.
 
 **Verifikasi Tahap E selesai; penutupan pedoman menunggu persetujuan eksplisit owner.** Persetujuan harus mencakup baseline GitHub-only dan menerima secara sadar pengecualian CDR-011/Q-028, ASE-MISS-007, audit produk PARTIAL, runtime/database NOT TESTED, dan Gate 2 BLOCKED. Tidak ada izin implementasi yang tersirat.
+
+
+## 13. Addendum — persetujuan eksplisit pemilik dan penutupan Tahap E (2026-10-10)
+
+- **Keputusan pemilik:** baseline final Pedoman AMANAH SEO disetujui untuk cakupan dokumentasi GitHub-only dengan seluruh pengecualian Tahap E tetap tercatat. Bukti: pesan persetujuan eksplisit pemilik dalam percakapan tanggal 2026-10-10.
+- **Batas persetujuan:** pemilik secara eksplisit menyatakan persetujuan ini tidak berarti persetujuan implementasi, kelulusan runtime, atau kelulusan Gate 1/Gate 2.
+- **Bukti perubahan verifikasi:** PR #21, `docs: verify Phase E acceptance and record approval gate`, digabung ke `main` pada merge commit `de4122f3ec4a0bbbc36c617775a1a82687a5672c`. Catatan ini merekam keputusan pemilik secara terpisah dari hasil pemeriksaan teknis.
+- **Pengecualian yang dipertahankan:** CDR-011/Q-028 tetap OPEN / PARTIALLY ADVANCED; ASE-MISS-007 belum diverifikasi; audit GitHub AMANAH SEO AI/ENGINE V2 PARTIAL; runtime/database/tes eksekusi NOT TESTED atau belum terverifikasi; Roadmap Phase 2/Gate 2 tetap BLOCKED / NOT PASS. DEC-001–DEC-007 tetap CONFIRMED, PROP-001–PROP-008 tetap PROPOSED, dan Q-001–Q-028 tetap OPEN.
+- **Disposisi:** Tahap E **COMPLETE — APPROVED WITH EXCEPTIONS**, terbatas pada baseline dokumentasi GitHub-only. Tidak ada perubahan pada produk AI/ENGINE, kode, database, konfigurasi, runtime, atau sinkronisasi lokal/WordPress.
