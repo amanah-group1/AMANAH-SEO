@@ -123,7 +123,7 @@ This section is separate from the historical cross-document audit result above. 
 
 - **Approval evidence / ASE-MISS-008:** PR [#13](https://github.com/amanahgroup123/AMANAH-SEO/pull/13), merged as commit [`165835d49caa87fb4923f254adb411b21cfda844`](https://github.com/amanahgroup123/AMANAH-SEO/commit/165835d49caa87fb4923f254adb411b21cfda844), verified the DRAFT → APPROVED transition for all 11 core documents and linked the corresponding approval commit/date in each current header. ASE-MISS-008 is **RESOLVED for those 11 documents**. This does not approve proposals or implementation.
 - **Foundation traceability / CDR-011:** PR [#14](https://github.com/amanahgroup123/AMANAH-SEO/pull/14), merged as commit [`eff5e8919cb5a150d88f1e092d35360b4ad5c245`](https://github.com/amanahgroup123/AMANAH-SEO/commit/eff5e8919cb5a150d88f1e092d35360b4ad5c245), added [Foundation Requirements Traceability Baseline](FOUNDATION_REQUIREMENTS_TRACEABILITY_2026-10-10.md). It maps all eight existing Charter objectives to source documents, conceptual component responsibilities, roadmap acceptance criteria, and current evidence status.
-- **Inventory:** the canonical repository inventory now records 25 repository artifacts: README (1), core documents (11), audit records (9), and templates (4). The two ENGINE V2 Library artifacts remain secondary context and are not included in that repository count.
+- **Inventory:** the canonical repository inventory now records 27 repository artifacts: README (1), core documents (11), audit records (11), and templates (4). The two ENGINE V2 Library artifacts remain secondary context and are not included in that repository count.
 - **Validation:** all eight FTR rows exist; the 11 core-document approval links and SHAs were checked; the inventory and README index the new records; no child-product paths were changed.
 
 ### Documentation-only gate disposition
@@ -140,3 +140,22 @@ Remaining controlled decisions:
 **Official Roadmap Phase 2 remains BLOCKED; official Gate 2 remains NOT PASS / BLOCKED.** The documentation-only gate closure is not Roadmap Gate 2. Phase 1 audits of AMANAH SEO AI and AMANAH SEO ENGINE V2 remain unstarted/unverified in this scope and require explicit separate authorization. After that authorization, each audit must be executed and reviewed separately before architecture/contract refinement.
 
 No child-product source code, database, configuration, or runtime was audited or changed by this documentation work.
+
+
+## 10. Addendum — Owner-Authorized GitHub Phase 1 Product Audits (2026-10-10)
+
+**Authorization:** Owner explicitly approved separate read-only Phase 1 audits on 2026-10-10, with the boundary that work must not widen. Canonical source remains each product's GitHub `main`; local synchronization is deferred until these reports are reviewed.
+
+### Separate audit reports
+- [AMANAH SEO AI — Phase 1 GitHub Baseline Audit](PHASE_1_GITHUB_AUDIT_AMANAH_SEO_AI_2026-10-10.md), product baseline `ab8e18c5e23e0d16f79115619955b0f4f00bf4b6`: PARTIAL. Findings AI-F-001–AI-F-004 include an Entity Profile route slug mismatch, a license-key storage risk requiring contract disposition, stale operational status docs, and gaps in settings-flow test evidence.
+- [AMANAH SEO ENGINE V2 — Phase 1 GitHub Baseline Audit](PHASE_1_GITHUB_AUDIT_AMANAH_SEO_ENGINE_V2_2026-10-10.md), product baseline `80e7c38a327baeef1d7ad7b13d006d453d5838b1`: PARTIAL. Findings ENG-F-001–ENG-F-004 include a failed latest recorded PHPUnit release gate, schema-version contract ambiguity, conditional predictable fallback key, and stale implementation-status metadata.
+
+### Revalidated disposition
+
+These are separate, bounded GitHub source/documentation audits. They do not claim live database/runtime PASS; neither audit ran tests or triggered workflows, and neither changed product source, tests, database, configuration, or runtime. The ENGINE V2 report records that its latest available release-gate run failed at PHPUnit; no root cause is inferred without the failed-test details.
+
+**Official Roadmap Phase 1 / Gate 1: NOT PASS / BLOCKED — PARTIAL EVIDENCE ONLY** for both products until the reports are reviewed and missing live database/runtime evidence and executable validation are explicitly dispositioned.
+
+**Official Roadmap Phase 2 / Gate 2: remains BLOCKED / NOT PASS.** Architecture/contract refinement and integration design are not authorized by these audit reports. Next step is owner review of both reports separately; only after review may a bounded plan be approved for local synchronization and read-only runtime/database verification.
+
+No product implementation, fixes, or cross-product changes were performed.
