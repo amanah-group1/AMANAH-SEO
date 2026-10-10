@@ -127,9 +127,8 @@ This addendum records inconsistencies found while continuing the parent-guide co
 - **Rule B:** The current inventory summary records 30 tracked repository files including `.gitignore`, with 29 documentation/artifact files excluding `.gitignore`.
 - **Type:** Inventory metadata drift.
 - **Impact:** MEDIUM. A reader may treat a historical count as the current inventory, despite the current total being stated elsewhere in the same register.
-- **Recommended disposition:** Update the row to identify 27 as a historical count tied to its earlier baseline, or replace it with the current 30/29 figures and keep the prior count only where historically relevant. Do not imply the local/global inventory was checked.
-- **Status:** OPEN — editorial correction required.
-- **Evidence:** Current register blob `eecf7766a50b062eeeff1549af9496074953f382`; current `main` commit `59d43bb75001cc125d0e908cf333293f2d527899`.
+- **Disposition:** RESOLVED — the ASE-AUD-005 row now labels 27 as a historical count and records the validated current GitHub inventory as 30 tracked files total including `.gitignore` (29 documentation/artifact files). This is a GitHub `main` inventory only; local/global inventory was not checked.
+- **Evidence:** Updated register blob `852dfeb11314ff0d421058f93ef9ed6fb8a8a695`; correction commit `57c83e327e80ab58b9a36805308c639a8c8d3b4b`.
 
 ### CDR-014 — Approval-evidence status is stale in the re-audit narrative
 
@@ -138,9 +137,8 @@ This addendum records inconsistencies found while continuing the parent-guide co
 - **Rule B:** The approval evidence revalidation report identifies the approval commit and date for all 11 core documents, states 11/11 VERIFIED, and marks ASE-MISS-008 RESOLVED for that defined scope.
 - **Type:** Audit-record status synchronization / historical disposition.
 - **Impact:** MEDIUM. The repository presents two different dispositions without a sufficiently prominent statement that the earlier status is superseded by later evidence.
-- **Recommended disposition:** Preserve the historical assessment, but add a dated cross-reference that supersedes its ASE-MISS-008 status for the 11 core documents only. Do not extend this conclusion to templates, audit records, external sources, product decisions, or implementation approval.
-- **Status:** OPEN — editorial reconciliation required.
-- **Evidence:** `docs/audits/APPROVAL_EVIDENCE_REVALIDATION_2026-10-10.md` blob `76fe6c8ebb8d1b258e9d25aeaaf49a469534d312`; `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md` blob `eecf7766a50b062eeeff1549af9496074953f382`.
+- **Disposition:** RESOLVED for the defined core-document approval-evidence scope. The re-audit §3 and this report's historical disposition now cross-reference the later 11/11 verification; the Roadmap Phase 2 Readiness Assessment explicitly states the current resolution and its limits. This does not extend to templates, audit records, external sources, product decisions, or implementation approval.
+- **Evidence:** Approval Evidence Revalidation blob `76fe6c8ebb8d1b258e9d25aeaaf49a469534d312`; updated re-audit blob to be recorded by the resulting commit; updated readiness assessment blob `4cc987c0bb08384b2cdb4d5b89e7bd9f040d912f`; updated register blob `852dfeb11314ff0d421058f93ef9ed6fb8a8a695`.
 
 ### CDR-015 — Gate 0 report mixes historical branch status with current-main status
 
@@ -149,14 +147,13 @@ This addendum records inconsistencies found while continuing the parent-guide co
 - **Rule B:** The current `main` version of Open Questions is APPROVED as a question register, while Q-001–Q-027 remain OPEN. Gate 0 §5 already acknowledges the current-main APPROVED status.
 - **Type:** Historical/current status narrative inconsistency.
 - **Impact:** LOW–MEDIUM. Readers may confuse a status recorded on a historical correction branch with the current lifecycle status.
-- **Recommended disposition:** Label §2 as a record of changes made on the historical correction branch and state that it is not a current-main status inventory. Retain §5's distinction between document status and individual question status.
-- **Status:** OPEN — editorial clarification required.
-- **Evidence:** Current `docs/10_OPEN_QUESTIONS.md` blob `8157d946cbaa9de8d00dbd52e890653a6ae26fb3`; `docs/audits/GATE_0_VERIFICATION_2026-10-09.md` blob `118b32569a8f1439f358febdc8300eebf7319467`.
+- **Disposition:** RESOLVED — §2 is now explicitly titled as a historical correction list and states that it is not a current-main status inventory. §2 item 4 and §5 preserve the distinction: current `main` marks the question-register document APPROVED while Q-001–Q-027 remain OPEN.
+- **Evidence:** Current `docs/10_OPEN_QUESTIONS.md` blob `8157d946cbaa9de8d00dbd52e890653a6ae26fb3`; updated Gate 0 Verification blob `ab47cfff5767905c499e839509f2bf3457a86817`; correction commit `7a0bdba343fbdaeb46f64e5bf856dda242ac4d2c`.
 
 ### Updated disposition
 
 - CDR-001–CDR-012 retain their previously recorded dispositions, subject to the later evidence explicitly linked above.
-- CDR-013–CDR-015 are newly recorded and remain OPEN pending controlled editorial reconciliation.
+- CDR-013–CDR-015 are **RESOLVED for the specific editorial inconsistencies recorded here**, based on the source-record corrections and evidence listed under each finding. This does not close CDR-011 or the wider cross-document audit.
 - No new substantive architecture or commercial decision is inferred. Q-001–Q-027 remain OPEN unless individually decided through the approved governance process.
 - This addendum does not change the official Roadmap Phase 2 / Gate 2 result: it remains BLOCKED / NOT PASS.
-- Next authorized documentation step: correct the three metadata/status inconsistencies in their canonical records, then re-fetch the affected files from `main` and verify the corrections.
+- Next authorized documentation step: re-fetch the corrected source records and this addendum from `main`, verify exact text and current HEAD, then continue the remaining Phase B audit without reopening these resolved findings absent new evidence.
