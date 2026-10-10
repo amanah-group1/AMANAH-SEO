@@ -1,6 +1,6 @@
 # Phase 2 Cross-Document Re-Audit — 2026-10-10
 
-**Status:** IN REVIEW — read-only re-audit report  
+**Status:** APPROVED — re-audit report merged via PR #7; read-only scope and source limitations remain  
 **Repository:** `amanahgroup123/AMANAH-SEO`  
 **Baseline:** `main` at `5e7b78ee1506afd6511ade715634878375d0ae91` (the baseline on which this review began)  
 **Related Phase 1 register:** `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md` (merged to main at `bceb08b3cc2c41f33b9115a851d0ecb0b59d1fdf`)  
@@ -35,7 +35,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 - **Impact:** MEDIUM. References to “§18” are ambiguous, and the table appears after the stated final-status section. The content of the traceability table is useful, but its numbering/order was not correctly reconciled during the prior correction.
 - **Original recommendation:** Renumber and reorder the sections consistently and update references without changing Q statuses.
 - **Implemented resolution:** Traceability is now §18, Dokumen Terkait §19, and Status Akhir §20. The section headings are unique and ordered; the Phase 1 register and Gate Closure references were updated.
-- **Status:** CORRECTED AND VALIDATED IN CONTROLLED BRANCH — section sequence is unique and ordered §18–§20; register/gate references were checked. Acceptance into main awaits merge of the controlled reconciliation PR.
+- **Status:** RESOLVED — section sequence is unique and ordered §18–§20; register/gate references were checked and merged to `main` in PR #7, commit `e94abeb8d741ad80dc7cbc91579523d01fac3a58`.
 - **Decision / evidence:** No substantive product decision required; document correction and revalidation evidence required.
 
 ### CDR-010 — Current approval status and approval/version-history evidence are not uniformly traceable
@@ -77,7 +77,7 @@ The previous audit's “0 critical conflicts” statement remains supportable **
 **Re-audit result: PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS — for repository + accessible Library scope only.**
 
 Reason:
-1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected and the section sequence plus documented §18 references were validated in the controlled reconciliation branch.
+1. CDR-001–CDR-008 were revalidated; CDR-009 is corrected, validated, and merged to `main` in PR #7.
 2. CDR-010 is resolved by locating the approval commits and adding explicit metadata references while preserving historical DRAFT entries.
 3. CDR-011 remains an explicit open source/owner decision; the gap is recorded with an action and no invented requirement.
 4. No new CRITICAL contradiction is confirmed from the examined repository documents.
