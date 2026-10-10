@@ -98,3 +98,14 @@ Roadmap §5 defines these criteria:
 - It does not declare official Roadmap Phase 2 complete or Gate 2 PASS.
 - It records authorization for separate read-only GitHub audits only; it does not authorize product implementation, integration, or changes to product code, database, configuration, or runtime.
 - No product requirements were inferred from ENGINE V2 or AMANAH SEO AI documents.
+
+
+## 6. Addendum — Phase 1 Evidence Closure Follow-up (2026-10-10)
+
+The follow-up [Phase 1 Evidence Closure report](PHASE_1_EVIDENCE_CLOSURE_FOLLOWUP_2026-10-10.md) revalidated that both product `main` HEADs remain at the audit baselines and added source/CI evidence without modifying either product.
+
+- **AMANAH SEO AI:** Entity Profile route mismatch remains confirmed at source level. License-key storage remains a security-contract decision. Operational docs and save-flow test evidence remain stale/incomplete. Runtime, database, and PHPUnit are NOT TESTED in this follow-up.
+- **AMANAH SEO ENGINE V2:** the recorded release-gate log details **112 tests, 275 assertions, 12 errors, and 4 failures** after PHP syntax validation passed; package build/validation were skipped. Schema metadata values 7, Schema::VERSION 11, migration checks through 18, and the literal secret-key fallback were rechecked. No root cause has been implemented or corrected.
+- **Official status:** Gate 1 remains PARTIAL/BLOCKED for both products. Roadmap Phase 2 / Gate 2 remains BLOCKED. Runtime/database evidence and owner review/disposition are still required; no integration or implementation is authorized by this follow-up.
+
+The repository inventory increases to **28 artifacts** (README 1, core documents 11, audit records 12, templates 4).
