@@ -154,7 +154,7 @@ This addendum records inconsistencies found while continuing the parent-guide co
 
 - CDR-001–CDR-012 retain their previously recorded dispositions, subject to the later evidence explicitly linked above.
 - CDR-013–CDR-015 are **RESOLVED for the specific editorial inconsistencies recorded here**, based on the source-record corrections and evidence listed under each finding. This does not close CDR-011 or the wider cross-document audit.
-- No new substantive architecture or commercial decision is inferred. Q-001–Q-027 remain OPEN unless individually decided through the approved governance process.
+- No new substantive architecture or commercial decision is inferred. Q-001–Q-028 remain OPEN unless individually decided through the approved governance process.
 - This addendum does not change the official Roadmap Phase 2 / Gate 2 result: it remains BLOCKED / NOT PASS.
 - Next authorized documentation step: re-fetch the corrected source records and this addendum from `main`, verify exact text and current HEAD, then continue the remaining Phase B audit without reopening these resolved findings absent new evidence.
 
@@ -196,7 +196,7 @@ No new requirement is created, no owner decision is inferred, and no child-produ
 - **Rule B:** some current summaries still referred only to Q-001–Q-027 or described the re-audit scope as CDR-001–CDR-012, which could be read as a complete current inventory after the newer changes.
 - **Type:** Current-status/reference synchronization.
 - **Impact:** LOW–MEDIUM. Readers could overlook Q-028 or mistake a prior audit baseline for the latest state.
-- **Correction:** Current summaries now refer to Q-001–Q-028 where appropriate; the Foundation Traceability Baseline explicitly retains its limited scope and does not claim to resolve Q-028; the readiness assessment and Document Register identify the current status and CDR-016. Older reports that accurately state the counts at their original historical baseline are retained as historical records.
+- **Correction:** Current summaries now refer to Q-001–Q-028 where appropriate; the Foundation Traceability Baseline explicitly retains its limited scope and does not claim to resolve Q-028; the readiness assessment reflects the current Q-028 status, and the Document Register records the updated scope/disposition of this re-audit. Older reports that accurately state the counts at their original historical baseline are retained as historical records.
 - **Disposition:** **RESOLVED for the current-status references listed above.** Q-028 remains OPEN; no substantive decision was made.
 - **Evidence:** the corrected current-main files are the Foundation Requirements Traceability Baseline, Roadmap Phase 2 Readiness Assessment, this re-audit, the Phase 1 Document Register, and the updated Rencana Induk.
 
