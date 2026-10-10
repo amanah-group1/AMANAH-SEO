@@ -57,6 +57,16 @@ Platform induk yang direncanakan mengelola shared capabilities dan mengintegrasi
 - `docs/08_AUDIT_AND_READINESS.md` — audit methodology dan readiness criteria.
 - `docs/09_ROADMAP_AND_GATES.md` — proposed phases dan approval gates.
 - `docs/10_OPEN_QUESTIONS.md` — keputusan yang belum dibuat.
+
+### Audit records
+
+- `docs/audits/FOUNDATION_CONSISTENCY_REVIEW_2026-10-09.md` — consistency review dengan scope terbatas.
+- `docs/audits/GATE_0_VERIFICATION_2026-10-09.md` — evidence untuk Gate 0 sesuai scope yang tercatat.
+- `docs/audits/PHASE_2_CROSS_DOCUMENT_FINDINGS_2026-10-10.md` — temuan audit silang CDR-001–CDR-008 pada baseline awal.
+- `docs/audits/PHASE_2_GATE_CLOSURE_2026-10-10.md` — gate closure historis dan addendum re-audit terbaru.
+- `docs/audits/PHASE_1_DOCUMENT_REGISTER_2026-10-10.md` — register inventaris dokumen dan keterbatasan sumber.
+- `docs/audits/PHASE_2_CROSS_DOCUMENT_REAUDIT_2026-10-10.md` — revalidasi temuan CDR-001–CDR-012.
+
 ### Reusable templates
 
 - `templates/ADR_TEMPLATE.md` — template Architecture Decision Record.
@@ -69,10 +79,9 @@ Platform induk yang direncanakan mengelola shared capabilities dan mengintegrasi
 ### 5.1 Document status
 
 - `DRAFT` — belum disahkan.
-- `IN_REVIEW` — sedang ditinjau.
+- `IN REVIEW` — sedang ditinjau.
 - `APPROVED` — telah disahkan oleh pihak yang berwenang.
 - `SUPERSEDED` — digantikan oleh dokumen atau versi baru.
-- `DEPRECATED` — tidak direkomendasikan untuk penggunaan baru.
 - `ARCHIVED` — disimpan sebagai rekaman historis.
 
 ### 5.2 Decision status
@@ -105,9 +114,9 @@ Setiap angka atau model komersial yang pernah dibahas harus dianggap sebagai usu
 
 ## 8. Current Status
 
-Repositori ini sedang berada pada tahap foundation documentation.
+Repositori ini berada pada tahap fondasi dokumentasi dan rekonsiliasi audit silang sumber yang dapat diakses. Hasil audit silang dokumentasi adalah **PASS WITH RECORDED OPEN DECISIONS AND SOURCE LIMITATIONS** untuk repository dan Library yang dapat diakses; ini bukan penutupan Roadmap Phase 2 / Gate 2. CDR-011 tetap OPEN, dan folder lokal/drive eksternal belum diperiksa langsung.
 
-Belum ada klaim bahwa:
+Audit teknis kedua produk belum dinyatakan selesai atau disetujui untuk dimulai. Belum ada klaim bahwa:
 - Kedua produk telah lulus integration readiness audit.
 - Platform induk telah diimplementasikan.
 - Integration contracts telah final.
@@ -115,11 +124,11 @@ Belum ada klaim bahwa:
 
 ## 9. Next Steps
 
-1. Gunakan Project Charter dan Decision Register yang telah disetujui sebagai acuan.
-2. Mulai audit AMANAH SEO AI dan AMANAH SEO ENGINE V2 secara terpisah hanya setelah ada persetujuan eksplisit untuk tahap audit.
-3. Perbarui architecture blueprint berdasarkan bukti audit produk.
-4. Selesaikan keputusan kontrak integrasi berdasarkan temuan dan persetujuan yang tercatat.
-5. Ajukan rencana implementasi terkontrol sebelum perubahan kode.
+1. Tutup batas inventaris sumber yang belum diverifikasi: periksa folder lokal/drive eksternal atau catat konfirmasi owner bahwa tidak ada sumber tambahan.
+2. Selesaikan disposition CDR-011 dengan keputusan owner tentang kecukupan Charter/dokumen tematik versus kebutuhan dokumen Product Direction/requirements/data/UI tersendiri.
+3. Pertahankan seluruh Q-001–Q-027 sebagai OPEN sampai ada keputusan yang disetujui dan tercatat.
+4. Mulai audit AMANAH SEO AI dan AMANAH SEO ENGINE V2 secara terpisah hanya setelah pedoman fondasi selesai dan ada persetujuan eksplisit.
+5. Perbarui architecture blueprint berdasarkan bukti audit produk, kemudian ajukan rencana implementasi terkontrol sebelum perubahan kode.
 
 ---
 
