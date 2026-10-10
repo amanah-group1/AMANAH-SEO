@@ -1,7 +1,7 @@
 # PEDOMAN INDUK AMANAH SEO
 **Versi:** 1.0-draft  
 **Tanggal penyusunan:** 2026-10-10  
-**Status:** DRAFT — dasar konsep disusun ulang; keputusan bertanda PERLU PERSETUJUAN belum dianggap final  
+**Status:** DRAFT TERKENDALI — tujuh keputusan dasar MVP telah disetujui; keputusan lain yang masih bertanda PERLU PERSETUJUAN tetap terbuka  
 **Pemilik keputusan:** Pemilik produk AMANAH SEO
 
 > Dokumen ini adalah titik awal baru untuk konsep dan arah produk AMANAH SEO. Dokumen lama di repository tidak boleh mengubah atau menimpa konsep dalam dokumen ini. Catatan audit lama hanya dipakai sebagai rekam jejak/evidence, bukan sebagai sumber visi produk. AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya ditinjau baca-saja selama penyusunan pedoman ini.
@@ -199,6 +199,8 @@ Persetujuan pedoman **bukan** persetujuan otomatis untuk mengubah kode, menggabu
 **Aturan akhir:** Bangun AMANAH SEO untuk membantu pemilik website mengambil keputusan SEO yang lebih baik dan menjalankan perbaikan secara terarah serta berkelanjutan. Semua fitur, dokumen, dan integrasi harus mendukung tujuan itu; bila tidak, jangan masukkan ke MVP.
 
 
-## 14. Lingkup MVP yang sedang diputuskan
+## 14. Lingkup MVP dan keputusan pemilik
 
-Untuk mencegah pedoman terus melebar, gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan yang perlu ditinjau pemilik. Usulan tersebut belum final. Keputusan MVP-01 sampai MVP-07 harus disetujui atau diubah secara eksplisit; hal non-blocking masuk backlog. Setelah keputusan inti itu diselesaikan, pedoman dapat ditutup tanpa menunggu seluruh roadmap masa depan.
+Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan MVP-01 sampai MVP-07. Pada 2026-10-11, pemilik menyetujui ketujuh rekomendasi tersebut sebagai dasar lingkup MVP. Catatan persetujuan dan status masing-masing keputusan ada di dokumen usulan MVP.
+
+Persetujuan ini menyelesaikan keputusan arah dasar MVP, tetapi tidak otomatis menyetujui keputusan lain yang masih ditandai **PERLU PERSETUJUAN** dalam pedoman ini. Keputusan non-blocking yang tidak diperlukan untuk menetapkan siklus utama, keamanan minimum, atau kriteria penerimaan dipindahkan ke backlog agar tidak menahan penyelesaian pedoman. Persetujuan ini juga bukan persetujuan implementasi atau penggabungan pull request.
