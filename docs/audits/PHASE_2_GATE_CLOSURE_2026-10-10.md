@@ -58,7 +58,7 @@ Alasan:
 4. Pertanyaan terbuka dan keputusan PROPOSED tetap dipertahankan sebagai terbuka.
 5. Tidak ada klaim bahwa kedua produk telah diaudit, bahwa kontrak final telah disetujui, atau bahwa implementasi siap dimulai.
 
-Gate ini bukan Roadmap Gate 2 dan tidak mengesahkan Architecture and Contract Refinement. Perubahan perlu digabungkan ke `main` agar hasilnya menjadi baseline repository. Sampai persetujuan terpisah dicatat, jangan memulai audit teknis, perubahan kode, database, konfigurasi, atau runtime pada AMANAH SEO AI dan AMANAH SEO ENGINE V2.
+Gate ini bukan Roadmap Gate 2 dan tidak mengesahkan Architecture and Contract Refinement. Perubahan telah digabungkan ke `main` pada commit `609cbd2b1a718dccd8a8707d74ae4d8ab28c7caa`, sehingga koreksi dokumentasi ini menjadi baseline repository. Sampai persetujuan terpisah dicatat, jangan memulai audit teknis, perubahan kode, database, konfigurasi, atau runtime pada AMANAH SEO AI dan AMANAH SEO ENGINE V2.
 
 ## 6. Next Authorized Step
 
