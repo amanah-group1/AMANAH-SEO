@@ -3,7 +3,7 @@
 **Status Dokumen:** IN REVIEW — rekaman assessment; bukan persetujuan Gate 2 atau izin implementasi  
 **Tanggal:** 2026-10-10  
 **Repository:** `amanahgroup123/AMANAH-SEO`  
-**Baseline:** `main` sebelum branch assessment; semua klaim repository harus dibaca dengan batas akses yang dicatat di bawah  
+**Baseline:** GitHub repository `main` sebagai sumber acuan utama sesuai instruksi owner; sinkronisasi ke local dilakukan setelah dokumentasi selesai  
 **Scope:** CDR-011, ASE-MISS-008, prasyarat masuk Roadmap Phase 2, dan kriteria keluar Roadmap Gate 2  
 **Excluded:** Audit source code, database, konfigurasi, dan runtime AMANAH SEO AI maupun AMANAH SEO ENGINE V2; tidak ada perubahan pada kedua produk
 
@@ -32,14 +32,14 @@ Audit inventaris dokumen dan audit silang sebelumnya bukan audit produk, bukan k
 1. **Cukup untuk arah dan batas platform pada tingkat tinggi:** Charter dan dokumen tematik yang tersedia dapat dipakai sebagai baseline konseptual untuk menyiapkan audit produk. Bukti yang tersedia tidak membenarkan klaim bahwa Product Master/Brief/Direction terpisah wajib dibuat sebelum audit produk.
 2. **Belum cukup untuk memfinalkan arsitektur dan kontrak:** belum ada hasil audit aktual kedua produk yang dapat menjadi evidence untuk keputusan kontrak; belum ada traceability end-to-end lengkap dari kebutuhan ke komponen dan acceptance tests; Q-001–Q-027 masih OPEN.
 3. **Kebutuhan data model dan UI/navigation:** dokumen khusus belum ditemukan dalam repository yang diperiksa. Ini adalah gap yang harus dinilai berdasarkan hasil audit dan keputusan scope arsitektur; keberadaannya tidak boleh diasumsikan wajib sebagai dokumen mandiri tanpa keputusan.
-4. **Batas sumber belum ditutup:** folder proyek lokal, drive eksternal, dan berkas yang belum ada di Library tidak diperiksa langsung. Karena itu, tidak boleh disimpulkan bahwa sumber tambahan tidak ada.
+4. **Batas sumber:** owner telah menetapkan GitHub repository sebagai sumber acuan utama dan menyatakan local akan disinkronkan setelah dokumentasi selesai. Maka inventaris kanonis untuk gate ini berbasis repository GitHub; tidak perlu menahan gate hanya untuk membandingkan salinan local yang belum disinkronkan. Library tetap sumber sekunder, bukan otoritas platform induk.
 
 ### Disposition
 **CDR-011 tetap OPEN**, dengan rekomendasi terukur berikut:
 - Pertahankan Charter dan dokumen tematik sebagai baseline arah/scope sementara.
 - Jangan membuat Product Master/Brief/Direction baru hanya untuk mengisi nama dokumen yang hilang.
 - Setelah audit produk disetujui dan selesai, putuskan melalui Decision Register/ADR apakah perlu requirements-to-test matrix dan dokumen data/UI terpisah.
-- Tutup batas sumber hanya setelah pemeriksaan lokasi tambahan atau konfirmasi owner bahwa tidak ada sumber lain.
+- Gunakan GitHub `main` sebagai baseline tunggal; pull ke local dilakukan setelah dokumentasi selesai. Catat sumber baru hanya bila owner kemudian menambahkannya sebagai sumber resmi.
 
 Ini adalah hasil assessment berbasis evidence yang tersedia, bukan keputusan owner yang mengesampingkan sumber lokal yang belum diperiksa.
 
@@ -58,14 +58,14 @@ Ini adalah hasil assessment berbasis evidence yang tersedia, bukan keputusan own
 
 | Prerequisite | Result | Evidence / reason |
 |---|---|---|
-| Approved foundation documents define platform scope and boundaries | PASS WITH LIMITATION | Core Charter and thematic documents are APPROVED; external/local source boundary remains unverified |
+| Approved foundation documents define platform scope and boundaries | PASS WITH LIMITATION | Core Charter and thematic documents are APPROVED; owner designated GitHub `main` as canonical baseline, with local pull deferred until documentation is complete |
 | Official Phase 1 audit of AMANAH SEO AI completed and reviewed | BLOCKED / NOT EVIDENCED HERE | No product audit evidence is part of this documentation-only scope |
 | Official Phase 1 audit of AMANAH SEO ENGINE V2 completed and reviewed | BLOCKED / NOT EVIDENCED HERE | No product audit evidence is part of this documentation-only scope |
 | Product baselines, capabilities, risks, dependencies, and integration gaps evidenced | NOT TESTED | Requires separate product audits with explicit authorization |
-| Owner confirms source boundary / CDR-011 disposition | OPEN | Local/external sources remain unverified; no owner decision is inferred |
+| Owner confirms canonical source for this work | PASS | Owner explicitly designated GitHub as primary reference and local pull after documentation completion |
 | Product audits explicitly authorized under Charter §5.1 and §10 | NOT RECORDED IN THIS ASSESSMENT | This request authorized the documentation readiness assessment, not changes to or technical audit of child products |
 
-**Entry decision:** do not start official Roadmap Phase 2 architecture/contract refinement until Phase 1 product audit results are available and reviewed, source limitations have an explicit disposition, and the relevant authorization is recorded.
+**Entry decision:** do not start official Roadmap Phase 2 architecture/contract refinement until Phase 1 product audit results are available and reviewed, the canonical GitHub baseline is used and the remaining requirements-traceability decision has an explicit disposition, and the relevant authorization is recorded.
 
 ## 5. Official Roadmap Gate 2 Exit Criteria
 
@@ -83,7 +83,7 @@ Roadmap §5 defines these criteria:
 
 ## 6. Controlled Next Actions
 
-1. Complete the source-boundary check: inspect the relevant local folders/external storage, or record the owner's explicit confirmation that no additional source exists.
+1. Use GitHub `main` as the canonical baseline; after documentation readiness is completed, pull/sync to local and validate the same commit.
 2. Collect and verify approval history per core document; retain an explicit evidence gap for any document whose approval cannot be proved.
 3. Obtain and record separate explicit authorization to perform the two product audits, without modifying either product.
 4. Execute and review the two Phase 1 product audits separately, recording repository/branch/commit, documentation, tests, relevant database/runtime evidence, risks, and integration gaps.
