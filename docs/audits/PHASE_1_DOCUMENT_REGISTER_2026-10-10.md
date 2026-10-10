@@ -72,8 +72,8 @@ Artefak di bawah adalah dokumen produk terpisah yang ditemukan di Library. Dokum
 
 ## 5. Ringkasan inventarisasi dan gerbang Phase 1
 
-- Repository berisi **29 file dokumentasi/artefak** pada struktur `main` yang diperiksa: README (1), dokumen inti (11), rencana induk penuntasan (1), audit records (12), dan template (4).
-- **29 file tersebut terdaftar** di bagian 2.
+- Tree GitHub `main` berisi **30 file** termasuk `.gitignore`. Inventaris dokumentasi/artefak mencakup **29 file**: README (1), dokumen inti (11), rencana induk penuntasan (1), audit records (12), dan template (4); `.gitignore` tidak dihitung sebagai dokumen/artefak dokumentasi.
+- **29 file dokumentasi/artefak tersebut terdaftar** di bagian 2.
 - Dua dokumen Library yang ditemukan terkait ENGINE V2 terdaftar terpisah sebagai sumber produk eksternal, bukan dokumen induk.
 - Sumber yang dicari tetapi belum ditemukan atau belum dapat diverifikasi dicatat pada bagian 4.
 - Dokumen induk yang tersedia sudah dapat diidentifikasi: Project Charter untuk visi/scope, Decision Register untuk keputusan, Document Governance untuk kontrol dokumen, Roadmap untuk urutan fase, dan Open Questions untuk pertanyaan terbuka.
