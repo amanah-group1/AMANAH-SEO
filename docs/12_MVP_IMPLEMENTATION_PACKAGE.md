@@ -479,3 +479,14 @@ Template laporan per menu wajib berisi: ID paket, menu/slug, baseline commit, co
 8. Persetujuan paket implementasi sebelum kode diubah.
 
 **Status setelah pemeriksaan ini:** source-tree inventory lebih terukur; migration list Engine terverifikasi sebagai versi 1–9 dan 11–18; perbedaan runtime minimum PHP teridentifikasi. Audit per-file, audit seluruh isi dokumen locked, database runtime, tes migrasi, dan WordPress integration masih **BELUM LENGKAP / BELUM DIUJI**. Tidak ada kode produk, database, atau runtime yang diubah.
+
+
+### 15.6 Temuan tambahan berisiko tinggi: archive AI dan uninstall Engine
+
+Pemeriksaan langsung pada `AMANAH-SEO-AI/plugin/includes/class-install.php`, `AMANAH-SEO-AI/plugin/includes/class-deactivator.php`, dan `amanah-seo-engine-v2/plugin/Infrastructure/WordPress/Lifecycle/WordPressLifecycle.php` menambahkan dua gate wajib:
+
+**AI legacy archive — destructive branch harus direkonsiliasi.** Jika tabel legacy `{$wpdb->prefix}amanah_content_analysis` masih ada dan tabel arsip `{$wpdb->prefix}amanah_content_analysis_legacy` juga sudah ada, installer AI saat ini menjalankan `DROP TABLE` terhadap tabel legacy. Jalur ini berpotensi menghilangkan baris yang belum direkonsiliasi; jangan menyimpulkan bahwa semua jalur archive selalu mempertahankan data. Sebelum integrasi/aktivasi pada database yang pernah dipakai, paket migrasi harus menguji kondisi legacy-only, archive-only, keduanya ada dengan isi berbeda, dan keduanya ada dengan isi identik; backup dan bukti jumlah baris wajib. Jangan menjalankan installer terhadap data nyata sebagai bagian audit.
+
+**Engine uninstall — penghapusan lintas modul.** Engine hanya menghapus data saat opsi `delete_data_on_uninstall` bernilai true, tetapi ketika aktif ia menjatuhkan 22 tabel Engine dan menghapus opsi `amanah_seo_ai_credentials` selain opsi Engine lainnya. Opsi tersebut memiliki nama yang mengindikasikan data kredensial AI dan tidak boleh dihapus sebagai efek samping uninstall Engine di dalam paket tunggal. Parent plugin tidak boleh memanggil uninstall Engine secara otomatis tanpa keputusan kepemilikan data dan consent. Implementasi final harus mempunyai satu kebijakan uninstall yang eksplisit, non-destructive secara default, memisahkan tabel/options setiap modul, menampilkan dampak sebelum penghapusan, dan memiliki backup/rollback yang diuji.
+
+Temuan ini mengubah risiko lifecycle menjadi **HIGH / RELEASE BLOCKER** sampai diselesaikan. Aktivasi dan deactivation tidak boleh disamakan dengan uninstall; uninstall lama bukan handler yang aman untuk dipakai langsung oleh parent plugin.
