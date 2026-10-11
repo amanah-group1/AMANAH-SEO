@@ -380,12 +380,12 @@ final class AMANAH_SEO_Menu_Shell {
 			?>
 			<div class="wrap">
 				<h1><?php esc_html_e( 'AMANAH SEO AI', 'amanah-seo' ); ?></h1>
-				<div class="card" style="width:100%;max-width:none;box-sizing:border-box;margin:18px 0 24px;padding:24px">
+				<div class="card" style="width:100%;max-width:none;box-sizing:border-box;margin:18px 0 24px;padding:24px;background:#eef7ff;border:1px solid #c7e3ff;border-left:5px solid #4a90e2;border-radius:6px">
 					<p style="font-size:15px;line-height:1.7;margin-top:0"><?php esc_html_e( 'AMANAH SEO AI menyediakan kemampuan kecerdasan buatan untuk membantu AMANAH SEO memahami identitas bisnis, memperkuat konteks keahlian, menganalisis konten, dan menemukan peluang perbaikan SEO.', 'amanah-seo' ); ?></p>
 					<p style="font-size:15px;line-height:1.7;margin-bottom:0"><?php esc_html_e( 'Kemampuan AI bekerja sebagai bagian dari satu ekosistem: AMANAH SEO mengelola konfigurasi, prioritas, persetujuan, pelaporan, dan tata kelola; AMANAH SEO ENGINE mengatur workflow strategi hingga pembuatan, evaluasi, dan peninjauan konten. Halaman ini berfokus pada kemampuan AI pendukung, bukan menduplikasi tanggung jawab kedua komponen tersebut.', 'amanah-seo' ); ?></p>
 				</div>
 				<?php if ( ! class_exists( 'AMANAH_SEO_AI_Admin_Menu' ) ) : ?>
-					<div class="notice notice-warning inline"><p><?php esc_html_e( 'Plugin AMANAH SEO AI belum aktif. Aktifkan plugin pendamping untuk menggunakan fitur AI yang terintegrasi. Kartu yang belum terintegrasi tetap ditandai sebagai placeholder.', 'amanah-seo' ); ?></p></div>
+					<div class="notice notice-info inline"><p><?php esc_html_e( 'Modul AMANAH SEO AI belum terdeteksi pada instalasi ini. AMANAH SEO tetap dapat digunakan tanpa modul tersebut; kartu placeholder belum menjalankan fungsi AI.', 'amanah-seo' ); ?></p></div>
 				<?php endif; ?>
 
 				<h2 style="margin-top:0"><?php esc_html_e( 'Kemampuan AI pendukung', 'amanah-seo' ); ?></h2>
@@ -407,6 +407,9 @@ final class AMANAH_SEO_Menu_Shell {
 					</div>
 				<?php endforeach; ?>
 			</div>
+			<?php
+			return;
+		}
 
 		if ( 'amanah-seo-engine-workflow' === $requested_page ) {
 			$engine_pages = array(
