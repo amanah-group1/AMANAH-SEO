@@ -221,3 +221,8 @@ Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar
 **Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber data tertentu tetap harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
 
 Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisasi runtime, atau penggabungan pull request. Semua itu memerlukan persetujuan terpisah.
+
+
+## 15. Struktur menu final AMANAH SEO
+
+Struktur navigasi produk telah ditetapkan sebagai keputusan final pemilik pada 2026-10-11. **AMANAH SEO** menjadi satu-satunya menu induk; **AMANAH SEO AI** dan **AMANAH SEO ENGINE** menjadi kelompok modul di bawahnya, bukan menu produk induk yang sejajar. Susunan lengkap, fungsi kelompok, aturan navigasi, dan batas implementasinya tercatat dalam [Struktur Menu Final AMANAH SEO](13_STRUKTUR_MENU_FINAL_AMANAH_SEO.md). Keputusan ini menetapkan rancangan navigasi, bukan klaim bahwa semua fitur sudah tersedia atau persetujuan untuk mulai coding.
