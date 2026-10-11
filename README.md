@@ -23,9 +23,9 @@ Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau inte
 - Pedoman Induk dan Lingkup MVP tersedia di branch `main`. Perubahan pedoman dikonsolidasikan melalui [PR #23](https://github.com/amanahgroup123/AMANAH-SEO/pull/23), yang sudah digabung.
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
 - Lingkup MVP adalah satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya**.
-- Sumber data tertentu harus dibuktikan sebelum fitur yang bergantung padanya dibuat atau dinyatakan berfungsi.
+- Sumber awal konseptual yang dipilih adalah data internal WordPress (struktur/konten) dan Google Search Console (performa pencarian); akses teknis masing-masing harus dibuktikan sebelum fitur terkait dinyatakan berfungsi.
 - Paket kesiapan pengerjaan MVP sedang diajukan melalui [PR #24](https://github.com/amanahgroup123/AMANAH-SEO/pull/24). PR tersebut masih draft dan belum digabung.
-- Website WordPress testing dapat dipakai untuk menguji siklus dasar tanpa website resmi atau Google Search Console. Data yang belum tersedia harus ditandai jelas; sistem tidak boleh mengarang metrik.
+- Website WordPress testing dapat dipakai untuk menguji siklus dasar tanpa koneksi GSC, menggunakan data WordPress yang benar-benar terbaca dan/atau temuan manual berlabel jelas. Fitur metrik pencarian tetap menunggu bukti akses GSC. Data yang belum tersedia harus ditandai jelas; sistem tidak boleh mengarang metrik.
 - Pedoman konseptual selesai bukan berarti implementasi, sinkronisasi runtime, deployment, atau merge berikutnya otomatis disetujui.
 
 ## Aturan kerja
@@ -35,3 +35,6 @@ Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau inte
 3. Gunakan bahasa yang mudah dipahami pada penjelasan dan antarmuka.
 4. Jangan mengubah website, database, runtime, konfigurasi, atau produk pendamping selama tahap persiapan dokumen.
 5. Mulai coding hanya setelah paket, ruang lingkup, daftar perubahan, kriteria penerimaan, rencana rollback, dan persetujuan pemilik jelas.
+
+
+**Penutupan pedoman:** keputusan konseptual yang diperlukan untuk menetapkan arah produk dan MVP telah dikonsolidasikan. Bukti akses WordPress/GSC dan pengujian penerimaan adalah gerbang teknis sebelum implementasi/fitur terkait, bukan alasan untuk membuka kembali keputusan konsep. Implementasi tetap memerlukan persetujuan terpisah.
