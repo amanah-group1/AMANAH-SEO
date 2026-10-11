@@ -83,6 +83,46 @@ final class AMANAH_SEO_Menu_Shell {
 			'title' => 'Article Generation',
 			'description' => 'Article Generation merupakan bagian produk AMANAH SEO AI.',
 		),
+		'amanah-seo-ai-audit' => array(
+			'title' => 'AI Audit',
+			'description' => 'Halaman AI Audit belum diintegrasikan; belum ada audit yang dijalankan.',
+		),
+		'amanah-seo-ai-topic-authority' => array(
+			'title' => 'Topic Authority',
+			'description' => 'Halaman Topic Authority belum diintegrasikan.',
+		),
+		'amanah-seo-ai-content-brief' => array(
+			'title' => 'Content Brief',
+			'description' => 'Halaman Content Brief belum diintegrasikan.',
+		),
+		'amanah-seo-ai-faq-generator' => array(
+			'title' => 'FAQ Generator',
+			'description' => 'Halaman FAQ Generator belum diintegrasikan.',
+		),
+		'amanah-seo-ai-content-optimizer' => array(
+			'title' => 'Content Optimizer',
+			'description' => 'Halaman Content Optimizer belum diintegrasikan.',
+		),
+		'amanah-seo-ai-internal-links' => array(
+			'title' => 'Internal Link AI',
+			'description' => 'Halaman Internal Link AI belum diintegrasikan.',
+		),
+		'amanah-seo-ai-schema-generator' => array(
+			'title' => 'Schema Generator',
+			'description' => 'Halaman Schema Generator belum diintegrasikan.',
+		),
+		'amanah-seo-ai-schema-validation' => array(
+			'title' => 'Schema Validation',
+			'description' => 'Halaman Schema Validation belum diintegrasikan.',
+		),
+		'amanah-seo-ai-reports' => array(
+			'title' => 'AI Reports',
+			'description' => 'Halaman AI Reports belum diintegrasikan.',
+		),
+		'amanah-seo-ai-license' => array(
+			'title' => 'License & Entitlement AI',
+			'description' => 'Halaman License & Entitlement AI belum diintegrasikan.',
+		),
 		'amanah-seo-engine-keyword-research' => array(
 			'title' => 'Keyword Research',
 			'description' => 'Tahap Keyword Research pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
@@ -144,6 +184,16 @@ final class AMANAH_SEO_Menu_Shell {
 			'amanah-entity-profile',
 			'amanah-authority',
 			'amanah-content-generation',
+			'amanah-seo-ai-audit',
+			'amanah-seo-ai-topic-authority',
+			'amanah-seo-ai-content-brief',
+			'amanah-seo-ai-faq-generator',
+			'amanah-seo-ai-content-optimizer',
+			'amanah-seo-ai-internal-links',
+			'amanah-seo-ai-schema-generator',
+			'amanah-seo-ai-schema-validation',
+			'amanah-seo-ai-reports',
+			'amanah-seo-ai-license',
 		);
 		$hidden_engine_pages = array(
 			'amanah-seo-engine-keyword-research',
@@ -232,6 +282,56 @@ final class AMANAH_SEO_Menu_Shell {
 					'title' => 'Article Generation',
 					'description' => 'Membantu menyusun draf artikel berdasarkan instruksi dan konteks yang didukung fitur. Draf dapat ditinjau dan disunting sebelum diterbitkan.',
 					'action' => 'Buat Artikel',
+				),
+				'amanah-seo-ai-audit' => array(
+					'title' => 'AI Audit',
+					'description' => 'Pusat audit AI; integrasi pemeriksaan belum tersedia.',
+					'action' => 'Buka AI Audit',
+				),
+				'amanah-seo-ai-topic-authority' => array(
+					'title' => 'Topic Authority',
+					'description' => 'Pengelolaan otoritas topik; integrasi belum tersedia.',
+					'action' => 'Buka Topic Authority',
+				),
+				'amanah-seo-ai-content-brief' => array(
+					'title' => 'Content Brief',
+					'description' => 'Penyusunan brief konten; integrasi belum tersedia.',
+					'action' => 'Buka Content Brief',
+				),
+				'amanah-seo-ai-faq-generator' => array(
+					'title' => 'FAQ Generator',
+					'description' => 'Penyusunan FAQ; integrasi belum tersedia.',
+					'action' => 'Buka FAQ Generator',
+				),
+				'amanah-seo-ai-content-optimizer' => array(
+					'title' => 'Content Optimizer',
+					'description' => 'Optimasi konten; integrasi belum tersedia.',
+					'action' => 'Buka Content Optimizer',
+				),
+				'amanah-seo-ai-internal-links' => array(
+					'title' => 'Internal Link AI',
+					'description' => 'Pengelolaan internal link berbantuan AI; integrasi belum tersedia.',
+					'action' => 'Buka Internal Link AI',
+				),
+				'amanah-seo-ai-schema-generator' => array(
+					'title' => 'Schema Generator',
+					'description' => 'Pembuatan schema; integrasi belum tersedia.',
+					'action' => 'Buka Schema Generator',
+				),
+				'amanah-seo-ai-schema-validation' => array(
+					'title' => 'Schema Validation',
+					'description' => 'Validasi schema; integrasi belum tersedia.',
+					'action' => 'Buka Schema Validation',
+				),
+				'amanah-seo-ai-reports' => array(
+					'title' => 'AI Reports',
+					'description' => 'Laporan fitur AI; integrasi belum tersedia.',
+					'action' => 'Buka AI Reports',
+				),
+				'amanah-seo-ai-license' => array(
+					'title' => 'License & Entitlement AI',
+					'description' => 'Pengelolaan lisensi dan hak penggunaan AI; integrasi belum tersedia.',
+					'action' => 'Buka License & Entitlement AI',
 				),
 				'amanah-seo-ai-settings' => array(
 					'title' => 'AI Settings',
