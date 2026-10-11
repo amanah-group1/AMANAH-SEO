@@ -379,3 +379,31 @@ Rancangan ini adalah usulan teknis berdasarkan kontrak yang dibaca. Detail final
 **Keputusan teknis yang belum boleh diasumsikan:** schema/option consolidation, module migration coordinator details, module enable/disable policy, plugin-old upgrade/disable sequence, updater/license identity, dan pemindahan database aktual.
 
 **Status:** audit masih parsial; desain teknis di atas masih berupa proposal untuk diselesaikan melalui source inventory. Tidak ada kode produk atau database yang diubah.
+
+
+## 14. Source audit lebih dalam — installer AI dan MigrationManager Engine
+
+Pemeriksaan langsung terhadap implementasi sumber menemukan detail penting yang harus menjadi migration gate. Temuan berikut berasal dari source di branch `main`, bukan dari inspeksi database runtime.
+
+### 14.1 AI installer / upgrade source
+
+File `AMANAH-SEO-AI/plugin/includes/class-install.php` menyatakan `DATABASE_VERSION = '1.3.0'`, membaca option `amanah_version`, dan memakai `amanah_installed` untuk status instalasi. Implementasi memeriksa kesiapan tabel, memakai `$wpdb->prefix`, membuat/memperbarui skema melalui `dbDelta()`, dan hanya menganggap versi siap bila status database sesuai. Ada pula jalur `archive_legacy_content_analysis_table()` yang memindahkan tabel lama ke nama arsip.
+
+**Peringatan data penting:** dokumentasi desain menyebut `wp_amanah_content_analysis`, sedangkan source installer aktif membuat `{$wpdb->prefix}amanah_content_analyses` (bentuk plural). Installer juga mendefinisikan `amanah_article_packages`, yang tidak tercantum dalam daftar 10 tabel awal dokumen desain yang ditinjau. Terdapat kemungkinan perubahan kontrak skema antara dokumen, source, dan data runtime. Ini bukan alasan untuk otomatis mengubah skema; perlu rekonsiliasi formal terhadap CORE-002, migration history, legacy archive path, dan database salinan sebelum integrasi.
+
+### 14.2 Engine MigrationManager source
+
+File `amanah-seo-engine-v2/plugin/Infrastructure/Migration/MigrationManager.php` menyimpan version pada option `amanah_seo_engine_database_version`, mendaftarkan migration berdasarkan versi, lalu menjalankan `up()` dan memperbarui option versi. Ia juga memiliki `repairKnownSchemaDrift()` yang secara khusus dapat menjalankan ulang migration 11 dan 18 bila kondisi tabel tertentu ditemukan.
+
+Ini menunjukkan Engine memiliki logika repair untuk schema drift. Migrasi gabungan harus mempertahankan perilaku tersebut dan tidak boleh menganggap update option versi saja membuktikan schema sehat. Source audit lanjutan harus memeriksa seluruh migration 11/18, registrasi semua migration, tabel yang diverifikasi, serta bagaimana exception/failure ditangani oleh pemanggil.
+
+### 14.3 Dampak dan keputusan teknis
+
+1. Sebelum migrasi, lakukan audit skema aktual per runtime/database yang dituju, termasuk prefix, semua tabel AI/Engine, options versi, status instalasi, tabel arsip legacy, dan jumlah/relasi data. Audit ini harus baca-saja.
+2. Rekonsiliasi perbedaan dokumen AI vs installer source sebagai keputusan change-control tersendiri; jangan menganggap dokumen atau source sendirian cukup membuktikan kondisi database.
+3. Pertahankan AI option `amanah_version` / `amanah_installed` dan Engine option `amanah_seo_engine_database_version` selama tahap awal. Jangan memakai satu option versi gabungan yang menimpa status migrasi modul.
+4. Uji migrasi dari salinan database pada kondisi fresh install, database versi lama, schema drift, migration failure, dan rerun. Verifikasi row counts/data integrity, bukan hanya versi option.
+5. Setiap tindakan terhadap tabel legacy/archive harus memiliki backup, precondition eksplisit, bukti pemetaan data, serta rollback yang diuji. Jangan jalankan jalur archive pada database pengguna selama tahap integrasi tanpa paket migrasi yang disetujui.
+6. Sebelum menyatukan plugin, tentukan urutan kompatibilitas jika dua plugin lama aktif bersamaan, keduanya memakai tabel bernama mirip, atau salah satu modul sudah pernah menginisialisasi skema. Aktivasi plugin induk tidak boleh memicu side effect destruktif.
+
+**Perubahan yang diizinkan saat ini:** dokumentasi audit pada branch AMANAH-SEO saja. Tidak ada installer, migration source, tabel, options, atau database pendamping yang diubah.
