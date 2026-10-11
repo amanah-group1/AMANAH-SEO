@@ -72,7 +72,7 @@ MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 
 Ketujuh rekomendasi MVP-01 sampai MVP-07 telah disetujui pemilik pada 2026-10-11 dan menjadi dasar lingkup MVP. Tidak perlu meminta persetujuan ulang untuk keputusan yang sama.
 
-- Prinsip sumber data terkecil yang dapat diverifikasi disetujui; nama sumber tertentu tetap harus dipilih dan dibuktikan sebelum implementasi.
+- Sumber awal konseptual WordPress internal dan GSC telah dipilih; akses, izin, cakupan, serta perilaku gagal harus dibuktikan sebelum fitur yang bergantung padanya diimplementasikan atau dinyatakan lulus.
 - Verifikasi kemampuan AI/ENGINE merupakan syarat sebelum integrasi tertentu dipilih, bukan syarat untuk MVP berdiri sendiri.
 - Pertanyaan komersial, arsitektur rinci, perluasan tim/website, dan KPI numerik dipindahkan ke backlog sesuai waktu kebutuhan pada Pedoman Induk.
 - Implementasi dan merge PR tetap membutuhkan persetujuan terpisah.
