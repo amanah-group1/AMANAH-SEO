@@ -7,6 +7,7 @@
 1. **[Pedoman Induk AMANAH SEO](docs/PEDOMAN_INDUK_AMANAH_SEO.md)** — acuan utama untuk tujuan produk, prinsip, pembagian produk, alur kerja, keputusan, dan gerbang sebelum implementasi.
 2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — fungsi MVP, batas yang tidak termasuk, keputusan dasar, dan kriteria penerimaan.
 3. **[Paket Kesiapan Pengerjaan MVP](docs/12_MVP_IMPLEMENTATION_PACKAGE.md)** — rancangan persiapan, urutan kerja, dan bukti penerimaan. Dokumen ini masih draft sampai disetujui pemilik.
+4. **[Struktur Menu Final AMANAH SEO](docs/13_STRUKTUR_MENU_FINAL_AMANAH_SEO.md)** — keputusan final navigasi: satu menu induk AMANAH SEO dengan kelompok modul AMANAH SEO AI dan AMANAH SEO ENGINE.
 
 Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/README.md). Dokumen arsip dan laporan audit historis merupakan rekam jejak, bukan bukti otomatis bahwa keadaan kode atau runtime saat ini sudah lulus.
 
