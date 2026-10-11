@@ -56,7 +56,7 @@ final class AMANAH_SEO_Menu_Shell {
 			'description' => 'Laporan belum diimplementasikan.',
 		),
 		'amanah-seo-ai-tools' => array(
-			'title' => 'AI Tools',
+			'title' => 'AMANAH SEO AI',
 			'description' => 'Pusat navigasi untuk semua fitur AMANAH SEO AI.',
 		),
 		'amanah-seo-engine-workflow' => array(
