@@ -137,6 +137,16 @@ final class AMANAH_SEO_Menu_Shell {
 			58
 		);
 
+		// Rename the automatically generated first submenu to a concise Overview label.
+		add_submenu_page(
+			'amanah-seo-dashboard',
+			'Overview',
+			'Overview',
+			'manage_options',
+			'amanah-seo-dashboard',
+			array( self::class, 'render_page' )
+		);
+
 		$hidden_ai_pages = array(
 			'amanah-seo-ai-settings',
 			'amanah-content-analyzer',
