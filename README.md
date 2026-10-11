@@ -10,17 +10,16 @@
 
 Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/README.md). Dokumen arsip dan laporan audit historis merupakan rekam jejak, bukan bukti otomatis bahwa keadaan kode atau runtime saat ini sudah lulus.
 
-## Batas tiga produk
+## Arsitektur produk
 
-- **AMANAH SEO** — produk utama yang mengelola website, kondisi/temuan, prioritas, tugas, keputusan, dan pemantauan hasil.
-- **AMANAH SEO AI** — produk AI/SEO tersendiri; bukan dependensi wajib AMANAH SEO.
-- **AMANAH SEO ENGINE V2** — produk workflow SEO/konten tersendiri; bukan dependensi wajib AMANAH SEO.
-
-Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau integrasi tersedia sampai versi, kontrak, izin, dan perilakunya benar-benar diverifikasi.
+- **AMANAH SEO** adalah satu-satunya plugin WordPress yang dipasang pengguna pada target akhir.
+- Kemampuan dari **AMANAH SEO AI** dan **AMANAH SEO ENGINE V2** ditata sebagai modul internal setelah audit dan migrasi terkontrol; kedua repository tetap baseline sumber sampai paket migrasi disetujui.
+- Core, modul AI, dan modul Engine tetap memiliki batas tanggung jawab, kontrak, pengujian, dan kepemilikan data yang jelas. Fitur modul tidak otomatis menjadi bagian MVP fungsional.
+- AMANAH SEO Lifecycle Manager menjadi koordinator tunggal lifecycle komponen internal. Keputusan packaging ini bukan izin untuk memindahkan kode atau mengubah runtime.
 
 ## Status dokumen dan persetujuan
 
-- Pedoman Induk dan Lingkup MVP tersedia di branch `main`. Perubahan pedoman dikonsolidasikan melalui [PR #23](https://github.com/amanahgroup123/AMANAH-SEO/pull/23), yang sudah digabung.
+- Pedoman Induk, Lingkup MVP, dan keputusan target packaging satu plugin tersedia di branch `main`; konsolidasi terbaru tercatat melalui PR dokumentasi #29, #30, dan PR arsitektur setelah ditutup.
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
 - Lingkup MVP adalah satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya**.
 - Sumber awal konseptual yang dipilih adalah data internal WordPress (struktur/konten) dan Google Search Console (performa pencarian); akses teknis masing-masing harus dibuktikan sebelum fitur terkait dinyatakan berfungsi.
@@ -33,7 +32,7 @@ Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau inte
 1. Kerjakan hanya AMANAH SEO, kecuali pemilik secara eksplisit menyetujui cakupan lain.
 2. Audit kondisi nyata sebelum implementasi dan jangan menyatakan PASS tanpa bukti.
 3. Gunakan bahasa yang mudah dipahami pada penjelasan dan antarmuka.
-4. Jangan mengubah website, database, runtime, konfigurasi, atau produk pendamping selama tahap persiapan dokumen.
+4. Jangan mengubah website, database, runtime, konfigurasi, atau repository sumber AI/Engine selama tahap persiapan dokumen.
 5. Mulai coding hanya setelah paket, ruang lingkup, daftar perubahan, kriteria penerimaan, rencana rollback, dan persetujuan pemilik jelas.
 
 
