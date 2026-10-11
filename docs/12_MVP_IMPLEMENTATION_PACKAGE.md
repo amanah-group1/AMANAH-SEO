@@ -77,7 +77,7 @@ Gerbang ini berlaku pada sumber data yang benar-benar akan dipakai, bukan kewaji
 
 **Untuk siklus dasar MVP:** sumber awal boleh berupa informasi/konten WordPress yang berhasil dibaca dengan izin yang tersedia dan/atau temuan manual yang dimasukkan pengguna. Label dan asal informasi harus jelas.
 
-**Untuk fitur metrik Google Search:** Google Search Console API dengan akses baca-saja adalah kandidat, bukan koneksi yang sudah tersedia. Gerbang ini baru wajib sebelum fitur tersebut dibuat atau dinyatakan berfungsi. Website testing yang belum terdaftar tidak dapat dipakai sebagai bukti bahwa akses Search Console sudah lulus.
+**Untuk fitur metrik Google Search:** GSC adalah sumber yang dipilih secara konseptual; Google Search Console API dengan akses baca-saja adalah metode integrasi yang perlu diverifikasi, bukan koneksi yang sudah tersedia. Gerbang ini wajib sebelum fitur tersebut dibuat atau dinyatakan berfungsi. Website testing yang belum terdaftar tidak dapat dipakai sebagai bukti bahwa akses Search Console sudah lulus.
 
 Bukti minimum untuk sumber apa pun:
 1. nama/jenis sumber dan izin yang digunakan;
