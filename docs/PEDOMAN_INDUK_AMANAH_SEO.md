@@ -35,49 +35,53 @@ AMANAH SEO menyatukan alur pengambilan keputusan dan pengelolaan pekerjaan itu. 
 4. **Manusia tetap memegang kendali.** Pemilik atau pengguna yang berwenang mengendalikan persetujuan, penerbitan, perubahan berisiko, serta tindakan yang berdampak pada website.
 5. **Tidak mengarang hasil.** Pisahkan fakta terukur, hasil analisis, perkiraan, rekomendasi, dan hal yang belum diketahui.
 6. **Tidak menjanjikan ranking.** Sistem membantu kualitas dan proses SEO; mesin pencari dan hasil bisnis tidak sepenuhnya dapat dikendalikan.
-7. **Produk terpisah, integrasi opsional.** AMANAH SEO AI dan AMANAH SEO ENGINE V2 harus tetap memiliki identitas dan fungsi masing-masing. AMANAH SEO tidak boleh mengasumsikan integrasi berhasil tanpa bukti.
-8. **Jangan menduplikasi mesin khusus.** AMANAH SEO mengatur konteks website, prioritas, pekerjaan, persetujuan, dan pemantauan. Kemampuan AI khusus tetap milik AMANAH SEO AI; mesin workflow konten terstruktur tetap milik AMANAH SEO ENGINE V2.
+7. **Satu produk utama, satu plugin WordPress.** Pengguna memasang dan mengaktifkan plugin AMANAH SEO saja. AMANAH SEO AI dan AMANAH SEO ENGINE V2 menjadi modul internal dalam paket plugin yang sama, bukan plugin terpisah yang wajib dipasang pengguna.
+8. **Modul tetap memiliki batas tanggung jawab.** Core AMANAH SEO mengelola konteks website, temuan, prioritas, tugas, persetujuan, dan pemantauan. Modul AI mempertahankan tanggung jawab AI/SEO khusus; modul Engine mempertahankan workflow SEO/konten terstruktur. Modul tidak boleh diduplikasi atau saling mengambil alih tanpa kontrak internal yang jelas.
+9. **Migrasi bertahap dan kompatibel.** Repository AI dan Engine menjadi baseline sumber selama migrasi. Kode tidak boleh dipindahkan secara massal sebelum dependensi, kepemilikan data, lisensi, pengaturan, hook, namespace, aktivasi, dan risiko benturan diaudit. Repository asal tidak dihapus atau diubah secara destruktif sebagai bagian dari migrasi awal.
 9. **Bukti sebelum klaim.** Status fitur, keamanan, pengujian, dan kesiapan harus didukung bukti.
 10. **Perubahan terkendali.** Tidak ada implementasi sebelum ruang lingkup dan kriteria penerimaan disepakati.
 11. **Sederhana dan dapat dipahami.** Dashboard dan pedoman tidak boleh memaksa pemilik mengikuti proses dokumentasi yang berputar-putar tanpa menghasilkan keputusan atau produk yang lebih jelas.
 12. **Aman secara default.** Akses mengikuti kewenangan; rahasia dan data pengguna dilindungi; tindakan penting dicatat; kegagalan dijelaskan tanpa membocorkan rahasia.
 
-## 4. Pembagian tiga produk
+## 4. Arsitektur produk dan modul
 
-### 4.1 AMANAH SEO — produk utama / pengelola
+### 4.1 AMANAH SEO — plugin induk dan Core
 
-Tanggung jawab konsep:
-- Pengalaman utama dan dashboard pengelolaan website.
-- Ringkasan kondisi website dan status pekerjaan.
-- Daftar masalah, peluang, dan prioritas beserta alasannya.
-- Pengelolaan tugas, status, ketergantungan, tenggat, dan penanggung jawab.
-- Alur pemeriksaan, persetujuan, dan keputusan pengguna.
-- Gambaran hasil, perubahan kondisi, dan rekomendasi langkah berikutnya.
-- Pengaturan akses dan koneksi antarkomponen sesuai keputusan arsitektur yang kelak disetujui.
+AMANAH SEO adalah satu-satunya plugin WordPress yang dipasang pengguna. Core bertanggung jawab atas:
+- Bootstrap plugin, lifecycle aktivasi/nonaktifkan, pemeriksaan kompatibilitas, dan pemuatan modul.
+- Dashboard dan navigasi utama.
+- Konteks serta pengelolaan website.
+- Temuan, prioritas, tugas, keputusan/persetujuan, riwayat hasil, dan langkah berikutnya.
+- Hak akses umum, pengaturan inti, diagnostik, dan kontrak internal modul.
+- Pencatatan status modul tanpa mengklaim kemampuan yang belum lulus pengujian.
 
-AMANAH SEO **tidak otomatis mengambil alih** seluruh analisis AI, proses produksi konten mendalam, atau workflow khusus yang menjadi tanggung jawab produk terpisah.
+Core tidak boleh mengasumsikan semua modul siap hanya karena berkas modul ditemukan. Modul yang gagal dimuat harus menghasilkan diagnostik aman dan tidak boleh merusak aktivasi Core bila dapat dihindari.
 
-### 4.2 AMANAH SEO AI — produk AI tersendiri
+### 4.2 Modul AMANAH SEO AI
 
-Peran konseptual: menyediakan kemampuan SEO berbantuan AI, pemahaman konteks/entity, analisis, atau fungsi AI lain yang benar-benar tersedia dan teruji pada produknya.
+Kemampuan yang saat ini berada di repository AMANAH SEO AI menjadi bagian internal dari paket AMANAH SEO. Area yang perlu dipetakan dan dimigrasikan secara terkendali mencakup, sesuai bukti aktual:
+- Entity Profile dan pengelolaan entity.
+- Konfigurasi provider/model AI serta pengelolaan kredensial.
+- Content Analyzer dan fitur AI/SEO lain yang telah tersedia.
+- Prompt/execution, validasi dan sanitasi output, persistence, diagnostik, pengaturan, capability, serta pengujian yang terkait.
 
-Batasan:
-- Tidak dianggap wajib agar AMANAH SEO atau AMANAH SEO ENGINE V2 dapat berjalan.
-- Tidak boleh dinyatakan menyediakan kemampuan tertentu hanya berdasarkan rencana atau nama fitur; harus diverifikasi di repositori dan pengujian.
-- Memiliki konfigurasi, akses, lisensi, data, serta siklus pengembangannya sendiri sesuai kontrak yang disepakati.
+Daftar ini adalah peta audit awal, bukan klaim bahwa semua fitur telah lulus runtime atau siap dipindahkan. Kepemilikan API key, pengaturan, tabel, capability, dan data lama harus diputuskan berdasarkan audit sebelum migrasi.
 
-### 4.3 AMANAH SEO ENGINE V2 — produk workflow SEO tersendiri
+### 4.3 Modul AMANAH SEO Engine
 
-Peran konseptual: menjalankan alur kerja SEO/konten yang terstruktur, dari kebutuhan dan strategi hingga pembuatan, evaluasi, perbaikan, peninjauan, dan kesiapan publikasi sesuai kemampuan yang benar-benar ada.
+Kemampuan yang saat ini berada di repository AMANAH SEO ENGINE V2 menjadi modul internal dalam paket plugin induk. Area audit awal mencakup workflow keyword/intelligence, requirements, strategy, planning/brief, generation, evaluation, refinement, review, publishing information, dan approval, sesuai implementasi yang benar-benar tersedia.
 
-Batasan:
-- Tidak dianggap wajib bagi AMANAH SEO atau AMANAH SEO AI untuk berjalan.
-- Tidak menjamin peringkat mesin pencari.
-- AMANAH SEO tidak boleh menyalin mesin workflow ini ke dalam produk induk hanya untuk menghindari integrasi.
+Modul Engine tidak boleh mengubah atau menerbitkan konten secara otomatis di luar kebijakan dan persetujuan yang disepakati. Status modul dan fitur harus dibuktikan melalui pengujian; nama atau dokumentasi fitur saja tidak membuktikan implementasi.
 
-### 4.4 Aturan hubungan produk
+### 4.4 Batas internal dan kepemilikan data
 
-Ketiga produk dapat digunakan secara mandiri sesuai fungsi masing-masing. Integrasi bersifat opsional dan harus memiliki kontrak yang jelas: tujuan, pemilik data, input/output, autentikasi/otorisasi, kegagalan, pencatatan, kompatibilitas versi, serta cara memutus koneksi. Jika integrasi tidak tersedia atau gagal, sistem harus menunjukkan status yang jujur dan tidak berpura-pura telah menyelesaikan pekerjaan.
+- Pengguna memasang satu plugin; tidak ada ketergantungan runtime wajib pada dua plugin pendamping yang terpisah.
+- Core, modul AI, dan modul Engine tetap dipisahkan secara internal agar tanggung jawab, pengujian, dan perbaikan dapat dilakukan per modul.
+- Modul berinteraksi melalui kontrak internal yang eksplisit, bukan melalui akses langsung yang tidak terdokumentasi ke database atau class modul lain.
+- Kepemilikan data, migrasi tabel/options, pengaturan, kredensial, capability, hooks, cron/background jobs, REST/AJAX endpoints, dan namespace harus dipetakan sebelum penggabungan kode.
+- Data dan pengaturan instalasi yang sudah ada harus dipertahankan melalui migration/compatibility plan yang dapat diuji. Tidak boleh ada penghapusan atau reset data secara diam-diam.
+- Fitur AI/Engine tidak otomatis masuk ke lingkup fungsional MVP hanya karena modulnya berada dalam paket yang sama. Siklus MVP Core harus dapat diuji tanpa bergantung pada layanan AI atau seluruh workflow Engine.
+- Repository AI dan Engine tetap menjadi arsip sumber/rujukan selama migrasi dan hanya dapat dipensiunkan setelah pengganti tunggal lulus kriteria penerimaan serta pemilik menyetujui penutupan terpisah.
 
 ## 5. Alur kerja utama AMANAH SEO
 
@@ -87,7 +91,7 @@ Alur konseptual dari awal hingga perbaikan berkelanjutan:
 2. **Bangun gambaran kondisi.** Kumpulkan sinyal yang dapat diakses, tandai kualitas/keterkinian data, lalu kelompokkan temuan menjadi masalah, peluang, risiko, dan hal yang belum diketahui.
 3. **Susun prioritas.** Urutkan pekerjaan berdasarkan tujuan pemilik, dampak yang diharapkan, urgensi, usaha, risiko, dependensi, serta kekuatan bukti. Jelaskan alasan rekomendasi; jangan menyajikan skor sebagai fakta objektif bila itu hanya estimasi.
 4. **Buat rencana kerja.** Setiap pekerjaan memiliki tujuan, dasar temuan, hasil yang diharapkan, pemilik/penanggung jawab, dependensi, risiko, status, dan kriteria selesai.
-5. **Pilih cara pelaksanaan.** Kerjakan secara manual, melalui AMANAH SEO AI, melalui AMANAH SEO ENGINE V2, atau melalui integrasi lain yang telah disetujui. Jangan menganggap semua metode selalu tersedia.
+5. **Pilih cara pelaksanaan.** Kerjakan secara manual atau melalui modul internal yang tersedia dan telah lulus pemeriksaan. Jangan menganggap semua modul/fitur selalu tersedia atau menjadikan AI/Engine sebagai prasyarat untuk siklus MVP.
 6. **Periksa hasil.** Validasi hasil terhadap persyaratan, mutu, bukti, dan risiko. Kegagalan harus dapat dilihat, didiagnosis, dicoba ulang secara aman, atau dialihkan ke penanganan manual.
 7. **Minta persetujuan bila diperlukan.** Perubahan penting dan publikasi tidak boleh dilakukan tanpa persetujuan dari pengguna yang berwenang, kecuali kebijakan otomatisasi yang eksplisit telah disetujui dan dibatasi dengan aman.
 8. **Laksanakan dan catat.** Setelah diizinkan, lakukan tindakan melalui komponen yang bertanggung jawab. Simpan status, waktu, pelaksana, hasil, dan referensi perubahan yang relevan.
@@ -221,3 +225,18 @@ Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar
 **Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber data tertentu tetap harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
 
 Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisasi runtime, atau penggabungan pull request. Semua itu memerlukan persetujuan terpisah.
+
+
+## 15. Keputusan arsitektur satu plugin — 2026-10-11
+
+Pemilik menyetujui arah arsitektur: **AMANAH SEO menjadi satu plugin WordPress; AMANAH SEO AI dan AMANAH SEO Engine menjadi modul internal di dalam paket plugin tersebut.** Keputusan ini menggantikan bagian pedoman lama yang menyatakan ketiganya harus tetap menjadi produk/plugin terpisah untuk instalasi pengguna.
+
+Keputusan ini menetapkan target produk dan packaging, bukan bukti bahwa kode telah digabungkan. Implementasi masih memerlukan paket migrasi terkontrol yang memuat audit baseline ketiga repository, pemetaan file/dependensi, kontrak modul, strategi data dan pengaturan, kompatibilitas/lisensi, urutan migrasi, tes regresi, kriteria penerimaan, dan rollback. Sampai paket tersebut disetujui, tidak ada perubahan kode, database, runtime, atau WordPress yang dilakukan.
+
+Target penerimaan arsitektur akhir:
+1. Pengguna hanya perlu memasang dan mengaktifkan plugin AMANAH SEO.
+2. Core dapat diaktifkan tanpa kegagalan ketika modul AI/Engine tidak aktif atau tidak tersedia, sesuai kebijakan modul yang disepakati.
+3. Modul berkomunikasi melalui batas internal yang terdokumentasi.
+4. Data, pengaturan, lisensi/entitlement, capability, dan perilaku fitur yang ada tidak hilang atau berubah tanpa rencana migrasi dan persetujuan.
+5. Seluruh pengujian unit, integrasi, keamanan, migrasi, regresi, dan WordPress runtime yang relevan lulus sebelum penggantian plugin lama dinyatakan selesai.
+6. Tidak ada klaim PASS sebelum bukti pengujian tersedia.
