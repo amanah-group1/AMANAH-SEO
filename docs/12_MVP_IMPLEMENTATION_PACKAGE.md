@@ -1,6 +1,6 @@
 # Paket Kesiapan Pengerjaan MVP AMANAH SEO
 
-**Versi:** 0.2-draft  
+**Versi:** 0.3-draft  
 **Status:** RANCANGAN TERKENDALI — belum disetujui untuk coding  
 **Tanggal:** 2026-10-11  
 **Acuan utama:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), dan [README](../README.md)  
@@ -25,7 +25,7 @@
 
 - PR #23 sudah digabung ke `main`; Pedoman Induk dan Lingkup MVP tersedia di `main`.
 - PR #24 yang sebelumnya mengusulkan paket kesiapan telah digabung ke `main`; isi dokumen ini tetap berstatus rancangan terkendali dan bukan persetujuan coding.
-- README sebelumnya memuat kalimat bahwa pedoman berada di branch `controlled/rebuild-product-pedoman` dan belum digabung. Kalimat itu tidak lagi sesuai dengan keadaan saat ini karena Pedoman Induk dan Lingkup MVP sudah ada di `main`. README diperbarui dalam perubahan dokumentasi ini agar merujuk ke keadaan yang benar.
+- Riwayat konsistensi: README sebelumnya memuat kalimat bahwa pedoman berada di branch `controlled/rebuild-product-pedoman` dan belum digabung. Informasi tersebut telah diselaraskan pada revisi dokumentasi yang sudah masuk `main`.
 - Dokumen rencana induk penuntasan yang pernah dicari dengan nama `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` tidak ditemukan di `main` pada pemeriksaan ini. Karena itu, dokumen tersebut tidak boleh disebut sudah diperiksa atau dijadikan acuan aktif. Acuan aktif yang berhasil diverifikasi adalah Pedoman Induk, Lingkup MVP, dan README.
 - Status “pedoman konseptual selesai” tidak berarti kode sudah dibuat, website sudah terhubung, seluruh sumber data sudah diuji, atau implementasi telah disetujui.
 
