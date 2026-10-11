@@ -9,7 +9,7 @@ MVP harus membuktikan satu siklus nilai dari awal sampai akhir:
 
 **Website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → pencatatan hasil → langkah berikutnya.**
 
-Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO, menggantikan produk AI, atau menyalin workflow ENGINE. Jika suatu kemampuan tidak diperlukan untuk menyelesaikan siklus ini, tempatkan setelah MVP.
+Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO sekaligus. Target packaging adalah satu plugin AMANAH SEO dengan core dan modul internal AI/Engine setelah audit/migrasi terkontrol. Kemampuan penuh modul tidak otomatis masuk lingkup fungsional MVP; jangan menyalin workflow Engine ke core.
 
 ## 2. Fungsi yang direkomendasikan sebagai wajib MVP
 
@@ -29,7 +29,7 @@ Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO, menggantikan prod
 Kecuali pemilik secara eksplisit menyatakan sebaliknya, jangan jadikan hal berikut sebagai syarat MVP:
 - Generasi artikel lengkap di dalam AMANAH SEO.
 - Mesin workflow konten yang menduplikasi AMANAH SEO ENGINE V2.
-- Ketergantungan wajib pada AMANAH SEO AI atau ENGINE V2.
+- Menjadikan kemampuan AI atau seluruh workflow Engine sebagai prasyarat fungsional MVP dasar. Modul internal dapat berada dalam paket plugin yang sama, tetapi siklus MVP harus tetap dapat diuji tanpa mengandalkan fitur modul yang belum diverifikasi.
 - Penerbitan otomatis, perubahan massal, atau tindakan SEO berisiko tanpa persetujuan.
 - Integrasi dengan banyak penyedia data sekaligus sebelum satu sumber dipilih dan diverifikasi.
 - Portal pelanggan, tim/organisasi kompleks, marketplace, payment gateway, billing AI, atau sistem komersial penuh.
@@ -47,7 +47,7 @@ Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas s
 | MVP-03 | Sumber data awal | WordPress internal untuk struktur/konten website dan Google Search Console untuk metrik performa pencarian adalah sumber awal yang dipilih secara konseptual. Akses nyata, izin, cakupan, dan perilaku gagal masing-masing wajib dibuktikan sebelum fitur terkait dinyatakan berfungsi. Sumber lain ditunda. | DISETUJUI 2026-10-11; verifikasi teknis sebelum fitur terkait |
 | MVP-04 | Pelaksanaan tindakan | Semua perubahan website dan publikasi membutuhkan persetujuan eksplisit; MVP hanya mengatur tugas dan hasil, bukan melakukan tindakan otonom. | DISETUJUI 2026-10-11 |
 | MVP-05 | Akun dan akses | Minimal pengguna terautentikasi dengan hak akses pemilik/admin yang jelas; multi-tenant/tim kompleks ditunda. | DISETUJUI 2026-10-11 |
-| MVP-06 | Integrasi AI/ENGINE | Opsional; tidak menjadi prasyarat MVP. Kontrak integrasi disusun hanya jika fungsi MVP benar-benar membutuhkannya. | DISETUJUI 2026-10-11 |
+| MVP-06 | Pemakaian modul AI/Engine | Kemampuan AI/Engine tidak menjadi prasyarat fungsional MVP dasar. Karena target packaging adalah satu plugin, kontrak internal modul tetap harus dirancang sebelum migrasi; fitur modul dipanggil hanya jika dibutuhkan dan sudah diuji. | DISETUJUI 2026-10-11 untuk prinsip MVP; detail kontrak sebelum migrasi |
 | MVP-07 | Keberhasilan MVP | Siklus utama selesai, setiap rekomendasi memiliki alasan/sumber atau label ketidakpastian, persetujuan tercatat, dan kegagalan terlihat. Tetapkan target angka setelah baseline tersedia. | DISETUJUI 2026-10-11 |
 
 ## 5. Catatan persetujuan pemilik
@@ -73,7 +73,7 @@ MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 Ketujuh rekomendasi MVP-01 sampai MVP-07 telah disetujui pemilik pada 2026-10-11 dan menjadi dasar lingkup MVP. Tidak perlu meminta persetujuan ulang untuk keputusan yang sama.
 
 - Sumber awal konseptual WordPress internal dan GSC telah dipilih; akses, izin, cakupan, serta perilaku gagal harus dibuktikan sebelum fitur yang bergantung padanya diimplementasikan atau dinyatakan lulus.
-- Verifikasi kemampuan AI/ENGINE merupakan syarat sebelum integrasi tertentu dipilih, bukan syarat untuk MVP berdiri sendiri.
+- Verifikasi kemampuan AI/Engine merupakan syarat sebelum modul dimigrasikan atau fitur modul dipanggil; bukan syarat agar siklus MVP dasar berdiri sendiri.
 - Pertanyaan komersial, arsitektur rinci, perluasan tim/website, dan KPI numerik dipindahkan ke backlog sesuai waktu kebutuhan pada Pedoman Induk.
 - Implementasi dan merge PR tetap membutuhkan persetujuan terpisah.
 - Jangan membuat dokumen atau fase baru kecuali ada keputusan konkret yang tidak dapat dicatat di dua dokumen acuan ini.
