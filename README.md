@@ -19,7 +19,7 @@ Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/RE
 
 ## Status dokumen dan persetujuan
 
-- Pedoman Induk, Lingkup MVP, dan keputusan target packaging satu plugin tersedia di branch `main`; konsolidasi terbaru tercatat melalui PR dokumentasi #29, #30, dan PR arsitektur setelah ditutup.
+- Pedoman Induk, Lingkup MVP, dan target packaging satu plugin menjadi acuan konseptual. Konsolidasi dokumentasi hanya menetapkan arah dan batas; paket kesiapan implementasi tetap memerlukan persetujuan coding tersendiri.
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
 - Lingkup MVP adalah satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya**.
 - Sumber awal konseptual yang dipilih adalah data internal WordPress (struktur/konten) dan Google Search Console (performa pencarian); akses teknis masing-masing harus dibuktikan sebelum fitur terkait dinyatakan berfungsi.
