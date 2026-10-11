@@ -237,3 +237,34 @@ Pemilik menyetujui target bahwa pengguna memasang satu plugin **AMANAH SEO** yan
 - Rollback dapat mengembalikan keadaan sebelumnya tanpa kehilangan data.
 
 **Status:** DESAIN MIGRASI BELUM SELESAI; AUDIT BASELINE BELUM LENGKAP; IMPLEMENTASI BELUM DIMULAI. Tahap berikutnya adalah audit baca-saja dan penyusunan daftar perubahan yang tepat. Tidak ada kode produk yang diubah dalam branch dokumentasi ini.
+
+
+## 11. Audit baseline awal — read-only, belum lengkap
+
+Pemeriksaan awal dilakukan langsung terhadap file di branch `main` masing-masing repository. Temuan ini hanya baseline sumber; belum merupakan audit seluruh file, database aktual, atau runtime.
+
+| Area | Bukti sumber | Temuan awal | Dampak migrasi |
+|---|---|---|---|
+| AI entry point | `AMANAH-SEO-AI/plugin/amanah-seo-ai.php` | Memiliki header plugin sendiri, konstanta global `AMANAH_SEO_AI_VERSION/PATH/URL/PREFIX`, memuat loader/core/install/activator/deactivator, dan mendaftarkan activation/deactivation hooks sendiri. | Tidak boleh menyalin entry point apa adanya ke plugin induk. Bootstrap, konstanta, install/upgrade, dan lifecycle harus diintegrasikan secara eksplisit. |
+| AI source boundary | `00_MASTER_DOCUMENTATION/REPO-STRUCTURE-001_CANONICAL_PLUGIN_SOURCE_BOUNDARY.md` | `plugin/` adalah source boundary canonical; tests dan master docs berada di luar plugin deployable. | Migrasi harus mengambil source dari `plugin/`, bukan root repo atau folder development/runtime. |
+| Engine entry point | `amanah-seo-engine-v2/plugin/amanah-seo-engine.php` | Memiliki header plugin sendiri, memuat autoloader, mendaftarkan namespace `Amanah\\SEOEngine\\`, memanggil `Plugin::boot()`, dan mendaftarkan activation/deactivation hooks sendiri. | Perlu menggabungkan lifecycle ke satu plugin file dan memastikan class loader/namespace tetap kompatibel. |
+| Engine PHP baseline | `amanah-seo-engine-v2/composer.json` | Menyatakan PHP `>=7.4`, PSR-4 namespace `Amanah\\SEOEngine\\` ke `plugin/`, serta PHPUnit/WPCS/parallel-lint sebagai dev dependencies. | Versi PHP minimum gabungan dan toolchain harus dipilih berdasarkan baseline semua komponen; jangan mengasumsikan sama. |
+| Test configuration | Kedua repository memiliki `phpunit.xml.dist` dan `tests/bootstrap.php`. AI suite bernama `AMANAH SEO AI CORE-003`; Engine suite bernama `Amanah SEO Engine V2`. | Struktur dan bootstrap tes berbeda. | Test suites perlu dipertahankan dan dijalankan dalam layout gabungan tanpa benturan class, path, fixture, atau bootstrap. |
+| Engine governance | `Master Dokumen/DOC-00 — Phase 0 Master Index & Document Control.md` dan `DOC-13 — Implementation Boundary, Architecture & Change-Control Specification.md` | Master docs berstatus LOCKED; change-control melarang perubahan diam-diam dan mewajibkan audit penuh sebelum implementasi. | Perubahan yang memengaruhi Engine harus ditangani sebagai controlled migration package dan tidak boleh mengubah aturan LOCKED secara diam-diam. |
+
+### Risiko yang sudah teridentifikasi
+
+1. Dua bootstrap plugin yang terpisah tidak dapat dipertahankan apa adanya sebagai satu plugin WordPress; activation/deactivation dan upgrade hooks harus dipusatkan serta dirancang ulang dengan cakupan yang jelas.
+2. Konstanta global AI dan namespace Engine berpotensi berbenturan dengan Core atau modul lain; seluruh definisi global, autoloading, hooks, option keys, capabilities, routes, cron jobs, dan table names harus diinventarisasi.
+3. Skema dan data dari kedua plugin belum direkonsiliasi. Tidak ada tabel/options yang boleh digabung, diganti nama, dihapus, atau di-reset sebelum migration plan dan bukti backup/rollback disetujui.
+4. Kesamaan folder bernama `modules/` bukan bukti bahwa kedua codebase memiliki kontrak modul yang kompatibel.
+5. Audit ini belum memverifikasi semua dokumen AI 01–16, semua dokumen Engine DOC-00–DOC-15, seluruh source tree, database aktual, runtime, atau semua hasil CI. Status audit keseluruhan: **PARTIAL / NOT TESTED**.
+
+### Langkah audit baca-saja berikutnya
+
+- Selesaikan pembacaan dokumen master yang relevan dan aturan proyek pada kedua repository.
+- Inventarisasi file entry point, loader, activator, installer/migrations, global constants/functions, namespaces, hooks, capabilities, REST/AJAX routes, cron/jobs, settings/options, tables, uninstall behavior, and tests.
+- Bandingkan implementasi aktual dengan locked docs dan status terbaru; catat file/commit untuk setiap temuan.
+- Hasilkan mapping sumber → target modul (Core / AI / Engine), dependency graph, daftar benturan, keputusan yang dibutuhkan, dan urutan migrasi.
+
+**Batas audit:** read-only. Tidak ada file kode, branch, database, konfigurasi, runtime, atau WordPress dari repository AI/Engine yang diubah.
