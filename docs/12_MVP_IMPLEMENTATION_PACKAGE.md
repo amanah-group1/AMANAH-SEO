@@ -619,3 +619,35 @@ Pemeriksaan entry point/boot registries dan controller utama menghasilkan kontra
 3. Namespace REST lama harus dipertahankan atau diberi compatibility mapping yang terencana; verifikasi daftar rute lengkap, permission callback, nonce/CSRF, dan versi API sebelum migrasi.
 4. Audit semua cron hooks termasuk jadwal berulang, pembersihan, retry, dan callback agar tidak terdaftar ganda dan tidak tertinggal setelah deactivate.
 5. Perubahan slug, capability, route, cron, atau text domain termasuk perubahan perilaku dan wajib masuk paket menu terkait, bukan perubahan massal di tahap skeleton.
+
+
+### 15.15 Keputusan yang belum disetujui dan tidak boleh dipilih diam-diam
+
+Berikut adalah keputusan teknis/produk yang masih terbuka. Ini bukan permintaan untuk menghentikan audit; keputusan dicatat agar implementasi tidak mengarang kebijakan.
+
+| ID | Keputusan | Rekomendasi aman sementara | Gerbang |
+|---|---|---|---|
+| ARCH-01 | Apakah modul AI/Engine boleh gagal/absen tanpa memblokir core AMANAH SEO? | Core dan dashboard status tetap bisa berjalan; modul yang gagal harus ditandai unavailable dengan alasan, tanpa fallback tersembunyi. | Konfirmasi perilaku sebelum skeleton final. |
+| DATA-01 | Bagaimana menangani AI legacy table dan archive yang keduanya ada? | Backup; bandingkan jumlah/hash/baris; jangan DROP atau merge otomatis; catat hasil dan sediakan restore. | Blocker sebelum installer AI dipanggil pada database existing. |
+| DATA-02 | Kebijakan uninstall satu plugin dan pemisahan kepemilikan data | Non-destructive default; hapus data hanya melalui tindakan eksplisit dan preview dampak. | Blocker sebelum membuat uninstall induk. |
+| MIG-01 | Strategi versi database induk vs versi AI/Engine | Pertahankan option/version state modul masing-masing; parent hanya mengoordinasi. Jangan menulis satu nomor versi gabungan pada option lama. | Putuskan pada paket lifecycle/migration. |
+| MIG-02 | Dukungan upgrade dari AI-only, Engine-only, keduanya aktif, dan fresh install | Uji tiap keadaan pada salinan database terpisah; jangan jalankan dua installer lama di bawah entry point induk. | Blocker sebelum aktivasi migrasi modul. |
+| NAV-01 | Parent slug, slug screen final, redirect/compatibility bookmark | Pilih satu parent AMANAH SEO; petakan slug lama per menu dan uji deep-link langsung. | Putuskan pada paket menu induk. |
+| AUTH-01 | Pemetaan role/capability AI custom dan Engine manage_options | Least privilege; pertahankan permission tiap operasi; migrasi capability tidak boleh memperluas hak Editor. | Blocker per menu yang dipindahkan. |
+| LIC-01 | Identitas license, entitlement, update channel, package verification dan server endpoint untuk produk induk | Jangan ubah identity atau jalankan updater lama pada paket induk sampai kontrak server dan kompatibilitas ditetapkan. | Blocker sebelum menu License/Updates atau distribusi. |
+| COMPAT-01 | Minimum PHP/WordPress untuk plugin gabungan | Pertahankan PHP 8.1+ dan WordPress 6.0+ karena AI activator mensyaratkannya, sampai tes membuktikan batas lain aman. | Tetapkan di header/CI induk. |
+| SCHEDULE-01 | Lifecycle semua cron hook | Pada deactivate, bersihkan kedua hook berulang `amanah_seo_engine_run_jobs` dan `amanah_seo_engine_cleanup_jobs`; uji aktivasi ulang tanpa duplikasi. | Blocker sebelum background job diaktifkan. |
+| DATA-03 | Migration 17 menghapus SecretStore key `dataforseo` | Fixture harus membuktikan hanya entri legacy tersebut yang dihapus; provider AI lainnya tetap utuh. | Blocker sebelum menjalankan migration 17 pada data existing. |
+
+Persetujuan atas arsitektur satu plugin tidak otomatis menyetujui keputusan data/lisensi/capability di atas. Bila belum diputuskan, implementasi harus mempertahankan data dan perilaku lama serta menunda fitur terkait.
+
+### 15.16 Closure criteria untuk tahap persiapan
+
+Tahap persiapan dokumentasi/source-baseline dapat dianggap selesai untuk mulai menyusun **paket menu pertama**, setelah:
+1. Semua temuan risiko tinggi dan keputusan terbuka pada dokumen ini tercantum dalam checklist paket implementasi.
+2. Branch dan PR hanya berisi perubahan dokumentasi, dan status CI disebutkan secara jujur.
+3. Paket menu pertama menentukan file yang akan diubah dan diuji; audit detail controller/REST/capability dilakukan terhadap source aktual yang digunakan paket tersebut.
+4. Migrasi data tidak dijalankan sampai tersedia baseline database/backup yang bisa dipulihkan dan hasil uji pada salinan.
+5. Persetujuan eksplisit pemilik untuk scope paket menu pertama diperoleh.
+
+Tahap persiapan ini **tidak dapat membuktikan** schema database runtime, perilaku activation/upgrade/uninstall, hasil PHPUnit, keamanan role, atau fungsi UI WordPress. Itu harus menjadi bukti nyata pada siklus menu yang sesuai, bukan dianggap lulus karena dokumentasi/source sudah dipetakan.
