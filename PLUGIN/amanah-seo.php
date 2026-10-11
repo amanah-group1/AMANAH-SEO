@@ -28,88 +28,96 @@ final class AMANAH_SEO_Menu_Shell {
 	 */
 	private const PAGES = array(
 		'amanah-seo-dashboard' => array(
-			'title'       => 'Dashboard',
+			'title' => 'Overview',
 			'description' => 'Ringkasan kondisi website, prioritas, pekerjaan tertunda, persetujuan, dan hasil akan ditampilkan di sini setelah fungsi terkait diimplementasikan.',
 		),
 		'amanah-seo-websites' => array(
-			'title'       => 'Website & Workspace',
-			'description' => 'Pengelolaan website dan ruang kerja belum diimplementasikan. Belum ada website yang didaftarkan atau diubah oleh plugin ini.',
+			'title' => 'Website & Workspace',
+			'description' => 'Pengelolaan website dan ruang kerja belum diimplementasikan.',
 		),
 		'amanah-seo-intelligence' => array(
-			'title'       => 'SEO Intelligence',
-			'description' => 'Status SEO, pemeriksaan website, temuan, peluang pertumbuhan, sumber data, dan tingkat keyakinan belum diimplementasikan. Tidak ada pemindaian yang dijalankan.',
+			'title' => 'SEO Intelligence',
+			'description' => 'Status SEO, pemeriksaan website, temuan, peluang pertumbuhan, sumber data, dan tingkat keyakinan belum diimplementasikan.',
 		),
 		'amanah-seo-priorities' => array(
-			'title'       => 'Priorities & Tasks',
+			'title' => 'Priorities & Tasks',
 			'description' => 'Prioritas, alasan rekomendasi, tugas, penanggung jawab, status, tenggat, dan dependensi belum diimplementasikan.',
 		),
 		'amanah-seo-execution' => array(
-			'title'       => 'Execution & Approval',
-			'description' => 'Rencana pelaksanaan, antrean persetujuan, riwayat keputusan, dan log perubahan/hasil belum diimplementasikan. Tidak ada perubahan website yang dijalankan.',
+			'title' => 'Execution & Approval',
+			'description' => 'Rencana pelaksanaan, antrean persetujuan, riwayat keputusan, dan log perubahan/hasil belum diimplementasikan.',
 		),
 		'amanah-seo-monitoring' => array(
-			'title'       => 'Monitoring & Results',
-			'description' => 'Pemantauan pekerjaan, perubahan SEO, perbandingan sebelum/sesudah, dan siklus evaluasi berikutnya belum diimplementasikan. Tidak ada metrik yang dibuat-buat.',
+			'title' => 'Monitoring & Results',
+			'description' => 'Pemantauan pekerjaan, perubahan SEO, perbandingan sebelum/sesudah, dan siklus evaluasi berikutnya belum diimplementasikan.',
 		),
 		'amanah-seo-reports' => array(
-			'title'       => 'Reports',
-			'description' => 'Laporan belum diimplementasikan. Belum ada data atau hasil yang diklaim oleh halaman ini.',
+			'title' => 'Reports',
+			'description' => 'Laporan belum diimplementasikan.',
 		),
-		'amanah-seo-settings' => array(
-			'title'       => 'Settings & Access',
-			'description' => 'Pengaturan workspace, pengguna/hak akses khusus, integrasi/sumber data, dan preferensi produk belum diimplementasikan. Akses halaman kerangka ini dibatasi ke manage_options.',
+		'amanah-seo-ai-tools' => array(
+			'title' => 'AI Tools',
+			'description' => 'Pusat navigasi untuk semua fitur AMANAH SEO AI.',
 		),
-		'amanah-seo-ai-dashboard' => array(
-			'title'       => 'AI — Dashboard',
-			'description' => 'Dashboard AMANAH SEO AI belum ditampilkan dari produk AI. Ini hanya pintasan navigasi dan tidak menjalankan atau menghubungkan produk AI.',
-		),
-		'amanah-content-analyzer' => array(
-			'title'       => 'AI — Content Analyzer',
-			'description' => 'Content Analyzer merupakan bagian produk AMANAH SEO AI yang terpisah. Halaman ini hanya placeholder navigasi; analisis konten belum dijalankan dari produk utama.',
-		),
-		'amanah-entity-profile' => array(
-			'title'       => 'AI — Entity Profile',
-			'description' => 'Entity Profile berada pada produk AMANAH SEO AI yang terpisah. Halaman ini hanya placeholder navigasi.',
-		),
-		'amanah-authority' => array(
-			'title'       => 'AI — Authority',
-			'description' => 'Authority berada pada produk AMANAH SEO AI yang terpisah. Halaman ini hanya placeholder navigasi.',
+		'amanah-seo-engine-workflow' => array(
+			'title' => 'ENGINE Workflow',
+			'description' => 'Pusat navigasi untuk delapan tahap AMANAH SEO ENGINE V2.',
 		),
 		'amanah-seo-ai-settings' => array(
-			'title'       => 'AI — Settings',
-			'description' => 'Pengaturan AMANAH SEO AI dikelola pada produk terpisah. Halaman ini tidak membaca atau mengubah pengaturan produk AI.',
+			'title' => 'AI Settings',
+			'description' => 'Pengaturan AMANAH SEO AI.',
+		),
+		'amanah-content-analyzer' => array(
+			'title' => 'Content Analyzer',
+			'description' => 'Content Analyzer merupakan bagian produk AMANAH SEO AI.',
+		),
+		'amanah-entity-profile' => array(
+			'title' => 'Entity Profile',
+			'description' => 'Entity Profile merupakan bagian produk AMANAH SEO AI.',
+		),
+		'amanah-authority' => array(
+			'title' => 'Authority & Author',
+			'description' => 'Authority & Author merupakan bagian produk AMANAH SEO AI.',
+		),
+		'amanah-content-generation' => array(
+			'title' => 'Article Generation',
+			'description' => 'Article Generation merupakan bagian produk AMANAH SEO AI.',
 		),
 		'amanah-seo-engine-keyword-research' => array(
-			'title'       => 'ENGINE — Keyword Research',
-			'description' => 'Tahap Keyword pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi dan tidak menjalankan workflow ENGINE.',
+			'title' => 'Keyword Research',
+			'description' => 'Tahap Keyword Research pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
 		),
 		'amanah-seo-engine-intelligence' => array(
-			'title'       => 'ENGINE — Intelligence',
-			'description' => 'Tahap Intelligence pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi.',
+			'title' => 'Intelligence',
+			'description' => 'Tahap Intelligence pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
 		),
 		'amanah-seo-engine-requirements' => array(
-			'title'       => 'ENGINE — Requirements',
-			'description' => 'Tahap Requirements pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi.',
+			'title' => 'Requirements',
+			'description' => 'Tahap Requirements pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
 		),
 		'amanah-seo-engine-strategy-plan' => array(
-			'title'       => 'ENGINE — Strategy & Plan',
-			'description' => 'Tahap Strategy dan Plan pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi.',
+			'title' => 'Strategy & Plan',
+			'description' => 'Tahap Strategy & Plan pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
 		),
 		'amanah-seo-engine-brief-blueprint' => array(
-			'title'       => 'ENGINE — Brief & Blueprint',
-			'description' => 'Tahap Brief dan Blueprint pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi.',
+			'title' => 'Brief & Blueprint',
+			'description' => 'Tahap Brief & Blueprint pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
 		),
 		'amanah-seo-engine-generation-evaluation' => array(
-			'title'       => 'ENGINE — Generation & Evaluation',
-			'description' => 'Tahap Generation dan Evaluation pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi.',
+			'title' => 'Generation & Evaluation',
+			'description' => 'Tahap Generation & Evaluation pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
 		),
 		'amanah-seo-engine-refinement-maturity' => array(
-			'title'       => 'ENGINE — Refinement & Maturity',
-			'description' => 'Tahap Refinement dan Maturity pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi.',
+			'title' => 'Refinement & Maturity',
+			'description' => 'Tahap Refinement & Maturity pada AMANAH SEO ENGINE V2 belum diintegrasikan.',
 		),
 		'amanah-seo-engine-review-publishing' => array(
-			'title'       => 'ENGINE — Review & Publishing',
-			'description' => 'Tahap Review dan Publishing Information pada AMANAH SEO ENGINE V2. Ini hanya placeholder navigasi; tidak ada konten yang dipublikasikan.',
+			'title' => 'Review & Publishing',
+			'description' => 'Tahap Review & Publishing pada AMANAH SEO ENGINE V2 belum diintegrasikan; tidak ada konten yang dipublikasikan.',
+		),
+		'amanah-seo-settings' => array(
+			'title' => 'Settings & Access',
+			'description' => 'Pengaturan workspace, pengguna/hak akses khusus, integrasi/sumber data, dan preferensi produk belum diimplementasikan.',
 		),
 	);
 
@@ -129,28 +137,37 @@ final class AMANAH_SEO_Menu_Shell {
 			58
 		);
 
+		$hidden_ai_pages = array(
+			'amanah-seo-ai-settings',
+			'amanah-content-analyzer',
+			'amanah-entity-profile',
+			'amanah-authority',
+			'amanah-content-generation',
+		);
+		$hidden_engine_pages = array(
+			'amanah-seo-engine-keyword-research',
+			'amanah-seo-engine-intelligence',
+			'amanah-seo-engine-requirements',
+			'amanah-seo-engine-strategy-plan',
+			'amanah-seo-engine-brief-blueprint',
+			'amanah-seo-engine-generation-evaluation',
+			'amanah-seo-engine-refinement-maturity',
+			'amanah-seo-engine-review-publishing',
+		);
+
 		foreach ( self::PAGES as $slug => $page ) {
-			// WordPress already creates the Dashboard submenu for the top-level page.
 			if ( 'amanah-seo-dashboard' === $slug ) {
 				continue;
 			}
 
-			// When the companion AI plugin is active, it registers its real screens
-			// under this menu. Do not create duplicate placeholder routes.
-			if (
-				class_exists( 'AMANAH_SEO_AI_Plugin_Core' )
-				&& in_array(
-					$slug,
-					array(
-						'amanah-seo-ai-dashboard',
-						'amanah-content-analyzer',
-						'amanah-entity-profile',
-						'amanah-authority',
-						'amanah-seo-ai-settings',
-					),
-					true
-				)
-			) {
+			if ( in_array( $slug, $hidden_ai_pages, true ) && class_exists( 'AMANAH_SEO_AI_Admin_Menu' ) ) {
+				// The AI companion registers its own protected, hidden screens.
+				continue;
+			}
+
+			if ( in_array( $slug, $hidden_ai_pages, true ) || in_array( $slug, $hidden_engine_pages, true ) ) {
+				// Keep feature routes available without cluttering the sidebar.
+				add_submenu_page( '', $page['title'], $page['title'], 'manage_options', $slug, array( self::class, 'render_page' ) );
 				continue;
 			}
 
@@ -192,6 +209,62 @@ final class AMANAH_SEO_Menu_Shell {
 		}
 
 		$page = self::PAGES[ $requested_page ];
+
+		if ( 'amanah-seo-ai-tools' === $requested_page ) {
+			$ai_pages = array(
+				'amanah-entity-profile' => 'Entity Profile',
+				'amanah-authority' => 'Authority & Author',
+				'amanah-content-analyzer' => 'Content Analyzer',
+				'amanah-content-generation' => 'Article Generation',
+				'amanah-seo-ai-settings' => 'AI Settings',
+			);
+			?>
+			<div class="wrap">
+				<h1><?php esc_html_e( 'AI Tools', 'amanah-seo' ); ?></h1>
+				<p><?php esc_html_e( 'Pilih fitur AI yang ingin dibuka. Setiap fitur tetap menggunakan halaman dan hak akses aslinya.', 'amanah-seo' ); ?></p>
+				<?php if ( ! class_exists( 'AMANAH_SEO_AI_Admin_Menu' ) ) : ?>
+					<div class="notice notice-warning inline"><p><?php esc_html_e( 'Plugin AMANAH SEO AI belum aktif. Aktifkan plugin pendamping untuk menggunakan fitur AI.', 'amanah-seo' ); ?></p></div>
+				<?php endif; ?>
+				<div class="amanah-seo-navigation-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:1100px;margin-top:20px">
+					<?php foreach ( $ai_pages as $slug => $label ) : ?>
+						<div class="postbox" style="padding:18px;margin:0">
+							<h2 style="margin-top:0"><?php echo esc_html( $label ); ?></h2>
+							<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=' . $slug ) ); ?>"><?php esc_html_e( 'Open', 'amanah-seo' ); ?></a></p>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<?php
+			return;
+		}
+
+		if ( 'amanah-seo-engine-workflow' === $requested_page ) {
+			$engine_pages = array(
+				'amanah-seo-engine-keyword-research' => '01 — Keyword Research',
+				'amanah-seo-engine-intelligence' => '02 — Intelligence',
+				'amanah-seo-engine-requirements' => '03 — Requirements',
+				'amanah-seo-engine-strategy-plan' => '04 — Strategy & Plan',
+				'amanah-seo-engine-brief-blueprint' => '05 — Brief & Blueprint',
+				'amanah-seo-engine-generation-evaluation' => '06 — Generation & Evaluation',
+				'amanah-seo-engine-refinement-maturity' => '07 — Refinement & Maturity',
+				'amanah-seo-engine-review-publishing' => '08 — Review & Publishing',
+			);
+			?>
+			<div class="wrap">
+				<h1><?php esc_html_e( 'ENGINE Workflow', 'amanah-seo' ); ?></h1>
+				<p><?php esc_html_e( 'Delapan tahap workflow ditampilkan berurutan. Integrasi fungsi ENGINE belum termasuk dalam paket navigasi ini.', 'amanah-seo' ); ?></p>
+				<div class="amanah-seo-navigation-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:1100px;margin-top:20px">
+					<?php foreach ( $engine_pages as $slug => $label ) : ?>
+						<div class="postbox" style="padding:18px;margin:0">
+							<h2 style="margin-top:0"><?php echo esc_html( $label ); ?></h2>
+							<p><a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=' . $slug ) ); ?>"><?php esc_html_e( 'View stage', 'amanah-seo' ); ?></a></p>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<?php
+			return;
+		}
 		?>
 		<div class="wrap">
 			<h1><?php echo esc_html( $page['title'] ); ?></h1>
