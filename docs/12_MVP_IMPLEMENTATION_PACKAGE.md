@@ -1,6 +1,6 @@
 # Paket Kesiapan Pengerjaan MVP AMANAH SEO
 
-**Versi:** 0.2-draft  
+**Versi:** 0.3-draft  
 **Status:** RANCANGAN TERKENDALI — belum disetujui untuk coding  
 **Tanggal:** 2026-10-11  
 **Acuan utama:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), dan [README](../README.md)  
@@ -18,7 +18,7 @@
 6. WordPress dapat menjadi sumber awal untuk identitas website dan konten yang benar-benar dapat dibaca dengan izin yang tersedia. Cara pengambilan dan data yang bisa dibaca harus diperiksa sebelum fitur tersebut dibuat; jangan menganggap REST API atau akses tertentu sudah tersedia.
 7. Temuan awal dapat dimasukkan oleh pengguna secara manual, dengan catatan sumber/alasan dan label bahwa temuan tersebut merupakan masukan pengguna, bukan hasil pengukuran otomatis.
 8. Google Search Console dapat ditambahkan pada tahap berikutnya untuk metrik performa pencarian, setelah website yang sesuai tersedia dan pemilik memberi akses resmi baca-saja.
-9. Integrasi AMANAH SEO AI dan AMANAH SEO ENGINE V2 tetap opsional dan berada di luar MVP dasar.
+9. Target arsitektur adalah satu plugin WordPress AMANAH SEO yang memuat modul internal AI dan Engine. Modul tersebut tidak menjadi prasyarat fungsional siklus MVP dasar; audit/migrasi modul adalah paket kerja terpisah yang tidak boleh dilakukan secara massal sebelum disetujui.
 10. Semua perubahan pada website dan publikasi tetap memerlukan persetujuan eksplisit. MVP tidak melakukan perubahan website secara otomatis.
 
 ## 2. Status dokumen dan konflik yang sudah ditemukan
@@ -52,7 +52,8 @@
 - Menjanjikan atau menampilkan angka klik, tayangan, CTR, posisi Google, atau ranking tanpa sumber terverifikasi.
 - Membuat atau menerbitkan konten secara otomatis.
 - Mengubah website tanpa persetujuan.
-- Mengganti AMANAH SEO AI atau AMANAH SEO ENGINE V2 atau menyalin mesin khusus keduanya.
+- Menjadikan kemampuan AI atau seluruh workflow Engine sebagai prasyarat siklus MVP dasar.
+- Memindahkan kode modul AI/Engine ke Core tanpa audit dependensi, kontrak internal, strategi migrasi data/pengaturan, dan persetujuan paket migrasi.
 - Integrasi wajib dengan produk AI/ENGINE, banyak penyedia data sekaligus, billing, marketplace, portal pelanggan, atau pengelolaan tim kompleks.
 - Menyatakan integrasi atau fitur sudah berfungsi tanpa bukti uji.
 
@@ -158,7 +159,8 @@ Setiap butir harus diberi status PASS, FAIL, atau BELUM DIUJI disertai bukti. Ja
 - Gunakan hak akses minimum yang diperlukan; semua pemeriksaan izin penting dilakukan di sisi server.
 - Jangan menyimpan rahasia di repository, log, screenshot, atau percakapan.
 - Jangan mengubah atau menerbitkan konten website tanpa persetujuan pemilik.
-- Jangan mengubah produk AMANAH SEO AI atau AMANAH SEO ENGINE V2.
+- Jangan mengubah kode, database, konfigurasi, atau runtime AMANAH SEO AI maupun AMANAH SEO ENGINE V2 selama tahap persiapan dokumen.
+- Target satu plugin tidak mengizinkan pemindahan kode secara massal. Migrasi baru boleh dimulai setelah paket migrasi tersendiri memetakan baseline, file/dependensi, kontrak modul, data/pengaturan, lisensi, tes regresi, dan rollback serta mendapat persetujuan.
 - Jangan mengubah database, runtime, konfigurasi, atau website testing saat tahap persiapan dokumen.
 - Implementasi harus berada dalam branch/PR tersendiri dengan daftar file, tes, dan cara rollback yang jelas.
 - Jangan menggabungkan PR atau melakukan deployment hanya karena paket ini selesai.
@@ -196,3 +198,42 @@ Sebelum implementasi, pemilik perlu menyetujui:
 6. Izin eksplisit untuk mulai coding.
 
 **Status saat ini:** persiapan dokumentasi sedang dirapikan. Pedoman dan lingkup MVP sudah ada di `main`; paket ini masih draft. Lingkungan dan sumber data nyata belum diverifikasi dalam dokumen ini. Belum ada izin implementasi, perubahan runtime, atau penggabungan PR.
+
+
+## 10. Paket arsitektur satu plugin dan migrasi modul — belum disetujui untuk implementasi
+
+Pemilik menyetujui target bahwa pengguna memasang satu plugin **AMANAH SEO** yang memuat modul internal AI dan Engine. Persetujuan arsitektur ini tidak dengan sendirinya mengizinkan migrasi kode, perubahan database, atau deployment.
+
+### Tahap A — audit baseline (baca-saja)
+- Catat branch, commit, entry point, struktur source, dependensi, tests, dan status kerja untuk ketiga repository.
+- Baca master documentation dan aturan proyek AMANAH SEO AI serta AMANAH SEO Engine sebelum menyentuh source mereka.
+- Petakan fitur yang nyata, status pengujian, titik aktivasi, hooks, capabilities, routes, REST/AJAX, cron/background jobs, provider credentials, dan diagnostik.
+- Petakan database tables, options/settings, versioning, migrations, dan kepemilikan data tanpa mengubahnya.
+- Tandai setiap fakta sebagai terverifikasi, parsial, belum diuji, atau terhalang.
+
+### Tahap B — desain kontrak modul
+- Tentukan bootstrap dan lifecycle satu plugin induk.
+- Tentukan interface/contract internal Core ↔ AI module dan Core ↔ Engine module.
+- Tetapkan aturan kegagalan modul: Core harus tetap aman dan diagnostik harus jelas jika suatu modul tidak dapat dimuat.
+- Tetapkan kepemilikan data, kredensial, lisensi/entitlement, capabilities, hooks, dan migration ownership.
+- Tetapkan kompatibilitas terhadap instalasi/data yang sudah ada serta cara menghindari class/function collisions.
+
+### Tahap C — urutan migrasi terkendali
+1. Siapkan kerangka plugin induk dan pengujian bootstrap tanpa mengubah runtime.
+2. Migrasikan Core yang diperlukan untuk siklus MVP dan buktikan acceptance criteria MVP.
+3. Migrasikan modul AI sebagai paket terpisah di dalam plugin induk, beserta tes regresi provider/settings/entity/content analyzer yang relevan.
+4. Migrasikan modul Engine secara terpisah, dengan tes workflow dan publishing approval yang relevan.
+5. Tambahkan migrasi data/settings hanya jika dibutuhkan dan setelah rencana upgrade/rollback diuji.
+6. Jalankan integrasi lintas modul, keamanan, aktivasi/nonaktifkan, update/upgrade, dan uji WordPress runtime.
+7. Pensiunkan plugin lama hanya setelah pengganti lulus dan keputusan penutupan disetujui secara terpisah.
+
+### Kriteria penerimaan arsitektur akhir
+- Pengguna dapat memasang dan mengaktifkan hanya plugin AMANAH SEO.
+- Core tidak fatal error bila modul gagal dimuat; status kegagalan ditampilkan dengan aman.
+- Modul berinteraksi melalui kontrak yang jelas dan tidak mengakses data satu sama lain secara tidak terdokumentasi.
+- Data, pengaturan, kredensial, lisensi, hak akses, dan workflow lama dipertahankan atau dimigrasikan dengan bukti.
+- Tidak ada class/function collision atau aktivasi ganda dari dua plugin.
+- Tes unit, integrasi, regresi, keamanan, migrasi, dan WordPress runtime yang relevan lulus.
+- Rollback dapat mengembalikan keadaan sebelumnya tanpa kehilangan data.
+
+**Status:** DESAIN MIGRASI BELUM SELESAI; AUDIT BASELINE BELUM LENGKAP; IMPLEMENTASI BELUM DIMULAI. Tahap berikutnya adalah audit baca-saja dan penyusunan daftar perubahan yang tepat. Tidak ada kode produk yang diubah dalam branch dokumentasi ini.
