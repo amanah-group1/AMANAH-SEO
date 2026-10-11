@@ -13,11 +13,11 @@
 1. Produk yang dikerjakan adalah **AMANAH SEO**, produk utama pengelola pekerjaan SEO.
 2. Website WordPress testing menjadi lingkungan pengujian awal; bukan website resmi/produksi.
 3. MVP pertama harus membuktikan satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → keputusan pemilik → catatan hasil → langkah berikutnya**.
-4. Google Search Console **bukan syarat untuk mulai menguji siklus dasar MVP**. Website testing yang belum terdaftar di Search Console tetap bisa dipakai untuk menguji alur, pengelolaan website, temuan yang dimasukkan pemilik, tugas, persetujuan, dan riwayat.
-5. Sistem tidak boleh membuat angka klik, tayangan, ranking, atau hasil lain seolah-olah nyata jika belum ada sumber yang membuktikannya. Data yang belum tersedia harus ditandai jelas.
-6. WordPress dapat menjadi sumber awal untuk identitas website dan konten yang benar-benar dapat dibaca dengan izin yang tersedia. Cara pengambilan dan data yang bisa dibaca harus diperiksa sebelum fitur tersebut dibuat; jangan menganggap REST API atau akses tertentu sudah tersedia.
-7. Temuan awal dapat dimasukkan oleh pengguna secara manual, dengan catatan sumber/alasan dan label bahwa temuan tersebut merupakan masukan pengguna, bukan hasil pengukuran otomatis.
-8. Google Search Console dapat ditambahkan pada tahap berikutnya untuk metrik performa pencarian, setelah website yang sesuai tersedia dan pemilik memberi akses resmi baca-saja.
+4. Sumber awal konseptual yang dipilih adalah WordPress internal untuk struktur/konten dan Google Search Console (GSC) untuk metrik performa pencarian. Pemilihan ini tidak berarti koneksi sudah tersedia atau lulus uji.
+5. GSC **bukan syarat untuk menguji siklus dasar tugas MVP**, tetapi merupakan prasyarat teknis bagi fitur metrik pencarian. Website testing yang belum terdaftar di GSC tetap dapat menguji pengelolaan website, temuan manual, tugas, keputusan, dan riwayat tanpa mengklaim metrik pencarian.
+6. Sistem tidak boleh membuat angka klik, tayangan, CTR, posisi, ranking, atau hasil lain seolah-olah nyata jika belum ada sumber yang membuktikannya. Data kosong, usang, parsial, tidak diizinkan, atau gagal harus dibedakan dan tidak diubah menjadi nol.
+7. WordPress dapat menjadi sumber untuk identitas, URL, judul, konten, dan hubungan konten yang benar-benar dapat dibaca dengan izin yang tersedia. Cara pengambilan dan cakupan data harus dibuktikan; jangan menganggap REST API atau akses tertentu sudah tersedia.
+8. Temuan awal dapat dimasukkan manual oleh pengguna dengan sumber/alasan, waktu, dan label bahwa itu masukan pengguna, bukan hasil pengukuran otomatis.
 9. Integrasi AMANAH SEO AI dan AMANAH SEO ENGINE V2 tetap opsional dan berada di luar MVP dasar.
 10. Semua perubahan pada website dan publikasi tetap memerlukan persetujuan eksplisit. MVP tidak melakukan perubahan website secara otomatis.
 
@@ -118,9 +118,10 @@ Bukti minimum untuk sumber apa pun:
 - Uji kegagalan, akses tidak sah, dan data yang belum tersedia.
 - Catat hasil PASS/FAIL berdasarkan bukti; perbaiki masalah yang ditemukan dalam lingkup yang disetujui.
 
-### Tahap berikutnya — metrik Search Console (opsional untuk siklus dasar)
-- Baru dimulai jika ada properti yang sesuai, akses resmi baca-saja, dan kebutuhan metrik disetujui.
-- Uji izin properti, satu kueri data, keterkinian data, data kosong/parsial, kuota, dan kegagalan autentikasi.
+### Gerbang sumber data — WordPress internal dan GSC
+- Untuk WordPress, buktikan akses baca yang sah serta contoh data sesuai lingkup fitur (identitas, URL, judul, konten, atau hubungan konten). Catat cakupan dan waktu pengambilan.
+- Untuk GSC, buktikan properti yang tepat dan akses baca-saja sebelum membuat atau mengklaim fitur metrik pencarian. Uji kueri data, rentang tanggal, keterkinian, data kosong/parsial, batas kuota, dan kegagalan autentikasi.
+- GSC tidak menghalangi pengujian alur dasar tugas jika belum tersedia; gunakan temuan manual berlabel jelas atau data WordPress yang benar-benar dibaca. Jangan mengklaim metrik GSC dalam skenario tersebut.
 - Jangan mengirim password, token, client secret, atau kredensial ke chat atau repository.
 
 ## 6. Kriteria penerimaan MVP
@@ -196,3 +197,21 @@ Sebelum implementasi, pemilik perlu menyetujui:
 6. Izin eksplisit untuk mulai coding.
 
 **Status saat ini:** persiapan dokumentasi sedang dirapikan. Pedoman dan lingkup MVP sudah ada di `main`; paket ini masih draft. Lingkungan dan sumber data nyata belum diverifikasi dalam dokumen ini. Belum ada izin implementasi, perubahan runtime, atau penggabungan PR.
+
+
+## 8. Transisi status dan pemulihan yang wajib diuji
+
+| Keadaan | Perilaku yang diwajibkan | Bukti uji minimum |
+|---|---|---|
+| Data tersedia | Catat sumber, waktu, cakupan, dan referensi bukti | Contoh data nyata yang disanitasi |
+| Data tidak tersedia/parsial/usang | Tampilkan status sebenarnya; jangan isi nilai rekaan atau menganggapnya nol | Skenario kosong, parsial, dan usang |
+| Akses ditolak/koneksi gagal | Tandai gagal/terhambat, tampilkan langkah aman, jangan mengklaim pembaruan berhasil | Uji izin ditolak dan kegagalan sumber |
+| Persetujuan menunggu | Tidak ada tindakan website/publikasi yang dijalankan | Uji status menunggu dan penolakan |
+| Persetujuan ditolak | Kembalikan untuk revisi atau batalkan sesuai keputusan; simpan riwayat | Uji penolakan dan audit trail |
+| Isi berubah setelah disetujui | Persetujuan lama tidak berlaku untuk perubahan material; minta persetujuan ulang | Uji perubahan versi |
+| Percobaan ulang | Pastikan aman/idempoten dan tidak menggandakan tindakan; verifikasi hasil tidak pasti | Uji kegagalan dan retry |
+| Selesai | Hanya setelah kriteria selesai dan bukti dicatat | Bukti hasil yang dapat ditinjau |
+
+## 9. Status penutupan dokumen
+
+Pedoman konseptual dan lingkup MVP dinyatakan selesai berdasarkan keputusan pemilik. Dokumen paket ini tetap **rancangan kesiapan implementasi**, bukan persetujuan coding. Tidak ada keputusan konseptual yang memblokir penutupan pedoman; bukti akses WordPress, GSC, dan lingkungan testing tetap merupakan gerbang teknis sebelum fitur terkait dibangun atau dinyatakan PASS.
