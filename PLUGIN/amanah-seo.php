@@ -388,12 +388,12 @@ final class AMANAH_SEO_Menu_Shell {
 			?>
 			<div class="wrap">
 				<h1><?php esc_html_e( 'AMANAH SEO AI', 'amanah-seo' ); ?></h1>
-				<p class="description" style="max-width:900px;font-size:14px"><?php esc_html_e( 'Kemampuan AI pendamping dalam ekosistem AMANAH SEO untuk membangun konteks bisnis, mendukung analisis dan pengembangan konten, serta membantu pekerjaan SEO secara terkontrol.', 'amanah-seo' ); ?></p>
+				<p class="description" style="font-size:14px;max-width:none;width:100%;box-sizing:border-box"><?php esc_html_e( 'Kemampuan AI pendamping dalam ekosistem AMANAH SEO untuk membangun konteks bisnis, mendukung analisis dan pengembangan konten, serta membantu pekerjaan SEO secara terkontrol.', 'amanah-seo' ); ?></p>
 				<?php if ( ! class_exists( 'AMANAH_SEO_AI_Admin_Menu' ) ) : ?>
 					<div class="notice notice-warning inline"><p><?php esc_html_e( 'Plugin AMANAH SEO AI belum aktif. Aktifkan plugin pendamping untuk menggunakan fitur AI yang terintegrasi. Kartu yang belum terintegrasi tetap ditandai sebagai placeholder.', 'amanah-seo' ); ?></p></div>
 				<?php endif; ?>
 
-				<div class="card" style="max-width:1100px;margin-top:18px;padding:22px">
+				<div class="card" style="width:100%;max-width:none;box-sizing:border-box;margin-top:18px;padding:24px">
 					<h2 style="margin-top:0"><?php esc_html_e( 'Membangun fondasi agar AI memahami bisnis Anda', 'amanah-seo' ); ?></h2>
 					<p><?php esc_html_e( 'Ketika orang menggunakan mesin pencari maupun AI untuk menemukan bisnis, produk, layanan, dan informasi, bisnis membutuhkan identitas yang jelas, informasi yang konsisten, keahlian yang dapat dijelaskan, serta konten yang relevan dan terstruktur.', 'amanah-seo' ); ?></p>
 					<p><strong><?php esc_html_e( 'AMANAH SEO AI membantu membangun fondasi tersebut — bukan sekadar menghasilkan konten.', 'amanah-seo' ); ?></strong></p>
@@ -409,7 +409,7 @@ final class AMANAH_SEO_Menu_Shell {
 				<p><?php esc_html_e( 'Pilih kelompok kemampuan sesuai pekerjaan yang ingin dilakukan. Status placeholder berarti integrasi fitur belum tersedia pada paket ini.', 'amanah-seo' ); ?></p>
 				<?php foreach ( $ai_groups as $group_title => $group_slugs ) : ?>
 					<h3 style="margin-top:24px"><?php echo esc_html( $group_title ); ?></h3>
-					<div class="amanah-seo-navigation-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:1100px">
+					<div class="amanah-seo-navigation-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px;width:100%;max-width:none;box-sizing:border-box">
 						<?php foreach ( $group_slugs as $slug ) : ?>
 							<?php $card = $ai_pages[ $slug ]; ?>
 							<div class="postbox" style="padding:18px;margin:0">
@@ -424,7 +424,7 @@ final class AMANAH_SEO_Menu_Shell {
 					</div>
 				<?php endforeach; ?>
 
-				<div class="card" style="max-width:1100px;margin-top:28px;padding:22px">
+				<div class="card" style="width:100%;max-width:none;box-sizing:border-box;margin-top:28px;padding:24px">
 					<h2 style="margin-top:0"><?php esc_html_e( 'Bagian dari satu sistem SEO terpadu', 'amanah-seo' ); ?></h2>
 					<p><?php esc_html_e( 'AMANAH SEO menghubungkan data website, SEO Intelligence, prioritas, strategi, pelaksanaan, validasi, persetujuan manusia, publikasi, dan pemantauan hasil. AMANAH SEO AI mendukung ekosistem tersebut melalui kemampuan AI, sedangkan AMANAH SEO ENGINE menyediakan workflow SEO yang terstruktur.', 'amanah-seo' ); ?></p>
 					<p><strong><?php esc_html_e( 'Tujuannya bukan sekadar menghasilkan konten dengan AI, tetapi mendukung keputusan SEO yang lebih terarah dan dapat ditinjau.', 'amanah-seo' ); ?></strong></p>
