@@ -268,3 +268,63 @@ Pemeriksaan awal dilakukan langsung terhadap file di branch `main` masing-masing
 - Hasilkan mapping sumber → target modul (Core / AI / Engine), dependency graph, daftar benturan, keputusan yang dibutuhkan, dan urutan migrasi.
 
 **Batas audit:** read-only. Tidak ada file kode, branch, database, konfigurasi, runtime, atau WordPress dari repository AI/Engine yang diubah.
+
+
+## 12. Temuan audit baseline lanjutan — source dan kontrak data
+
+Audit ini masih baca-saja dan berlandaskan file di branch `main` kedua repository pendamping. Ini memperluas baseline pada bagian 11; bukan audit live database atau runtime.
+
+### 12.1 AMANAH SEO AI — struktur dan data
+
+**Source yang diverifikasi:**
+- `plugin/amanah-seo-ai.php` — entry point dan lifecycle plugin.
+- `plugin/includes/class-plugin-loader.php`, `class-plugin-core.php`, `class-install.php`, `class-activator.php`, `class-deactivator.php` — loader, core, install/upgrade, activation, deactivation.
+- `plugin/modules/` memiliki modul `ai/`, `authority/`, `content/`, dan `entity/`.
+- Dokumen arsitektur menyatakan `plugin/` sebagai canonical source boundary; dokumentasi dan tes tetap di luar source deployable.
+
+**Daftar tabel yang tercantum dalam dokumen desain database AI (10):**
+
+`wp_amanah_entities`, `wp_amanah_entity_topics`, `wp_amanah_audits`, `wp_amanah_content_analysis`, `wp_amanah_content_plan`, `wp_amanah_schema`, `wp_amanah_ai_logs`, `wp_amanah_tasks`, `wp_amanah_settings`, `wp_amanah_license`.
+
+Daftar tersebut berasal dari dokumen desain, bukan hasil inspeksi database runtime. Nama tabel aktual dapat menggunakan prefix WordPress yang berbeda atau memiliki perbedaan versi; harus diverifikasi melalui installer/migration source dan database aktual sebelum rencana migrasi ditetapkan. Dokumen juga menyebut penggunaan `wp_options`; option keys aktual belum diinventarisasi penuh.
+
+### 12.2 AMANAH SEO Engine — struktur dan data
+
+**Source yang diverifikasi:**
+- `plugin/amanah-seo-engine.php` — entry point, autoloader, boot, activation/deactivation hooks.
+- `plugin/Core/Autoload/ClassLoader.php` — loader namespace `Amanah\\SEOEngine\\` dari `plugin/`.
+- `plugin/Core/Bootstrap/Plugin.php` — bootstrap utama Engine.
+- `plugin/Infrastructure/Migration/MigrationInterface.php` dan `MigrationManager.php`, beserta direktori `Migrations/` — terdapat migration framework eksplisit.
+- Struktur Engine mencakup `AI`, `Application`, `Core`, `Domain`, `Infrastructure`, `Platform`, dan `Presentation`. Infrastructure memiliki area Database, Migration, Repository, Configuration, BackgroundJob, Diagnostics, WordPress, dan lainnya. Platform memiliki area License dan Update.
+- `composer.json` menyatakan PHP `>=7.4`, PSR-4 autoload, PHPUnit 9.6, WPCS, dan parallel-lint untuk development.
+
+Migration manager dan direktori migration berarti urutan serta versi migration Engine harus dipertahankan; tidak boleh disamakan secara asumtif dengan installer/upgrade AI. Isi migration dan schema Engine belum diinventarisasi penuh pada tahap ini.
+
+### 12.3 Konflik dan keputusan teknis yang wajib diselesaikan sebelum coding
+
+| ID | Risiko/pertanyaan | Aturan kerja sementara | Bukti yang masih dibutuhkan |
+|---|---|---|---|
+| MIG-01 | Nama tabel AI dan Engine mungkin bertumpang tindih atau memakai prefix/versi berbeda. | Jangan rename, merge, drop, atau reset tabel. | Daftar tabel dan skema dari semua migration AI/Engine serta database aktual tiap runtime. |
+| MIG-02 | AI menggunakan installer/upgrade; Engine memiliki MigrationManager. | Jangan membuat satu migration runner gabungan sebelum urutan dan ownership dipetakan. | Semua migration file, version option, activation path, upgrade path, dan idempotency test. |
+| BOOT-01 | Dua entry point dan lifecycle plugin. | Plugin induk kelak satu-satunya pemilik header/lifecycle; modul tidak mendaftarkan aktivasi plugin mandiri setelah migrasi. | Pemetaan side effects activation/deactivation dan hook yang sekarang terdaftar. |
+| LOAD-01 | AI loader dan Engine PSR-4 autoloader. | Namespace, class names, function names, constants, and include paths harus bebas benturan. | Inventaris deklarasi PHP dan pemeriksaan static collision. |
+| SEC-01 | API credentials, encrypted settings, custom capabilities, licensing/entitlements. | Tidak boleh memindahkan atau mengubah format rahasia, capability, atau entitlement tanpa compatibility contract. | Dokumen TQ-008 AI, rules licensing Engine, option keys aktual, key derivation/encryption path, role/capability registration, and tests. |
+| TEST-01 | PHPUnit bootstrap/suite berbeda. | Pertahankan tes per modul sambil membangun integration tests plugin induk. | Inventaris seluruh test suite dan dependency/fixture masing-masing. |
+| UPDATE-01 | Update/licensing area Engine dan AI punya mekanisme masing-masing. | Jangan mengaktifkan dua updater/plugin identity di paket tunggal. | Audit platform license/update code, product IDs, API contracts, and distribution workflow. |
+
+### 12.4 Batas audit dan status
+
+- Master governance Engine DOC-00, DOC-13, DOC-14 berstatus LOCKED dan mewajibkan audit penuh, audit database/migration/dependency, serta controlled change. Dokumen LOCKED tidak diubah oleh pekerjaan ini.
+- Master documentation AI yang telah ditinjau mencakup arsitektur, desain database, coding standard, security/privacy, role/permission, implementation control, dan plugin-core implementation plan; dokumen terkait lainnya masih perlu diperiksa sebelum audit dinyatakan lengkap.
+- Source entry point dan beberapa direktori telah diperiksa; belum seluruh file PHP, seluruh migration, seluruh tests, uninstall behavior, update/activation side effects, atau source CI.
+- Belum ada akses/verifikasi ke database runtime AI/Engine dalam audit ini. Tidak ada klaim skema aktual atau migrasi PASS.
+
+**Status keseluruhan:** AUDIT BASELINE PARTIAL. **Coding/migrasi:** NOT STARTED. **Database/runtime changes:** NONE.
+
+### 12.5 Urutan audit baca-saja berikutnya
+
+1. Baca dokumen kontrol AI lengkap, terutama TQ-007, TQ-008, TQ-005, CORE-002, REPO-STRUCTURE-001, testing/QA, REST API, deployment, dan dokumen implementation control.
+2. Baca Engine DOC-04 (data), DOC-05 (master rules), DOC-12 (AI/search/usage), serta aturan migration/portability/license/update yang relevan; hormati seluruh dokumen LOCKED.
+3. Inventarisasi seluruh migration source, table/options, class/function/constant declarations, hooks, cron, REST/AJAX, capability, licensing, updater, uninstall, dan tests.
+4. Hasilkan dependency graph dan mapping file-by-file ke target Core / AI module / Engine module, disertai disposition: reuse, adapt, replace, defer, atau exclude beserta alasannya.
+5. Siapkan rencana migrasi data dan rollback terpisah untuk review sebelum ada perubahan kode.
