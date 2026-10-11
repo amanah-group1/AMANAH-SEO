@@ -42,42 +42,47 @@ AMANAH SEO menyatukan alur pengambilan keputusan dan pengelolaan pekerjaan itu. 
 11. **Sederhana dan dapat dipahami.** Dashboard dan pedoman tidak boleh memaksa pemilik mengikuti proses dokumentasi yang berputar-putar tanpa menghasilkan keputusan atau produk yang lebih jelas.
 12. **Aman secara default.** Akses mengikuti kewenangan; rahasia dan data pengguna dilindungi; tindakan penting dicatat; kegagalan dijelaskan tanpa membocorkan rahasia.
 
-## 4. Pembagian tiga produk
+## 4. Arsitektur produk dan batas modul
 
-### 4.1 AMANAH SEO — produk utama / pengelola
+**Target packaging yang disetujui:** pengguna memasang satu plugin WordPress bernama **AMANAH SEO**. Kemampuan yang berasal dari AMANAH SEO AI dan AMANAH SEO ENGINE V2 ditata sebagai **modul internal** di dalam plugin induk setelah audit dan migrasi terkontrol; keduanya bukan plugin runtime tambahan yang dipasang berdampingan pada target akhir ini.
 
-Tanggung jawab konsep:
-- Pengalaman utama dan dashboard pengelolaan website.
+### 4.1 Core AMANAH SEO — pengelola utama
+
+Tanggung jawab core:
+- Pengalaman utama, navigasi, dan dashboard pengelolaan website.
 - Ringkasan kondisi website dan status pekerjaan.
-- Daftar masalah, peluang, dan prioritas beserta alasannya.
+- Daftar masalah, peluang, dan prioritas beserta alasan/buktinya.
 - Pengelolaan tugas, status, ketergantungan, tenggat, dan penanggung jawab.
 - Alur pemeriksaan, persetujuan, dan keputusan pengguna.
 - Gambaran hasil, perubahan kondisi, dan rekomendasi langkah berikutnya.
-- Pengaturan akses dan koneksi antarkomponen sesuai keputusan arsitektur yang kelak disetujui.
+- Kepemilikan kontrak modul, hak akses lintas modul, dan lifecycle produk yang terkoordinasi.
 
-AMANAH SEO **tidak otomatis mengambil alih** seluruh analisis AI, proses produksi konten mendalam, atau workflow khusus yang menjadi tanggung jawab produk terpisah.
+Core tidak boleh menyalin atau menggandakan mesin AI atau workflow konten. Core memanggil kontrak modul yang disetujui jika diperlukan dan tersedia; siklus MVP dasar tetap dapat diuji tanpa mengandalkan fitur AI/Engine yang belum dipindahkan atau diverifikasi.
 
-### 4.2 AMANAH SEO AI — produk AI tersendiri
+### 4.2 Modul AI — baseline AMANAH SEO AI
 
-Peran konseptual: menyediakan kemampuan SEO berbantuan AI, pemahaman konteks/entity, analisis, atau fungsi AI lain yang benar-benar tersedia dan teruji pada produknya.
-
-Batasan:
-- Tidak dianggap wajib agar AMANAH SEO atau AMANAH SEO ENGINE V2 dapat berjalan.
-- Tidak boleh dinyatakan menyediakan kemampuan tertentu hanya berdasarkan rencana atau nama fitur; harus diverifikasi di repositori dan pengujian.
-- Memiliki konfigurasi, akses, lisensi, data, serta siklus pengembangannya sendiri sesuai kontrak yang disepakati.
-
-### 4.3 AMANAH SEO ENGINE V2 — produk workflow SEO tersendiri
-
-Peran konseptual: menjalankan alur kerja SEO/konten yang terstruktur, dari kebutuhan dan strategi hingga pembuatan, evaluasi, perbaikan, peninjauan, dan kesiapan publikasi sesuai kemampuan yang benar-benar ada.
+Modul ini dapat menyediakan kemampuan SEO berbantuan AI, pemahaman entity, analisis, dan fungsi AI lain yang benar-benar tersedia dan teruji pada baseline sumbernya. Repository AMANAH SEO AI tetap baseline audit/migrasi sampai perubahan terkontrol disetujui.
 
 Batasan:
-- Tidak dianggap wajib bagi AMANAH SEO atau AMANAH SEO AI untuk berjalan.
-- Tidak menjamin peringkat mesin pencari.
-- AMANAH SEO tidak boleh menyalin mesin workflow ini ke dalam produk induk hanya untuk menghindari integrasi.
+- Fitur modul tidak otomatis menjadi bagian MVP fungsional.
+- Konfigurasi, kredensial, lisensi, data, provider/fallback, dan perilaku kegagalan harus diaudit sebelum migrasi; kontrak yang telah dikunci tidak boleh diubah tanpa keputusan terkontrol.
+- Jangan menjalankan lifecycle plugin lama secara paralel setelah migrasi ke satu plugin induk.
 
-### 4.4 Aturan hubungan produk
+### 4.3 Modul Engine — baseline AMANAH SEO ENGINE V2
 
-Ketiga produk dapat digunakan secara mandiri sesuai fungsi masing-masing. Integrasi bersifat opsional dan harus memiliki kontrak yang jelas: tujuan, pemilik data, input/output, autentikasi/otorisasi, kegagalan, pencatatan, kompatibilitas versi, serta cara memutus koneksi. Jika integrasi tidak tersedia atau gagal, sistem harus menunjukkan status yang jujur dan tidak berpura-pura telah menyelesaikan pekerjaan.
+Modul ini dapat menyediakan workflow SEO/konten terstruktur, dari kebutuhan dan strategi hingga generasi, evaluasi, refinement, review, dan kesiapan publikasi sesuai kemampuan baseline yang terbukti. Repository AMANAH SEO ENGINE V2 tetap baseline audit/migrasi sampai perubahan terkontrol disetujui.
+
+Batasan:
+- Fitur modul tidak otomatis menjadi bagian MVP fungsional.
+- Model data, migrasi, cron/jobs, route/menu, kapabilitas, lisensi, dan uninstall harus diaudit sebelum migrasi; rollback tidak boleh diasumsikan jika tidak ada kontrak teruji.
+- Jangan menyalin registrasi plugin dan lifecycle lama secara apa adanya ke plugin induk.
+
+### 4.4 Kontrak packaging dan lifecycle
+
+- **Satu plugin runtime:** hanya plugin AMANAH SEO yang dipasang dan diaktifkan pada target akhir. Modul AI dan Engine memiliki batas internal yang jelas, bukan registrasi plugin mandiri tambahan.
+- **Satu koordinator lifecycle:** AMANAH SEO Lifecycle Manager mengoordinasikan aktivasi, upgrade, migrasi, deaktivasi, uninstall, dan cleanup komponen internal yang hanya perlu satu instance. Modul mempertahankan logika migrasi/cleanup domainnya dan versi database masing-masing, tetapi koordinator memanggilnya dengan urutan, status, logging, dan pemulihan yang terkendali.
+- **Migrasi aman:** jangan menjalankan installer/lifecycle lama yang destruktif sebelum schema, tabel legacy/arsip, kredensial, cron, dan strategi backup/restore diaudit. Data pengguna dipertahankan secara default saat uninstall; penghapusan data memerlukan kebijakan eksplisit dan perlindungan rahasia.
+- **Batas fase:** keputusan packaging satu plugin tidak memberi izin untuk memindahkan kode sekarang. Source repositories AI/Engine, runtime, database, lisensi, dan konfigurasi tidak diubah pada tahap penutupan pedoman. Migrasi dilakukan satu paket terkontrol setelah scope, file, tes, dan rollback disetujui.
 
 ## 5. Alur kerja utama AMANAH SEO
 
@@ -171,7 +176,7 @@ Selama tahap penyusunan pedoman (tahap konseptual kini telah ditutup):
 
 Urutan berikut dicatat sebagai rekam jejak penyelesaian, bukan daftar pekerjaan yang masih terbuka:
 
-1. Dasar produk, peran tiga produk, prinsip kemandirian, dan kendali pemilik ditetapkan.
+1. Dasar produk, target packaging satu plugin, pembagian core/modul internal, prinsip kemandirian tanggung jawab, dan kendali pemilik ditetapkan.
 2. Alur end-to-end, sumber data awal, status, persetujuan, kegagalan, pemulihan, dan evaluasi ditetapkan.
 3. Lingkup MVP, hal di luar MVP, serta tujuh keputusan MVP disepakati.
 4. Kemampuan AI/ENGINE diperlakukan secara konservatif: integrasi tetap opsional dan status yang belum diuji tidak dianggap tersedia.
@@ -191,7 +196,8 @@ Ketujuh keputusan MVP-01 sampai MVP-07 disetujui pemilik pada 2026-10-11. Rincia
 
 - **GATE-DATA-01 — Verifikasi akses WordPress dan GSC.** Sumber awal konseptual telah dipilih: WordPress internal untuk struktur/konten dan GSC untuk performa pencarian. Sebelum fitur terkait dibangun atau dinyatakan berfungsi, buktikan izin, cakupan, metode baca, contoh data nyata, keterkinian, batas penggunaan, dan kondisi gagal untuk masing-masing sumber. Untuk menguji siklus dasar tugas, temuan manual yang diberi label jelas boleh digunakan tanpa mengklaim koneksi sumber otomatis lulus. Ini adalah gerbang implementasi, bukan penghalang penutupan pedoman konsep.
 - **GATE-CAPABILITY-01 — Verifikasi integrasi AI/ENGINE bila diusulkan.** Produk pendamping tetap opsional. Jika integrasi dipilih, audit repositori/versi, kontrak, autentikasi/otorisasi, alur data, penanganan gagal, dan pengujian. Sampai bukti tersedia, status integrasi adalah **BELUM TERVERIFIKASI**.
-- **ARCH-LIFECYCLE-01 — Pemilik siklus hidup.** AMANAH SEO Lifecycle Manager menjadi satu koordinator untuk fungsi siklus hidup yang memang hanya perlu satu instance di dalam produk/instalasi AMANAH SEO, termasuk urutan aktivasi, upgrade, migrasi, deaktivasi, dan uninstall komponen internal. Komponen tetap memiliki logika migrasi/cleanup internal yang dipanggil secara terkendali dan versi database masing-masing tetap tercatat. Keputusan ini tidak memberi Lifecycle Manager kewenangan mengendalikan siklus hidup instalasi AMANAH SEO AI atau AMANAH SEO ENGINE V2 yang merupakan produk terpisah. Kegagalan harus dicatat dan ditangani aman; uninstall default mempertahankan data pengguna, dan penghapusan data hanya mengikuti kebijakan eksplisit serta perlindungan rahasia/data.
+- **ARCH-PACKAGING-01 — Target satu plugin.** AMANAH SEO menjadi satu-satunya plugin runtime yang dipasang. Kemampuan AI dan Engine menjadi modul internal setelah audit/migrasi terkontrol; repository AI/Engine tetap baseline sumber, bukan plugin runtime tambahan pada target akhir. Keputusan packaging tidak memasukkan seluruh fitur modul ke MVP dasar dan bukan izin untuk memindahkan kode.
+- **ARCH-LIFECYCLE-01 — Pemilik siklus hidup.** AMANAH SEO Lifecycle Manager menjadi satu koordinator untuk aktivasi, upgrade, migrasi, deaktivasi, uninstall, dan cleanup komponen internal yang hanya perlu satu instance. Modul tetap memiliki logika migrasi/cleanup domain dan versi database masing-masing, dipanggil secara terkendali oleh koordinator. Kegagalan harus dicatat dan ditangani aman; uninstall default mempertahankan data pengguna, dan penghapusan data hanya mengikuti kebijakan eksplisit serta perlindungan rahasia/data.
 
 ### 11.3 Keputusan non-pemblokir yang dipindahkan ke backlog
 
@@ -249,7 +255,8 @@ Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisa
 ## 15. Konsolidasi final alur dan status penutupan
 
 - Alur AMANAH SEO adalah siklus pengelolaan website → sumber/kondisi → temuan → prioritas beralasan → tugas → pemeriksaan/keputusan → pelaksanaan yang diizinkan → pencatatan hasil → pemantauan → pembaruan prioritas.
-- Alur terperinci produksi konten milik AMANAH SEO ENGINE V2 tidak disalin menjadi mesin internal AMANAH SEO. Bila kelak diperlukan, AMANAH SEO hanya menyerahkan/menerima pekerjaan melalui integrasi yang disetujui dan diverifikasi.
+- Packaging runtime target adalah satu plugin AMANAH SEO dengan core serta modul internal AI/Engine. Batas modul dan kontrak internal harus dipertahankan; integrasi/packaging tidak berarti seluruh fitur modul masuk ke MVP.
+- Alur produksi konten terperinci tetap dimiliki modul Engine; core tidak menduplikasi workflow dan hanya menggunakan kontrak internal yang disetujui.
 - Sumber awal konseptual yang disetujui: WordPress internal dan Google Search Console. Sumber lain ditunda sampai ada alasan serta persetujuan.
 - Keputusan konseptual yang memblokir penutupan pedoman: **tidak ada yang tersisa**. Gerbang verifikasi akses sumber, uji lingkungan, dan verifikasi integrasi adalah prasyarat implementasi/fitur terkait, bukan keputusan produk terbuka.
 - Lingkup MVP dan tujuh keputusan MVP-01 sampai MVP-07 tetap menjadi acuan. Tidak ada persetujuan implementasi, merge, deployment, atau perubahan produk pendamping yang tersirat dari penutupan ini.
