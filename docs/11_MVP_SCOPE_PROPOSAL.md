@@ -9,7 +9,7 @@ MVP harus membuktikan satu siklus nilai dari awal sampai akhir:
 
 **Website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → pencatatan hasil → langkah berikutnya.**
 
-Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO, menggantikan produk AI, atau menyalin workflow ENGINE. Jika suatu kemampuan tidak diperlukan untuk menyelesaikan siklus ini, tempatkan setelah MVP.
+Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO sekaligus. Keputusan satu plugin adalah target packaging: AMANAH SEO AI dan AMANAH SEO Engine menjadi modul internal, tetapi kemampuan penuh kedua modul tidak otomatis masuk ke lingkup fungsional MVP. Jika suatu kemampuan tidak diperlukan untuk menyelesaikan siklus ini, tempatkan setelah MVP.
 
 ## 2. Fungsi yang direkomendasikan sebagai wajib MVP
 
@@ -29,7 +29,7 @@ Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO, menggantikan prod
 Kecuali pemilik secara eksplisit menyatakan sebaliknya, jangan jadikan hal berikut sebagai syarat MVP:
 - Generasi artikel lengkap di dalam AMANAH SEO.
 - Mesin workflow konten yang menduplikasi AMANAH SEO ENGINE V2.
-- Ketergantungan wajib pada AMANAH SEO AI atau ENGINE V2.
+- Ketergantungan fungsional MVP pada kemampuan AI atau workflow penuh Engine. Modul tersebut dapat berada dalam paket plugin yang sama, tetapi siklus MVP dasar harus tetap dapat diuji tanpa mengandalkannya.
 - Penerbitan otomatis, perubahan massal, atau tindakan SEO berisiko tanpa persetujuan.
 - Integrasi dengan banyak penyedia data sekaligus sebelum satu sumber dipilih dan diverifikasi.
 - Portal pelanggan, tim/organisasi kompleks, marketplace, payment gateway, billing AI, atau sistem komersial penuh.
@@ -47,7 +47,7 @@ Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas s
 | MVP-03 | Sumber data wajib | Mulai dengan sumber data paling kecil yang dapat dibuktikan tersedia; jangan membuat integrasi multi-provider sebagai syarat awal. Nama sumber spesifik tetap diverifikasi sebelum implementasi. | DISETUJUI 2026-10-11 (prinsip); sumber spesifik menunggu verifikasi |
 | MVP-04 | Pelaksanaan tindakan | Semua perubahan website dan publikasi membutuhkan persetujuan eksplisit; MVP hanya mengatur tugas dan hasil, bukan melakukan tindakan otonom. | DISETUJUI 2026-10-11 |
 | MVP-05 | Akun dan akses | Minimal pengguna terautentikasi dengan hak akses pemilik/admin yang jelas; multi-tenant/tim kompleks ditunda. | DISETUJUI 2026-10-11 |
-| MVP-06 | Integrasi AI/ENGINE | Opsional; tidak menjadi prasyarat MVP. Kontrak integrasi disusun hanya jika fungsi MVP benar-benar membutuhkannya. | DISETUJUI 2026-10-11 |
+| MVP-06 | Pemakaian modul AI/Engine | Kemampuan AI/Engine tidak menjadi prasyarat fungsional MVP dasar. Karena target arsitektur adalah satu plugin, kontrak internal modul tetap harus dirancang sebelum migrasi; pemanggilan fitur modul dilakukan hanya bila dibutuhkan dan sudah teruji. | DISETUJUI 2026-10-11 untuk prinsip MVP; detail kontrak menunggu paket arsitektur |
 | MVP-07 | Keberhasilan MVP | Siklus utama selesai, setiap rekomendasi memiliki alasan/sumber atau label ketidakpastian, persetujuan tercatat, dan kegagalan terlihat. Tetapkan target angka setelah baseline tersedia. | DISETUJUI 2026-10-11 |
 
 ## 5. Catatan persetujuan pemilik
@@ -73,7 +73,7 @@ MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 Ketujuh rekomendasi MVP-01 sampai MVP-07 telah disetujui pemilik pada 2026-10-11 dan menjadi dasar lingkup MVP. Tidak perlu meminta persetujuan ulang untuk keputusan yang sama.
 
 - Prinsip sumber data terkecil yang dapat diverifikasi disetujui; nama sumber tertentu tetap harus dipilih dan dibuktikan sebelum implementasi.
-- Verifikasi kemampuan AI/ENGINE merupakan syarat sebelum integrasi tertentu dipilih, bukan syarat untuk MVP berdiri sendiri.
+- Verifikasi kemampuan AI/Engine merupakan syarat sebelum modul dimigrasikan atau fitur modul dipanggil; bukan syarat agar siklus MVP dasar dapat berdiri sendiri.
 - Pertanyaan komersial, arsitektur rinci, perluasan tim/website, dan KPI numerik dipindahkan ke backlog sesuai waktu kebutuhan pada Pedoman Induk.
 - Implementasi dan merge PR tetap membutuhkan persetujuan terpisah.
 - Jangan membuat dokumen atau fase baru kecuali ada keputusan konkret yang tidak dapat dicatat di dua dokumen acuan ini.
