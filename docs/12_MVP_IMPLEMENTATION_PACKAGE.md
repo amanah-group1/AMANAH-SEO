@@ -24,7 +24,7 @@
 ## 2. Status dokumen dan konflik yang sudah ditemukan
 
 - PR #23 sudah digabung ke `main`; Pedoman Induk dan Lingkup MVP tersedia di `main`.
-- PR #24 adalah rancangan persiapan ini. PR masih draft dan belum digabung.
+- PR #24 yang sebelumnya mengusulkan paket kesiapan telah digabung ke `main`; isi dokumen ini tetap berstatus rancangan terkendali dan bukan persetujuan coding.
 - README sebelumnya memuat kalimat bahwa pedoman berada di branch `controlled/rebuild-product-pedoman` dan belum digabung. Kalimat itu tidak lagi sesuai dengan keadaan saat ini karena Pedoman Induk dan Lingkup MVP sudah ada di `main`. README diperbarui dalam perubahan dokumentasi ini agar merujuk ke keadaan yang benar.
 - Dokumen rencana induk penuntasan yang pernah dicari dengan nama `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` tidak ditemukan di `main` pada pemeriksaan ini. Karena itu, dokumen tersebut tidak boleh disebut sudah diperiksa atau dijadikan acuan aktif. Acuan aktif yang berhasil diverifikasi adalah Pedoman Induk, Lingkup MVP, dan README.
 - Status “pedoman konseptual selesai” tidak berarti kode sudah dibuat, website sudah terhubung, seluruh sumber data sudah diuji, atau implementasi telah disetujui.
@@ -167,22 +167,21 @@ Setiap butir harus diberi status PASS, FAIL, atau BELUM DIUJI disertai bukti. Ja
 ## 8. Keputusan yang sudah ditetapkan dan yang masih terbuka
 
 ### Sudah ditetapkan
-- WordPress adalah platform pertama.
-- MVP dimulai dari satu website per ruang kerja/pengaturan.
-- Pilih sumber data terkecil yang dapat dibuktikan tersedia.
-- Perubahan website/publikasi memerlukan persetujuan eksplisit.
-- Akses awal adalah owner/admin.
-- Integrasi AI/ENGINE opsional.
+- WordPress adalah platform pertama, dengan satu website per ruang kerja/pengaturan pada MVP.
+- Sumber awal konseptual adalah WordPress internal untuk struktur/konten dan GSC untuk metrik performa pencarian.
+- GSC tidak wajib untuk menguji siklus dasar tugas; GSC wajib diverifikasi sebelum fitur metrik pencarian dibuat atau dinyatakan lulus.
+- Perubahan website/publikasi memerlukan persetujuan eksplisit; MVP dasar tidak bertindak secara otonom.
+- Akses awal adalah owner/admin; integrasi AI/ENGINE opsional.
 - Keberhasilan diukur dari siklus inti, alasan/sumber temuan, persetujuan tercatat, dan kegagalan yang terlihat.
 
-### Masih harus dibuktikan atau diputuskan sebelum coding terkait
-- Cara nyata membaca informasi/konten dari WordPress testing dan contoh data yang akan dipakai.
-- File/komponen yang disentuh dan rancangan minimum setelah pemeriksaan repositori.
-- Strategi penyimpanan, backup, retensi, dan deployment yang diperlukan untuk implementasi yang dipilih.
-- Apakah metrik Search Console diperlukan untuk MVP dasar atau ditunda. Rekomendasi saat ini: tunda sampai siklus dasar terbukti.
+### Gerbang teknis sebelum coding atau klaim PASS
+- Verifikasi akses nyata WordPress testing dan contoh data yang memang diperlukan oleh fitur yang dipilih.
+- Verifikasi akses baca-saja GSC dan contoh metrik sebelum membangun/mengklaim fitur performa pencarian.
+- Setelah audit repositori dan lingkungan, tetapkan file/komponen yang disentuh, rancangan minimum, strategi penyimpanan/backup/retensi yang relevan, deployment, tes, dan rollback.
+- Integrasi AI/ENGINE hanya diaudit lebih lanjut jika benar-benar dipilih sebagai kebutuhan.
 
 ### Tidak memblokir siklus dasar
-- Website resmi dan pendaftaran Search Console untuk website resmi.
+- Website resmi dan koneksi GSC jika alur dasar diuji memakai data WordPress yang benar-benar tersedia dan/atau temuan manual berlabel jelas.
 - Integrasi AI/ENGINE.
 - Harga, billing, banyak website/tim, KPI numerik, dan analitik lanjutan.
 
@@ -196,10 +195,10 @@ Sebelum implementasi, pemilik perlu menyetujui:
 5. Rencana rollback.
 6. Izin eksplisit untuk mulai coding.
 
-**Status saat ini:** persiapan dokumentasi sedang dirapikan. Pedoman dan lingkup MVP sudah ada di `main`; paket ini masih draft. Lingkungan dan sumber data nyata belum diverifikasi dalam dokumen ini. Belum ada izin implementasi, perubahan runtime, atau penggabungan PR.
+**Status saat ini:** pedoman konseptual dan lingkup MVP telah dikonsolidasikan di `main`. Paket ini tetap rancangan kesiapan implementasi; lingkungan serta akses sumber data nyata belum diverifikasi dalam dokumen ini. Tidak ada izin implementasi, perubahan runtime, atau deployment yang tersirat.
 
 
-## 8. Transisi status dan pemulihan yang wajib diuji
+## 10. Transisi status dan pemulihan yang wajib diuji
 
 | Keadaan | Perilaku yang diwajibkan | Bukti uji minimum |
 |---|---|---|
@@ -212,6 +211,6 @@ Sebelum implementasi, pemilik perlu menyetujui:
 | Percobaan ulang | Pastikan aman/idempoten dan tidak menggandakan tindakan; verifikasi hasil tidak pasti | Uji kegagalan dan retry |
 | Selesai | Hanya setelah kriteria selesai dan bukti dicatat | Bukti hasil yang dapat ditinjau |
 
-## 9. Status penutupan dokumen
+## 11. Status penutupan dokumen
 
 Pedoman konseptual dan lingkup MVP dinyatakan selesai berdasarkan keputusan pemilik. Dokumen paket ini tetap **rancangan kesiapan implementasi**, bukan persetujuan coding. Tidak ada keputusan konseptual yang memblokir penutupan pedoman; bukti akses WordPress, GSC, dan lingkungan testing tetap merupakan gerbang teknis sebelum fitur terkait dibangun atau dinyatakan PASS.
