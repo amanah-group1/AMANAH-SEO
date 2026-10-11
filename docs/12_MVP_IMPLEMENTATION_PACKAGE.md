@@ -425,7 +425,7 @@ Pemeriksaan rekursif Git tree pada baseline `main` kedua repository pendamping d
 | Migration class terpisah | 0 ditemukan | 17 |
 | Source entry point plugin | `plugin/amanah-seo-ai.php` | `plugin/amanah-seo-engine.php` |
 
-AI memiliki installer/upgrade di `plugin/includes/class-install.php`, bukan direktori migration class terpisah. Engine memiliki migration class versi 1–9 dan 11–18. **Tidak ditemukan migration class versi 10** pada tree baseline yang diperiksa. Ini harus dicatat sebagai celah historis versi, bukan diisi, dinomori ulang, atau dianggap bug tanpa menelusuri riwayat commit dan kontrak rilis.
+AI memiliki installer/upgrade di `plugin/includes/class-install.php`, bukan direktori migration class terpisah. Engine memiliki migration class dengan nomor runtime 1–8 dan 10–18. **Tidak ditemukan migration class versi 10** pada tree baseline yang diperiksa. Ini harus dicatat sebagai celah historis versi, bukan diisi, dinomori ulang, atau dianggap bug tanpa menelusuri riwayat commit dan kontrak rilis.
 
 ### 15.2 Temuan lifecycle dan persyaratan runtime
 
@@ -470,7 +470,7 @@ Template laporan per menu wajib berisi: ID paket, menu/slug, baseline commit, co
 ### 15.5 Gate yang masih wajib sebelum implementasi
 
 1. Rekonsiliasi AI database design vs installer source dan legacy archive behavior.
-2. Audit setiap dari 17 Engine migration class dan efek sampingnya, termasuk versi 11/18 repair, migration version gap 10, serta kegagalan/rollback.
+2. Audit setiap dari 17 Engine migration class dan efek sampingnya, termasuk versi 11/18 repair, migration filename/runtime-version mismatch (Version9SEOScan.php mengembalikan versi 10; nomor runtime 9 tidak ditemukan), serta kegagalan/rollback.
 3. Inventaris penuh table names, options, capabilities, admin menus/slugs, REST/AJAX routes, cron/job hooks, uninstall behavior, license/update identity, global functions/constants, and PHP class collisions.
 4. Audit dokumen locked AI (35 dokumen/folder utama terdaftar pada tree) dan Engine (DOC-00–DOC-15 serta workflow execution doc) untuk konflik yang memengaruhi integrasi. Hitungan dokumen bukan bukti semua isi sudah direkonsiliasi.
 5. File-by-file source-to-target map final beserta dependency graph dan keputusan reuse/adapt/replace/defer/exclude.
@@ -518,3 +518,49 @@ Menu berikut terverifikasi dari registrasi sumber baseline. Daftar ini adalah in
 **Urutan integrasi yang direkomendasikan:** (1) parent Dashboard/status modul dan capability gate; (2) Settings + AI provider/credential; (3) Entity Profile; (4) Authority & Author; (5) Content Analyzer dan Article Generation; (6) Engine Live Website/SEO scan dan Keywords; (7) Strategy/URL Mapping; (8) Content Plan/Scanning; (9) Brief/Blueprint/Content Production/quality/review/publish; (10) Links/Issues/Recommendations/Monitoring; (11) Import/Export/System; (12) License/Updates hanya setelah identitas produk disetujui. Urutan ini bukan keputusan untuk mengimplementasikan seluruh fitur sekaligus: setiap item tetap paket terpisah dan baru dimulai setelah menu sebelumnya lolos tes serta regresi.
 
 Sebelum menggabungkan navigasi, tetapkan parent menu tunggal dan pemetaan slug/redirect yang kompatibel. Jangan sekadar menampilkan dua set submenu dengan dua branding/identitas plugin. Menu yang tidak termasuk MVP dasar boleh ditunda tanpa dihapus dari peta migrasi.
+
+
+### 15.8 Audit migration Engine per nomor runtime — koreksi hasil awal
+
+Pemeriksaan langsung atas seluruh 17 file migration class dan registrasinya di `Core/Bootstrap/Plugin.php` mengoreksi ringkasan awal. Nomor yang dikembalikan `getVersion()` adalah **1–8 dan 10–18**. Tidak ada class yang mengembalikan nomor 9. File `Version9SEOScan.php` mengembalikan nomor **10** dan nama `seo_scan_results_repair`; jangan menganggap ini migration 9 hanya dari nama file, dan jangan menomori ulang versi yang sudah pernah dipakai.
+
+| Runtime version | Nama migration | Efek utama yang terlihat di source |
+|---:|---|---|
+| 1 | `core_foundation` | Memasang tabel diagnostics melalui `Schema::install()`. |
+| 2 | `core_domain` | Memasang search intents, clusters, owner URLs, keywords, content strategies/plans/briefs/blueprints/content, quality results, internal-link opportunities, dan cannibalization. |
+| 3 | `ai_engine` | Memasang tabel AI providers, models, tasks, dan usage. |
+| 4 | `background_jobs` | Memasang tabel job queue. |
+| 5 | `portability` | Memasang tabel operasi/backup portability. |
+| 6 | `ai_usage_cost` | Mengubah tabel usage dengan kolom `pricing_source` jika migration dieksekusi; pemeriksaan idempotency perlu tes pada database nyata/salinan. |
+| 7 | `portability_recovery` | Memperbarui/menyiapkan skema portability recovery. |
+| 8 | `content_plan` | Membuat/menegaskan tabel content plans dengan `dbDelta()`. |
+| 9 | **Tidak ditemukan** | Nomor runtime 9 tidak terdaftar pada baseline yang diaudit. |
+| 10 | `seo_scan_results_repair` | Membuat tabel `amanah_seo_scan_results`; class file-nya bernama `Version9SEOScan.php`. |
+| 11 | `canonical_issues_and_recommendations` | Membuat tabel issues dan recommendations; repair path akan memanggil ulang migration jika salah satu tabel tidak ada. |
+| 12 | `content_revision` | Membuat tabel `amanah_seo_content_revisions`. |
+| 13 | `quality_content_version` | Memperbarui/membuat struktur quality results dengan versi konten. |
+| 14 | `keyword_article_structure` | Menambah `article_type`, `pillar_keyword_id` dan indeks terkait pada tabel keywords, dengan pengecekan kolom/indeks sebelumnya. |
+| 15 | `default_search_intents` | Menyisipkan default search intents ke tabel; perlu tes bahwa rerun tidak menggandakan atau mengubah nilai yang disesuaikan pengguna. |
+| 16 | `content_scanning` | Membuat tabel content scans, SERP results, dan scan analyses. |
+| 17 | `remove_legacy_serp_credentials` | Menghapus entri rahasia legacy `dataforseo` melalui SecretStore; komentar source menyatakan kredensial provider AI lain harus tetap utuh. Ini efek samping data/options dan wajib dites dengan fixture. |
+| 18 | `content_intelligence_findings_requirements_traceability` | Membuat tabel intelligence runs/findings, content requirements, dan requirement snapshots. |
+
+Catatan: daftar efek di atas diringkas dari implementasi migration, bukan hasil eksekusi. Versi 11 dan 18 dipanggil ulang oleh repair path ketika tabel tertentu hilang. Karena migrasi dapat dipanggil ulang di luar jalur normal, sifat idempotent harus diverifikasi; repair path 11/18 tidak dengan sendirinya membuktikan seluruh operasi aman saat diulang. Tidak ditemukan method `down()` pada kontrak migration yang diperiksa, sehingga rollback database tidak boleh diasumsikan tersedia; rencana pemulihan perlu backup/restore teruji atau migrasi kompensasi eksplisit.
+
+### 15.9 Inventaris tabel Engine yang didefinisikan source baseline
+
+Nama berikut terdeteksi pada `Schema.php` dan migration classes. Ini bukan inventaris database aktual, dan beberapa tabel dibuat oleh migration lanjutan.
+
+- Fondasi/domain: `amanah_seo_diagnostics`, `amanah_seo_search_intents`, `amanah_seo_clusters`, `amanah_seo_owner_urls`, `amanah_seo_keywords`, `amanah_seo_content_strategies`, `amanah_seo_content_plans`, `amanah_seo_content_briefs`, `amanah_seo_page_blueprints`, `amanah_seo_content`, `amanah_seo_quality_results`, `amanah_seo_internal_link_opportunities`, `amanah_seo_cannibalization`.
+- AI dan pekerjaan: `amanah_seo_ai_providers`, `amanah_seo_ai_models`, `amanah_seo_ai_tasks`, `amanah_seo_ai_usage`, `amanah_seo_jobs`.
+- Portability: `amanah_seo_portability_backups`, `amanah_seo_portability_operations`.
+- SEO/content lanjutan: `amanah_seo_scan_results`, `amanah_seo_issues`, `amanah_seo_recommendations`, `amanah_seo_content_revisions`, `amanah_seo_content_scans`, `amanah_seo_serp_results`, `amanah_seo_scan_analyses`, `amanah_seo_intelligence_runs`, `amanah_seo_intelligence_findings`, `amanah_seo_content_requirements`, `amanah_seo_requirement_snapshots`.
+
+Semua nama tabel harus dipetakan terhadap AI dan target AMANAH SEO sebelum integrasi. Prefix tabel berasal dari `$wpdb->prefix`; jangan mengasumsikan prefix `wp_` pada instalasi nyata. Ada tabel yang dibentuk melalui helper `Schema`, sehingga audit nama tabel tidak boleh hanya membaca string dalam migration class.
+
+### 15.10 Batas bukti source vs bukti runtime
+
+- Source baseline yang diaudit: AI `cd83b80fc7030651cee020391081279a9a36e27f`; Engine `80e7c38a327baeef1d7ad7b13d006d453d5838b1`. Revisi repository upstream setelah commit baseline ini belum otomatis tercakup.
+- Pemeriksaan file migration, menu registry, installer, lifecycle dan test inventory dilakukan dari source. Belum ada perintah PHPUnit, WordPress activation, SQL migration, upgrade, uninstall, or restore yang dijalankan pada lingkungan nyata melalui audit ini.
+- Tes unit yang ada menunjukkan kontrak yang pernah dimaksudkan, bukan bukti otomatis bahwa suite lulus pada head source saat ini. Status CI/tes harus diperiksa sebelum paket implementasi disetujui.
+- Audit class collision masih bersifat arsitektural: Engine menggunakan namespace `Amanah\\SEOEngine`; AI memakai banyak class global berprefix `AMANAH_SEO_AI_`. Risiko benturan terbesar yang perlu diuji tetap hooks, menu slugs, capabilities, option/table names, text domains, cron hooks, asset paths, and activation/uninstall lifecycle. Ini belum menggantikan pemindaian simbol lintas seluruh file.
