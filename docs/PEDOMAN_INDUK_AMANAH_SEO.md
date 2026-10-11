@@ -1,5 +1,5 @@
 # PEDOMAN INDUK AMANAH SEO
-**Versi:** 1.0-candidate  
+**Versi:** 1.0-final-konseptual  
 **Tanggal penyusunan:** 2026-10-10  
 **Tanggal konsolidasi keputusan:** 2026-10-11  
 **Status:** PEDOMAN KONSEPTUAL SELESAI — pemilik memerintahkan penuntasan pada 2026-10-11; implementasi tetap memerlukan persetujuan terpisah  
@@ -81,20 +81,41 @@ Ketiga produk dapat digunakan secara mandiri sesuai fungsi masing-masing. Integr
 
 ## 5. Alur kerja utama AMANAH SEO
 
-Alur konseptual dari awal hingga perbaikan berkelanjutan:
+Alur konseptual dari awal hingga perbaikan berkelanjutan. Alur ini adalah milik AMANAH SEO sebagai pengelola pekerjaan; ia tidak menyalin mesin produksi konten atau workflow khusus milik produk pendamping.
 
-1. **Daftarkan dan pahami website.** Catat identitas website, tujuan pemilik, cakupan akses, kondisi awal, sumber data yang tersedia, dan batasan. Jangan mengasumsikan koneksi atau data tersedia sebelum diverifikasi.
-2. **Bangun gambaran kondisi.** Kumpulkan sinyal yang dapat diakses, tandai kualitas/keterkinian data, lalu kelompokkan temuan menjadi masalah, peluang, risiko, dan hal yang belum diketahui.
-3. **Susun prioritas.** Urutkan pekerjaan berdasarkan tujuan pemilik, dampak yang diharapkan, urgensi, usaha, risiko, dependensi, serta kekuatan bukti. Jelaskan alasan rekomendasi; jangan menyajikan skor sebagai fakta objektif bila itu hanya estimasi.
-4. **Buat rencana kerja.** Setiap pekerjaan memiliki tujuan, dasar temuan, hasil yang diharapkan, pemilik/penanggung jawab, dependensi, risiko, status, dan kriteria selesai.
-5. **Pilih cara pelaksanaan.** Kerjakan secara manual, melalui AMANAH SEO AI, melalui AMANAH SEO ENGINE V2, atau melalui integrasi lain yang telah disetujui. Jangan menganggap semua metode selalu tersedia.
-6. **Periksa hasil.** Validasi hasil terhadap persyaratan, mutu, bukti, dan risiko. Kegagalan harus dapat dilihat, didiagnosis, dicoba ulang secara aman, atau dialihkan ke penanganan manual.
-7. **Minta persetujuan bila diperlukan.** Perubahan penting dan publikasi tidak boleh dilakukan tanpa persetujuan dari pengguna yang berwenang, kecuali kebijakan otomatisasi yang eksplisit telah disetujui dan dibatasi dengan aman.
-8. **Laksanakan dan catat.** Setelah diizinkan, lakukan tindakan melalui komponen yang bertanggung jawab. Simpan status, waktu, pelaksana, hasil, dan referensi perubahan yang relevan.
-9. **Pantau hasil.** Bandingkan hasil dengan kondisi awal dan tujuan menggunakan data yang benar-benar tersedia. Pisahkan korelasi dari sebab-akibat dan jelaskan keterbatasan atribusi.
-10. **Perbarui prioritas.** Gunakan hasil terbaru untuk mempertahankan, mengubah, atau menutup pekerjaan. Siklus berulang tanpa menghapus jejak keputusan sebelumnya.
+1. **Daftarkan dan pahami website.** Catat identitas website, tujuan pemilik, cakupan akses, kondisi awal, dan kewenangan yang diberikan.
+2. **Hubungkan dan verifikasi sumber data awal.** Gunakan data internal WordPress untuk struktur website, URL, judul, konten, dan hubungan konten yang benar-benar dapat dibaca dengan izin yang tersedia. Gunakan Google Search Console (GSC) untuk kueri, klik, tayangan, CTR, posisi, dan halaman pencarian ketika properti serta akses baca-saja telah diverifikasi. Keduanya adalah sumber awal yang dipilih secara konseptual; koneksi aktual tidak boleh diasumsikan.
+3. **Bangun gambaran kondisi.** Tandai asal, waktu, cakupan, keterkinian, dan keterbatasan data. Kelompokkan temuan menjadi masalah, peluang, risiko, dan hal yang belum diketahui. Bedakan hasil pengukuran, masukan manual, analisis, dan perkiraan.
+4. **Susun prioritas.** Urutkan pekerjaan menurut tujuan pemilik, dampak yang diperkirakan, urgensi, usaha, risiko, dependensi, serta kekuatan bukti. Jelaskan alasan; skor atau dampak estimasi bukan fakta objektif.
+5. **Buat rencana kerja.** Setiap tugas memiliki tujuan, dasar temuan, hasil yang diharapkan, penanggung jawab/pemilik keputusan, dependensi, risiko, status, dan kriteria selesai.
+6. **Pilih cara pelaksanaan.** Pekerjaan dapat dilakukan manual atau melalui integrasi yang secara khusus disetujui dan telah diverifikasi. AMANAH SEO AI dan AMANAH SEO ENGINE V2 tetap produk terpisah dan opsional; jangan menganggap koneksi, fitur, atau keberhasilan integrasinya tersedia tanpa bukti.
+7. **Periksa hasil.** Bandingkan hasil dengan kriteria selesai, mutu, bukti, dan risiko. Kegagalan harus terlihat, dapat didiagnosis, dicoba ulang secara aman, atau dialihkan ke penanganan manual.
+8. **Minta dan catat persetujuan.** Tindakan yang mengubah website dan publikasi memerlukan persetujuan eksplisit pengguna yang berwenang. Persetujuan terkait versi/isi tertentu; perubahan material setelah persetujuan membutuhkan pemeriksaan dan persetujuan ulang.
+9. **Laksanakan tindakan yang diizinkan.** Pada MVP dasar, AMANAH SEO mengelola tugas dan keputusan, bukan mengubah atau menerbitkan website secara otonom. Setiap tindakan yang kelak disetujui harus mencatat pelaksana, waktu, versi/target, hasil, dan referensi bukti.
+10. **Pantau hasil dan perbarui prioritas.** Bandingkan kondisi dengan baseline memakai data yang benar-benar tersedia. Pisahkan korelasi dari sebab-akibat; gunakan hasil untuk mempertahankan, mengubah, atau menutup tugas tanpa menghapus riwayat.
 
-Setiap tahap dapat berhenti bila prasyarat tidak terpenuhi. Status minimum yang harus dibedakan: **Belum dimulai, Siap, Berjalan, Menunggu persetujuan, Terhambat, Gagal, Selesai, Dibatalkan**. Status tidak boleh dimajukan tanpa bukti yang sesuai.
+### 5.1 Kontrak sumber data awal
+
+| Sumber | Penggunaan | Syarat bukti | Jika tidak tersedia |
+|---|---|---|---|
+| WordPress internal | Struktur website, URL, judul, konten dan hubungan konten yang dapat diakses | Izin dan metode baca terbukti; cakupan serta waktu pembacaan dicatat | Tandai tidak tersedia/gagal; gunakan masukan manual bila sesuai dan beri label sumber |
+| Google Search Console | Kueri, klik, tayangan, CTR, posisi, dan halaman pencarian | Properti benar, akses baca-saja sah, data contoh terbaca, rentang tanggal dan keterkinian dicatat | Jangan mengarang metrik atau mengubah data hilang menjadi nol; fitur GSC berstatus belum terhubung/terhambat |
+| Masukan manual pengguna | Temuan atau konteks yang belum dapat diperoleh otomatis | Identitas sumber, waktu masukan, alasan, dan label manual | Jangan tampilkan sebagai hasil pengukuran otomatis |
+
+Sumber eksternal lain ditunda sampai kebutuhan nyata, nilai guna, biaya, izin, keamanan, dan dampaknya diaudit serta disetujui. Pemilihan sumber secara konseptual tidak sama dengan kelulusan gerbang akses teknis.
+
+### 5.2 Status, transisi, dan pemulihan
+
+Status minimum tugas: **Belum dimulai, Siap, Berjalan, Menunggu persetujuan, Terhambat, Gagal, Selesai, Dibatalkan**. Setiap perubahan status harus memiliki waktu, pelaku/sumber, dan alasan yang sesuai. Status **Selesai** memerlukan bukti terhadap kriteria selesai; status **Menunggu persetujuan** tidak boleh diperlakukan sebagai izin; **Terhambat** membutuhkan alasan dan langkah berikutnya; **Gagal** harus mempertahankan diagnostik yang aman dan hasil parsial; **Dibatalkan** membutuhkan alasan dan tidak boleh menghapus riwayat.
+
+- Prasyarat atau akses tidak terpenuhi: hentikan tahap yang bergantung padanya, tampilkan sebab dan langkah pemulihan, serta jangan memalsukan keberhasilan.
+- Data kosong, usang, parsial, atau gagal diambil: bedakan tiap keadaan dan pertahankan waktu pemeriksaan terakhir yang berhasil.
+- Percobaan ulang hanya dilakukan jika aman/idempoten atau telah dipastikan tidak menggandakan perubahan; tindakan yang hasilnya tidak pasti harus diverifikasi sebelum diulang.
+- Penolakan persetujuan: kembalikan pekerjaan untuk revisi atau tandai dibatalkan sesuai keputusan pemilik; jangan melanjutkan tindakan.
+- Perubahan material setelah persetujuan: batalkan kelayakan persetujuan untuk versi lama dan minta persetujuan ulang.
+- Kegagalan satu integrasi opsional tidak boleh membuat seluruh produk berpura-pura gagal/sukses; isolasi dampak, tampilkan status koneksi, dan pertahankan jalur manual jika aman.
+
+Setiap tahap dapat berhenti bila prasyarat tidak terpenuhi. Status tidak boleh dimajukan tanpa bukti yang sesuai.
 
 ## 6. Dashboard dan pengalaman pengguna
 
@@ -165,10 +186,11 @@ Setiap langkah menghasilkan artefak/keputusan yang dapat ditinjau. Jangan mengul
 
 Ketujuh keputusan MVP-01 sampai MVP-07 disetujui pemilik pada 2026-10-11. Rincian, alasan, dan batas persetujuan tercatat di [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md). Persetujuan ini menetapkan WordPress sebagai platform pertama, cakupan satu website per ruang kerja/pengaturan, prinsip sumber data terkecil yang dapat diverifikasi, persetujuan manusia untuk perubahan/publikasi, model akses awal owner/admin, integrasi AI/ENGINE yang opsional, dan kriteria keberhasilan berbasis siklus inti.
 
-### 11.2 Satu gerbang yang wajib diselesaikan sebelum implementasi
+### 11.2 Gerbang implementasi dan keputusan arsitektur
 
-- **GATE-DATA-01 — Verifikasi sumber data awal.** Sebelum kode MVP dirancang untuk mengonsumsi sumber tertentu, pilih dan buktikan satu sumber data yang dapat diakses secara sah, memiliki data yang relevan, dan dapat diuji. Catat pemilik akses, cakupan data, keterkinian, batas penggunaan, metode pengambilan, kondisi gagal, dan bukti pengujian. Ini adalah gerbang implementasi, bukan penghalang penutupan pedoman konsep.
-- **GATE-CAPABILITY-01 — Verifikasi kemampuan produk pendamping bila integrasi diusulkan.** Jangan mengandalkan AI atau ENGINE sebagai dependensi MVP. Jika suatu integrasi kelak diusulkan, audit repository/versi yang tepat, kontrak, autentikasi/otorisasi, alur data, penanganan gagal, dan tes terlebih dahulu. Sampai bukti tersebut tersedia, status kemampuan integrasi adalah **BELUM TERVERIFIKASI**.
+- **GATE-DATA-01 — Verifikasi akses WordPress dan GSC.** Sumber awal konseptual telah dipilih: WordPress internal untuk struktur/konten dan GSC untuk performa pencarian. Sebelum fitur terkait dibangun atau dinyatakan berfungsi, buktikan izin, cakupan, metode baca, contoh data nyata, keterkinian, batas penggunaan, dan kondisi gagal untuk masing-masing sumber. Untuk menguji siklus dasar tugas, temuan manual yang diberi label jelas boleh digunakan tanpa mengklaim koneksi sumber otomatis lulus. Ini adalah gerbang implementasi, bukan penghalang penutupan pedoman konsep.
+- **GATE-CAPABILITY-01 — Verifikasi integrasi AI/ENGINE bila diusulkan.** Produk pendamping tetap opsional. Jika integrasi dipilih, audit repositori/versi, kontrak, autentikasi/otorisasi, alur data, penanganan gagal, dan pengujian. Sampai bukti tersedia, status integrasi adalah **BELUM TERVERIFIKASI**.
+- **ARCH-LIFECYCLE-01 — Pemilik siklus hidup.** AMANAH SEO Lifecycle Manager menjadi satu koordinator untuk fungsi siklus hidup yang memang hanya perlu satu instance di dalam produk/instalasi AMANAH SEO, termasuk urutan aktivasi, upgrade, migrasi, deaktivasi, dan uninstall komponen internal. Komponen tetap memiliki logika migrasi/cleanup internal yang dipanggil secara terkendali dan versi database masing-masing tetap tercatat. Keputusan ini tidak memberi Lifecycle Manager kewenangan mengendalikan siklus hidup instalasi AMANAH SEO AI atau AMANAH SEO ENGINE V2 yang merupakan produk terpisah. Kegagalan harus dicatat dan ditangani aman; uninstall default mempertahankan data pengguna, dan penghapusan data hanya mengikuti kebijakan eksplisit serta perlindungan rahasia/data.
 
 ### 11.3 Keputusan non-pemblokir yang dipindahkan ke backlog
 
@@ -208,7 +230,7 @@ Pedoman dinyatakan **SIAP DITUTUP** ketika:
 7. Satu dokumen induk menjadi sumber acuan, keputusan MVP memiliki catatan persetujuan, dan dokumen lama yang bertentangan ditandai superseded.
 8. Pemilik memberi instruksi eksplisit untuk menutup pedoman; instruksi penuntasan diberikan pada 2026-10-11.
 
-**Status saat ini:** pedoman konseptual dinyatakan selesai berdasarkan instruksi pemilik tanggal 2026-10-11. Butir 1–3, 5–7 telah dikonsolidasikan di branch ini. Butir 4 terpenuhi pada tingkat pencatatan evidence dan batas klaim, bukan audit runtime menyeluruh: dokumentasi AMANAH SEO AI tersedia secara baca-saja, tetapi status/runtime terkini dan kemampuan integrasi belum diverifikasi; dokumen sumber utama ENGINE V2 belum berhasil diidentifikasi dari path yang dapat diakses pada pemeriksaan ini. Kekurangan bukti dicatat secara eksplisit dan tidak dipakai untuk mengklaim integrasi tersedia. Karena integrasi bersifat opsional, kekurangan ini bukan penghalang penutupan pedoman konseptual.
+**Status saat ini:** pedoman konseptual dinyatakan selesai berdasarkan instruksi pemilik tanggal 2026-10-11. Tujuan, batas produk, alur utama, lingkup MVP, prinsip keamanan, dan kriteria penerimaan telah dikonsolidasikan dalam dokumen acuan. Sumber awal konseptual adalah WordPress internal dan GSC; akses aktual keduanya tetap harus dibuktikan melalui GATE-DATA-01 sebelum fitur terkait diklaim berfungsi. Kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan bukan dependensi MVP. Keterbatasan bukti ini dicatat secara eksplisit dan bukan penghalang penutupan pedoman konseptual.
 
 Persetujuan pedoman bukan persetujuan otomatis untuk mengubah kode, menggabungkan pull request, mengubah runtime, atau menerbitkan produk. Implementasi membutuhkan ruang lingkup dan persetujuan terpisah.
 
@@ -221,3 +243,12 @@ Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar
 **Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber data tertentu tetap harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
 
 Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisasi runtime, atau penggabungan pull request. Semua itu memerlukan persetujuan terpisah.
+
+
+## 15. Konsolidasi final alur dan status penutupan
+
+- Alur AMANAH SEO adalah siklus pengelolaan website → sumber/kondisi → temuan → prioritas beralasan → tugas → pemeriksaan/keputusan → pelaksanaan yang diizinkan → pencatatan hasil → pemantauan → pembaruan prioritas.
+- Alur terperinci produksi konten milik AMANAH SEO ENGINE V2 tidak disalin menjadi mesin internal AMANAH SEO. Bila kelak diperlukan, AMANAH SEO hanya menyerahkan/menerima pekerjaan melalui integrasi yang disetujui dan diverifikasi.
+- Sumber awal konseptual yang disetujui: WordPress internal dan Google Search Console. Sumber lain ditunda sampai ada alasan serta persetujuan.
+- Keputusan konseptual yang memblokir penutupan pedoman: **tidak ada yang tersisa**. Gerbang verifikasi akses sumber, uji lingkungan, dan verifikasi integrasi adalah prasyarat implementasi/fitur terkait, bukan keputusan produk terbuka.
+- Lingkup MVP dan tujuh keputusan MVP-01 sampai MVP-07 tetap menjadi acuan. Tidak ada persetujuan implementasi, merge, deployment, atau perubahan produk pendamping yang tersirat dari penutupan ini.

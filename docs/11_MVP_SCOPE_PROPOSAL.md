@@ -44,7 +44,7 @@ Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas s
 |---|---|---|---|
 | MVP-01 | Platform website pertama | WordPress sebagai platform pertama. | DISETUJUI 2026-10-11 |
 | MVP-02 | Cakupan awal | Satu website per ruang kerja/pengaturan pada MVP, dengan rancangan tidak menghalangi perluasan kemudian. | DISETUJUI 2026-10-11 |
-| MVP-03 | Sumber data wajib | Mulai dengan sumber data paling kecil yang dapat dibuktikan tersedia; jangan membuat integrasi multi-provider sebagai syarat awal. Nama sumber spesifik tetap diverifikasi sebelum implementasi. | DISETUJUI 2026-10-11 (prinsip); sumber spesifik menunggu verifikasi |
+| MVP-03 | Sumber data awal | WordPress internal untuk struktur/konten website dan Google Search Console untuk metrik performa pencarian adalah sumber awal yang dipilih secara konseptual. Akses nyata, izin, cakupan, dan perilaku gagal masing-masing wajib dibuktikan sebelum fitur terkait dinyatakan berfungsi. Sumber lain ditunda. | DISETUJUI 2026-10-11; verifikasi teknis sebelum fitur terkait |
 | MVP-04 | Pelaksanaan tindakan | Semua perubahan website dan publikasi membutuhkan persetujuan eksplisit; MVP hanya mengatur tugas dan hasil, bukan melakukan tindakan otonom. | DISETUJUI 2026-10-11 |
 | MVP-05 | Akun dan akses | Minimal pengguna terautentikasi dengan hak akses pemilik/admin yang jelas; multi-tenant/tim kompleks ditunda. | DISETUJUI 2026-10-11 |
 | MVP-06 | Integrasi AI/ENGINE | Opsional; tidak menjadi prasyarat MVP. Kontrak integrasi disusun hanya jika fungsi MVP benar-benar membutuhkannya. | DISETUJUI 2026-10-11 |
@@ -72,8 +72,33 @@ MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 
 Ketujuh rekomendasi MVP-01 sampai MVP-07 telah disetujui pemilik pada 2026-10-11 dan menjadi dasar lingkup MVP. Tidak perlu meminta persetujuan ulang untuk keputusan yang sama.
 
-- Prinsip sumber data terkecil yang dapat diverifikasi disetujui; nama sumber tertentu tetap harus dipilih dan dibuktikan sebelum implementasi.
+- Sumber awal konseptual WordPress internal dan GSC telah dipilih; akses, izin, cakupan, serta perilaku gagal harus dibuktikan sebelum fitur yang bergantung padanya diimplementasikan atau dinyatakan lulus.
 - Verifikasi kemampuan AI/ENGINE merupakan syarat sebelum integrasi tertentu dipilih, bukan syarat untuk MVP berdiri sendiri.
 - Pertanyaan komersial, arsitektur rinci, perluasan tim/website, dan KPI numerik dipindahkan ke backlog sesuai waktu kebutuhan pada Pedoman Induk.
 - Implementasi dan merge PR tetap membutuhkan persetujuan terpisah.
 - Jangan membuat dokumen atau fase baru kecuali ada keputusan konkret yang tidak dapat dicatat di dua dokumen acuan ini.
+
+
+## 8. Keputusan sumber data dan batas verifikasi
+
+Sumber awal yang disetujui untuk arah produk:
+
+- **WordPress internal:** identitas website, URL, judul, konten, dan hubungan konten yang benar-benar dapat dibaca dengan izin yang tersedia.
+- **Google Search Console (GSC):** kueri, klik, tayangan, CTR, posisi, dan halaman pencarian, jika properti dan akses baca-saja telah diverifikasi.
+- **Masukan manual:** diperbolehkan untuk menjalankan siklus dasar ketika data otomatis belum tersedia, tetapi harus diberi label sebagai masukan pengguna, bukan hasil pengukuran.
+
+Keputusan ini menetapkan sumber awal secara konseptual, bukan menyatakan koneksi telah dibuat. GSC tidak wajib untuk menguji alur dasar website → temuan → prioritas → tugas → keputusan → hasil; tetapi fitur metrik pencarian tidak boleh dibangun atau dinyatakan lulus sebelum GATE-DATA-01 untuk GSC terbukti. Data yang kosong, usang, parsial, tidak diizinkan, atau gagal diambil harus dibedakan. Tidak boleh mengubah data yang tidak tersedia menjadi nol atau membuat metrik rekaan.
+
+## 9. Alur, status, dan pemulihan minimum
+
+- Setiap temuan harus memiliki asal/sumber, waktu, alasan atau bukti, ketidakpastian, dan status.
+- Setiap tugas harus memiliki tujuan, pemilik keputusan/penanggung jawab, kriteria selesai, dependensi bila ada, dan riwayat status.
+- Status minimum: Belum dimulai, Siap, Berjalan, Menunggu persetujuan, Terhambat, Gagal, Selesai, Dibatalkan.
+- Selesai memerlukan bukti terhadap kriteria selesai. Menunggu persetujuan bukan izin. Terhambat dan Gagal memerlukan alasan serta langkah berikutnya. Dibatalkan memerlukan alasan dan tidak menghapus riwayat.
+- Penolakan persetujuan mengembalikan tugas untuk revisi atau membatalkannya. Perubahan material setelah persetujuan memerlukan pemeriksaan/persetujuan ulang.
+- Percobaan ulang hanya boleh dilakukan bila aman dan tidak menggandakan tindakan; hasil yang tidak pasti harus diverifikasi sebelum diulang.
+- Siklus dasar MVP tetap tidak mengubah atau menerbitkan website secara otomatis.
+
+## 10. Status keputusan dan penutupan pedoman
+
+Semua keputusan konseptual yang diperlukan untuk menetapkan produk dan MVP telah dicatat. Tidak ada keputusan produk terbuka yang memblokir penutupan pedoman. Yang masih wajib sebelum implementasi/fitur terkait adalah bukti teknis: akses lingkungan WordPress testing, akses WordPress internal sesuai cakupan fitur, akses GSC untuk metrik pencarian, serta uji penerimaan. Kekurangan bukti teknis tidak boleh disebut PASS, tetapi tidak membuka kembali keputusan konseptual yang sudah disetujui.
