@@ -425,14 +425,14 @@ Pemeriksaan rekursif Git tree pada baseline `main` kedua repository pendamping d
 | Migration class terpisah | 0 ditemukan | 17 |
 | Source entry point plugin | `plugin/amanah-seo-ai.php` | `plugin/amanah-seo-engine.php` |
 
-AI memiliki installer/upgrade di `plugin/includes/class-install.php`, bukan direktori migration class terpisah. Engine memiliki migration class dengan nomor runtime 1–8 dan 10–18. **Tidak ditemukan migration class versi 10** pada tree baseline yang diperiksa. Ini harus dicatat sebagai celah historis versi, bukan diisi, dinomori ulang, atau dianggap bug tanpa menelusuri riwayat commit dan kontrak rilis.
+AI memiliki installer/upgrade di `plugin/includes/class-install.php`, bukan direktori migration class terpisah. Engine memiliki 17 migration class dengan nomor runtime 1–8 dan 10–18. File `Version9SEOScan.php` mengembalikan `getVersion() = 10` dan `getName() = seo_scan_results_repair`; nomor runtime 9 tidak terdaftar. Ini filename/runtime-version mismatch, bukan alasan untuk membuat atau menomori ulang migration.
 
 ### 15.2 Temuan lifecycle dan persyaratan runtime
 
 - Entry point AI mendefinisikan konstanta global `AMANAH_SEO_AI_VERSION`, `AMANAH_SEO_AI_PATH`, `AMANAH_SEO_AI_URL`, dan `AMANAH_SEO_AI_PREFIX`; mendaftarkan activation/deactivation hooks; menjalankan `AMANAH_SEO_AI_Install::maybe_upgrade` pada `plugins_loaded`; lalu membuat dan menjalankan `AMANAH_SEO_AI_Plugin_Core`.
 - AI activator secara eksplisit mensyaratkan PHP 8.1+ dan WordPress 6.x+. Ia menjalankan installer serta menambahkan capability entity/authority untuk administrator dan capability view untuk editor.
 - Engine `Plugin::activate()` menjalankan environment guard, inisialisasi configuration defaults, dan `MigrationManager::migrate()`. `deactivate()` dan `uninstall()` didelegasikan ke lifecycle service. Entry point Engine mendaftarkan lifecycle plugin sendiri.
-- Engine mendaftarkan migration versi 1–9 dan 11–18 di `Core/Bootstrap/Plugin.php`. `MigrationManager` menjalankan migration berurutan berdasarkan nomor, menyimpan versi ke option `amanah_seo_engine_database_version`, dan memiliki repair path khusus untuk schema versi 11 dan 18. Repair versi 11 memeriksa tabel issues/recommendations; repair versi 18 memeriksa empat tabel intelligence/requirements.
+- Engine mendaftarkan 17 migration class dengan nomor runtime 1–8 dan 10–18 di `Core/Bootstrap/Plugin.php`. `MigrationManager` menjalankan migration berurutan berdasarkan nomor, menyimpan versi ke option `amanah_seo_engine_database_version`, dan memiliki repair path khusus untuk schema versi 11 dan 18. Repair versi 11 memeriksa tabel issues/recommendations; repair versi 18 memeriksa empat tabel intelligence/requirements.
 - Engine memiliki komponen background job/queue/WordPress cron, lisensi/entitlement, dan update client/service. Identitas produk Engine saat ini digunakan dalam konstruktor client/server update dan lisensi. Identitas ini tidak boleh sekadar diganti ke AMANAH SEO sebelum server, package identity, entitlement, dan kompatibilitas lisensi diputuskan.
 - Karena AI menolak aktivasi pada PHP di bawah 8.1, paket satu plugin yang membawa AI harus menggunakan PHP minimum 8.1 kecuali kelak ada audit kompatibilitas dan perubahan terkontrol yang membuktikan alternatif aman. Klaim `PHP >=7.4` pada composer Engine sendiri tidak cukup untuk menurunkan persyaratan gabungan.
 
@@ -478,7 +478,7 @@ Template laporan per menu wajib berisi: ID paket, menu/slug, baseline commit, co
 7. Keputusan terpisah tentang identitas lisensi/updater dan urutan penonaktifan plugin lama.
 8. Persetujuan paket implementasi sebelum kode diubah.
 
-**Status setelah pemeriksaan ini:** source-tree inventory lebih terukur; migration list Engine terverifikasi sebagai versi 1–9 dan 11–18; perbedaan runtime minimum PHP teridentifikasi. Audit per-file, audit seluruh isi dokumen locked, database runtime, tes migrasi, dan WordPress integration masih **BELUM LENGKAP / BELUM DIUJI**. Tidak ada kode produk, database, atau runtime yang diubah.
+**Status setelah pemeriksaan ini:** source-tree inventory, migration version map, tabel, menu/route/capability baseline, dan lifecycle risks telah dipetakan pada level integrasi. Audit rinci controller/dependency per menu serta seluruh isi dokumen locked belum digantikan oleh pengujian runtime; database runtime, tes migrasi/restore, dan WordPress integration masih **BELUM DIUJI**. Tidak ada kode produk, database, atau runtime yang diubah.
 
 
 ### 15.6 Temuan tambahan berisiko tinggi: archive AI dan uninstall Engine
