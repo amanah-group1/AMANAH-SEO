@@ -195,6 +195,13 @@ final class AMANAH_SEO_Menu_Shell {
 			'amanah-seo-ai-reports',
 			'amanah-seo-ai-license',
 		);
+		$companion_ai_pages = array(
+			'amanah-seo-ai-settings',
+			'amanah-content-analyzer',
+			'amanah-entity-profile',
+			'amanah-authority',
+			'amanah-content-generation',
+		);
 		$hidden_engine_pages = array(
 			'amanah-seo-engine-keyword-research',
 			'amanah-seo-engine-intelligence',
@@ -211,7 +218,7 @@ final class AMANAH_SEO_Menu_Shell {
 				continue;
 			}
 
-			if ( in_array( $slug, $hidden_ai_pages, true ) && class_exists( 'AMANAH_SEO_AI_Admin_Menu' ) ) {
+			if ( in_array( $slug, $companion_ai_pages, true ) && class_exists( 'AMANAH_SEO_AI_Admin_Menu' ) ) {
 				// The AI companion registers its own protected, hidden screens.
 				continue;
 			}
