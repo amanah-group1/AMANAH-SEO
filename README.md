@@ -4,33 +4,34 @@
 
 ## Dokumen acuan
 
-1. **[Pedoman Induk AMANAH SEO](docs/PEDOMAN_INDUK_AMANAH_SEO.md)** — sumber utama untuk visi, prinsip, pembagian produk, alur end-to-end, kontrol pemilik, status keputusan, backlog, dan gerbang sebelum implementasi.
-2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — definisi MVP dan catatan persetujuan tujuh keputusan dasar.
+1. **[Pedoman Induk AMANAH SEO](docs/PEDOMAN_INDUK_AMANAH_SEO.md)** — acuan utama untuk tujuan produk, prinsip, pembagian produk, alur kerja, keputusan, dan gerbang sebelum implementasi.
+2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — fungsi MVP, batas yang tidak termasuk, keputusan dasar, dan kriteria penerimaan.
+3. **[Paket Kesiapan Pengerjaan MVP](docs/12_MVP_IMPLEMENTATION_PACKAGE.md)** — rancangan persiapan, urutan kerja, dan bukti penerimaan. Dokumen ini masih draft sampai disetujui pemilik.
 
-Dokumen lama yang sudah digantikan dipindahkan ke [arsip dokumentasi](docs/archive/README.md), tetap dipertahankan sebagai rekam jejak historis, dan bukan sumber aturan aktif kecuali diadopsi kembali secara eksplisit. Laporan audit historis tetap terpisah di `docs/audits/` dan tidak otomatis menjadi bukti kondisi runtime saat ini.
+Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/README.md). Dokumen arsip dan laporan audit historis merupakan rekam jejak, bukan bukti otomatis bahwa keadaan kode atau runtime saat ini sudah lulus.
 
 ## Batas tiga produk
 
-- **AMANAH SEO** — produk utama yang mengelola konteks website, kondisi, prioritas pekerjaan, tugas, persetujuan, status, dan pemantauan hasil.
-- **AMANAH SEO AI** — produk AI/SEO tersendiri; bukan dependensi wajib.
-- **AMANAH SEO ENGINE V2** — produk workflow SEO/konten terstruktur tersendiri; bukan dependensi wajib.
+- **AMANAH SEO** — produk utama yang mengelola website, kondisi/temuan, prioritas, tugas, keputusan, dan pemantauan hasil.
+- **AMANAH SEO AI** — produk AI/SEO tersendiri; bukan dependensi wajib AMANAH SEO.
+- **AMANAH SEO ENGINE V2** — produk workflow SEO/konten tersendiri; bukan dependensi wajib AMANAH SEO.
 
-Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau integrasi tersedia sampai repositori/versi, kontrak, dan perilakunya benar-benar diverifikasi.
+Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau integrasi tersedia sampai versi, kontrak, izin, dan perilakunya benar-benar diverifikasi.
 
-## Status pedoman
+## Status dokumen dan persetujuan
 
+- Pedoman Induk dan Lingkup MVP tersedia di branch `main`. Perubahan pedoman dikonsolidasikan melalui [PR #23](https://github.com/amanahgroup123/AMANAH-SEO/pull/23), yang sudah digabung.
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
-- Lingkup MVP telah dikonsolidasikan: satu siklus **website → kondisi/temuan → prioritas beralasan → tugas → keputusan/pemeriksaan pemilik → hasil → langkah berikutnya**.
-- Sumber data SEO spesifik harus dipilih dan diverifikasi sebelum implementasi.
-- Kemampuan integrasi AI/ENGINE belum dinyatakan terverifikasi; integrasi tidak wajib untuk MVP.
-- Keputusan komersial dan teknis non-pemblokir dipindahkan ke backlog agar tidak menghambat penutupan pedoman.
-- Pedoman konseptual dinyatakan **SELESAI** atas instruksi pemilik pada 2026-10-11 dan berada di branch `controlled/rebuild-product-pedoman`. Branch belum digabung ke `main`; implementasi belum disetujui.
+- Lingkup MVP adalah satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya**.
+- Sumber data tertentu harus dibuktikan sebelum fitur yang bergantung padanya dibuat atau dinyatakan berfungsi.
+- Paket kesiapan pengerjaan MVP sedang diajukan melalui [PR #24](https://github.com/amanahgroup123/AMANAH-SEO/pull/24). PR tersebut masih draft dan belum digabung.
+- Website WordPress testing dapat dipakai untuk menguji siklus dasar tanpa website resmi atau Google Search Console. Data yang belum tersedia harus ditandai jelas; sistem tidak boleh mengarang metrik.
+- Pedoman konseptual selesai bukan berarti implementasi, sinkronisasi runtime, deployment, atau merge berikutnya otomatis disetujui.
 
-## Batas pekerjaan tahap pedoman (tahap ini telah ditutup)
+## Aturan kerja
 
-Batas berikut tetap berlaku untuk mencegah perluasan ruang lingkup tanpa persetujuan:
-1. Fokus pada penyelesaian dan persetujuan pedoman AMANAH SEO.
-2. Pemeriksaan AMANAH SEO AI dan AMANAH SEO ENGINE V2 hanya baca-saja.
-3. Jangan mengubah kode, konfigurasi, database, runtime, lisensi, atau WordPress kedua produk pendamping.
-4. Jangan menyinkronkan atau menjalankan implementasi sebagai bagian dari pekerjaan pedoman.
-5. Pertahankan bukti historis dan jangan menyebut hal yang belum diperiksa sebagai PASS.
+1. Kerjakan hanya AMANAH SEO, kecuali pemilik secara eksplisit menyetujui cakupan lain.
+2. Audit kondisi nyata sebelum implementasi dan jangan menyatakan PASS tanpa bukti.
+3. Gunakan bahasa yang mudah dipahami pada penjelasan dan antarmuka.
+4. Jangan mengubah website, database, runtime, konfigurasi, atau produk pendamping selama tahap persiapan dokumen.
+5. Mulai coding hanya setelah paket, ruang lingkup, daftar perubahan, kriteria penerimaan, rencana rollback, dan persetujuan pemilik jelas.
