@@ -241,8 +241,7 @@ final class AMANAH_SEO_Menu_Shell {
 			);
 			?>
 			<div class="wrap">
-				<h1><?php esc_html_e( 'AI Tools', 'amanah-seo' ); ?></h1>
-				<p><?php esc_html_e( 'Pilih fitur AI yang ingin dibuka. Setiap fitur tetap menggunakan halaman dan hak akses aslinya.', 'amanah-seo' ); ?></p>
+				<h1><?php esc_html_e( 'AMANAH SEO AI', 'amanah-seo' ); ?></h1>
 				<?php if ( ! class_exists( 'AMANAH_SEO_AI_Admin_Menu' ) ) : ?>
 					<div class="notice notice-warning inline"><p><?php esc_html_e( 'Plugin AMANAH SEO AI belum aktif. Aktifkan plugin pendamping untuk menggunakan fitur AI.', 'amanah-seo' ); ?></p></div>
 				<?php endif; ?>
@@ -254,6 +253,30 @@ final class AMANAH_SEO_Menu_Shell {
 							<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=' . $slug ) ); ?>"><?php echo esc_html( $card['action'] ); ?></a></p>
 						</div>
 					<?php endforeach; ?>
+				</div>
+
+				<div class="card" style="max-width: 1100px; margin-top: 28px; padding: 28px;">
+					<h2 style="font-size: 24px; margin-top: 0;"><?php echo esc_html__( 'Jika AI belum mengenal bisnis Anda, apakah calon pelanggan akan menemukannya?', 'amanah-seo' ); ?></h2>
+					<h3><?php echo esc_html__( 'Dunia pencarian sedang berubah.', 'amanah-seo' ); ?></h3>
+					<p><?php echo esc_html__( 'Orang tidak lagi hanya mengetik kata kunci di Google. Mereka mulai bertanya langsung kepada ChatGPT, Gemini, Perplexity, dan berbagai AI lainnya untuk menemukan bisnis, brand, produk, layanan, dan informasi yang mereka percaya.', 'amanah-seo' ); ?></p>
+					<p><strong><?php echo esc_html__( 'Ketika seseorang bertanya kepada AI tentang bisnis Anda, apakah AI tahu siapa Anda — dan mengapa Anda layak direkomendasikan?', 'amanah-seo' ); ?></strong></p>
+
+					<h3><?php echo esc_html__( 'AMANAH SEO AI membantu Anda membangun fondasinya.', 'amanah-seo' ); ?></h3>
+					<p><?php echo esc_html__( 'Bukan sekadar membuat konten. Bukan sekadar mengejar ranking. AMANAH SEO AI dirancang untuk membantu membangun fondasi AI Visibility Optimization dengan menghubungkan elemen-elemen penting yang membantu AI memahami sebuah brand secara lebih utuh.', 'amanah-seo' ); ?></p>
+					<ul>
+						<li><strong><?php echo esc_html__( 'Identity', 'amanah-seo' ); ?></strong> — <?php echo esc_html__( 'siapa Anda dan apa yang Anda representasikan.', 'amanah-seo' ); ?></li>
+						<li><strong><?php echo esc_html__( 'Authority', 'amanah-seo' ); ?></strong> — <?php echo esc_html__( 'mengapa Anda layak dipercaya.', 'amanah-seo' ); ?></li>
+						<li><strong><?php echo esc_html__( 'Expertise', 'amanah-seo' ); ?></strong> — <?php echo esc_html__( 'bidang apa yang benar-benar Anda kuasai.', 'amanah-seo' ); ?></li>
+						<li><strong><?php echo esc_html__( 'AI Capability', 'amanah-seo' ); ?></strong> — <?php echo esc_html__( 'bagaimana kemampuan AI dikonfigurasi dan digunakan secara terkontrol.', 'amanah-seo' ); ?></li>
+					</ul>
+
+					<h3><?php echo esc_html__( 'Karena AI tidak hanya membaca apa yang Anda tulis.', 'amanah-seo' ); ?></h3>
+					<p><?php echo esc_html__( 'AI juga berusaha memahami siapa yang berada di balik informasi tersebut, apa keahliannya, seberapa kredibel sumbernya, dan bagaimana seluruh informasi itu saling terhubung.', 'amanah-seo' ); ?></p>
+					<p><strong><?php echo esc_html__( 'Semakin AI menjadi bagian dari perjalanan pencarian seseorang, semakin penting bagi sebuah bisnis untuk memiliki identitas dan authority yang dapat dipahami dengan jelas.', 'amanah-seo' ); ?></strong></p>
+
+					<h3><?php echo esc_html__( 'Bangun fondasinya sebelum persaingannya semakin ramai.', 'amanah-seo' ); ?></h3>
+					<p><?php echo esc_html__( 'Gunakan halaman ini untuk mengatur AI Provider dan model AI yang tersedia. Sementara itu, Entity Profile dan Authority & Author menjadi kemampuan terpisah untuk membangun fondasi identitas dan authority bisnis Anda sesuai hak akses yang tersedia.', 'amanah-seo' ); ?></p>
+					<p><strong><?php echo esc_html__( 'Jangan menunggu sampai AI mulai menentukan siapa yang terlihat. Mulai bangun bagaimana AI mengenal bisnis Anda hari ini.', 'amanah-seo' ); ?></strong></p>
 				</div>
 			</div>
 			<?php
