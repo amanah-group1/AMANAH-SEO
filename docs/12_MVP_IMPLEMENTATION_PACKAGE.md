@@ -6,7 +6,7 @@
 **Acuan utama:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), dan [README](../README.md)  
 **Tujuan:** menyiapkan pekerjaan MVP untuk diuji pada website WordPress testing, tanpa menunggu website resmi atau integrasi Google Search Console.
 
-> Dokumen ini hanya merapikan persiapan dan menetapkan batas serta bukti penerimaan. Dokumen ini bukan izin untuk mulai coding, mengubah database/runtime/WordPress, melakukan deployment, atau mengubah produk AMANAH SEO AI maupun AMANAH SEO ENGINE V2.
+> Dokumen ini hanya merapikan persiapan dan menetapkan batas serta bukti penerimaan. Dokumen ini bukan izin untuk mulai coding, memindahkan kode modul AI/Engine, mengubah database/runtime/WordPress, melakukan deployment, atau mengubah repository sumber AI/Engine.
 
 ## 1. Ringkasan keputusan
 
@@ -18,7 +18,7 @@
 6. Sistem tidak boleh membuat angka klik, tayangan, CTR, posisi, ranking, atau hasil lain seolah-olah nyata jika belum ada sumber yang membuktikannya. Data kosong, usang, parsial, tidak diizinkan, atau gagal harus dibedakan dan tidak diubah menjadi nol.
 7. WordPress dapat menjadi sumber untuk identitas, URL, judul, konten, dan hubungan konten yang benar-benar dapat dibaca dengan izin yang tersedia. Cara pengambilan dan cakupan data harus dibuktikan; jangan menganggap REST API atau akses tertentu sudah tersedia.
 8. Temuan awal dapat dimasukkan manual oleh pengguna dengan sumber/alasan, waktu, dan label bahwa itu masukan pengguna, bukan hasil pengukuran otomatis.
-9. Integrasi AMANAH SEO AI dan AMANAH SEO ENGINE V2 tetap opsional dan berada di luar MVP dasar.
+9. Target packaging adalah satu plugin WordPress AMANAH SEO dengan modul internal AI dan Engine setelah audit/migrasi terkontrol. Kemampuan modul tidak menjadi prasyarat fungsional MVP dasar dan migrasi kode memerlukan paket serta persetujuan tersendiri.
 10. Semua perubahan pada website dan publikasi tetap memerlukan persetujuan eksplisit. MVP tidak melakukan perubahan website secara otomatis.
 
 ## 2. Status dokumen dan konflik yang sudah ditemukan
@@ -159,7 +159,7 @@ Setiap butir harus diberi status PASS, FAIL, atau BELUM DIUJI disertai bukti. Ja
 - Gunakan hak akses minimum yang diperlukan; semua pemeriksaan izin penting dilakukan di sisi server.
 - Jangan menyimpan rahasia di repository, log, screenshot, atau percakapan.
 - Jangan mengubah atau menerbitkan konten website tanpa persetujuan pemilik.
-- Jangan mengubah produk AMANAH SEO AI atau AMANAH SEO ENGINE V2.
+- Jangan mengubah repository sumber AMANAH SEO AI atau AMANAH SEO ENGINE V2 maupun runtime/database terkait pada tahap dokumentasi; packaging satu plugin belum memberi izin migrasi kode.
 - Jangan mengubah database, runtime, konfigurasi, atau website testing saat tahap persiapan dokumen.
 - Implementasi harus berada dalam branch/PR tersendiri dengan daftar file, tes, dan cara rollback yang jelas.
 - Jangan menggabungkan PR atau melakukan deployment hanya karena paket ini selesai.
@@ -178,7 +178,7 @@ Setiap butir harus diberi status PASS, FAIL, atau BELUM DIUJI disertai bukti. Ja
 - Verifikasi akses nyata WordPress testing dan contoh data yang memang diperlukan oleh fitur yang dipilih.
 - Verifikasi akses baca-saja GSC dan contoh metrik sebelum membangun/mengklaim fitur performa pencarian.
 - Setelah audit repositori dan lingkungan, tetapkan file/komponen yang disentuh, rancangan minimum, strategi penyimpanan/backup/retensi yang relevan, deployment, tes, dan rollback.
-- Integrasi AI/ENGINE hanya diaudit lebih lanjut jika benar-benar dipilih sebagai kebutuhan.
+- Audit dan migrasi modul AI/Engine merupakan paket terkontrol terpisah; tidak boleh dilakukan sebelum scope, kontrak, file, tes, dan rollback disetujui.
 
 ### Tidak memblokir siklus dasar
 - Website resmi dan koneksi GSC jika alur dasar diuji memakai data WordPress yang benar-benar tersedia dan/atau temuan manual berlabel jelas.
