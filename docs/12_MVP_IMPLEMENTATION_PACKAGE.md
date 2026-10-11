@@ -1,173 +1,198 @@
-# Paket Kesiapan Implementasi MVP AMANAH SEO
-**Versi:** 0.1-draft  
-**Status:** RANCANGAN TERKONTROL — belum disetujui untuk implementasi  
+# Paket Kesiapan Pengerjaan MVP AMANAH SEO
+
+**Versi:** 0.2-draft  
+**Status:** RANCANGAN TERKENDALI — belum disetujui untuk coding  
 **Tanggal:** 2026-10-11  
-**Dasar produk:** [Pedoman Induk AMANAH SEO](PEDOMAN_INDUK_AMANAH_SEO.md) dan [Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md)  
-**Batas:** Dokumen persiapan saja. Tidak mengizinkan coding, deployment, perubahan database/runtime, atau integrasi produk pendamping.
+**Acuan utama:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), dan [README](../README.md)  
+**Tujuan:** menyiapkan pekerjaan MVP untuk diuji pada website WordPress testing, tanpa menunggu website resmi atau integrasi Google Search Console.
 
-## 1. Tujuan
+> Dokumen ini hanya merapikan persiapan dan menetapkan batas serta bukti penerimaan. Dokumen ini bukan izin untuk mulai coding, mengubah database/runtime/WordPress, melakukan deployment, atau mengubah produk AMANAH SEO AI maupun AMANAH SEO ENGINE V2.
 
-Menetapkan gerbang kesiapan data, batas teknis minimum, urutan implementasi, bukti penerimaan, dan aturan perubahan sebelum kode MVP dibuat. Paket ini tidak menggantikan dua dokumen acuan produk dan tidak menganggap kemampuan yang belum diuji sebagai tersedia.
+## 1. Ringkasan keputusan
 
-## 2. Keputusan dasar yang diwarisi
+1. Produk yang dikerjakan adalah **AMANAH SEO**, produk utama pengelola pekerjaan SEO.
+2. Website WordPress testing menjadi lingkungan pengujian awal; bukan website resmi/produksi.
+3. MVP pertama harus membuktikan satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → keputusan pemilik → catatan hasil → langkah berikutnya**.
+4. Google Search Console **bukan syarat untuk mulai menguji siklus dasar MVP**. Website testing yang belum terdaftar di Search Console tetap bisa dipakai untuk menguji alur, pengelolaan website, temuan yang dimasukkan pemilik, tugas, persetujuan, dan riwayat.
+5. Sistem tidak boleh membuat angka klik, tayangan, ranking, atau hasil lain seolah-olah nyata jika belum ada sumber yang membuktikannya. Data yang belum tersedia harus ditandai jelas.
+6. WordPress dapat menjadi sumber awal untuk identitas website dan konten yang benar-benar dapat dibaca dengan izin yang tersedia. Cara pengambilan dan data yang bisa dibaca harus diperiksa sebelum fitur tersebut dibuat; jangan menganggap REST API atau akses tertentu sudah tersedia.
+7. Temuan awal dapat dimasukkan oleh pengguna secara manual, dengan catatan sumber/alasan dan label bahwa temuan tersebut merupakan masukan pengguna, bukan hasil pengukuran otomatis.
+8. Google Search Console dapat ditambahkan pada tahap berikutnya untuk metrik performa pencarian, setelah website yang sesuai tersedia dan pemilik memberi akses resmi baca-saja.
+9. Integrasi AMANAH SEO AI dan AMANAH SEO ENGINE V2 tetap opsional dan berada di luar MVP dasar.
+10. Semua perubahan pada website dan publikasi tetap memerlukan persetujuan eksplisit. MVP tidak melakukan perubahan website secara otomatis.
 
-- Platform website pertama: WordPress.
-- Cakupan MVP: satu website per workspace/pengaturan.
-- Siklus inti: website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya.
-- Semua perubahan website dan publikasi memerlukan persetujuan eksplisit; MVP tidak mengubah atau menerbitkan konten secara otonom.
-- Integrasi AMANAH SEO AI dan AMANAH SEO ENGINE V2 opsional, bukan dependensi MVP.
-- Data tidak tersedia, usang, parsial, atau gagal harus ditampilkan apa adanya; jangan mengubahnya menjadi nol atau status sukses.
-- Paket ini tidak memilih framework, database, hosting, atau model komersial secara prematur. Rincian itu ditetapkan setelah gerbang data dan pemeriksaan lingkungan.
+## 2. Status dokumen dan konflik yang sudah ditemukan
 
-## 3. GATE-DATA-01 — verifikasi sumber data SEO
+- PR #23 sudah digabung ke `main`; Pedoman Induk dan Lingkup MVP tersedia di `main`.
+- PR #24 adalah rancangan persiapan ini. PR masih draft dan belum digabung.
+- README sebelumnya memuat kalimat bahwa pedoman berada di branch `controlled/rebuild-product-pedoman` dan belum digabung. Kalimat itu tidak lagi sesuai dengan keadaan saat ini karena Pedoman Induk dan Lingkup MVP sudah ada di `main`. README diperbarui dalam perubahan dokumentasi ini agar merujuk ke keadaan yang benar.
+- Dokumen rencana induk penuntasan yang pernah dicari dengan nama `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` tidak ditemukan di `main` pada pemeriksaan ini. Karena itu, dokumen tersebut tidak boleh disebut sudah diperiksa atau dijadikan acuan aktif. Acuan aktif yang berhasil diverifikasi adalah Pedoman Induk, Lingkup MVP, dan README.
+- Status “pedoman konseptual selesai” tidak berarti kode sudah dibuat, website sudah terhubung, seluruh sumber data sudah diuji, atau implementasi telah disetujui.
 
-### 3.1 Kandidat pertama yang direkomendasikan
+## 3. Batas MVP pertama
 
-**Google Search Console API — Search Analytics, dengan scope OAuth read-only `https://www.googleapis.com/auth/webmasters.readonly`.**
+### Termasuk dalam MVP dasar
 
-Alasan kandidat:
-- Menyediakan data performa pencarian Google yang relevan untuk siklus MVP: klik, tayangan, CTR, posisi rata-rata, dan pengelompokan berdasarkan tanggal, halaman, kueri, perangkat, atau negara.
-- Memiliki endpoint resmi untuk memeriksa daftar properti yang dapat diakses pengguna dan tingkat izinnya.
-- Memungkinkan MVP memulai dari data pencarian yang terukur, tanpa mengklaim sebagai audit teknis penuh atas seluruh website.
-- OAuth dan scope read-only lebih sesuai dengan prinsip akses minimum daripada meminta kredensial akun Google pengguna.
+1. Mengelola satu website WordPress testing pada satu ruang kerja/pengaturan.
+2. Menampilkan identitas dan informasi website yang benar-benar tersedia.
+3. Menampilkan status sumber data dan waktu pemeriksaan/pembaruan bila ada.
+4. Mencatat temuan SEO dengan judul, uraian, sumber/bukti atau alasan, tingkat kepentingan, ketidakpastian, dan status.
+5. Membedakan temuan hasil pengukuran dari temuan yang dimasukkan manual oleh pengguna.
+6. Menyusun prioritas yang menjelaskan alasan urutannya; tidak menampilkan skor sebagai fakta bila itu hanya perkiraan.
+7. Mengubah temuan menjadi tugas yang memiliki tujuan, penanggung jawab/pemilik keputusan, status, kriteria selesai, dan catatan.
+8. Mencatat pemeriksaan dan keputusan pemilik, termasuk status menunggu persetujuan.
+9. Mencatat hasil pekerjaan, bukti yang tersedia, kegagalan, dan langkah berikutnya.
+10. Menampilkan dashboard sederhana untuk kondisi, prioritas, tugas yang tertahan/gagal, dan keputusan yang menunggu.
+11. Menegakkan hak akses dan melindungi tindakan penting.
+12. Menguji jalur berhasil, data kosong/tidak tersedia, kegagalan, dan akses yang ditolak.
 
-Sumber dokumentasi resmi yang diperiksa:
-- Search Analytics query: https://developers.google.com/webmaster-tools/v1/searchanalytics/query
-- Daftar properti Search Console: https://developers.google.com/webmaster-tools/v1/sites/list
-- OAuth dan scope: https://developers.google.com/webmaster-tools/v1/how-tos/authorizing
-- Batas penggunaan: https://developers.google.com/webmaster-tools/limits
-- Penjelasan status/keterkinian data: https://support.google.com/webmasters/answer/17011364
+### Tidak termasuk dalam MVP dasar
 
-### 3.2 Status verifikasi yang jujur
+- Mengambil metrik Google Search Console sebelum akses nyata dan kebutuhan fitur tersebut siap.
+- Menjanjikan atau menampilkan angka klik, tayangan, CTR, posisi Google, atau ranking tanpa sumber terverifikasi.
+- Membuat atau menerbitkan konten secara otomatis.
+- Mengubah website tanpa persetujuan.
+- Mengganti AMANAH SEO AI atau AMANAH SEO ENGINE V2 atau menyalin mesin khusus keduanya.
+- Integrasi wajib dengan produk AI/ENGINE, banyak penyedia data sekaligus, billing, marketplace, portal pelanggan, atau pengelolaan tim kompleks.
+- Menyatakan integrasi atau fitur sudah berfungsi tanpa bukti uji.
 
-| Aspek | Temuan saat ini | Status |
+## 4. Pemeriksaan sebelum coding
+
+Pemeriksaan ini dilakukan pada lingkungan AMANAH SEO yang benar, yaitu website WordPress testing yang sudah disiapkan pemilik. Jangan menginstal ulang WordPress atau mengubah konfigurasi hanya karena dokumen ini diperbarui.
+
+### GATE-TEST-WP — pastikan lingkungan testing dapat dipakai
+
+Sebelum coding yang bergantung pada lingkungan, catat:
+- alamat website testing dan konfirmasi bahwa pemilik dapat masuk ke WordPress;
+- versi WordPress dan PHP yang terpasang, bila mudah diperiksa;
+- apakah website berisi konten uji yang aman digunakan;
+- cara yang sah dan paling sederhana untuk membaca informasi website/konten dengan izin yang tersedia;
+- bukti yang disanitasi, tanpa password, token, atau rahasia.
+
+**Lulus bila:** website testing dapat dibuka oleh pemilik, ruang lingkup pengujian jelas, dan cara membaca data awal terbukti dapat dilakukan atau alternatif manual disepakati. Jika sebagian data tidak dapat dibaca, catat batasannya dan jangan mengarang hasil.
+
+### GATE-DATA-01 — pastikan sumber data sesuai fitur
+
+Gerbang ini berlaku pada sumber data yang benar-benar akan dipakai, bukan kewajiban menghubungkan semua sumber sejak awal.
+
+**Untuk siklus dasar MVP:** sumber awal boleh berupa informasi/konten WordPress yang berhasil dibaca dengan izin yang tersedia dan/atau temuan manual yang dimasukkan pengguna. Label dan asal informasi harus jelas.
+
+**Untuk fitur metrik Google Search:** Google Search Console API dengan akses baca-saja adalah kandidat, bukan koneksi yang sudah tersedia. Gerbang ini baru wajib sebelum fitur tersebut dibuat atau dinyatakan berfungsi. Website testing yang belum terdaftar tidak dapat dipakai sebagai bukti bahwa akses Search Console sudah lulus.
+
+Bukti minimum untuk sumber apa pun:
+1. nama/jenis sumber dan izin yang digunakan;
+2. contoh data yang benar-benar berhasil dibaca atau dimasukkan;
+3. waktu pengambilan atau waktu masukan;
+4. cara membedakan data nyata, masukan manual, data kosong, data usang, dan kegagalan;
+5. contoh kegagalan atau akses ditolak yang ditampilkan secara jujur;
+6. bukti yang disanitasi dan persetujuan pemilik atas penggunaan sumber.
+
+**Status sekarang:** akses nyata WordPress maupun Google Search Console belum dibuktikan oleh dokumen ini. Tidak ada gerbang data yang boleh dinyatakan PASS sebelum pengujian nyata menghasilkan bukti.
+
+## 5. Urutan pekerjaan yang diusulkan
+
+### Tahap 0 — pemeriksaan dan persetujuan paket
+- Cocokkan repositori dan lingkungan AMANAH SEO yang benar.
+- Periksa cara membaca data WordPress testing dan sepakati contoh data yang aman.
+- Tetapkan daftar file/komponen yang akan disentuh, rencana pengujian, dan cara membatalkan perubahan.
+- Dapatkan persetujuan eksplisit sebelum coding.
+
+### Tahap 1 — dasar website dan data
+- Kelola satu website testing.
+- Tampilkan informasi yang tersedia dan status sumber.
+- Dukung pencatatan temuan manual dengan sumber/alasan dan label yang benar.
+- Buktikan data tidak tersedia atau gagal tidak ditampilkan sebagai sukses.
+
+### Tahap 2 — temuan, prioritas, dan tugas
+- Buat temuan yang bisa ditelusuri ke sumber atau masukan pengguna.
+- Susun prioritas dengan alasan yang dapat dipahami.
+- Buat tugas dari temuan dengan status dan kriteria selesai.
+
+### Tahap 3 — keputusan, hasil, dan dashboard
+- Catat keputusan/persetujuan pemilik.
+- Catat hasil dan bukti yang tersedia.
+- Tampilkan pekerjaan selesai, tertahan, gagal, dan langkah berikutnya.
+
+### Tahap 4 — uji penerimaan siklus lengkap
+- Jalankan satu skenario dari pendaftaran website sampai langkah berikutnya.
+- Uji kegagalan, akses tidak sah, dan data yang belum tersedia.
+- Catat hasil PASS/FAIL berdasarkan bukti; perbaiki masalah yang ditemukan dalam lingkup yang disetujui.
+
+### Tahap berikutnya — metrik Search Console (opsional untuk siklus dasar)
+- Baru dimulai jika ada properti yang sesuai, akses resmi baca-saja, dan kebutuhan metrik disetujui.
+- Uji izin properti, satu kueri data, keterkinian data, data kosong/parsial, kuota, dan kegagalan autentikasi.
+- Jangan mengirim password, token, client secret, atau kredensial ke chat atau repository.
+
+## 6. Kriteria penerimaan MVP
+
+MVP dasar hanya dapat dinyatakan lulus bila bukti menunjukkan seluruh hal berikut:
+
+| ID | Yang harus dibuktikan | Bukti penerimaan |
 |---|---|---|
-| API dan fungsi | Dokumentasi resmi menunjukkan endpoint Search Analytics dan daftar properti tersedia | TERVERIFIKASI SECARA DOKUMENTASI |
-| Relevansi untuk MVP | Mendukung metrik performa pencarian dan tren awal | SESUAI DENGAN BATASAN |
-| Scope least-privilege | OAuth 2.0 dan scope read-only tersedia | TERVERIFIKASI SECARA DOKUMENTASI |
-| Data/freshness | Data terbaru dapat bersifat preliminary; data final dan parsial harus dibedakan | BATASAN DIKETAHUI |
-| Kuota/limit | Ada batas per-site, per-user, dan per-project; kueri tertentu lebih mahal | BATASAN DIKETAHUI |
-| Akses nyata ke properti milik pemilik | Belum ada bukti autentikasi dan properti yang berhasil dibaca dalam sesi ini | BELUM DIVERIFIKASI |
-| Persetujuan penggunaan dan pemilik akses | Pemilik harus menghubungkan akun dan menyetujui akses | MENUNGGU TINDAKAN PEMILIK |
-| Hasil uji integrasi | Belum ada request/response nyata yang diuji | BELUM DILAKUKAN |
+| AC-01 | Pengguna berwenang dapat mengelola satu website testing | Hasil uji tambah/lihat/perbarui/nonaktifkan sesuai lingkup |
+| AC-02 | Asal data jelas | Tampilan membedakan data WordPress, masukan manual, dan data yang belum tersedia |
+| AC-03 | Tidak ada angka atau temuan rekaan | Uji data kosong/tidak tersedia tidak menghasilkan klaim palsu |
+| AC-04 | Temuan memiliki dasar | Setiap temuan memiliki sumber/bukti atau label masukan manual, alasan, status, dan ketidakpastian |
+| AC-05 | Prioritas dapat dijelaskan | Urutan prioritas menunjukkan alasan yang dapat ditelusuri ke temuan |
+| AC-06 | Temuan dapat menjadi tugas | Tugas memiliki tujuan, status, penanggung jawab/pemilik keputusan, dan kriteria selesai |
+| AC-07 | Keputusan pemilik tercatat | Uji keputusan/persetujuan menyimpan status dan catatan yang relevan |
+| AC-08 | Hasil dan riwayat dapat ditinjau | Status, waktu, hasil, bukti, dan kegagalan penting tercatat |
+| AC-09 | Akses dibatasi | Pengguna tanpa hak yang sesuai ditolak pada sisi server |
+| AC-10 | Kegagalan terlihat | Data/sumber gagal atau usang tidak ditampilkan sebagai keberhasilan baru |
+| AC-11 | Tidak ada perubahan website otomatis | Pengujian membuktikan alur MVP hanya mengatur pekerjaan dan keputusan |
+| AC-12 | Siklus inti selesai | Satu skenario penuh dari website sampai langkah berikutnya berhasil dan terdokumentasi |
 
-**Kesimpulan GATE-DATA-01: BELUM LULUS.** Kandidat teknis telah dipilih dan batas dokumentasinya diverifikasi, tetapi sumber belum dapat dinyatakan siap dipakai MVP sampai akses ke properti nyata diuji. Tidak boleh ada klaim bahwa data telah terhubung.
+Setiap butir harus diberi status PASS, FAIL, atau BELUM DIUJI disertai bukti. Jangan menulis PASS hanya karena kode terlihat benar atau halaman tampil.
 
-### 3.3 Bukti minimum untuk menutup gerbang
+### Bukti pengujian minimum
 
-Pemilik perlu menyediakan akses melalui proses OAuth yang disetujui dan memilih properti Search Console yang tepat. Jangan mengirim password Google, token, client secret, atau kredensial rahasia ke percakapan atau repository.
+- daftar skenario dan hasilnya;
+- hasil pengujian otomatis yang relevan;
+- bukti uji manual/integrasi yang disanitasi;
+- bukti akses yang diizinkan dan ditolak;
+- contoh data kosong atau sumber gagal;
+- catatan masalah yang belum selesai dan dampaknya.
 
-Uji baca-saja harus membuktikan:
-1. OAuth consent dan callback berhasil; token disimpan di tempat rahasia yang sesuai, bukan di log atau repository.
-2. Endpoint daftar properti berhasil mengembalikan properti yang diharapkan dan tingkat izin yang memadai.
-3. Satu kueri rentang tanggal yang konservatif menghasilkan respons valid; catat tanggal data, jumlah baris, dan status final/preliminary.
-4. Data klik, tayangan, CTR, dan posisi dipetakan dengan benar; respons kosong tidak dianggap sebagai angka nol atau kegagalan tanpa pemeriksaan konteks.
-5. Kasus 401/403, 429/quota, 5xx/timeout, properti tanpa data, serta token dicabut diperlakukan dengan status yang jelas.
-6. Bukti uji tanpa token atau rahasia: timestamp, endpoint/metode, properti tersamarkan bila perlu, rentang tanggal, kode status, bentuk respons yang disanitasi, dan hasil PASS/FAIL.
-7. Pemilik mengonfirmasi bahwa properti dan akses tersebut benar dan diizinkan untuk digunakan.
+## 7. Keamanan dan batas perubahan
 
-Sampai semua butir terbukti, GATE-DATA-01 tetap terbuka dan implementasi pengambilan data belum boleh dimulai.
+- Gunakan hak akses minimum yang diperlukan; semua pemeriksaan izin penting dilakukan di sisi server.
+- Jangan menyimpan rahasia di repository, log, screenshot, atau percakapan.
+- Jangan mengubah atau menerbitkan konten website tanpa persetujuan pemilik.
+- Jangan mengubah produk AMANAH SEO AI atau AMANAH SEO ENGINE V2.
+- Jangan mengubah database, runtime, konfigurasi, atau website testing saat tahap persiapan dokumen.
+- Implementasi harus berada dalam branch/PR tersendiri dengan daftar file, tes, dan cara rollback yang jelas.
+- Jangan menggabungkan PR atau melakukan deployment hanya karena paket ini selesai.
 
-## 4. Kontrak data minimum untuk MVP
+## 8. Keputusan yang sudah ditetapkan dan yang masih terbuka
 
-Kontrak berikut adalah target desain, bukan klaim implementasi yang sudah ada.
+### Sudah ditetapkan
+- WordPress adalah platform pertama.
+- MVP dimulai dari satu website per ruang kerja/pengaturan.
+- Pilih sumber data terkecil yang dapat dibuktikan tersedia.
+- Perubahan website/publikasi memerlukan persetujuan eksplisit.
+- Akses awal adalah owner/admin.
+- Integrasi AI/ENGINE opsional.
+- Keberhasilan diukur dari siklus inti, alasan/sumber temuan, persetujuan tercatat, dan kegagalan yang terlihat.
 
-### Input
-- Identitas properti Search Console yang dipilih pemilik.
-- Rentang tanggal dan dimensi terbatas untuk kueri MVP.
-- Scope OAuth read-only.
-- Konfigurasi jadwal pengambilan yang konservatif dan dapat dikendalikan.
+### Masih harus dibuktikan atau diputuskan sebelum coding terkait
+- Cara nyata membaca informasi/konten dari WordPress testing dan contoh data yang akan dipakai.
+- File/komponen yang disentuh dan rancangan minimum setelah pemeriksaan repositori.
+- Strategi penyimpanan, backup, retensi, dan deployment yang diperlukan untuk implementasi yang dipilih.
+- Apakah metrik Search Console diperlukan untuk MVP dasar atau ditunda. Rekomendasi saat ini: tunda sampai siklus dasar terbukti.
 
-### Output normalisasi
-- Properti dan rentang tanggal yang diminta.
-- Metrik klik, tayangan, CTR, posisi rata-rata bila tersedia.
-- Dimensi yang dikembalikan API, seperti tanggal/halaman/kueri/perangkat.
-- Waktu pengambilan, tanggal terbaru yang tersedia, status final/preliminary, dan metadata sumber.
-- Status data: `available`, `partial`, `stale`, `empty`, `unauthorized`, `rate_limited`, atau `error`.
-- Catatan keterbatasan/ketidakpastian yang bisa ditampilkan pada dashboard.
+### Tidak memblokir siklus dasar
+- Website resmi dan pendaftaran Search Console untuk website resmi.
+- Integrasi AI/ENGINE.
+- Harga, billing, banyak website/tim, KPI numerik, dan analitik lanjutan.
 
-### Batas interpretasi
-- Search Console mengukur performa pada Google Search; bukan bukti menyeluruh mengenai kesehatan teknis website atau seluruh SEO.
-- API dapat membatasi baris yang dikembalikan dan tidak menjamin seluruh baris tersedia.
-- Data preliminary dapat berubah. Dashboard harus menyatakan rentang waktu dan freshness; jangan mencampur data preliminary dengan data final tanpa label.
-- Metrik posisi rata-rata bukan jaminan ranking atau hasil bisnis.
-- Tidak adanya baris bukan bukti bahwa klik/impression pasti nol tanpa memeriksa rentang, properti, izin, dan metadata.
+## 9. Persetujuan sebelum mulai coding
 
-## 5. Paket implementasi yang diusulkan — tanpa coding
+Sebelum implementasi, pemilik perlu menyetujui:
+1. Paket MVP dan batas yang tertulis di dokumen ini.
+2. Hasil pemeriksaan lingkungan testing dan sumber data awal.
+3. Daftar file/komponen yang akan diubah.
+4. Kriteria penerimaan dan skenario uji.
+5. Rencana rollback.
+6. Izin eksplisit untuk mulai coding.
 
-### Tahap A — bukti sumber dan keputusan teknis
-- Tutup GATE-DATA-01 menggunakan checklist Bagian 3.3.
-- Periksa repository dan lingkungan AMANAH SEO yang benar sebelum menetapkan bahasa, framework, database, deployment, atau lokasi rahasia.
-- Tulis keputusan arsitektur minimum dan alasan pemilihannya; jangan menyalin asumsi dari AMANAH SEO AI atau ENGINE V2.
-
-### Tahap B — desain kontrak dan keamanan
-- Definisikan antarmuka provider sumber data dan normalisasi respons tanpa mengikat dashboard ke detail vendor.
-- Tetapkan OAuth state/CSRF, validasi redirect URI, pengelolaan token, rotasi/pencabutan, enkripsi saat tersimpan, dan redaksi log.
-- Terapkan server-side authorization untuk setiap workspace dan properti.
-- Gunakan prinsip read-only. Tidak ada scope untuk memodifikasi website, sitemap, atau Search Console.
-- Tetapkan batas timeout, pagination, kuota, backoff, cache, dan kebijakan ketika data usang.
-- Tentukan retensi dan penghapusan token/data sebelum penyimpanan data produksi.
-
-### Tahap C — implementasi siklus MVP
-1. Daftar dan pengaturan satu website/Workspace.
-2. Koneksi dan status sumber data yang dapat dicabut.
-3. Ringkasan data dan timestamp/freshness.
-4. Temuan dengan sumber, rentang tanggal, alasan, serta label ketidakpastian.
-5. Prioritas yang dapat ditelusuri ke temuan; bukan skor misterius.
-6. Tugas, status, pemilik keputusan, dependensi, dan kriteria selesai.
-7. Persetujuan/catatan pemilik tanpa menjalankan tindakan website otomatis.
-8. Riwayat hasil dan dashboard tindakan berikutnya.
-
-Urutan ini adalah rencana; coding baru boleh dimulai setelah GATE-DATA-01 lulus, paket ditinjau, dan persetujuan implementasi diberikan.
-
-## 6. Penanganan kegagalan yang wajib dirancang
-
-| Kondisi | Perilaku yang diwajibkan |
-|---|---|
-| Token kedaluwarsa/dicabut atau 401 | Tandai koneksi perlu autentikasi ulang; jangan menampilkan data baru seolah berhasil |
-| 403/izin properti tidak memadai | Tampilkan izin ditolak; jangan mencoba melewati kontrol akses |
-| 429/kuota | Backoff terbatas, hormati batas provider, jadwalkan ulang secara aman, tampilkan waktu pengambilan terakhir |
-| Timeout/5xx | Retry terbatas hanya untuk operasi baca yang aman; simpan status gagal dan jangan membuat duplikasi |
-| Respons kosong | Bedakan data kosong, rentang tanpa data, properti salah, dan respons parsial; jangan otomatis mengisi nol |
-| Data preliminary/usang | Tampilkan label dan waktu pembaruan; jangan menyatakan hasil final |
-| Respons tidak valid/schema berubah | Validasi, hentikan pemrosesan yang tidak aman, catat error yang disanitasi |
-| Pemilik mencabut koneksi | Hentikan pengambilan berikutnya, cabut/hapus token sesuai kebijakan yang disetujui, simpan jejak audit tanpa rahasia |
-
-## 7. Kriteria penerimaan dan bukti pengujian
-
-MVP belum dapat dinyatakan lulus sebelum tes otomatis dan uji integrasi terkontrol membuktikan:
-
-- Jalur sukses dengan properti yang berizin dan data nyata.
-- Properti tanpa data dan rentang tanggal kosong tidak menghasilkan klaim palsu.
-- Data preliminary, parsial, dan stale ditandai dengan benar.
-- 401, 403, 429, timeout, 5xx, respons invalid, dan token revoked ditangani secara aman.
-- Retry terbatas tidak menggandakan tugas/hasil dan tidak melanggar kuota.
-- Pengguna tidak dapat membaca data workspace/properti yang bukan kewenangannya.
-- OAuth state/CSRF dan redirect/callback divalidasi.
-- Token, client secret, dan data sensitif tidak masuk ke log, pesan error, test snapshots, atau repository.
-- Setiap temuan dapat ditelusuri ke sumber/rentang waktu atau diberi label ketidakpastian.
-- Tidak ada perubahan website/publikasi otonom.
-- Kegagalan integrasi tidak ditampilkan sebagai keberhasilan.
-
-Bukti minimal: hasil tes otomatis, ringkasan uji integrasi yang disanitasi, checklist izin, dan hasil uji akses ditolak. Jangan menulis PASS sebelum bukti ada.
-
-## 8. Ruang lingkup yang tidak diizinkan oleh paket ini
-
-- Tidak membuat atau mengubah kode, schema database, konfigurasi runtime, deployment, atau WordPress.
-- Tidak menggabungkan perubahan ini ke `main` tanpa persetujuan terpisah.
-- Tidak mengubah AMANAH SEO AI atau AMANAH SEO ENGINE V2.
-- Tidak membangun integrasi AI/ENGINE sebelum kebutuhan dan kontraknya disetujui secara terpisah.
-- Tidak menerbitkan konten atau mengubah website secara otonom.
-- Tidak mengklaim data Search Console telah tersedia sebelum pengujian akses nyata lulus.
-- Tidak menjanjikan ranking atau hasil bisnis.
-
-## 9. Gerbang persetujuan berikutnya
-
-Sebelum coding:
-1. Pemilik mengonfirmasi properti Search Console yang akan dipakai dan melakukan proses otorisasi resmi.
-2. Bukti uji read-only dicatat dan GATE-DATA-01 dinyatakan PASS atau FAIL.
-3. Paket ini ditinjau dan disetujui, termasuk keputusan arsitektur yang belum diputuskan.
-4. Ruang lingkup implementasi, daftar file/komponen yang akan disentuh, acceptance criteria, serta rencana rollback ditetapkan dalam PR implementasi tersendiri.
-5. Pemilik memberikan persetujuan eksplisit untuk mulai coding.
-
-**Status akhir saat ini:** paket persiapan disusun; kandidat sumber data didukung dokumentasi resmi; akses nyata belum diverifikasi; GATE-DATA-01 masih terbuka; implementasi belum disetujui dan belum dimulai.
+**Status saat ini:** persiapan dokumentasi sedang dirapikan. Pedoman dan lingkup MVP sudah ada di `main`; paket ini masih draft. Lingkungan dan sumber data nyata belum diverifikasi dalam dokumen ini. Belum ada izin implementasi, perubahan runtime, atau penggabungan PR.
