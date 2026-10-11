@@ -213,11 +213,31 @@ final class AMANAH_SEO_Menu_Shell {
 
 		if ( 'amanah-seo-ai-tools' === $requested_page ) {
 			$ai_pages = array(
-				'amanah-entity-profile' => 'Entity Profile',
-				'amanah-authority' => 'Authority & Author',
-				'amanah-content-analyzer' => 'Content Analyzer',
-				'amanah-content-generation' => 'Article Generation',
-				'amanah-seo-ai-settings' => 'AI Settings',
+				'amanah-entity-profile' => array(
+					'title' => 'Entity Profile',
+					'description' => 'Mengelola profil entitas, informasi bisnis, produk, layanan, serta konteks yang menjadi dasar AI dalam memahami apa bisnis Anda, apa yang Anda tawarkan, dan bidang apa yang Anda kuasai.',
+					'action' => 'Kelola Profil Entitas',
+				),
+				'amanah-authority' => array(
+					'title' => 'Authority & Author',
+					'description' => 'Mengelola informasi penulis dan elemen otoritas untuk memperjelas keahlian, kredibilitas, serta keterkaitan penulis dengan topik yang dibahas.',
+					'action' => 'Kelola Otoritas & Penulis',
+				),
+				'amanah-content-analyzer' => array(
+					'title' => 'Content Analyzer',
+					'description' => 'Menganalisis judul, isi artikel, keyword, dan entitas untuk membantu menemukan masalah serta peluang perbaikan konten SEO.',
+					'action' => 'Analisis Konten',
+				),
+				'amanah-content-generation' => array(
+					'title' => 'Article Generation',
+					'description' => 'Membantu menyusun draf artikel berdasarkan instruksi dan konteks yang didukung fitur. Draf dapat ditinjau dan disunting sebelum diterbitkan.',
+					'action' => 'Buat Artikel',
+				),
+				'amanah-seo-ai-settings' => array(
+					'title' => 'AI Settings',
+					'description' => 'Mengelola penyedia AI, kredensial API, dan pilihan model yang tersedia sesuai konfigurasi agar fitur AI dapat menjalankan permintaan.',
+					'action' => 'Atur AI',
+				),
 			);
 			?>
 			<div class="wrap">
@@ -227,10 +247,11 @@ final class AMANAH_SEO_Menu_Shell {
 					<div class="notice notice-warning inline"><p><?php esc_html_e( 'Plugin AMANAH SEO AI belum aktif. Aktifkan plugin pendamping untuk menggunakan fitur AI.', 'amanah-seo' ); ?></p></div>
 				<?php endif; ?>
 				<div class="amanah-seo-navigation-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:1100px;margin-top:20px">
-					<?php foreach ( $ai_pages as $slug => $label ) : ?>
+					<?php foreach ( $ai_pages as $slug => $card ) : ?>
 						<div class="postbox" style="padding:18px;margin:0">
-							<h2 style="margin-top:0"><?php echo esc_html( $label ); ?></h2>
-							<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=' . $slug ) ); ?>"><?php esc_html_e( 'Open', 'amanah-seo' ); ?></a></p>
+							<h2 style="margin-top:0"><?php echo esc_html( $card['title'] ); ?></h2>
+							<p><?php echo esc_html( $card['description'] ); ?></p>
+							<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=' . $slug ) ); ?>"><?php echo esc_html( $card['action'] ); ?></a></p>
 						</div>
 					<?php endforeach; ?>
 				</div>
