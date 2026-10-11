@@ -52,7 +52,7 @@ Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas s
 
 ## 5. Catatan persetujuan pemilik
 
-Pada 2026-10-11, pemilik menyetujui ketujuh rekomendasi MVP-01 sampai MVP-07 sebagai dasar pedoman AMANAH SEO. Persetujuan MVP-03 mencakup prinsip memilih sumber data terkecil yang dapat diverifikasi, bukan pemilihan nama penyedia tertentu. Sumber data spesifik tetap harus diverifikasi sebelum implementasi. Persetujuan ini menetapkan arah produk dan lingkup MVP; bukan persetujuan untuk implementasi, perubahan kode/runtime, atau penggabungan pull request.
+Pada 2026-10-11, pemilik menyetujui ketujuh keputusan MVP-01 sampai MVP-07 sebagai dasar pedoman AMANAH SEO. Sumber awal konseptual yang dipilih kemudian dikonsolidasikan adalah WordPress internal untuk struktur/konten dan GSC untuk performa pencarian. Pemilihan sumber tidak membuktikan akses atau koneksi telah tersedia; hal tersebut wajib diverifikasi sebelum fitur terkait dibuat atau dinyatakan lulus. Persetujuan ini menetapkan arah produk dan lingkup MVP, bukan izin implementasi, perubahan kode/runtime, atau penggabungan pull request.
 
 ## 6. Kriteria penerimaan MVP yang dapat diuji
 
