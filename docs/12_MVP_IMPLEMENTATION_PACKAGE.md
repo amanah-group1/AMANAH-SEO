@@ -490,3 +490,31 @@ Pemeriksaan langsung pada `AMANAH-SEO-AI/plugin/includes/class-install.php`, `AM
 **Engine uninstall — penghapusan lintas modul.** Engine hanya menghapus data saat opsi `delete_data_on_uninstall` bernilai true, tetapi ketika aktif ia menjatuhkan 22 tabel Engine dan menghapus opsi `amanah_seo_ai_credentials` selain opsi Engine lainnya. Opsi tersebut memiliki nama yang mengindikasikan data kredensial AI dan tidak boleh dihapus sebagai efek samping uninstall Engine di dalam paket tunggal. Parent plugin tidak boleh memanggil uninstall Engine secara otomatis tanpa keputusan kepemilikan data dan consent. Implementasi final harus mempunyai satu kebijakan uninstall yang eksplisit, non-destructive secara default, memisahkan tabel/options setiap modul, menampilkan dampak sebelum penghapusan, dan memiliki backup/rollback yang diuji.
 
 Temuan ini mengubah risiko lifecycle menjadi **HIGH / RELEASE BLOCKER** sampai diselesaikan. Aktivasi dan deactivation tidak boleh disamakan dengan uninstall; uninstall lama bukan handler yang aman untuk dipakai langsung oleh parent plugin.
+
+
+### 15.7 Menu baseline untuk urutan uji nyata
+
+Menu berikut terverifikasi dari registrasi sumber baseline. Daftar ini adalah inventaris navigasi awal untuk menyusun urutan uji, bukan klaim bahwa setiap screen sudah lulus runtime.
+
+**AMANAH SEO AI** — parent slug `amanah-seo-ai-settings`:
+- Dashboard/settings: `amanah-seo-ai-settings` (capability `manage_options`).
+- Entity Profile: `amanah-entity-profile` (capability `amanah_view_entity`).
+- Authority & Author: `amanah-authority` (capability `amanah_view_authority`).
+- Content Analyzer: menu didaftarkan oleh content controller; jalur REST juga didaftarkan pada `rest_api_init`.
+- Content AI: `amanah-content-ai` (capability `edit_posts`); FAQ Generator `amanah-faq-generator` dan Schema Generator `amanah-schema-generator` saat ini diarahkan ke placeholder “akan diimplementasikan”.
+- Article generation: controller/repository/validator/evaluator/quality gate ada di source tree dan dimuat oleh plugin core; rute/menu dan kontrak harus dipetakan bersama tes terkait sebelum migrasi.
+
+**AMANAH SEO Engine V2** — parent slug `amanah-seo-engine`; default capability pada AdminScreenRegistry adalah `manage_options`:
+- Home / Dashboard: `amanah-seo-engine`, `amanah-seo-engine-dashboard`.
+- Live Website: `amanah-seo-engine-live-scan`.
+- SEO: `amanah-seo-engine-keywords`, `amanah-seo-engine-seo-strategy`, `amanah-seo-engine-url-mapping`.
+- Content: `amanah-seo-engine-content-plan`, `amanah-seo-engine-content-scanning`, `amanah-seo-engine-content-production`, `amanah-seo-engine-published-content`; hidden editor route `amanah-seo-engine-content-editor`.
+- Links: `amanah-seo-engine-internal-links`, `amanah-seo-engine-orphan-pages`.
+- Issues: `amanah-seo-engine-seo-issues`, `amanah-seo-engine-cannibalization`, `amanah-seo-engine-recommendations`.
+- Monitoring: `amanah-seo-engine-monitoring-performance`, `amanah-seo-engine-monitoring-keywords`, `amanah-seo-engine-monitoring-site-health`.
+- AI: `amanah-seo-engine-ai-configuration`, `amanah-seo-engine-ai-usage`.
+- Administration: `amanah-seo-engine-import-export`, `amanah-seo-engine-settings`, `amanah-seo-engine-license`, `amanah-seo-engine-updates`, `amanah-seo-engine-system`.
+
+**Urutan integrasi yang direkomendasikan:** (1) parent Dashboard/status modul dan capability gate; (2) Settings + AI provider/credential; (3) Entity Profile; (4) Authority & Author; (5) Content Analyzer dan Article Generation; (6) Engine Live Website/SEO scan dan Keywords; (7) Strategy/URL Mapping; (8) Content Plan/Scanning; (9) Brief/Blueprint/Content Production/quality/review/publish; (10) Links/Issues/Recommendations/Monitoring; (11) Import/Export/System; (12) License/Updates hanya setelah identitas produk disetujui. Urutan ini bukan keputusan untuk mengimplementasikan seluruh fitur sekaligus: setiap item tetap paket terpisah dan baru dimulai setelah menu sebelumnya lolos tes serta regresi.
+
+Sebelum menggabungkan navigasi, tetapkan parent menu tunggal dan pemetaan slug/redirect yang kompatibel. Jangan sekadar menampilkan dua set submenu dengan dua branding/identitas plugin. Menu yang tidak termasuk MVP dasar boleh ditunda tanpa dihapus dari peta migrasi.
