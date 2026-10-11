@@ -407,3 +407,75 @@ Ini menunjukkan Engine memiliki logika repair untuk schema drift. Migrasi gabung
 6. Sebelum menyatukan plugin, tentukan urutan kompatibilitas jika dua plugin lama aktif bersamaan, keduanya memakai tabel bernama mirip, atau salah satu modul sudah pernah menginisialisasi skema. Aktivasi plugin induk tidak boleh memicu side effect destruktif.
 
 **Perubahan yang diizinkan saat ini:** dokumentasi audit pada branch AMANAH-SEO saja. Tidak ada installer, migration source, tabel, options, atau database pendamping yang diubah.
+
+
+## 15. Inventaris source tree terukur dan implikasi implementasi per menu
+
+Pemeriksaan rekursif Git tree pada baseline `main` kedua repository pendamping dilakukan secara baca-saja pada 2026-10-11. Hitungan ini adalah hitungan file pada Git tree, bukan bukti semua perilaku telah diuji.
+
+### 15.1 Ukuran baseline yang terukur
+
+| Ukuran | AMANAH SEO AI | AMANAH SEO Engine V2 |
+|---|---:|---:|
+| Git tree entry (termasuk direktori) | 154 | 431 |
+| File blob | 131 | 355 |
+| File PHP | 75 | 325 |
+| File di bawah `tests/` | 20 | 26 |
+| Dokumen di folder dokumentasi utama | 35 | 17 |
+| Migration class terpisah | 0 ditemukan | 17 |
+| Source entry point plugin | `plugin/amanah-seo-ai.php` | `plugin/amanah-seo-engine.php` |
+
+AI memiliki installer/upgrade di `plugin/includes/class-install.php`, bukan direktori migration class terpisah. Engine memiliki migration class versi 1–9 dan 11–18. **Tidak ditemukan migration class versi 10** pada tree baseline yang diperiksa. Ini harus dicatat sebagai celah historis versi, bukan diisi, dinomori ulang, atau dianggap bug tanpa menelusuri riwayat commit dan kontrak rilis.
+
+### 15.2 Temuan lifecycle dan persyaratan runtime
+
+- Entry point AI mendefinisikan konstanta global `AMANAH_SEO_AI_VERSION`, `AMANAH_SEO_AI_PATH`, `AMANAH_SEO_AI_URL`, dan `AMANAH_SEO_AI_PREFIX`; mendaftarkan activation/deactivation hooks; menjalankan `AMANAH_SEO_AI_Install::maybe_upgrade` pada `plugins_loaded`; lalu membuat dan menjalankan `AMANAH_SEO_AI_Plugin_Core`.
+- AI activator secara eksplisit mensyaratkan PHP 8.1+ dan WordPress 6.x+. Ia menjalankan installer serta menambahkan capability entity/authority untuk administrator dan capability view untuk editor.
+- Engine `Plugin::activate()` menjalankan environment guard, inisialisasi configuration defaults, dan `MigrationManager::migrate()`. `deactivate()` dan `uninstall()` didelegasikan ke lifecycle service. Entry point Engine mendaftarkan lifecycle plugin sendiri.
+- Engine mendaftarkan migration versi 1–9 dan 11–18 di `Core/Bootstrap/Plugin.php`. `MigrationManager` menjalankan migration berurutan berdasarkan nomor, menyimpan versi ke option `amanah_seo_engine_database_version`, dan memiliki repair path khusus untuk schema versi 11 dan 18. Repair versi 11 memeriksa tabel issues/recommendations; repair versi 18 memeriksa empat tabel intelligence/requirements.
+- Engine memiliki komponen background job/queue/WordPress cron, lisensi/entitlement, dan update client/service. Identitas produk Engine saat ini digunakan dalam konstruktor client/server update dan lisensi. Identitas ini tidak boleh sekadar diganti ke AMANAH SEO sebelum server, package identity, entitlement, dan kompatibilitas lisensi diputuskan.
+- Karena AI menolak aktivasi pada PHP di bawah 8.1, paket satu plugin yang membawa AI harus menggunakan PHP minimum 8.1 kecuali kelak ada audit kompatibilitas dan perubahan terkontrol yang membuktikan alternatif aman. Klaim `PHP >=7.4` pada composer Engine sendiri tidak cukup untuk menurunkan persyaratan gabungan.
+
+### 15.3 Disposition sumber sementara
+
+| Area sumber | Disposition | Alasan / syarat sebelum dipindahkan |
+|---|---|---|
+| Entry point AI dan Engine | **Replace** dengan satu entry point induk | Keduanya mendaftarkan lifecycle plugin tersendiri. Jangan ikut mengaktifkan dua header plugin lama di paket akhir. |
+| AI loader/core dan admin/module classes | **Adapt** | Pertahankan perilaku/kontrak yang sudah dikunci; audit semua global, hooks, menu slug, capability, asset path, dan dependency. |
+| AI installer | **Adapt behind AI migration adapter** | Pertahankan versi 1.3.0 dan semantics option selama fase awal; rekonsiliasi schema/archive sebelum runtime migration. |
+| Engine autoloader dan namespace | **Reuse with isolated module boundary** | Namespace PSR-4 dapat dipertahankan; verifikasi PHP minimum dan jalur include pada paket baru. |
+| Engine migration classes 1–9, 11–18 | **Reuse after inventory/test** | Jangan renumber versi; audit setiap efek samping, idempotency, tabel dan data yang disentuh; jelaskan missing v10 berdasarkan riwayat. |
+| AI dan Engine tests/bootstrap | **Adapt + retain suites** | Jangan menggabungkan bootstrap secara buta; pertahankan suite masing-masing dan tambahkan integration suite parent. |
+| Engine license/update implementation | **Defer integration pending product-identity decision** | Identitas produk, endpoint, package verification, eligibility, dan server contracts harus ditentukan dulu. |
+| Uninstall/destructive cleanup | **Defer; default non-destructive** | Satu plugin tidak boleh menghapus data modul lain atau data lama tanpa persetujuan, backup, dan rollback yang diuji. |
+| Google Search Console / external metrics | **Defer from core MVP** | Tidak diperlukan untuk membuktikan siklus dasar; hanya diaktifkan setelah akses nyata disetujui dan dibuktikan. |
+
+Disposition ini merupakan peta tingkat komponen. Peta file-per-file yang final masih harus meliputi setiap PHP file yang dipindahkan, seluruh hook/capability/route/cron, dan dependency transitif. Statusnya belum boleh disebut lengkap sampai daftar tersebut dihasilkan dan direview.
+
+### 15.4 Model pengerjaan nyata: satu menu, satu paket, satu uji penerimaan
+
+Setelah paket arsitektur disetujui dan kerangka induk siap, setiap menu/fungsi dikerjakan melalui siklus berikut; tidak ada migrasi semua menu sekaligus:
+
+1. **Baseline menu** — catat nama menu dan slug, capability yang dibutuhkan, URL admin, controller/callback, source file, tabel/options yang dibaca/ditulis, dan hasil saat ini di WordPress testing.
+2. **Kontrak menu** — tulis perilaku yang diharapkan, hak akses, input/output, validasi, nonce/CSRF, keadaan kosong, pesan sukses/gagal, dan ketergantungan pada modul lain.
+3. **Paket perubahan terbatas** — daftar file yang diubah serta file yang secara eksplisit tidak disentuh; satu branch/PR terkontrol untuk menu atau subfitur tersebut.
+4. **Tes otomatis** — unit/contract tests yang relevan, pemeriksaan syntax/static analysis, dan regresi terhadap menu lain yang berbagi layanan.
+5. **Sinkronisasi ke WordPress testing** — backup bila menyentuh data/schema, salin hanya source plugin canonical ke lokasi runtime yang telah dikonfirmasi, dan catat commit yang diuji.
+6. **Tes nyata pemilik** — login dengan role yang sesuai; buka menu; uji jalur berhasil, data kosong, input tidak valid, akses ditolak, dan kegagalan layanan jika relevan. Jangan gunakan data produksi atau kredensial dalam bukti.
+7. **Keputusan gate** — PASS hanya jika bukti nyata dan otomatis sesuai kriteria; FAIL jika ada pelanggaran; BLOCKED jika lingkungan/sumber belum tersedia. Tidak boleh mengklaim PASS dari sekadar tampilan halaman atau tes unit.
+8. **Regresi dan penutupan** — cek menu terkait, catat hasil dan bukti sanitasi, tetapkan commit/rollback; baru kemudian mulai menu berikutnya.
+
+Template laporan per menu wajib berisi: ID paket, menu/slug, baseline commit, commit implementasi, file berubah, skema/options terdampak, skenario, hasil otomatis, hasil WordPress nyata, bukti, regresi, rollback, dan status PASS/FAIL/BLOCKED. Persetujuan untuk satu menu tidak otomatis memberi izin memperluas scope ke menu lain.
+
+### 15.5 Gate yang masih wajib sebelum implementasi
+
+1. Rekonsiliasi AI database design vs installer source dan legacy archive behavior.
+2. Audit setiap dari 17 Engine migration class dan efek sampingnya, termasuk versi 11/18 repair, migration version gap 10, serta kegagalan/rollback.
+3. Inventaris penuh table names, options, capabilities, admin menus/slugs, REST/AJAX routes, cron/job hooks, uninstall behavior, license/update identity, global functions/constants, and PHP class collisions.
+4. Audit dokumen locked AI (35 dokumen/folder utama terdaftar pada tree) dan Engine (DOC-00–DOC-15 serta workflow execution doc) untuk konflik yang memengaruhi integrasi. Hitungan dokumen bukan bukti semua isi sudah direkonsiliasi.
+5. File-by-file source-to-target map final beserta dependency graph dan keputusan reuse/adapt/replace/defer/exclude.
+6. Rencana fresh install, upgrade dari setiap baseline yang didukung, coexistence dua plugin lama, backup/restore, dan rollback yang diuji pada salinan database.
+7. Keputusan terpisah tentang identitas lisensi/updater dan urutan penonaktifan plugin lama.
+8. Persetujuan paket implementasi sebelum kode diubah.
+
+**Status setelah pemeriksaan ini:** source-tree inventory lebih terukur; migration list Engine terverifikasi sebagai versi 1–9 dan 11–18; perbedaan runtime minimum PHP teridentifikasi. Audit per-file, audit seluruh isi dokumen locked, database runtime, tes migrasi, dan WordPress integration masih **BELUM LENGKAP / BELUM DIUJI**. Tidak ada kode produk, database, atau runtime yang diubah.
