@@ -292,52 +292,52 @@ final class AMANAH_SEO_Menu_Shell {
 				),
 				'amanah-seo-ai-audit' => array(
 					'title' => 'AI Audit',
-					'description' => 'Pusat audit AI; integrasi pemeriksaan belum tersedia.',
+					'description' => 'Meninjau kebutuhan pemeriksaan dan peluang perbaikan SEO berbantuan AI.',
 					'action' => 'Buka AI Audit',
 				),
 				'amanah-seo-ai-topic-authority' => array(
 					'title' => 'Topic Authority',
-					'description' => 'Pengelolaan otoritas topik; integrasi belum tersedia.',
+					'description' => 'Membangun konteks topik dan hubungan antar-konten untuk memperjelas bidang keahlian.',
 					'action' => 'Buka Topic Authority',
 				),
 				'amanah-seo-ai-content-brief' => array(
 					'title' => 'Content Brief',
-					'description' => 'Penyusunan brief konten; integrasi belum tersedia.',
+					'description' => 'Menyusun arahan, tujuan, struktur, dan kebutuhan konten sebelum penulisan.',
 					'action' => 'Buka Content Brief',
 				),
 				'amanah-seo-ai-faq-generator' => array(
 					'title' => 'FAQ Generator',
-					'description' => 'Penyusunan FAQ; integrasi belum tersedia.',
+					'description' => 'Membantu menyusun pertanyaan dan jawaban yang relevan dengan kebutuhan audiens.',
 					'action' => 'Buka FAQ Generator',
 				),
 				'amanah-seo-ai-content-optimizer' => array(
 					'title' => 'Content Optimizer',
-					'description' => 'Optimasi konten; integrasi belum tersedia.',
+					'description' => 'Menemukan peluang perbaikan pada konten yang sudah ada.',
 					'action' => 'Buka Content Optimizer',
 				),
 				'amanah-seo-ai-internal-links' => array(
 					'title' => 'Internal Link AI',
-					'description' => 'Pengelolaan internal link berbantuan AI; integrasi belum tersedia.',
+					'description' => 'Mendukung evaluasi dan perencanaan hubungan tautan internal antarhalaman.',
 					'action' => 'Buka Internal Link AI',
 				),
 				'amanah-seo-ai-schema-generator' => array(
 					'title' => 'Schema Generator',
-					'description' => 'Pembuatan schema; integrasi belum tersedia.',
+					'description' => 'Mendukung penyusunan structured data sesuai kebutuhan halaman.',
 					'action' => 'Buka Schema Generator',
 				),
 				'amanah-seo-ai-schema-validation' => array(
 					'title' => 'Schema Validation',
-					'description' => 'Validasi schema; integrasi belum tersedia.',
+					'description' => 'Memeriksa kelayakan dan konsistensi structured data.',
 					'action' => 'Buka Schema Validation',
 				),
 				'amanah-seo-ai-reports' => array(
 					'title' => 'AI Reports',
-					'description' => 'Laporan fitur AI; integrasi belum tersedia.',
+					'description' => 'Menyajikan ringkasan dan hasil dari kemampuan AI setelah integrasi tersedia.',
 					'action' => 'Buka AI Reports',
 				),
 				'amanah-seo-ai-license' => array(
 					'title' => 'License & Entitlement AI',
-					'description' => 'Pengelolaan lisensi dan hak penggunaan AI; integrasi belum tersedia.',
+					'description' => 'Menampilkan pengelolaan lisensi dan hak penggunaan fitur AI.',
 					'action' => 'Buka License & Entitlement AI',
 				),
 				'amanah-seo-ai-settings' => array(
