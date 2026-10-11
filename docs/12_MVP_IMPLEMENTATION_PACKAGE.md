@@ -328,3 +328,54 @@ Migration manager dan direktori migration berarti urutan serta versi migration E
 3. Inventarisasi seluruh migration source, table/options, class/function/constant declarations, hooks, cron, REST/AJAX, capability, licensing, updater, uninstall, dan tests.
 4. Hasilkan dependency graph dan mapping file-by-file ke target Core / AI module / Engine module, disertai disposition: reuse, adapt, replace, defer, atau exclude beserta alasannya.
 5. Siapkan rencana migrasi data dan rollback terpisah untuk review sebelum ada perubahan kode.
+
+
+## 13. Audit kontrak terkunci dan desain migrasi yang disarankan
+
+Bagian ini menerjemahkan bukti dokumen locked ke batas desain migrasi. Ini belum mengubah kontrak pada repository AI atau Engine.
+
+### 13.1 Kontrak AI yang wajib dipertahankan
+
+- `TQ-007_AI_ENGINE_IMPLEMENTATION_CONTRACT.md` berstatus LOCKED. Konfigurasi provider harus eksplisit; provider/model yang digunakan harus dapat diketahui; fallback hanya ke provider lain yang dikonfigurasi setelah retryable failures habis; tidak boleh membuat fallback diam-diam di luar kontrak.
+- `TQ-008_AI_API_CREDENTIAL_ENCRYPTION.md` berstatus LOCKED. Kontrak yang tercantum memakai PHP Sodium `sodium_crypto_secretbox()`, nonce acak `random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES)`, serta derivasi kunci HMAC-SHA-256 dengan purpose string tetap dan WordPress auth salt sebagai secret. Migrasi tidak boleh mengubah format, derivasi, atau penanganan credential tanpa kontrak perubahan tersendiri.
+- `TQ-005_PHASE_2_MIGRATION_SYSTEM.md` dan `CORE-002_DATABASE_DECISION.md` berstatus LOCKED. AI menggunakan version-based migration terintegrasi installer, database version di WordPress options, tabel dengan `$wpdb->prefix` aktif, migrasi idempotent dan non-destruktif, serta version hanya dinaikkan setelah langkah berhasil. Tidak boleh mengganti mekanisme ini dengan framework baru secara diam-diam.
+- `REPO-STRUCTURE-001_CANONICAL_PLUGIN_SOURCE_BOUNDARY.md` menetapkan `plugin/` sebagai source produksi canonical AI; root repo tidak boleh disalin sebagai plugin deployable.
+
+### 13.2 Kontrak Engine yang wajib dipertahankan
+
+- DOC-00, DOC-04, DOC-05, DOC-12, DOC-13, dan DOC-14 yang diperiksa berstatus LOCKED. Perubahan perilaku workflow, data model, provider/model governance, approval, history, atau change-control tidak boleh disisipkan sebagai efek samping integrasi.
+- DOC-04 menjelaskan logical data model dan secara eksplisit menyatakan bahwa dokumen itu sendiri belum menetapkan implementasi database aktual. Karena itu, tabel Engine tidak boleh direka dari logical entities; source migration/repository dan database aktual harus menjadi bukti.
+- DOC-12 melarang silent provider/model changes dan mengharuskan provider/model/usage yang dipakai dalam operasi dapat diketahui. Integrasi tidak boleh menyamakan kebijakan provider Engine dengan AI tanpa review kontrak dan pengujian.
+- Engine memiliki `Infrastructure/Migration/MigrationManager.php` dan `Infrastructure/Migration/Migrations/`. Detail runner, version state, side effects, dan failure/rollback behavior harus dipetakan dari source sebelum desain coordinator ditetapkan.
+
+### 13.3 Rancangan migrasi awal — usulan untuk review
+
+**Prinsip:** satu plugin lifecycle, tetapi migrasi data tetap memiliki ownership per modul. Jangan langsung mengganti dua sistem migration dengan satu implementasi generik.
+
+1. Plugin induk memiliki satu header WordPress, satu entry point, satu activation/deactivation registration, dan satu coordinator untuk melaporkan hasil inisialisasi modul.
+2. AI module mempertahankan adapter terhadap kontrak version migration AI yang sudah locked. Ia tidak boleh menjalankan migrasi berulang/destruktif dan tidak boleh menaikkan versi jika langkah gagal.
+3. Engine module mempertahankan MigrationManager dan urutan migration Engine setelah audit source membuktikan bagaimana versi dan failure dikelola.
+4. Coordinator plugin induk memanggil migrasi modul secara terkontrol, berurutan, dapat diulang dengan aman, dan melaporkan kegagalan. Coordinator tidak menyatukan tabel atau menimpa version option milik modul.
+5. Bila aktivasi hanya sebagian berhasil, status modul dan pesan diagnostik harus jelas. Tidak boleh mengklaim semua modul sehat atau menandai seluruh instalasi berhasil jika satu migrasi wajib gagal.
+6. Database/option namespace masing-masing modul dipertahankan pada tahap pertama. Konsolidasi namespace, rename tabel, merge data, atau penghapusan sistem lama adalah pekerjaan terpisah yang memerlukan rencana, backup, test migrasi, dan persetujuan.
+7. Lifecycle plugin induk tidak boleh memuat dua header plugin terpisah. File entry point lama tidak disertakan sebagai entry point aktif dalam paket tunggal; kelas/fungsi yang masih diperlukan dipindahkan/adaptasi setelah inventarisasi dependency.
+8. Plugin lama tidak boleh dihapus/nonaktifkan otomatis sebelum migration compatibility dan upgrade path diuji pada salinan runtime/data.
+
+Rancangan ini adalah usulan teknis berdasarkan kontrak yang dibaca. Detail final harus menunggu audit semua migration files, installer/activator source, uninstall handlers, options, capabilities, and integration tests.
+
+### 13.4 Rencana implementasi terkendali yang akan disiapkan
+
+| Paket | Perubahan yang direncanakan | Batas keselamatan | Bukti penerimaan |
+|---|---|---|---|
+| A — Source inventory | Daftar lengkap file, class/function/constants, hooks, route, cron, tests, migrations, licensing/updater. | Read-only. | Inventory lengkap dengan sumber/commit dan gap yang ditandai. |
+| B — Parent skeleton | Satu header/entry point, bootstrap minimal, module registry/status, tests. | Tidak memuat kode modul atau migrasi data dulu. | Plugin induk bisa diaktifkan/nonaktifkan tanpa fatal error; Core skeleton test PASS. |
+| C — AI module adapter | Pindahkan/adapt source AI di bawah module boundary, mempertahankan kontrak AI. | Tidak mengubah schema/credential format/provider behavior. | Tes AI suite lulus dalam paket induk; tests untuk credential/settings/entity/content tetap lulus. |
+| D — Engine module adapter | Pindahkan/adapt Engine source dengan namespace dan dependency yang terisolasi. | Tidak mengubah locked workflow/provider/data/approval rules. | Tes Engine suite lulus di layout gabungan; migration sequence tetap valid. |
+| E — Data lifecycle | Coordinator memanggil migrasi AI dan Engine dengan ownership terpisah. | Tidak rename/drop/merge; backup dan rollback diuji. | Fresh install dan upgrade path lulus pada database salinan; kegagalan migration tidak menaikkan versi secara keliru. |
+| F — Integration hardening | Collision tests, permission/security, activation/deactivation, updater/license, regression, WordPress runtime. | Tidak deploy ke site aktif sebelum seluruh gate lulus. | Seluruh test suite lulus dan runtime evidence terdokumentasi; rollback diuji. |
+
+**Keputusan yang sudah disetujui pemilik:** satu plugin AMANAH SEO dengan AI dan Engine sebagai modul internal.
+
+**Keputusan teknis yang belum boleh diasumsikan:** schema/option consolidation, module migration coordinator details, module enable/disable policy, plugin-old upgrade/disable sequence, updater/license identity, dan pemindahan database aktual.
+
+**Status:** audit masih parsial; desain teknis di atas masih berupa proposal untuk diselesaikan melalui source inventory. Tidak ada kode produk atau database yang diubah.
