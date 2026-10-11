@@ -63,15 +63,15 @@ final class AMANAH_SEO_Menu_Shell {
 			'title'       => 'AI — Dashboard',
 			'description' => 'Dashboard AMANAH SEO AI belum ditampilkan dari produk AI. Ini hanya pintasan navigasi dan tidak menjalankan atau menghubungkan produk AI.',
 		),
-		'amanah-seo-ai-content-analyzer' => array(
+		'amanah-content-analyzer' => array(
 			'title'       => 'AI — Content Analyzer',
 			'description' => 'Content Analyzer merupakan bagian produk AMANAH SEO AI yang terpisah. Halaman ini hanya placeholder navigasi; analisis konten belum dijalankan dari produk utama.',
 		),
-		'amanah-seo-ai-entity-profile' => array(
+		'amanah-entity-profile' => array(
 			'title'       => 'AI — Entity Profile',
 			'description' => 'Entity Profile berada pada produk AMANAH SEO AI yang terpisah. Halaman ini hanya placeholder navigasi.',
 		),
-		'amanah-seo-ai-authority' => array(
+		'amanah-authority' => array(
 			'title'       => 'AI — Authority',
 			'description' => 'Authority berada pada produk AMANAH SEO AI yang terpisah. Halaman ini hanya placeholder navigasi.',
 		),
@@ -130,6 +130,30 @@ final class AMANAH_SEO_Menu_Shell {
 		);
 
 		foreach ( self::PAGES as $slug => $page ) {
+			// WordPress already creates the Dashboard submenu for the top-level page.
+			if ( 'amanah-seo-dashboard' === $slug ) {
+				continue;
+			}
+
+			// When the companion AI plugin is active, it registers its real screens
+			// under this menu. Do not create duplicate placeholder routes.
+			if (
+				class_exists( 'AMANAH_SEO_AI_Plugin_Core' )
+				&& in_array(
+					$slug,
+					array(
+						'amanah-seo-ai-dashboard',
+						'amanah-content-analyzer',
+						'amanah-entity-profile',
+						'amanah-authority',
+						'amanah-seo-ai-settings',
+					),
+					true
+				)
+			) {
+				continue;
+			}
+
 			add_submenu_page(
 				'amanah-seo-dashboard',
 				$page['title'] . ' — AMANAH SEO',
