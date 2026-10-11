@@ -594,3 +594,28 @@ Pemeriksaan metadata/headings pada dokumen acuan utama menegaskan:
 - Nama file tidak selalu sama dengan isi/kontraknya. Contoh yang ditemukan: AI file bernama `01_AMANAH_SEO_AI_PRD_DOCUMENT_v1.0.md` memiliki judul isi “ARTICLE GENERATION & QUALITY STANDARD — DOCUMENTATION RECONCILIATION”; file `04_AMANAH_SEO_AI_DATABASE_DESIGN_DOCUMENT_v1.0.sql` mengandung dokumen SQL/Markdown panjang dengan struktur dokumentasi; Engine file `Version9SEOScan.php` memiliki runtime version 10. Gunakan konten, metadata otoritas, dan source behavior bersama-sama; jangan mengubah dokumen terkunci atau membuat kesimpulan dari nama file saja.
 
 Pemeriksaan metadata ini belum merupakan rekonsiliasi semantik setiap paragraf dari seluruh dokumen. Kontrak yang relevan untuk tiap menu harus ditautkan di paket menu tersebut; jika ada konflik antardokumen, hentikan fitur terkait dan catat keputusan yang dibutuhkan, bukan memilih diam-diam.
+
+
+### 15.14 Hook, menu, route, dan capability baseline yang sudah diverifikasi
+
+Pemeriksaan entry point/boot registries dan controller utama menghasilkan kontrak berikut untuk peta integrasi:
+
+**AI**
+- Entry point lama mendaftarkan activation/deactivation hooks sendiri, menjalankan `AMANAH_SEO_AI_Install::maybe_upgrade` pada `plugins_loaded`, dan menjalankan `AMANAH_SEO_AI_Plugin_Core`.
+- Parent admin slug: `amanah-seo-ai-settings`; halaman Dashboard juga menggunakan slug tersebut. Menu lama mendaftarkan Content AI `amanah-content-ai`, FAQ Generator `amanah-faq-generator`, Schema Generator `amanah-schema-generator`; Entity Profile `amanah-entity-profile`; Authority & Author `amanah-authority`; Content Analyzer terdaftar dari controller tersendiri.
+- Capability tidak seragam: dashboard/settings memakai `manage_options`; Entity Profile memakai `amanah_view_entity`; Authority & Author memakai `amanah_view_authority`; Content AI menggunakan `edit_posts`. Activator memberi capability entity/authority kepada Administrator dan capability view kepada Editor. Parent plugin harus memetakan capability per tindakan, bukan meratakan semua halaman menjadi `manage_options` atau mengasumsikan role tertentu.
+- Entity REST controller mendaftarkan rute pada namespace `amanah/v1`; Content Analyzer juga mendaftarkan route pada `amanah/v1`; Article Generation mendaftarkan `/content/generate`, `/content/refine`, dan `/content/approve` pada namespace yang sama.
+- Temuan navigasi: Article Generation mendaftarkan submenu dengan parent slug `amanah-content-ai`, sementara slug itu sendiri adalah slug halaman submenu Content AI, bukan top-level slug yang didaftarkan entry menu. Ini perlu diuji/ditangani saat migrasi navigasi; jangan menyalin registrasi apa adanya dan menganggap halaman pasti dapat diakses.
+
+**Engine**
+- `Plugin::activate()` menjalankan environment guard, inisialisasi configuration defaults, dan migration manager; `deactivate()`/ `uninstall()` didelegasikan ke lifecycle service. Entry point Engine lama mendaftarkan lifecycle sendiri.
+- `PluginHooks::register()` mendaftarkan `init` untuk konfigurasi/migrasi, `admin_init` untuk save/edit/action handling, menu pada `admin_menu`, serta cron hooks `amanah_seo_engine_run_jobs` dan `amanah_seo_engine_cleanup_jobs`. Scheduler menjadwalkan job worker dan cleanup berulang; deactivation membersihkan hook run-jobs di lifecycle service, sehingga cleanup-hook perlu ditelusuri dan diuji juga.
+- Admin parent slug `amanah-seo-engine`; screen slug berada pada namespace `amanah-seo-engine-*`. Registry default memakai `manage_options`, dan hidden content editor route menggunakan slug `amanah-seo-engine-content-editor`.
+- Engine menginisialisasi providers OpenAI, Gemini, CustomAIProvider, background jobs, configuration, license, dan update services dalam bootstrap. Jangan menginisialisasi bootstrap penuh hanya untuk menampilkan menu jika efek samping boot belum dipisahkan.
+
+**Implikasi integrasi**
+1. Satu parent plugin harus mendaftarkan activation/deactivation hanya sekali; entry point modul lama tidak boleh ikut aktif sebagai plugin terpisah.
+2. Buat satu registrasi menu induk dan tabel pemetaan slug lama → slug target. Setiap callback screen tetap menggunakan capability eksplisit dan pengujian role.
+3. Namespace REST lama harus dipertahankan atau diberi compatibility mapping yang terencana; verifikasi daftar rute lengkap, permission callback, nonce/CSRF, dan versi API sebelum migrasi.
+4. Audit semua cron hooks termasuk jadwal berulang, pembersihan, retry, dan callback agar tidak terdaftar ganda dan tidak tertinggal setelah deactivate.
+5. Perubahan slug, capability, route, cron, atau text domain termasuk perubahan perilaku dan wajib masuk paket menu terkait, bukan perubahan massal di tahap skeleton.
