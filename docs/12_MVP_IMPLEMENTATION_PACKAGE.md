@@ -1,7 +1,7 @@
 # Paket Kesiapan Pengerjaan MVP AMANAH SEO
 
-**Versi:** 0.3-draft  
-**Status:** RANCANGAN TERKENDALI — belum disetujui untuk coding  
+**Versi:** 0.3-draft — DIGANTIKAN SEBAGAI ACUAN KERJA  
+**Status:** ARSIP RIWAYAT — gunakan paket tunggal versi 1.0 untuk pekerjaan lanjutan  
 **Tanggal:** 2026-10-11  
 **Acuan utama:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), dan [README](../README.md)  
 **Tujuan:** menyiapkan pekerjaan MVP untuk diuji pada website WordPress testing, tanpa menunggu website resmi atau integrasi Google Search Console.
@@ -213,4 +213,4 @@ Sebelum implementasi, pemilik perlu menyetujui:
 
 ## 11. Status penutupan dokumen
 
-Pedoman konseptual dan lingkup MVP dinyatakan selesai berdasarkan keputusan pemilik. Dokumen paket ini tetap **rancangan kesiapan implementasi**, bukan persetujuan coding. Tidak ada keputusan konseptual yang memblokir penutupan pedoman; bukti akses WordPress, GSC, dan lingkungan testing tetap merupakan gerbang teknis sebelum fitur terkait dibangun atau dinyatakan PASS.
+Dokumen ini dipertahankan sebagai riwayat keputusan dan acceptance criteria awal. Untuk pekerjaan gabungan audit lingkungan WordPress, bukti sumber WordPress/GSC, audit baseline AI/Engine, dan urutan migrasi satu plugin, gunakan [Paket Tunggal Kesiapan Implementasi dan Migrasi Modul versi 1.0](13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md). Runtime WordPress/GSC dan backup/restore tetap harus diuji langsung; dokumen ini tidak boleh digunakan sebagai bukti PASS atau izin deployment.

@@ -6,7 +6,8 @@
 
 1. **[Pedoman Induk AMANAH SEO](docs/PEDOMAN_INDUK_AMANAH_SEO.md)** — acuan utama untuk tujuan produk, prinsip, pembagian produk, alur kerja, keputusan, dan gerbang sebelum implementasi.
 2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — fungsi MVP, batas yang tidak termasuk, keputusan dasar, dan kriteria penerimaan.
-3. **[Paket Kesiapan Pengerjaan MVP](docs/12_MVP_IMPLEMENTATION_PACKAGE.md)** — rancangan persiapan, urutan kerja, dan bukti penerimaan. Dokumen ini masih draft sampai disetujui pemilik.
+3. **[Paket Tunggal Kesiapan Implementasi dan Migrasi Modul](docs/13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md)** — satu paket untuk audit WordPress, bukti WordPress/GSC, audit source AI/Engine, risiko database/kredensial/lisensi, migrasi, dan acceptance criteria.
+4. [Paket Kesiapan MVP versi sebelumnya](docs/12_MVP_IMPLEMENTATION_PACKAGE.md) dipertahankan sebagai riwayat; gunakan paket tunggal versi 1.0 sebagai acuan kerja.
 
 Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/README.md). Dokumen arsip dan laporan audit historis merupakan rekam jejak, bukan bukti otomatis bahwa keadaan kode atau runtime saat ini sudah lulus.
 
@@ -19,11 +20,11 @@ Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/RE
 
 ## Status dokumen dan persetujuan
 
-- Pedoman Induk, Lingkup MVP, dan target packaging satu plugin menjadi acuan konseptual. Konsolidasi dokumentasi hanya menetapkan arah dan batas; paket kesiapan implementasi tetap memerlukan persetujuan coding tersendiri.
+- Pedoman Induk dan Lingkup MVP sudah dikonsolidasikan. Paket gabungan audit kesiapan dan migrasi modul tersedia di [Paket Tunggal versi 1.0](docs/13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md); dokumen ini tidak menyatakan runtime lulus atau memberi izin deployment.
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
 - Lingkup MVP adalah satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya**.
 - Sumber awal konseptual yang dipilih adalah data internal WordPress (struktur/konten) dan Google Search Console (performa pencarian); akses teknis masing-masing harus dibuktikan sebelum fitur terkait dinyatakan berfungsi.
-- Paket kesiapan pengerjaan MVP tersedia di [docs/12_MVP_IMPLEMENTATION_PACKAGE.md](docs/12_MVP_IMPLEMENTATION_PACKAGE.md) sebagai rancangan terkendali; status dokumen tersebut bukan persetujuan untuk coding.
+- Paket kesiapan sebelumnya digantikan sebagai acuan kerja oleh [Paket Tunggal versi 1.0](docs/13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md).
 - Website WordPress testing dapat dipakai untuk menguji siklus dasar tanpa koneksi GSC, menggunakan data WordPress yang benar-benar terbaca dan/atau temuan manual berlabel jelas. Fitur metrik pencarian tetap menunggu bukti akses GSC. Data yang belum tersedia harus ditandai jelas; sistem tidak boleh mengarang metrik.
 - Pedoman konseptual selesai bukan berarti implementasi, sinkronisasi runtime, deployment, atau merge berikutnya otomatis disetujui.
 
