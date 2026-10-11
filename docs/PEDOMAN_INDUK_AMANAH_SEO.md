@@ -167,24 +167,25 @@ Selama tahap penyusunan pedoman (tahap konseptual kini telah ditutup):
 - Jangan mulai implementasi AMANAH SEO sebelum lingkup awal dan kriteria penerimaannya disetujui.
 - Jangan membuka fase baru hanya karena ada dokumen tambahan. Dokumen baru dibuat hanya jika menjawab keputusan atau kebutuhan nyata yang belum tercakup di sini.
 
-## 10. Urutan penyelesaian pedoman — satu jalur, tanpa putaran tak berujung
+## 10. Riwayat penutupan pedoman — satu jalur, tanpa putaran tak berujung
 
-**Langkah 1 — Tetapkan dasar produk.** Konfirmasi atau koreksi tujuan, peran tiga produk, prinsip kemandirian, dan kendali pemilik.  
-**Langkah 2 — Tetapkan alur pemilik website.** Lengkapi input, output, status, persetujuan, kondisi gagal, dan akhir tiap tahap.  
-**Langkah 3 — Tetapkan lingkup MVP AMANAH SEO.** Pisahkan fungsi wajib versi pertama, fungsi setelah MVP, dan hal di luar cakupan.  
-**Langkah 4 — Cocokkan dengan kemampuan nyata AI dan ENGINE.** Baca-saja; beri label tersedia-terverifikasi, tersedia-belum-teruji, belum ada, atau belum diketahui.  
-**Langkah 5 — Putuskan arsitektur dan integrasi minimum.** Hanya berdasarkan kebutuhan MVP dan hasil langkah 4; tidak perlu mendesain semua kemungkinan masa depan.  
-**Langkah 6 — Putuskan keamanan, akses, data, lisensi, serta komersial yang diperlukan untuk MVP.** Hal yang belum diperlukan untuk MVP tetap dicatat, bukan dijadikan penghalang tanpa alasan.  
-**Langkah 7 — Tetapkan kriteria penerimaan dan kesiapan.** Tentukan bukti apa yang membuktikan tiap fungsi berjalan dan batas klaim yang diperbolehkan.  
-**Langkah 8 — Tutup pedoman.** Terbitkan satu daftar keputusan final, satu daftar keputusan terbuka yang benar-benar memblokir MVP, lingkup MVP, dan acceptance criteria. Setelah pemilik menyetujui, pedoman dinyatakan selesai. Implementasi baru dimulai melalui persetujuan ruang lingkup terpisah.
+Urutan berikut dicatat sebagai rekam jejak penyelesaian, bukan daftar pekerjaan yang masih terbuka:
 
-Setiap langkah menghasilkan artefak/keputusan yang dapat ditinjau. Jangan mengulang langkah yang telah ditutup kecuali ada bukti baru yang mengubah keputusan. Temuan yang tidak memblokir MVP masuk backlog, bukan alasan untuk menunda penutupan.
+1. Dasar produk, peran tiga produk, prinsip kemandirian, dan kendali pemilik ditetapkan.
+2. Alur end-to-end, sumber data awal, status, persetujuan, kegagalan, pemulihan, dan evaluasi ditetapkan.
+3. Lingkup MVP, hal di luar MVP, serta tujuh keputusan MVP disepakati.
+4. Kemampuan AI/ENGINE diperlakukan secara konservatif: integrasi tetap opsional dan status yang belum diuji tidak dianggap tersedia.
+5. Keputusan lifecycle internal, keamanan minimum, kriteria penerimaan, dan batas klaim dicatat.
+6. Keputusan non-pemblokir dipindahkan ke backlog; bukti akses sumber dan pengujian dipisahkan sebagai gerbang implementasi.
+7. Pedoman konseptual ditutup atas instruksi pemilik pada 2026-10-11. Implementasi memerlukan persetujuan ruang lingkup terpisah.
+
+Langkah yang telah ditutup tidak dibuka kembali kecuali ada bukti baru yang mengubah keputusan. Temuan non-pemblokir tetap di backlog, bukan alasan untuk menunda penutupan.
 
 ## 11. Status keputusan dan backlog
 
 ### 11.1 Keputusan dasar MVP yang sudah disetujui
 
-Ketujuh keputusan MVP-01 sampai MVP-07 disetujui pemilik pada 2026-10-11. Rincian, alasan, dan batas persetujuan tercatat di [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md). Persetujuan ini menetapkan WordPress sebagai platform pertama, cakupan satu website per ruang kerja/pengaturan, prinsip sumber data terkecil yang dapat diverifikasi, persetujuan manusia untuk perubahan/publikasi, model akses awal owner/admin, integrasi AI/ENGINE yang opsional, dan kriteria keberhasilan berbasis siklus inti.
+Ketujuh keputusan MVP-01 sampai MVP-07 disetujui pemilik pada 2026-10-11. Rincian, alasan, dan batas persetujuan tercatat di [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md). Persetujuan ini menetapkan WordPress sebagai platform pertama, cakupan satu website per ruang kerja/pengaturan, sumber awal konseptual berupa WordPress internal dan GSC (dengan verifikasi teknis sebelum fitur terkait), persetujuan manusia untuk perubahan/publikasi, model akses awal owner/admin, integrasi AI/ENGINE yang opsional, dan kriteria keberhasilan berbasis siklus inti.
 
 ### 11.2 Gerbang implementasi dan keputusan arsitektur
 
@@ -240,7 +241,7 @@ Persetujuan pedoman bukan persetujuan otomatis untuk mengubah kode, menggabungka
 
 Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan MVP-01 sampai MVP-07. Ketujuh keputusan dasar tersebut disetujui pemilik pada 2026-10-11. Keputusan non-pemblokir yang tidak dibutuhkan untuk menetapkan siklus utama, keamanan minimum, atau kriteria penerimaan telah dipindahkan ke backlog pada Bagian 11.
 
-**Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber data tertentu tetap harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
+**Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber awal konseptual telah dipilih (WordPress internal dan GSC); akses dan kualitas data tetap harus diverifikasi sebelum fitur terkait dibuat atau dinyatakan lulus. Kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
 
 Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisasi runtime, atau penggabungan pull request. Semua itu memerlukan persetujuan terpisah.
 
