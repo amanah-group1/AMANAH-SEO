@@ -564,3 +564,33 @@ Semua nama tabel harus dipetakan terhadap AI dan target AMANAH SEO sebelum integ
 - Pemeriksaan file migration, menu registry, installer, lifecycle dan test inventory dilakukan dari source. Belum ada perintah PHPUnit, WordPress activation, SQL migration, upgrade, uninstall, or restore yang dijalankan pada lingkungan nyata melalui audit ini.
 - Tes unit yang ada menunjukkan kontrak yang pernah dimaksudkan, bukan bukti otomatis bahwa suite lulus pada head source saat ini. Status CI/tes harus diperiksa sebelum paket implementasi disetujui.
 - Audit class collision masih bersifat arsitektural: Engine menggunakan namespace `Amanah\\SEOEngine`; AI memakai banyak class global berprefix `AMANAH_SEO_AI_`. Risiko benturan terbesar yang perlu diuji tetap hooks, menu slugs, capabilities, option/table names, text domains, cron hooks, asset paths, and activation/uninstall lifecycle. Ini belum menggantikan pemindaian simbol lintas seluruh file.
+
+
+### 15.11 Koreksi lifecycle Engine: uninstall tidak mencakup seluruh tabel dan menghapus secret AI
+
+Perbandingan langsung antara `Schema.php`, seluruh migration classes, dan `WordPressLifecycle::uninstall()` menemukan **9 tabel yang tidak dihapus oleh uninstall Engine** meskipun dibentuk/ditetapkan oleh source baseline:
+
+- `amanah_seo_content_plans` (tabel inti dari Schema, tetapi tidak tercantum dalam array uninstall).
+- `amanah_seo_content_revisions`.
+- `amanah_seo_content_scans`.
+- `amanah_seo_serp_results`.
+- `amanah_seo_scan_analyses`.
+- `amanah_seo_intelligence_runs`.
+- `amanah_seo_intelligence_findings`.
+- `amanah_seo_content_requirements`.
+- `amanah_seo_requirement_snapshots`.
+
+Dengan demikian, frasa “uninstall menghapus 22 tabel” hanya menggambarkan daftar drop yang ada, bukan seluruh data Engine yang dibersihkan. Jika opsi `delete_data_on_uninstall` aktif, source menjatuhkan 22 tabel yang didaftarkan, tetapi tabel di atas berpotensi tertinggal. Ini membuat uninstall lama tidak dapat dijadikan kebijakan lifecycle induk. Untuk produk satu plugin, default tetap non-destructive; bila pemilik kelak meminta penghapusan data, perlu daftar kepemilikan tabel/options yang lengkap, preview dampak, backup, dan uji restore. Jangan memperbaiki uninstall lama secara diam-diam selama audit.
+
+### 15.12 Inventaris schema AI source vs desain dokumen
+
+Installer AI mendefinisikan 11 tabel: `amanah_entities`, `amanah_entity_topics`, `amanah_audits`, `amanah_content_analyses`, `amanah_content_plan`, `amanah_schema`, `amanah_ai_logs`, `amanah_tasks`, `amanah_settings`, `amanah_article_packages`, dan `amanah_license` (semuanya dengan prefix aktual `$wpdb->prefix`). Dokumen desain database mencantumkan 10 nama yang berbeda pada satu titik penting: `amanah_content_analysis` (singular), sementara installer menggunakan `amanah_content_analyses` (plural), dan dokumen tidak mencantumkan `amanah_article_packages`. Installer juga mengarsipkan tabel legacy `amanah_content_analysis` ke `amanah_content_analysis_legacy`; jika archive sudah ada, source dapat mencoba `DROP TABLE` legacy. Ini bukan perbedaan kosmetik dan harus diputuskan melalui audit data serta riwayat versi sebelum adapter installer dipanggil.
+
+### 15.13 Audit dokumen acuan: aturan locked tetap berlaku; filename bukan otoritas tunggal
+
+Pemeriksaan metadata/headings pada dokumen acuan utama menegaskan:
+- AI: `CORE-002_DATABASE_DECISION.md`, `TQ-005_PHASE_2_MIGRATION_SYSTEM.md`, `TQ-006_DEFAULT_OPTIONS_INITIALIZATION.md`, dan `TQ-007_AI_ENGINE_IMPLEMENTATION_CONTRACT.md` menyatakan keputusan locked/resolved. `TQ-008_AI_API_CREDENTIAL_ENCRYPTION.md` memuat keputusan dan hard implementation rules. Kontrak provider/fallback, enkripsi credential, opsi versi, dan migration semantics tidak boleh diubah oleh integrasi packaging.
+- Engine: `DOC-00`, `DOC-04`, `DOC-05`, `DOC-12`, `DOC-13`, `DOC-14`, dan `DOC-15` menyatakan status locked. DOC-13 mengharuskan full source/database/migration audit sebelum implementasi; DOC-14 menyatakan Phase 0 tidak melakukan coding dan mensyaratkan gate sebelum transisi.
+- Nama file tidak selalu sama dengan isi/kontraknya. Contoh yang ditemukan: AI file bernama `01_AMANAH_SEO_AI_PRD_DOCUMENT_v1.0.md` memiliki judul isi “ARTICLE GENERATION & QUALITY STANDARD — DOCUMENTATION RECONCILIATION”; file `04_AMANAH_SEO_AI_DATABASE_DESIGN_DOCUMENT_v1.0.sql` mengandung dokumen SQL/Markdown panjang dengan struktur dokumentasi; Engine file `Version9SEOScan.php` memiliki runtime version 10. Gunakan konten, metadata otoritas, dan source behavior bersama-sama; jangan mengubah dokumen terkunci atau membuat kesimpulan dari nama file saja.
+
+Pemeriksaan metadata ini belum merupakan rekonsiliasi semantik setiap paragraf dari seluruh dokumen. Kontrak yang relevan untuk tiap menu harus ditautkan di paket menu tersebut; jika ada konflik antardokumen, hentikan fitur terkait dan catat keputusan yang dibutuhkan, bukan memilih diam-diam.
