@@ -24,7 +24,7 @@ Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau inte
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
 - Lingkup MVP adalah satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya**.
 - Sumber awal konseptual yang dipilih adalah data internal WordPress (struktur/konten) dan Google Search Console (performa pencarian); akses teknis masing-masing harus dibuktikan sebelum fitur terkait dinyatakan berfungsi.
-- Paket kesiapan pengerjaan MVP sedang diajukan melalui [PR #24](https://github.com/amanahgroup123/AMANAH-SEO/pull/24). PR tersebut masih draft dan belum digabung.
+- Paket kesiapan pengerjaan MVP tersedia di [docs/12_MVP_IMPLEMENTATION_PACKAGE.md](docs/12_MVP_IMPLEMENTATION_PACKAGE.md) sebagai rancangan terkendali; status dokumen tersebut bukan persetujuan untuk coding.
 - Website WordPress testing dapat dipakai untuk menguji siklus dasar tanpa koneksi GSC, menggunakan data WordPress yang benar-benar terbaca dan/atau temuan manual berlabel jelas. Fitur metrik pencarian tetap menunggu bukti akses GSC. Data yang belum tersedia harus ditandai jelas; sistem tidak boleh mengarang metrik.
 - Pedoman konseptual selesai bukan berarti implementasi, sinkronisasi runtime, deployment, atau merge berikutnya otomatis disetujui.
 
