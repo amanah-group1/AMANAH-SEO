@@ -1,0 +1,22 @@
+name: AMANAH SEO Core PHP checks
+on:
+  pull_request:
+    paths:
+      - 'plugin/**/*.php'
+      - '.github/workflows/php-checks.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'plugin/**/*.php'
+      - '.github/workflows/php-checks.yml'
+jobs:
+  php-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Syntax-check plugin PHP files
+        run: find plugin -type f -name '*.php' -print0 | xargs -0 -n1 php -l
