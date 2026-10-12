@@ -74,92 +74,19 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 
 		// Read the historical ENGINE secret option without deleting or rewriting it.
-		if ( 'engine' === $module ) {
-			$legacy = self::decrypt( get_option( 'amanah_seo_license_secret', '' ) );
-			if ( null !== $legacy ) {
-				return $legacy;
-			}
-		}
-
-		// Migrate a legacy AI license record into encrypted Core storage, retaining
-		// the original row for compatibility and recovery.
 		if ( 'ai' === $module ) {
-			global $wpdb;
-			if ( isset( $wpdb ) && is_object( $wpdb ) && method_exists( $wpdb, 'get_var' ) && method_exists( $wpdb, 'prepare' ) ) {
-				$table = $wpdb->prefix . 'amanah_license';
-				$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) );
-				if ( $table === $table_exists ) {
-					$legacy = $wpdb->get_var( $wpdb->prepare(
-						"SELECT license_key FROM {$table} WHERE user_id = %d ORDER BY id DESC LIMIT 1",
-						get_current_user_id()
-					) );
-					if ( is_string( $legacy ) && '' !== $legacy && self::set_license( 'ai', $legacy ) ) {
-						return $legacy;
-					}
-				}
+			$status = self::activate_ai_license( $license_key );
+			self::save_license_status( 'ai', $status );
+			if ( 'unknown' === $status['status'] ) {
+				error_log( '[AMANAH SEO] AI license activation could not be verified: ' . ( $status['reason'] ?? 'unknown' ) );
 			}
-		}
-		return null;
-	}
-
-	public static function delete_license( string $module ): bool {
-		if ( ! self::valid_module( $module ) ) {
-			return false;
-		}
-		$stored = get_option( self::OPTION, array() );
-		$stored = is_array( $stored ) ? $stored : array();
-		$had_license = isset( $stored[ $module ] );
-		unset( $stored[ $module ] );
-		$updated = update_option( self::OPTION, $stored, false );
-		return true === $updated || ! $had_license;
-	}
-
-	public static function render() {
-		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
-			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO module access.', 'amanah-seo' ), '', array( 'response' => 403 ) );
-		}
-		echo '<div class="wrap"><h1>' . esc_html__( 'Settings & Access', 'amanah-seo' ) . '</h1>';
-		echo '<p>' . esc_html__( 'Manage the separate AMANAH SEO AI and ENGINE module license keys here. Keys are stored encrypted and are never displayed after saving.', 'amanah-seo' ) . '</p>';
-		if ( isset( $_GET['license_saved'] ) && in_array( sanitize_key( wp_unslash( $_GET['license_saved'] ) ), array( 'ai', 'engine' ), true ) ) {
-			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Module license key stored securely. Entitlement status depends on the configured licensing service.', 'amanah-seo' ) . '</p></div>';
-		}
-		foreach ( array( 'ai' => 'AMANAH SEO AI', 'engine' => 'AMANAH SEO ENGINE' ) as $module => $label ) {
-			$configured = null !== self::get_license( $module );
-			echo '<div class="card" style="max-width:900px;margin:20px 0;padding:20px">';
-			echo '<h2>' . esc_html( $label ) . '</h2>';
-			echo '<p>' . esc_html( $configured ? 'License key is stored.' : 'No license key is stored.' ) . '</p>';
-			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
-			echo '<input type="hidden" name="action" value="amanah_seo_save_module_license">';
-			echo '<input type="hidden" name="module" value="' . esc_attr( $module ) . '">';
-			wp_nonce_field( 'amanah_seo_save_module_license_' . $module );
-			echo '<label for="amanah-seo-license-' . esc_attr( $module ) . '">' . esc_html__( 'License Key', 'amanah-seo' ) . '</label><br>';
-			echo '<input class="regular-text" type="password" autocomplete="new-password" required maxlength="512" id="amanah-seo-license-' . esc_attr( $module ) . '" name="license_key" value=""> ';
-			submit_button( __( 'Save License Key', 'amanah-seo' ), 'primary', 'submit', false );
-			echo '</form></div>';
-		}
-		echo '</div>';
-	}
-
-	public static function save() {
-		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
-			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO module access.', 'amanah-seo' ), '', array( 'response' => 403 ) );
-		}
-		$module = isset( $_POST['module'] ) ? sanitize_key( wp_unslash( $_POST['module'] ) ) : '';
-		if ( ! self::valid_module( $module ) ) {
-			wp_die( esc_html__( 'Invalid module selection.', 'amanah-seo' ), '', array( 'response' => 400 ) );
-		}
-		check_admin_referer( 'amanah_seo_save_module_license_' . $module );
-		$license_key = isset( $_POST['license_key'] ) ? trim( (string) wp_unslash( $_POST['license_key'] ) ) : '';
-		if ( ! self::set_license( $module, $license_key ) ) {
-			wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
-			exit;
-		}
-		if ( 'engine' === $module ) {
+		} else {
 			try {
-				$services = \Amanah\SEOEngine\Core\Bootstrap\Plugin::boot();
-				$services->get( 'license_client' )->activate( $license_key );
-			} catch ( \Throwable $exception ) {
-				// Keep the encrypted key so a transient licensing-service outage does not lose it.
+				$services = \\Amanah\\SEOEngine\\Core\\Bootstrap\\Plugin::boot();
+				$state = $services->get( 'license_client' )->activate( $license_key );
+				self::save_license_status( 'engine', array( 'status' => $state->getStatus(), 'entitlements' => $state->getEntitlements() ) );
+			} catch ( \\Throwable $exception ) {
+				self::save_license_status( 'engine', array( 'status' => 'unknown', 'entitlements' => array() ) );
 				error_log( '[AMANAH SEO] ENGINE license activation deferred: ' . $exception->getMessage() );
 			}
 		}
