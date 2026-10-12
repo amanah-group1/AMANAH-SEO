@@ -11,7 +11,7 @@
 ## 1. Keputusan produk yang mengikat
 
 1. Target akhir adalah satu plugin WordPress yang dipasang pengguna: **AMANAH SEO**.
-2. AMANAH SEO menjadi satu pusat pengelolaan dan aktivasi untuk dua lisensi modul yang berbeda: lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Kedua lisensi memiliki status dan entitlement independen; lisensi satu modul tidak mengaktifkan atau memberi hak penggunaan modul lainnya. Plugin AI/Engine tidak perlu dipasang sebagai plugin runtime terpisah. Kebutuhan lisensi tersendiri untuk Core AMANAH SEO belum diputuskan.
+2. AMANAH SEO Core boleh diunduh, dipasang, dan diaktifkan tanpa lisensi. AMANAH SEO menjadi satu pusat pengelolaan dua lisensi modul independen: lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Status dan entitlement tiap modul diverifikasi terpisah; lisensi satu modul tidak membuka modul lainnya. Plugin AI/Engine tidak perlu dipasang sebagai plugin runtime terpisah.
 3. Kemampuan AI dan Engine menjadi modul internal setelah audit dan migrasi terkontrol; fitur modul tidak otomatis termasuk MVP dasar.
 4. AMANAH SEO Lifecycle Manager adalah koordinator tunggal lifecycle komponen internal. Jangan menjalankan lifecycle/installer lama secara paralel tanpa kontrak yang telah diuji.
 5. Core harus tetap bisa aktif dan menampilkan diagnostik aman saat modul opsional gagal. Kegagalan modul tidak boleh menyebabkan fatal error pada core.
