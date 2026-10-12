@@ -449,23 +449,43 @@ final class AMANAH_SEO_Module_Navigation {
  }
  public static function ai_dashboard(){
   self::start('AMANAH SEO AI');
-  echo '<p class="description" style="max-width:900px;font-size:14px">'.esc_html__('Kemampuan AI untuk membangun konteks bisnis, mendukung analisis dan pengembangan konten, serta membantu pekerjaan SEO secara terkontrol.','amanah-seo').'</p>';
-  echo '<div class="card" style="max-width:1100px;margin-top:18px;padding:22px"><h2 style="margin-top:0">'.esc_html__('Membangun fondasi agar AI memahami bisnis Anda','amanah-seo').'</h2><p>'.esc_html__('Bisnis membutuhkan identitas yang jelas, informasi yang konsisten, keahlian yang dapat dijelaskan, serta konten yang relevan dan terstruktur agar lebih mudah dipahami mesin pencari maupun sistem AI.','amanah-seo').'</p><p><strong>'.esc_html__('AMANAH SEO AI membantu membangun fondasi tersebut — bukan sekadar menghasilkan konten.','amanah-seo').'</strong></p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">';
-  $foundations=array('Identity'=>'Siapa bisnis Anda, apa yang ditawarkan, dan siapa yang dilayani.','Authority'=>'Informasi penulis, kredibilitas, dan keterkaitan keahlian dengan topik.','Expertise'=>'Konteks topik dan konten yang mencerminkan bidang yang dikuasai.','AI Capability'=>'Penyedia, model, dan penggunaan AI yang dikonfigurasi secara terkontrol.');
-  foreach($foundations as $heading=>$description) echo '<div><strong>'.esc_html($heading).'</strong><p>'.esc_html($description).'</p></div>';
-  echo '</div></div><h2 style="margin-top:28px">'.esc_html__('Kemampuan AI','amanah-seo').'</h2><p>'.esc_html__('Navigasi berikut mempertahankan kelompok kemampuan yang telah disepakati. Kartu bertanda placeholder belum menjalankan fitur.','amanah-seo').'</p>';
-  $groups=array(
-   'Entity & Authority'=>array('amanah-entity-profile'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-topic-authority'=>'Topic Authority'),
-   'Content AI'=>array('amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation','amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer'),
-   'Technical SEO & Validation'=>array('amanah-seo-ai-audit'=>'AI Audit','amanah-seo-ai-internal-links'=>'Internal Link AI','amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation'),
-   'Reports & Settings'=>array('amanah-seo-ai-reports'=>'AI Reports','amanah-seo-ai-settings'=>'AI Settings')
+
+  // One consolidated copywriting panel replaces the separate intro and footer cards.
+  echo '<section style="max-width:1180px;margin:16px 0 24px;padding:22px 26px;background:#eaf4ff;border:1px solid #b8d8f5;border-left:5px solid #2271b1;border-radius:4px">';
+  echo '<h2 style="margin:0 0 10px;font-size:20px">'.esc_html__('Jika AI belum mengenal bisnis Anda, bagaimana calon pelanggan akan menemukannya?','amanah-seo').'</h2>';
+  echo '<p style="margin:0 0 10px">'.esc_html__('Pencarian berkembang melampaui daftar tautan. Identitas bisnis yang jelas, otoritas yang dapat dipercaya, dan konten yang relevan membantu mesin pencari serta sistem AI memahami siapa Anda dan apa yang Anda kuasai.','amanah-seo').'</p>';
+  echo '<p style="margin:0"><strong>'.esc_html__('AMANAH SEO AI dirancang untuk mendukung fondasi tersebut sebagai bagian dari satu sistem SEO terpadu — bukan sekadar menghasilkan konten.','amanah-seo').'</strong></p>';
+  echo '</section>';
+
+  echo '<div style="max-width:1180px"><h2 style="margin:0 0 6px">'.esc_html__('Kemampuan AI','amanah-seo').'</h2>';
+  echo '<p class="description" style="margin:0 0 16px">'.esc_html__('Pilih area kerja yang dibutuhkan. Halaman yang belum terintegrasi akan menampilkan status placeholder dengan jelas.','amanah-seo').'</p>';
+
+  // One unified responsive grid avoids separate category grids leaving uneven blank rows.
+  $cards=array(
+   array('group'=>'Entity & Authority','slug'=>'amanah-entity-profile','title'=>'Entity Profile','description'=>'Identitas dan konteks utama bisnis.'),
+   array('group'=>'Entity & Authority','slug'=>'amanah-authority','title'=>'Authority & Author','description'=>'Kredibilitas penulis dan keahlian.'),
+   array('group'=>'Intelligence','slug'=>'amanah-seo-ai-audit','title'=>'AI Audit','description'=>'Area audit SEO berbantuan AI.'),
+   array('group'=>'Content AI','slug'=>'amanah-content-analyzer','title'=>'Content Analyzer','description'=>'Analisis kualitas dan konteks konten.'),
+   array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-brief','title'=>'Content Brief','description'=>'Kerangka konten sebelum penulisan.'),
+   array('group'=>'Content AI','slug'=>'amanah-content-generation','title'=>'Article Generation','description'=>'Alur pembuatan artikel terarah.'),
+   array('group'=>'Content AI','slug'=>'amanah-seo-ai-faq-generator','title'=>'FAQ Generator','description'=>'Perencanaan pertanyaan dan jawaban.'),
+   array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-optimizer','title'=>'Content Optimizer','description'=>'Penyempurnaan konten yang sudah ada.'),
+   array('group'=>'Authority','slug'=>'amanah-seo-ai-topic-authority','title'=>'Topic Authority','description'=>'Cakupan topik dan kedalaman keahlian.'),
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-internal-links','title'=>'Internal Link AI','description'=>'Dukungan perencanaan tautan internal.'),
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-generator','title'=>'Schema Manager','description'=>'Akses ke generator dan validasi schema.')
   );
-  foreach($groups as $group=>$items){
-   echo '<h3 style="margin-top:24px">'.esc_html($group).'</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:1100px">';
-   foreach($items as $slug=>$title) echo '<div class="postbox" style="padding:18px;margin:0"><h3 style="margin-top:0">'.esc_html($title).'</h3><p>'.esc_html__('Navigasi tersedia; integrasi fitur belum tersedia pada paket Core ini.','amanah-seo').'</p><p><span class="description">'.esc_html__('Placeholder — belum diimplementasikan','amanah-seo').'</span></p><p><a class="button" href="'.esc_url(admin_url('admin.php?page='.$slug)).'">'.esc_html__('Buka halaman','amanah-seo').'</a></p></div>';
-   echo '</div>';
+  echo '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;align-items:stretch">';
+  foreach($cards as $card){
+   echo '<article class="postbox" style="margin:0;padding:16px;display:flex;flex-direction:column;min-width:0">';
+   echo '<p style="margin:0 0 6px;color:#646970;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">'.esc_html($card['group']).'</p>';
+   echo '<h3 style="margin:0 0 8px;font-size:15px">'.esc_html($card['title']).'</h3>';
+   echo '<p style="margin:0 0 12px;flex:1">'.esc_html($card['description']).'</p>';
+   echo '<p style="margin:0 0 10px"><span class="description">'.esc_html__('Belum diimplementasikan','amanah-seo').'</span></p>';
+   echo '<p style="margin:0"><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page='.$card['slug'])).'">'.esc_html__('Buka area','amanah-seo').'</a>';
+   if('amanah-seo-ai-schema-generator'===$card['slug']) echo ' <a class="button button-link" href="'.esc_url(admin_url('admin.php?page=amanah-seo-ai-schema-validation')).'">'.esc_html__('Validasi','amanah-seo').'</a>';
+   echo '</p></article>';
   }
-  echo '<div style="max-width:1100px;margin-top:28px;padding:26px 28px;background:#eaf4ff;border:1px solid #b8d8f5;border-left:5px solid #2271b1;border-radius:4px"><h2 style="margin-top:0">'.esc_html__('Bagian dari satu sistem SEO terpadu','amanah-seo').'</h2><p>'.esc_html__('AMANAH SEO menghubungkan data website, SEO Intelligence, prioritas, strategi, pelaksanaan, validasi, persetujuan manusia, publikasi, dan pemantauan hasil. AMANAH SEO AI mendukung ekosistem tersebut melalui kemampuan AI, sedangkan AMANAH SEO ENGINE menyediakan workflow SEO yang terstruktur.','amanah-seo').'</p><p><strong>'.esc_html__('Tujuannya bukan sekadar menghasilkan konten dengan AI, tetapi mendukung keputusan SEO yang lebih terarah dan dapat dipertanggungjawabkan.','amanah-seo').'</strong></p></div>';
+  echo '</div></div>';
   self::end();
  }
  public static function engine_dashboard(){
