@@ -25,6 +25,6 @@ The GitHub Actions workflow runs `php -l` over the plugin PHP files. This is a s
 
 ## Known limitations before MVP acceptance
 - Website profile currently reports the WordPress site on which this plugin is installed; remote-site management is not implemented.
-- GSC integration, verified source ingestion, findings editing/resolution, task approval decisions, and evidence-based completion checks remain unfinished.
-- The initial task status `awaiting_approval` records a request; there is not yet a dedicated approve/reject workflow.
+- GSC integration, verified source ingestion, findings editing/resolution, and remote-site management remain unfinished.
+- Approval decisions are recorded, but they only change workflow state and do not execute website changes. Completion requires evidence text, and a task with pending approval cannot be marked complete.
 - License management for AI and ENGINE remains unimplemented pending verified product/server contracts.
