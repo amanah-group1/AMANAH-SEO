@@ -66,3 +66,13 @@ Internal namespace root remains `Amanah\\SEOEngine\\` to avoid a broad, risky na
 - Perform WordPress runtime smoke testing on a staging instance: activation, admin menu order/capabilities, Engine page load, database migration on a database copy, AI/Engine key-management integration, and deactivation/re-activation.
 - Resolve any remaining Core-managed module-license integration gaps before calling this release-ready. Hidden ENGINE license screens prevent duplicate UI, but do not by themselves prove that ENGINE entitlement management is wired to the Core licensing dashboard.
 - Do not copy this branch into the active WordPress plugin directory until the release gates above pass.
+
+
+## Checkpoint 10 — Core-owned ENGINE workflow navigation
+- Code commit: `b87d68f5ab970cf56a5611f231df250850a735b4`.
+- Regression-test commit: `6b1163c0ac0202c4f80227f595cbd3d4c573e94a`.
+- Changed files: `plugin/modules/engine-runtime/Presentation/Admin/AdminMenu.php` and `tests/module-integration-regression.php`.
+- Finding: ENGINE's top-level menu had already been removed, but two workflow submenu groups still pointed to the now-unregistered `amanah-seo-engine` parent. Those pages could become orphaned instead of appearing under the single Core menu.
+- Fix: both submenu parents now target `amanah-seo`; page slugs are unchanged. Added a regression assertion that fails if a submenu still points to the removed parent.
+- Static repository verification: wrong-parent matches = 0; Core-parent matches in the affected registration = 3; regression assertion is present.
+- GitHub Actions for head `6b1163c0ac0202c4f80227f595cbd3d4c573e94a`: Core regression and Core PHP checks were queued/running at checkpoint creation; results must be verified on the final checkpoint head before release.
