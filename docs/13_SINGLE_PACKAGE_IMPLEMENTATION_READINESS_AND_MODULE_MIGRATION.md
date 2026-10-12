@@ -12,12 +12,13 @@
 ## 1. Keputusan dan target yang mengikat
 
 1. Target akhir adalah **satu plugin WordPress yang dipasang pengguna: AMANAH SEO**.
-2. Plugin induk memiliki **Core AMANAH SEO**, modul internal AI (baseline dari repository AMANAH SEO AI), dan modul internal Engine (baseline dari repository AMANAH SEO ENGINE V2).
-3. Repository AI dan Engine tetap baseline sumber/audit; keduanya tidak dipasang sebagai plugin runtime tambahan pada target akhir.
-4. **Lifecycle Manager** di plugin induk menjadi koordinator tunggal lifecycle internal. Setiap modul tetap memiliki migrasi domain dan versi schema yang dapat dilacak; koordinator mengatur urutan, hasil, logging, dan pemulihan.
-5. Keputusan satu plugin bukan izin menyalin seluruh fitur AI/Engine ke MVP. Siklus MVP dasar harus dapat berjalan tanpa fitur modul yang belum dipindahkan dan belum dibuktikan.
-6. WordPress internal dipilih untuk data website/konten yang benar-benar dapat diakses. Google Search Console (GSC) dipilih untuk metrik performa pencarian, setelah properti dan akses baca-saja dibuktikan.
-7. Tidak ada angka, koneksi, migrasi, atau tes yang boleh disebut PASS tanpa bukti aktual.
+2. Pengguna cukup memasang AMANAH SEO dan menggunakan satu lisensi AMANAH SEO untuk aktivasi produk; tidak diwajibkan memasang/mengaktifkan plugin AI atau Engine secara terpisah.
+3. Plugin induk memiliki **Core AMANAH SEO**, modul internal AI (baseline dari repository AMANAH SEO AI), dan modul internal Engine (baseline dari repository AMANAH SEO ENGINE V2).
+4. Repository AI dan Engine tetap baseline sumber/audit; keduanya tidak dipasang sebagai plugin runtime tambahan pada target akhir.
+5. **Lifecycle Manager** di plugin induk menjadi koordinator tunggal lifecycle internal. Setiap modul tetap memiliki migrasi domain dan versi schema yang dapat dilacak; koordinator mengatur urutan, hasil, logging, dan pemulihan.
+6. Keputusan satu plugin bukan izin menyalin seluruh fitur AI/Engine ke MVP. Siklus MVP dasar harus dapat berjalan tanpa fitur modul yang belum dipindahkan dan belum dibuktikan.
+7. WordPress internal dipilih untuk data website/konten yang benar-benar dapat diakses. Google Search Console (GSC) dipilih untuk metrik performa pencarian, setelah properti dan akses baca-saja dibuktikan.
+8. Tidak ada angka, koneksi, migrasi, atau tes yang boleh disebut PASS tanpa bukti aktual.
 
 ## 2. Ringkasan status
 
