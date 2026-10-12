@@ -16,7 +16,7 @@
 4. AMANAH SEO Lifecycle Manager adalah koordinator tunggal lifecycle komponen internal. Jangan menjalankan lifecycle/installer lama secara paralel tanpa kontrak yang telah diuji.
 5. Core harus tetap bisa aktif dan menampilkan diagnostik aman saat modul opsional gagal. Kegagalan modul tidak boleh menyebabkan fatal error pada core.
 6. Tidak ada perubahan produksi, tindakan otonom terhadap website, penghapusan data, atau klaim PASS tanpa bukti.
-7. PR #34 yang sebelumnya menetapkan satu lisensi telah digabungkan ke `main` melalui commit `eab46a05f6e923de9b8511383e42ac89e6dd713d`; prinsip tersebut kini dikoreksi oleh paket dokumentasi ini dan tidak boleh dipakai sebagai dasar implementasi sampai koreksi lisensi per modul disetujui/masuk `main`. Perubahan dokumentasi bukan persetujuan coding.
+7. Keputusan pemilik bahwa Core AMANAH SEO dapat dipasang tanpa lisensi dan AI/Engine memiliki lisensi modul independen telah didokumentasikan dan digabungkan ke `main` melalui PR #36, commit `fdbdeb8c1caf8691140237ae66b607db0739f383`. Ini menyetujui keputusan arsitektur lisensi, bukan persetujuan coding.
 
 ## 2. Sasaran paket implementasi pertama
 
@@ -152,5 +152,5 @@ Coding hanya boleh dimulai setelah semua butir ini terpenuhi:
 
 ## 8. Catatan kendala sumber
 
-Path `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` yang sebelumnya ditetapkan sebagai dokumen kerja tidak ditemukan pada ref `main` ketika diperiksa pada 2026-10-12 (GitHub mengembalikan 404). Jangan menganggap dokumen itu telah dibaca pada pemeriksaan ini. Pemilik/maintainer perlu memastikan path yang benar atau memulihkan dokumen sebelum mengandalkannya sebagai checklist status.
+Path aktif `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` tidak ditemukan pada `main`; salinan historis tersedia di `docs/archive/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` dan secara eksplisit berstatus superseded. Karena itu, gunakan `docs/PEDOMAN_INDUK_AMANAH_SEO.md` sebagai acuan konseptual aktif dan paket implementasi ini untuk gerbang implementasi. Jangan memperlakukan dokumen arsip sebagai checklist operasional terkini tanpa persetujuan eksplisit.
 
