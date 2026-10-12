@@ -247,6 +247,11 @@ final class Plugin {
 		$aiTaskRepository = new WordPressAIExecutionTaskRepository( $wpdb );
 		$modelCatalog = new WordPressAIModelCatalog( $wpdb );
 
+		$licenseEndpoint = (string) $configuration->get( 'license_server_endpoint', '' );
+		if ( '' === $licenseEndpoint ) {
+			$licenseEndpoint = (string) get_option( 'amanah_seo_license_api_endpoint', 'https://api.amanahseoai.my.id' );
+		}
+
 		$licenseCache = new LicenseCache();
 		$licenseClient = new LicenseClient(
 			$http,
@@ -254,7 +259,7 @@ final class Plugin {
 			new LicenseSecretStore(),
 			new LicenseResponseValidator(),
 			'Amanah SEO Engine V2',
-			(string) $configuration->get( 'license_server_endpoint', '' )
+			$licenseEndpoint
 		);
 		$updateClient = new UpdateClient( null, new UpdateEligibility(), new UpdatePreflight(), new UpdatePackageVerifier() );
 		$updateServer = new UpdateServerClient(

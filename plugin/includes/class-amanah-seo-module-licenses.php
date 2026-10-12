@@ -102,6 +102,17 @@ final class AMANAH_SEO_Module_Licenses {
 		return null;
 	}
 
+	public static function delete_license( string $module ): bool {
+		if ( ! self::valid_module( $module ) ) {
+			return false;
+		}
+		$stored = get_option( self::OPTION, array() );
+		$stored = is_array( $stored ) ? $stored : array();
+		unset( $stored[ $module ] );
+		$updated = update_option( self::OPTION, $stored, false );
+		return true === $updated || ! isset( $stored[ $module ] );
+	}
+
 	public static function render() {
 		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO module access.', 'amanah-seo' ), '', array( 'response' => 403 ) );
