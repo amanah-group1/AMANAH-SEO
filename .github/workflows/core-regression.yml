@@ -22,6 +22,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          tools: phpunit:9.6
       - name: PHP syntax checks
         shell: bash
         run: |
@@ -35,6 +36,7 @@ jobs:
           php -l tests/dashboard-work-direction-regression.php
           php -l tests/task-form-integrity-regression.php
           php -l tests/module-integration-regression.php
+          find tests/engine-runtime -type f -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: Core data regression tests
         run: |
           php tests/core-store-regression.php
@@ -45,3 +47,5 @@ jobs:
           php tests/dashboard-work-direction-regression.php
           php tests/task-form-integrity-regression.php
           php tests/module-integration-regression.php
+
+          phpunit -c tests/engine-runtime/phpunit.xml.dist
