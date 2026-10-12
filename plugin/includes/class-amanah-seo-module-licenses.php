@@ -61,6 +61,25 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 	}
 
+	/**
+	 * Check a module entitlement from the last validated licensing-service response.
+	 * Fail closed for missing, malformed, stale-status, or non-active records.
+	 */
+	public static function has_entitlement( string $module, string $entitlement ): bool {
+		if ( ! self::valid_module( $module ) || '' === trim( $entitlement ) ) {
+			return false;
+		}
+		$statuses = get_option( 'amanah_seo_module_license_statuses', array() );
+		if ( ! is_array( $statuses ) || ! isset( $statuses[ $module ] ) || ! is_array( $statuses[ $module ] ) ) {
+			return false;
+		}
+		$record = $statuses[ $module ];
+		if ( ! isset( $record['status'], $record['entitlements'] ) || 'active' !== $record['status'] || ! is_array( $record['entitlements'] ) ) {
+			return false;
+		}
+		return in_array( sanitize_key( $entitlement ), array_map( 'sanitize_key', array_filter( $record['entitlements'], 'is_string' ) ), true );
+	}
+
 	public static function get_license( string $module ): ?string {
 		if ( ! self::valid_module( $module ) ) {
 			return null;
@@ -146,7 +165,8 @@ final class AMANAH_SEO_Module_Licenses {
 
 	private static function activate_ai_license( string $license_key ): array {
 		$endpoint = rtrim( (string) get_option( 'amanah_seo_license_api_endpoint', 'https://api.amanahseoai.my.id' ), '/' );
-		if ( 0 !== strpos( $endpoint, 'https://' ) ) {
+		$endpoint_parts = function_exists( 'wp_parse_url' ) ? wp_parse_url( $endpoint ) : parse_url( $endpoint );
+		if ( ! is_array( $endpoint_parts ) || 'https' !== strtolower( (string) ( $endpoint_parts['scheme'] ?? '' ) ) || 'api.amanahseoai.my.id' !== strtolower( (string) ( $endpoint_parts['host'] ?? '' ) ) || isset( $endpoint_parts['user'] ) || isset( $endpoint_parts['pass'] ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_endpoint' );
 		}
 		$response = wp_remote_post(
@@ -163,12 +183,21 @@ final class AMANAH_SEO_Module_Licenses {
 		$code = (int) wp_remote_retrieve_response_code( $response );
 		$body = json_decode( (string) wp_remote_retrieve_body( $response ), true );
 		$allowed = array( 'unconfigured', 'active', 'expired', 'revoked', 'suspended', 'invalid', 'unknown' );
-		if ( $code < 200 || $code >= 300 || ! is_array( $body ) || ! isset( $body['product'], $body['status'], $body['entitlements'] ) || 'amanah-seo-ai' !== (string) $body['product'] || ! in_array( $body['status'], $allowed, true ) || ! is_array( $body['entitlements'] ) ) {
+		if ( $code < 200 || $code >= 300 || ! is_array( $body ) || ! isset( $body['product'], $body['status'], $body['entitlements'] ) || ! is_string( $body['product'] ) || 'amanah-seo-ai' !== $body['product'] || ! is_string( $body['status'] ) || ! in_array( $body['status'], $allowed, true ) || ! is_array( $body['entitlements'] ) ) {
+			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
+		}
+		foreach ( $body['entitlements'] as $entitlement ) {
+			if ( ! is_string( $entitlement ) || '' === trim( $entitlement ) ) {
+				return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
+			}
+		}
+		$entitlements = array_values( array_unique( array_map( 'sanitize_key', $body['entitlements'] ) ) );
+		if ( 'active' === $body['status'] && empty( $entitlements ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 		}
 		return array(
-			'status' => (string) $body['status'],
-			'entitlements' => array_values( array_map( 'sanitize_key', array_map( 'strval', $body['entitlements'] ) ) ),
+			'status' => $body['status'],
+			'entitlements' => $entitlements,
 			'validated_at' => isset( $body['validated_at'] ) ? sanitize_text_field( (string) $body['validated_at'] ) : '',
 			'reason' => '',
 		);
