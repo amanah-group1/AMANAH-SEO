@@ -163,3 +163,38 @@ Coding hanya boleh dimulai setelah semua butir ini terpenuhi:
 
 Path aktif `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` tidak ditemukan pada `main`; salinan historis tersedia di `docs/archive/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` dan secara eksplisit berstatus superseded. Karena itu, gunakan `docs/PEDOMAN_INDUK_AMANAH_SEO.md` sebagai acuan konseptual aktif dan paket implementasi ini untuk gerbang implementasi. Jangan memperlakukan dokumen arsip sebagai checklist operasional terkini tanpa persetujuan eksplisit.
 
+
+
+## 6B. Audit teknis lanjutan: lifecycle, penyimpanan lisensi, dan batas migrasi (2026-10-12)
+
+**Jenis bukti:** inspeksi source GitHub pada branch `main`; tidak menjalankan installer, tidak menyentuh database/runtime, dan tidak menguji server lisensi.
+
+### AI — lifecycle dan data
+- `plugin/amanah-seo-ai.php` (SHA `73c15f7cbd0f0dc511bd5670bae69dd4824ab68e`) mendaftarkan activation hook ke `AMANAH_SEO_AI_Activator::activate()`, deactivation hook ke `AMANAH_SEO_AI_Deactivator::deactivate()`, dan hook `plugins_loaded` ke `AMANAH_SEO_AI_Install::maybe_upgrade()`.
+- `plugin/includes/class-activator.php` (SHA `9f26829e6ddc06d59fcbbd94f2de8b31b71bdd6f`) memanggil `AMANAH_SEO_AI_Install::install()` saat aktivasi dan menambahkan capability pada role administrator/editor. Karena aktivasi Core target tidak boleh menjalankan installer legacy, entry point lama tidak boleh disertakan/dipanggil secara langsung oleh lifecycle Core.
+- `plugin/includes/class-deactivator.php` (SHA `ea11888850545d7204b296a955376d5fff39f20b`) saat ini tidak membersihkan data persisten. Ini bukan bukti bahwa semua jalur upgrade/uninstall aman.
+- `plugin/includes/class-install.php` (SHA `bbf923d846a434c047c326fb9aab6186cfd84970`) dapat mengganti nama tabel legacy menjadi tabel arsip bila arsip belum ada, tetapi menghapus tabel legacy jika arsip sudah ada. Kebijakan aman sementara: preserve-only; tidak menjalankan jalur tersebut pada target migrasi, tidak menghapus tabel, dan tidak menggabungkan schema sebelum inventaris row/schema serta prosedur restore dibuktikan.
+
+### ENGINE — lisensi dan lifecycle
+- `plugin/amanah-seo-engine.php` (SHA `026d6183a12724a6d8d6ef7b1d39a2ede8560379`) mendaftarkan activation/deactivation hook pada `Plugin::activate()` dan `Plugin::deactivate()`; ini menguatkan bahwa lifecycle lama harus diorkestrasi, bukan didaftarkan ulang tanpa isolasi dalam Core.
+- `plugin/Core/Bootstrap/Plugin.php` (SHA `22f31ee16af7e568ab37b2366c06409c08ff704f`) adalah bootstrap besar yang meregistrasi banyak layanan dan migrasi; jangan memasukkannya ke Core Shell secara menyeluruh sebelum dependency, hook, cron, route, migration, dan side effect dipetakan.
+- `plugin/Platform/License/LicenseClient.php` (SHA `880c056a3aacec3cbc58e2aa71e4e2c6f2a1f9ee`) mengirim `license_key` dan `product` melalui HTTPS ke `/activate` dan `/validate`, menyimpan secret setelah aktivasi berhasil, dan menggunakan cache ketika validasi gagal. Ketika belum ada secret atau endpoint, status menjadi `unconfigured`; ketika request validasi gagal tanpa cache, status menjadi `unknown`.
+- `plugin/Platform/License/LicenseCache.php` (SHA `d3e7340581f7d9b0ef873b3aaf535573024ac7df`) menyimpan status lisensi pada option `amanah_seo_license_state`; `LicenseSecretStore.php` (SHA `8982f7a53781ff184a2bcd5f7109c7c2696dd3c7`) menyimpan secret pada option `amanah_seo_license_secret` dengan AES-256-GCM, tetapi derivasi kunci menggunakan literal fallback `amanah-seo-engine` saat `AUTH_KEY` tidak tersedia. Fallback ini tidak dapat diterima sebagai pola final untuk Core.
+- `EntitlementResolver.php` (SHA `cfd04728c116bd420e3ec3c95188db606c8a7620`) mengizinkan entitlement pada status aktif; grace khusus `premium_updates` dapat berlaku untuk state cache sesuai policy terpisah. Perilaku grace ini belum boleh digeneralisasi ke entitlement fitur AI/Engine.
+- Kontrak server, product ID final, aktivasi ulang/deaktivasi, domain binding, revocation, expiry, renewal, response signature/validation, grace/offline untuk fitur, dan kesetaraan implementasi lisensi AI **belum terbukti** dari bukti yang dibaca. G4 tetap parsial dan menjadi blocker sebelum modul premium diintegrasikan.
+
+### Keputusan teknis sementara yang diperlukan agar aman
+1. Core Shell pertama hanya menyediakan slot/kontrak modul dan diagnostik; tidak memuat atau menjalankan installer, migrator, activation hooks, uninstall hooks, cron registration, atau bootstrap legacy AI/Engine.
+2. Jangan memindahkan opsi lisensi atau credential antarmodul pada paket pertama. Jangan mengubah nama option yang sudah ada dan jangan menghapus/menggabungkan tabel.
+3. Pusat lisensi di UI AMANAH SEO boleh menjadi tujuan arsitektur, tetapi setiap modul tetap memakai product identity dan entitlement terpisah. Implementasi UI belum boleh mengklaim lisensi valid tanpa kontrak API dan uji server yang terverifikasi.
+4. Sebelum paket Core Shell coding, masih harus ditutup: SHA/tree baseline terkini; source inventory dan exact file allowlist; target WordPress testing yang disepakati; bukti backup + restore clone; test baseline; kontrak licensing yang tersedia; serta acceptance/recovery tests.
+5. Repo AMANAH SEO utama saat ini belum memiliki source plugin runtime. Karena itu belum ada target plugin induk yang aman untuk disinkronkan ke WordPress. `git pull` dan `robocopy` baru layak diberikan setelah implementasi di branch terkontrol, tes sesuai gate, PR ditinjau/di-merge, dan path runtime/destination dikonfirmasi.
+
+### Status setelah audit lanjutan
+- G3 Source inventory: **PARSIAL** — entry point/lifecycle dan sebagian risiko sudah diverifikasi; inventory lengkap dependency/hook/route/data ownership dan exact allowlist belum selesai.
+- G4 Licensing: **PARSIAL / BLOCKED** — sebagian alur Engine terbaca, namun server contract dan AI equivalent belum terbukti.
+- G5 Data ownership: **BLOCKED** — ada destructive legacy-table branch dan belum ada backup/restore evidence.
+- G1/G2/G6/G7: **BELUM DIUJI** pada target runtime/clone.
+- G8: **BELUM DISETUJUI** untuk scope implementasi Core Shell dengan allowlist final.
+
+Tidak ada kode produk, schema, credential, server lisensi, database, konfigurasi, atau WordPress runtime yang diubah oleh audit ini.
