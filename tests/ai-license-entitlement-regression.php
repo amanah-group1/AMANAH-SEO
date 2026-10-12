@@ -101,6 +101,20 @@ $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses'] = 
 $GLOBALS['amanah_license_mock_response'] = array( 'response' => array( 'code' => 200 ), 'body' => json_encode( array( 'data' => array( 'status' => 'ACTIVE', 'entitlements' => array( 'content_analyzer' ) ) ) ) );
 $checks['Malformed revalidation response does not grant grace entitlement during AI execution'] = ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' ) && 'unknown' === get_option( 'amanah_seo_module_license_statuses', array() )['ai']['status'];
 
+$GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['ai'] = array(
+	'status' => 'active',
+	'entitlements' => array( 'content_analyzer' ),
+	'validated_at' => gmdate( 'c', time() - DAY_IN_SECONDS - 60 ),
+	'expires_at' => 'LIFETIME',
+);
+$GLOBALS['amanah_license_mock_response'] = array(
+	'response' => array( 'code' => 401 ),
+	'body' => json_encode( array( 'success' => false, 'error' => array( 'code' => 'UNRECOGNIZED_CLIENT_ERROR' ) ) ),
+);
+$checks['Unknown 4xx license response cannot convert stale active entitlement into grace'] = ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' )
+	&& 'unknown' === get_option( 'amanah_seo_module_license_statuses', array() )['ai']['status']
+	&& 'invalid_response' === get_option( 'amanah_seo_module_license_statuses', array() )['ai']['reason'];
+
 $GLOBALS['amanah_license_mock_response'] = array( 'response' => array( 'code' => 503 ), 'body' => json_encode( array( 'success' => false, 'error' => array( 'code' => 'SERVER_ERROR' ) ) ) );
 $previous = array( 'status' => 'active', 'entitlements' => array( 'content_analyzer' ), 'validated_at' => gmdate( 'c', time() - 60 ), 'expires_at' => 'LIFETIME' );
 $grace_fallback = new ReflectionMethod( 'AMANAH_SEO_Module_Licenses', 'apply_ai_grace_fallback' );
