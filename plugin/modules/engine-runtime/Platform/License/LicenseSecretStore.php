@@ -1,18 +1,18 @@
 <?php
 declare( strict_types=1 );
-namespace Amanah\\SEOEngine\\Platform\\License;
+namespace Amanah\SEOEngine\Platform\License;
 defined( 'ABSPATH' ) || exit;
 final class LicenseSecretStore {
  private const OPTION='amanah_seo_license_secret'; private const CIPHER='aes-256-gcm';
  private function key(): string { return hash('sha256',defined('AUTH_KEY')?AUTH_KEY:'amanah-seo-engine',true); }
  public function set(string $secret): void {
   if ( class_exists( 'AMANAH_SEO_Module_Licenses' ) ) {
-   if ( ! AMANAH_SEO_Module_Licenses::set_license( 'engine', $secret ) ) throw new \\RuntimeException( 'license_secret_storage_error' );
+   if ( ! AMANAH_SEO_Module_Licenses::set_license( 'engine', $secret ) ) throw new \RuntimeException( 'license_secret_storage_error' );
    return;
   }
   $iv=random_bytes(openssl_cipher_iv_length(self::CIPHER));$tag='';
   $cipher=openssl_encrypt($secret,self::CIPHER,$this->key(),OPENSSL_RAW_DATA,$iv,$tag,'',16);
-  if(false===$cipher)throw new \\RuntimeException('license_secret_storage_error');
+  if(false===$cipher)throw new \RuntimeException('license_secret_storage_error');
   update_option(self::OPTION,'v1:'.base64_encode($iv.$tag.$cipher),false);
  }
  public function get(): ?string {
