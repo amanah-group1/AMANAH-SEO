@@ -32,6 +32,7 @@ jobs:
           php -l tests/content-checks-regression.php
           php -l tests/content-issue-dedupe-regression.php
           php -l tests/finding-to-task-regression.php
+          php -l tests/dashboard-work-direction-regression.php
       - name: Core data regression tests
         run: |
           php tests/core-store-regression.php
@@ -39,3 +40,4 @@ jobs:
           php tests/content-checks-regression.php
           php tests/content-issue-dedupe-regression.php
           php tests/finding-to-task-regression.php
+          php tests/dashboard-work-direction-regression.php
