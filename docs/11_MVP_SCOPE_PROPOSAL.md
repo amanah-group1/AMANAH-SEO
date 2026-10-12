@@ -11,6 +11,8 @@ MVP harus membuktikan satu siklus nilai dari awal sampai akhir:
 
 Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO sekaligus. Target packaging adalah satu plugin AMANAH SEO dengan core dan modul internal AI/Engine setelah audit/migrasi terkontrol. Kemampuan penuh modul tidak otomatis masuk lingkup fungsional MVP; jangan menyalin workflow Engine ke core.
 
+Prinsip packaging/aktivasi yang mengikat: pengguna cukup memasang plugin AMANAH SEO dan menggunakan satu lisensi AMANAH SEO untuk aktivasi produk. Tidak boleh mensyaratkan instalasi atau aktivasi plugin AMANAH SEO AI maupun AMANAH SEO ENGINE V2 secara terpisah. Prinsip ini tidak berarti seluruh fitur modul otomatis mendapat entitlement atau siap digunakan; validasi teknis lisensi dan kontrak modul tetap menjadi gerbang implementasi.
+
 ## 2. Fungsi yang direkomendasikan sebagai wajib MVP
 
 1. **Daftar website** — menambahkan, melihat, mengubah informasi dasar, dan menonaktifkan koneksi/website dengan aman.
