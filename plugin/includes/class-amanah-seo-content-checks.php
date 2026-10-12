@@ -102,6 +102,11 @@ final class AMANAH_SEO_Content_Checks {
 
   $data = self::scan_data();
   echo '<div class="wrap"><h1>Pemeriksaan Konten</h1>';
+  if(isset($_GET['amanah_notice'])){
+   $notice=sanitize_key(wp_unslash($_GET['amanah_notice']));
+   $messages=array('content_issue_imported'=>'Temuan berbasis bukti berhasil ditambahkan ke daftar Temuan.','content_issue_exists'=>'Temuan aktif untuk masalah dan konten ini sudah ada.','content_issue_stale'=>'Hasil pemeriksaan sudah berubah. Jalankan ulang dan periksa hasil terbaru.','error'=>'Temuan tidak dapat dibuat. Periksa kondisi dan coba lagi.');
+   if(isset($messages[$notice])) echo '<div class="notice '.('content_issue_imported'===$notice?'notice-success':'notice-info').' is-dismissible"><p>'.esc_html($messages[$notice]).'</p></div>';
+  }
   echo '<p>Pemeriksaan deterministik dan baca-saja terhadap artikel/halaman terbit WordPress. Tidak mengubah konten, metadata, tautan, atau status publikasi.</p>';
   echo '<p><strong>Diperiksa:</strong> ' . esc_html( $data['checked_at'] ) . ' &nbsp; <strong>Konten diperiksa:</strong> ' . esc_html( (string) $data['scanned'] ) . ' dari maksimal ' . esc_html( (string) $data['limit'] ) . '</p>';
   if ( $data['truncated'] ) {
@@ -113,9 +118,11 @@ final class AMANAH_SEO_Content_Checks {
   } elseif ( empty( $data['issues'] ) ) {
    echo '<p>Tidak ada masalah yang terdeteksi oleh tiga pemeriksaan dasar ini. Ini bukan audit SEO lengkap.</p>';
   } else {
-   echo '<table class="widefat striped"><thead><tr><th>Temuan</th><th>Konten</th><th>Bukti</th><th>Saran pemeriksaan</th></tr></thead><tbody>';
+   echo '<table class="widefat striped"><thead><tr><th>Temuan</th><th>Konten</th><th>Bukti</th><th>Saran pemeriksaan</th><th>Tindakan</th></tr></thead><tbody>';
    foreach ( $data['issues'] as $issue ) {
-    echo '<tr><td><strong>' . esc_html( $issue['label'] ) . '</strong><br><code>' . esc_html( $issue['code'] ) . '</code></td><td><a href="' . esc_url( $issue['url'] ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $issue['title'] ) . '</a><br>' . esc_html( $issue['type'] ) . ' · ID ' . esc_html( (string) $issue['post_id'] ) . '</td><td>' . esc_html( $issue['evidence'] ) . '</td><td>' . esc_html( $issue['suggestion'] ) . '</td></tr>';
+    echo '<tr><td><strong>' . esc_html( $issue['label'] ) . '</strong><br><code>' . esc_html( $issue['code'] ) . '</code></td><td><a href="' . esc_url( $issue['url'] ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $issue['title'] ) . '</a><br>' . esc_html( $issue['type'] ) . ' · ID ' . esc_html( (string) $issue['post_id'] ) . '</td><td>' . esc_html( $issue['evidence'] ) . '</td><td>' . esc_html( $issue['suggestion'] ) . '</td><td><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="amanah_seo_import_content_issue"><input type="hidden" name="post_id" value="' . esc_attr( (string) $issue['post_id'] ) . '"><input type="hidden" name="issue_code" value="' . esc_attr( $issue['code'] ) . '">';
+    wp_nonce_field( 'amanah_seo_import_content_issue_' . $issue['post_id'] . '_' . $issue['code'] );
+    echo '<button class="button button-primary" type="submit">Jadikan Temuan</button></form></td></tr>';
    }
    echo '</tbody></table>';
   }
