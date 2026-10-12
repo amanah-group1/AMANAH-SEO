@@ -7,58 +7,8 @@
 defined( 'ABSPATH' ) || exit;
 
 $model_options = 'gemini' === $data['provider'] ? $data['gemini_models'] : $data['openai_models'];
-$license = isset( $data['license'] ) && is_array( $data['license'] ) ? $data['license'] : array();
-$license_status = isset( $license['status'] ) ? sanitize_key( $license['status'] ) : 'not_configured';
 ?>
 <div class="wrap">
-	<div class="card" style="max-width: 900px; margin: 0 0 24px; padding: 24px;">
-		<h2 style="margin-top: 0;"><?php echo esc_html__( 'Plugin License', 'amanah-seo-ai' ); ?></h2>
-		<p><?php echo esc_html__( 'Masukkan license key AMANAH SEO AI untuk website ini.', 'amanah-seo-ai' ); ?></p>
-
-		<?php if ( isset( $_GET['license_saved'] ) ) : ?>
-			<div class="notice notice-success is-dismissible"><p><?php echo esc_html__( 'License key berhasil disimpan. Aktivasi server belum dilakukan pada V1.', 'amanah-seo-ai' ); ?></p></div>
-		<?php endif; ?>
-
-		<?php if ( isset( $_GET['license_error'] ) ) : ?>
-			<div class="notice notice-error"><p><?php echo esc_html__( 'License key tidak dapat disimpan. Pastikan license key diisi.', 'amanah-seo-ai' ); ?></p></div>
-		<?php endif; ?>
-
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-			<input type="hidden" name="action" value="amanah_seo_ai_save_license" />
-			<?php wp_nonce_field( 'amanah_seo_ai_save_license' ); ?>
-
-			<table class="form-table" role="presentation">
-				<tr>
-					<th scope="row"><label for="license_key"><?php echo esc_html__( 'License Key', 'amanah-seo-ai' ); ?></label></th>
-					<td>
-						<input class="regular-text" id="license_key" name="license_key" type="password" value="" autocomplete="off" required />
-						<p class="description">
-							<?php
-							echo esc_html(
-								'not_configured' === $license_status
-									? __( 'Belum ada license key yang disimpan.', 'amanah-seo-ai' )
-									: __( 'License key tersimpan untuk domain ini. Masukkan kembali hanya jika ingin menggantinya.', 'amanah-seo-ai' )
-							);
-							?>
-						</p>
-					</td>
-				</tr>
-			</table>
-
-			<?php submit_button( __( 'Save License Key', 'amanah-seo-ai' ), 'primary', 'submit', false ); ?>
-		</form>
-
-		<?php if ( 'not_configured' !== $license_status ) : ?>
-			<p style="margin-bottom: 0;">
-				<strong><?php echo esc_html__( 'Status:', 'amanah-seo-ai' ); ?></strong>
-				<?php echo esc_html( 'pending_activation' === $license_status ? __( 'Pending Activation', 'amanah-seo-ai' ) : $license_status ); ?>
-			</p>
-			<?php if ( ! empty( $license['domain'] ) ) : ?>
-				<p><strong><?php echo esc_html__( 'Domain:', 'amanah-seo-ai' ); ?></strong> <?php echo esc_html( $license['domain'] ); ?></p>
-			<?php endif; ?>
-		<?php endif; ?>
-	</div>
-
 	<h1><?php echo esc_html__( 'AMANAH SEO AI Settings', 'amanah-seo-ai' ); ?></h1>
 	<p><?php echo esc_html__( 'Konfigurasi provider AI dan pilih model yang tersedia langsung dari provider. Model tidak perlu diisi secara manual.', 'amanah-seo-ai' ); ?></p>
 

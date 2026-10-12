@@ -19,7 +19,6 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 
 	public function register() {
 		add_action( 'admin_post_amanah_seo_ai_save_settings', array( $this, 'save' ) );
-		add_action( 'admin_post_amanah_seo_ai_save_license', array( $this, 'save_license' ) );
 	}
 
 	public function render() {

@@ -109,8 +109,9 @@ final class AMANAH_SEO_Module_Licenses {
 		$stored = get_option( self::OPTION, array() );
 		$stored = is_array( $stored ) ? $stored : array();
 		unset( $stored[ $module ] );
+		$had_license = isset( $stored[ $module ] );
 		$updated = update_option( self::OPTION, $stored, false );
-		return true === $updated || ! isset( $stored[ $module ] );
+		return true === $updated || ! $had_license;
 	}
 
 	public static function render() {
@@ -152,6 +153,15 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( ! self::set_license( $module, $license_key ) ) {
 			wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
 			exit;
+		}
+		if ( 'engine' === $module ) {
+			try {
+				$services = \\Amanah\\SEOEngine\\Core\\Bootstrap\\Plugin::boot();
+				$services->get( 'license_client' )->activate( $license_key );
+			} catch ( \\Throwable $exception ) {
+				// Keep the encrypted key so a transient licensing-service outage does not lose it.
+				error_log( '[AMANAH SEO] ENGINE license activation deferred: ' . $exception->getMessage() );
+			}
 		}
 		wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_saved' => $module ), admin_url( 'admin.php' ) ) );
 		exit;
