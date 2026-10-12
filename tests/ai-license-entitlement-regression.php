@@ -19,7 +19,7 @@ function update_option( $key, $value, $autoload = null ) {
 	return true;
 }
 function delete_option( $key ) { unset( $GLOBALS['amanah_license_test_options'][ $key ] ); return true; }
-function sanitize_key( $value ) { return strtolower( preg_replace( '/[^a-z0-9_\\-]/', '', (string) $value ) ); }
+function sanitize_key( $value ) { $value = strtolower( (string) $value ); return preg_replace( '/[^a-z0-9_\\-]/', '', $value ); }
 function sanitize_text_field( $value ) { return trim( strip_tags( (string) $value ) ); }
 function wp_generate_uuid4() { static $i = 0; $i++; return sprintf( '123e4567-e89b-42d3-a456-%012d', $i ); }
 function home_url() { return 'https://example.test'; }
@@ -126,7 +126,7 @@ $client_source = file_get_contents( __DIR__ . '/../plugin/modules/ai-runtime/mod
 $checks['All AI execution passes through the central entitlement gate'] = strpos( $client_source, 'AMANAH_SEO_Module_Licenses::has_entitlement' ) !== false && strpos( $client_source, 'required_entitlement_for_task' ) !== false;
 $core_source = file_get_contents( __DIR__ . '/../plugin/includes/class-amanah-seo-module-licenses.php' );
 $checks['AI API key remains encrypted in Core storage'] = AMANAH_SEO_Module_Licenses::set_license( 'ai', 'ai-license-regression-key' ) && false === strpos( serialize( get_option( 'amanah_seo_module_license_secrets', array() ) ), 'ai-license-regression-key' );
-$checks['Activation endpoint is pinned to the licensing service host'] = strpos( $core_source, "'api.amanahseoai.my.id'" ) !== false;
+$checks['Activation endpoint is pinned to the licensing service host'] = strpos( $core_source, "'https://api.amanahseoai.my.id'" ) !== false;
 
 $failures = 0;
 foreach ( $checks as $label => $passed ) {
