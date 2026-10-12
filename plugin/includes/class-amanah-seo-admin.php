@@ -14,15 +14,15 @@ final class AMANAH_SEO_Admin {
   add_action('admin_post_amanah_seo_decide_approval',array(__CLASS__,'decide_approval'));
  }
  public static function menu() {
-  if(!current_user_can('manage_options')) return;
-  add_menu_page('AMANAH SEO','AMANAH SEO','manage_options','amanah-seo',array(__CLASS__,'dashboard'),'dashicons-chart-area',58);
-  add_submenu_page('amanah-seo','Website & Workspace','Website & Workspace','manage_options','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
-  add_submenu_page('amanah-seo','Temuan','Temuan','manage_options','amanah-seo-findings',array(__CLASS__,'findings_page'));
-  add_submenu_page('amanah-seo','Pekerjaan','Pekerjaan','manage_options','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
-  add_submenu_page('amanah-seo','Riwayat','Riwayat','manage_options','amanah-seo-history',array(__CLASS__,'history_page'));
-  add_submenu_page('amanah-seo','Diagnostik','Diagnostik','manage_options','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
+  if(!current_user_can('manage_amanah_seo')) return;
+  add_menu_page('AMANAH SEO','AMANAH SEO','manage_amanah_seo','amanah-seo',array(__CLASS__,'dashboard'),'dashicons-chart-area',58);
+  add_submenu_page('amanah-seo','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
+  add_submenu_page('amanah-seo','Temuan','Temuan','manage_amanah_seo','amanah-seo-findings',array(__CLASS__,'findings_page'));
+  add_submenu_page('amanah-seo','Pekerjaan','Pekerjaan','manage_amanah_seo','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
+  add_submenu_page('amanah-seo','Riwayat','Riwayat','manage_amanah_seo','amanah-seo-history',array(__CLASS__,'history_page'));
+  add_submenu_page('amanah-seo','Diagnostik','Diagnostik','manage_amanah_seo','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
  }
- private static function guard(){if(!current_user_can('manage_options')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));}
+ private static function guard(){if(!current_user_can('manage_amanah_seo')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));}
  private static function start($title){self::guard();echo '<div class="wrap"><h1>'.esc_html($title).'</h1>';if(isset($_GET['amanah_notice'])){$n=sanitize_key(wp_unslash($_GET['amanah_notice']));$m=array('saved'=>'Data berhasil disimpan.','error'=>'Data gagal disimpan. Periksa input dan coba lagi.','updated'=>'Status pekerjaan diperbarui.','decision'=>'Keputusan persetujuan dicatat.','evidence_required'=>'Pekerjaan selesai wajib memiliki bukti hasil.','approval_pending'=>'Persetujuan masih menunggu keputusan.','workspace_saved'=>'Pengaturan workspace berhasil disimpan.','finding_updated'=>'Status temuan diperbarui.','finding_update_error'=>'Status temuan tidak dapat diperbarui. Pastikan catatan penyelesaian diisi.','self_test_complete'=>'Uji runtime selesai. Lihat hasil pemeriksaan di bawah.','dependency_incomplete'=>'Pekerjaan belum dapat diselesaikan karena dependensinya belum selesai.','invalid_due_date'=>'Format tenggat tidak valid.','dependency_not_found'=>'Pekerjaan dependensi tidak ditemukan.');if(isset($m[$n]))echo '<div class="notice notice-'.(in_array($n,array('error','evidence_required','approval_pending','finding_update_error'),true)?'error':'success').' is-dismissible"><p>'.esc_html($m[$n]).'</p></div>';}}
  private static function end(){echo '</div>';}
  public static function dashboard(){
