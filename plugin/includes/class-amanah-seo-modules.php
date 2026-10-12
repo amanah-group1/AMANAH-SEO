@@ -40,7 +40,7 @@ final class AMANAH_SEO_Modules {
 		// separate plugin entry point, activation hook, or top-level menu.
 		try {
 			require_once AMANAH_SEO_PATH . 'modules/engine-runtime/bootstrap.php';
-		} catch ( \\Throwable $exception ) {
+		} catch ( \Throwable $exception ) {
 			error_log( '[AMANAH SEO] ENGINE module initialization failed: ' . $exception->getMessage() );
 		}
 	}
