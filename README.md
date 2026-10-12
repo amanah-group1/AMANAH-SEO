@@ -17,6 +17,11 @@ Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/RE
 - Fondasi runtime plugin WordPress tersedia di direktori `plugin/` pada paket implementasi Core MVP. Status: PHP syntax checks PASS; penerimaan runtime WordPress, backup/restore, GSC, dan integrasi lisensi belum diuji.
 - Jangan menganggap fondasi ini sebagai MVP lengkap atau menyalinnya ke produksi. Lihat [PR implementasi Core MVP](https://github.com/amanahgroup123/AMANAH-SEO/pull/40) untuk perubahan dan batas penerimaannya.
 
+## Status implementasi teknis
+
+- Fondasi runtime plugin WordPress tersedia di direktori `plugin/` pada paket implementasi Core MVP. Status: PHP syntax checks PASS; penerimaan runtime WordPress, backup/restore, GSC, dan integrasi lisensi belum diuji.
+- Jangan menganggap fondasi ini sebagai MVP lengkap atau menyalinnya ke produksi. Lihat [PR implementasi Core MVP](https://github.com/amanahgroup123/AMANAH-SEO/pull/40) untuk perubahan dan batas penerimaannya.
+
 ## Arsitektur produk
 
 - **AMANAH SEO** adalah satu-satunya plugin WordPress yang dipasang pengguna pada target akhir.
