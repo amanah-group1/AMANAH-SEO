@@ -18,6 +18,7 @@ final class WordPressLifecycle {
 
 	public function deactivate(): void {
 		wp_clear_scheduled_hook( 'amanah_seo_engine_run_jobs' );
+		wp_clear_scheduled_hook( 'amanah_seo_engine_cleanup_jobs' );
 	}
 
 	public function uninstall(): void {
