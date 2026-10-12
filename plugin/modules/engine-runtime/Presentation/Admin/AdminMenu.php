@@ -108,19 +108,10 @@ final class AdminMenu {
 	}
 
 	public function register(): void {
-		// Satu menu utama Amanah SEO Engine. Halaman utama berisi License,
-		// Updates, dan About. Tidak ada menu License & Updates terpisah.
-		add_menu_page(
-			'Amanah SEO Engine',
-			'Amanah SEO Engine',
-			'manage_options',
-			'amanah-seo-engine',
-			array( $this, 'renderProductHome' ),
-			'dashicons-chart-area',
-			30
-		);
+		// AMANAH SEO Core owns the single top-level menu and module license area.
+		// Register ENGINE workflows only as submenus under the Core menu.
 
-		// Dashboard tetap menjadi submenu langsung dari Amanah SEO Engine.
+		// ENGINE Dashboard is a submenu under AMANAH SEO Core.
 		add_submenu_page(
 			'amanah-seo',
 			'Dashboard',
