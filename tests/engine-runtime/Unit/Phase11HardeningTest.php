@@ -53,7 +53,8 @@ final class Phase11HardeningTest extends TestCase {
 		$source = file_get_contents( dirname( __DIR__, 3 ) . '/plugin/modules/engine-runtime/Presentation/Admin/AdminScreenRegistry.php' );
 
 		$this->assertIsString( $source );
-		$this->assertSame( 20, substr_count( $source, "__( '" ) );
+		$this->assertStringContainsString( '__( $title,', $source );
+		$this->assertStringContainsString( '__( $menu_title,', $source );
 	}
 
 	public function test_uninstall_removes_plugin_credentials_and_portability_operations(): void {

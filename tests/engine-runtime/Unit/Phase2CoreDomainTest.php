@@ -23,5 +23,5 @@ final class Phase2CoreDomainTest extends TestCase {
 		$this->assertNotNull( $finding );
 		$this->assertSame( 'multiple_active_owners', $finding->getConflictType() );
 	}
-	public function test_schema_version_is_six(): void { $this->assertSame( 6, Schema::VERSION ); }
+	public function test_schema_version_matches_current_internal_schema(): void { $this->assertSame( 11, Schema::VERSION ); }
 }

@@ -50,7 +50,7 @@ final class AdminScreenRegistry {
 		return array(
 			'title' => \function_exists( '__' ) ? __( $title, 'amanah-seo-engine' ) : $title,
 			'menu_title' => \function_exists( '__' ) ? __( $menu_title, 'amanah-seo-engine' ) : $menu_title,
-			'parent' => 'amanah-seo-engine',
+			'parent' => 'amanah-seo',
 			'group' => $group,
 			'capability' => 'manage_options',
 		);

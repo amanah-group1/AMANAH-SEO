@@ -152,7 +152,7 @@ final class AdminMenu {
 					continue;
 				}
 
-				if ( in_array( $slug, array( 'license', 'updates', 'ai-configuration' ), true ) ) {
+				if ( in_array( $slug, array( 'license', 'updates', 'ai-configuration', 'ai-usage' ), true ) ) {
 					continue;
 				}
 
