@@ -47,12 +47,12 @@ Ini adalah usulan batas MVP, bukan pernyataan bahwa semua fungsi wajib di atas s
 | MVP-03 | Sumber data wajib | Mulai dengan sumber data paling kecil yang dapat dibuktikan tersedia; jangan membuat integrasi multi-provider sebagai syarat awal. Nama sumber spesifik tetap diverifikasi sebelum implementasi. | DISETUJUI 2026-10-11 (prinsip); sumber spesifik menunggu verifikasi |
 | MVP-04 | Pelaksanaan tindakan | Semua perubahan website dan publikasi membutuhkan persetujuan eksplisit; MVP hanya mengatur tugas dan hasil, bukan melakukan tindakan otonom. | DISETUJUI 2026-10-11 |
 | MVP-05 | Akun dan akses | Minimal pengguna terautentikasi dengan hak akses pemilik/admin yang jelas; multi-tenant/tim kompleks ditunda. | DISETUJUI 2026-10-11 |
-| MVP-06 | Integrasi AI/ENGINE | Opsional; tidak menjadi prasyarat MVP. Kontrak integrasi disusun hanya jika fungsi MVP benar-benar membutuhkannya. | DISETUJUI 2026-10-11 |
+| MVP-06 | Integrasi/Modul AI dan Engine | Modul AI dan Engine dibundel dalam satu plugin AMANAH SEO, dengan entitlement lisensi independen. Integrasi eksternal tetap opsional; tidak boleh menjadi prasyarat MVP tanpa keputusan terpisah. | DIUBAH OLEH KEPUTUSAN ARSITEKTUR 2026-10-12 |
 | MVP-07 | Keberhasilan MVP | Siklus utama selesai, setiap rekomendasi memiliki alasan/sumber atau label ketidakpastian, persetujuan tercatat, dan kegagalan terlihat. Tetapkan target angka setelah baseline tersedia. | DISETUJUI 2026-10-11 |
 
 ## 5. Catatan persetujuan pemilik
 
-Pada 2026-10-11, pemilik menyetujui ketujuh rekomendasi MVP-01 sampai MVP-07 sebagai dasar pedoman AMANAH SEO. Persetujuan MVP-03 mencakup prinsip memilih sumber data terkecil yang dapat diverifikasi, bukan pemilihan nama penyedia tertentu. Sumber data spesifik tetap harus diverifikasi sebelum implementasi. Persetujuan ini menetapkan arah produk dan lingkup MVP; bukan persetujuan untuk implementasi, perubahan kode/runtime, atau penggabungan pull request.
+Pada 2026-10-11, pemilik menyetujui dasar MVP-01 sampai MVP-07. Pada 2026-10-12, pemilik menetapkan arsitektur paket tunggal dan lisensi modul independen; keputusan terbaru ini menggantikan bagian MVP-06 yang sebelumnya dapat dibaca sebagai plugin AI/Engine terpisah atau integrasi sebagai model distribusi. MVP-03 tetap hanya menyetujui prinsip pemilihan sumber data, bukan penyedia tertentu. Sumber data spesifik tetap harus diverifikasi sebelum implementasi. Perubahan arsitektur ini bukan persetujuan untuk implementasi, perubahan kode/runtime, atau penggabungan pull request.
 
 ## 6. Kriteria penerimaan MVP yang dapat diuji
 
@@ -73,7 +73,18 @@ MVP belum boleh dinyatakan lulus sebelum bukti menunjukkan:
 Ketujuh rekomendasi MVP-01 sampai MVP-07 telah disetujui pemilik pada 2026-10-11 dan menjadi dasar lingkup MVP. Tidak perlu meminta persetujuan ulang untuk keputusan yang sama.
 
 - Prinsip sumber data terkecil yang dapat diverifikasi disetujui; nama sumber tertentu tetap harus dipilih dan dibuktikan sebelum implementasi.
-- Verifikasi kemampuan AI/ENGINE merupakan syarat sebelum integrasi tertentu dipilih, bukan syarat untuk MVP berdiri sendiri.
+- Modul AI/Engine dibundel dalam satu plugin, tetapi kemampuan fitur dan entitlement tetap harus diverifikasi. Verifikasi integrasi eksternal hanya diperlukan bila integrasi tersebut dipilih.
 - Pertanyaan komersial, arsitektur rinci, perluasan tim/website, dan KPI numerik dipindahkan ke backlog sesuai waktu kebutuhan pada Pedoman Induk.
 - Implementasi dan merge PR tetap membutuhkan persetujuan terpisah.
 - Jangan membuat dokumen atau fase baru kecuali ada keputusan konkret yang tidak dapat dicatat di dua dokumen acuan ini.
+
+
+## 8. Keputusan arsitektur paket dan lisensi — 2026-10-12
+
+1. Distribusi untuk pengguna adalah satu plugin WordPress: AMANAH SEO.
+2. Modul AI dan Engine berada dalam paket yang sama dan tidak memerlukan plugin terpisah.
+3. Lisensi/entitlement kedua modul independen.
+4. Menu modul tetap terlihat; tanpa entitlement aktif, halaman modul menampilkan sales page informatif dan fitur berlisensi tidak dapat dijalankan.
+5. API key/kredensial AI dan lisensi adalah konsep berbeda. Pengelolaannya dipusatkan di AMANAH SEO.
+6. Pemeriksaan lisensi dilakukan di sisi server pada setiap jalur eksekusi yang dilindungi.
+7. Keputusan ini mengunci prinsip arsitektur, bukan detail harga, trial, renewal, masa tenggang, atau implementasi teknis. Detail tersebut tetap mengikuti backlog Pedoman Induk.
