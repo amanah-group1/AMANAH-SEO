@@ -323,12 +323,17 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( in_array( $service_status, array( 'ACTIVE', 'GRACE' ), true ) && empty( $entitlements ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 		}
+		$validated_at = gmdate( 'c' );
+		$grace_until = isset( $data['grace_until'] ) && is_string( $data['grace_until'] ) ? sanitize_text_field( $data['grace_until'] ) : '';
+		if ( 'GRACE' === $service_status && '' === $grace_until ) {
+			$grace_until = gmdate( 'c', time() + 604800 );
+		}
 		return array(
 			'status'       => strtolower( $service_status ),
 			'entitlements' => $entitlements,
-			'validated_at' => gmdate( 'c' ),
+			'validated_at' => $validated_at,
 			'expires_at'   => isset( $data['expires_at'] ) && is_string( $data['expires_at'] ) ? sanitize_text_field( $data['expires_at'] ) : '',
-			'grace_until'  => isset( $data['grace_until'] ) && is_string( $data['grace_until'] ) ? sanitize_text_field( $data['grace_until'] ) : '',
+			'grace_until'  => $grace_until,
 			'plan'         => isset( $data['plan'] ) && is_string( $data['plan'] ) ? sanitize_text_field( $data['plan'] ) : '',
 			'reason'       => '',
 		);
