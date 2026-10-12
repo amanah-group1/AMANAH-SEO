@@ -139,7 +139,7 @@ final class AdminMenu {
 			// sebagai heading non-clickable, sedangkan seluruh screen menjadi
 			// submenu yang benar-benar dapat dibuka.
 			add_submenu_page(
-				'amanah-seo-engine',
+				'amanah-seo',
 				$definition['title'],
 				'<span class="amanah-seo-menu-group" data-group="' . esc_attr( $group ) . '">' . esc_html( $definition['title'] ) . '</span>',
 				'manage_options',
@@ -157,7 +157,7 @@ final class AdminMenu {
 				}
 
 				add_submenu_page(
-					'amanah-seo-engine',
+					'amanah-seo',
 					$screen['title'],
 					'<span class="amanah-seo-menu-child">&nbsp;&nbsp;&nbsp;' . esc_html( $screen['menu_title'] ) . '</span>',
 					$screen['capability'],
