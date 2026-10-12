@@ -27,6 +27,7 @@ final class AMANAH_SEO_Store {
   $old=$row->status;
   $values=array('status'=>$status,'updated_at'=>current_time('mysql'));
   $formats=array('%s','%s');
+  if('awaiting_approval'===$status){$values['approval_status']='pending';$formats[]='%s';}
   if('completed'===$status){$values['completion_evidence']=sanitize_textarea_field($completion_evidence);$formats[]='%s';}
   $ok=$wpdb->update($table,$values,array('id'=>$id),$formats,array('%d'));
   if(false===$ok) return new WP_Error('task_update_failed','Task status could not be updated.');
