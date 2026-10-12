@@ -15,7 +15,7 @@ Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/RE
 ## Arsitektur produk
 
 - **AMANAH SEO** adalah satu-satunya plugin WordPress yang dipasang pengguna pada target akhir.
-- AMANAH SEO menjadi satu tempat untuk mengelola dua lisensi modul yang terpisah: lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Status dan entitlement keduanya independen; plugin AI/Engine tidak dipasang terpisah pada target akhir. Kebutuhan lisensi tersendiri untuk Core AMANAH SEO belum diputuskan.
+- AMANAH SEO dapat diunduh, dipasang, dan diaktifkan tanpa lisensi. Dari plugin AMANAH SEO, pengguna mengelola dua lisensi modul yang terpisah: lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Status dan entitlement keduanya independen; lisensi hanya diperlukan untuk akses modul terkait. Plugin AI/Engine tidak dipasang terpisah pada target akhir.
 - Kemampuan dari **AMANAH SEO AI** dan **AMANAH SEO ENGINE V2** ditata sebagai modul internal setelah audit dan migrasi terkontrol; kedua repository tetap baseline sumber sampai paket migrasi disetujui.
 - Core, modul AI, dan modul Engine tetap memiliki batas tanggung jawab, kontrak, pengujian, dan kepemilikan data yang jelas. Fitur modul tidak otomatis menjadi bagian MVP fungsional.
 - AMANAH SEO Lifecycle Manager menjadi koordinator tunggal lifecycle komponen internal. Keputusan packaging ini bukan izin untuk memindahkan kode atau mengubah runtime.
