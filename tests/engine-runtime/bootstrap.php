@@ -42,3 +42,20 @@ if ( ! function_exists( 'wp_strip_all_tags' ) ) {
 		return strip_tags( (string) $text );
 	}
 }
+
+if ( ! function_exists( 'get_option' ) ) {
+	function get_option( $option, $default = false ) {
+		return $GLOBALS['amanah_engine_test_options'][ $option ] ?? $default;
+	}
+}
+if ( ! function_exists( 'update_option' ) ) {
+	function update_option( $option, $value, $autoload = null ) {
+		$GLOBALS['amanah_engine_test_options'][ $option ] = $value;
+		return true;
+	}
+}
+if ( ! function_exists( 'sanitize_text_field' ) ) {
+	function sanitize_text_field( $value ) {
+		return trim( strip_tags( (string) $value ) );
+	}
+}

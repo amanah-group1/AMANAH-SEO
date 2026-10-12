@@ -31,7 +31,7 @@ final class ContentScanningProviderTest extends TestCase {
 		$run = (string) file_get_contents( $root . '/Application/UseCase/RunContentScanning.php' );
 		$this->assertStringContainsString( 'GoogleSearchSerpProvider', $plugin );
 		$this->assertStringContainsString( '$this->secrets->get(\'gemini\')', $run );
-		$this->assertStringContainsString( "'api_key'=>$gemini_secret", $run );
+		$this->assertStringContainsString( "'api_key'=>\$gemini_secret", $run );
 	}
 	public function test_google_search_provider_uses_interactions_api_and_citations(): void {
 		$provider = (string) file_get_contents( $this->engine_root() . '/Infrastructure/Serp/GoogleSearchSerpProvider.php' );
