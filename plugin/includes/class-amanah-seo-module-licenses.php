@@ -102,7 +102,10 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 		$validated_at = isset( $record['validated_at'] ) && is_string( $record['validated_at'] ) ? strtotime( $record['validated_at'] ) : false;
 		if ( false === $validated_at || ( $now - $validated_at ) >= DAY_IN_SECONDS ) {
-			$key = 'ai' === $module ? self::get_license( 'ai' ) : null;
+			if ( 'ai' !== $module ) {
+				return false;
+			}
+			$key = self::get_license( 'ai' );
 			if ( ! is_string( $key ) || '' === $key ) {
 				return false;
 			}
