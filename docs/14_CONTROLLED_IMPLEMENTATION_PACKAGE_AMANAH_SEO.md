@@ -42,8 +42,8 @@ Status di bawah ini adalah status bukti, bukan perkiraan.
 | G0 Baseline | SHA terkini, branch, working tree, inventory file, perbedaan sejak audit | SEBAGIAN — SHA baseline historis tersedia; perlu dikunci ulang | SHA/tree belum diverifikasi |
 | G1 Target runtime | Identitas target WordPress AMANAH SEO, path plugin, versi WP/PHP/DB, plugin aktif | BELUM DIUJI | Target atau path ambigu |
 | G2 Backup/recovery | Backup files + DB, restore ke clone, row count pembanding | BELUM DIUJI | Restore belum terbukti |
-| G3 Source inventory | Daftar entry point, autoload/bootstrap, hooks, routes, admin pages, capabilities, tests, config/build files | TERHAMBAT — inventory lengkap belum tersedia pada pemeriksaan ini | File allowlist belum bisa ditetapkan |
-| G4 Lisensi per modul | Audit kontrak lisensi AI dan Engine secara independen: client/server API, product ID, aktivasi/deaktivasi, entitlement, expiry, renewal, offline/grace, secret storage, domain binding, update path, cache, dan error states | BELUM DIAUDIT ULANG pada SHA terkini | Kontrak lisensi salah satu modul tidak jelas atau belum kompatibel dengan pusat pengelolaan |
+| G3 Source inventory | Daftar entry point, autoload/bootstrap, hooks, routes, admin pages, capabilities, tests, config/build files | PARSIAL — tree GitHub dan entry point utama kedua repo sumber telah diverifikasi; inventory lengkap dan allowlist belum dikunci | Belum seluruh data ownership, hooks/routes, tests, build/config, dan dependency audit ditutup |
+| G4 Lisensi per modul | Audit kontrak lisensi AI dan Engine secara independen: client/server API, product ID, aktivasi/deaktivasi, entitlement, expiry, renewal, offline/grace, secret storage, domain binding, update path, cache, dan error states | PARSIAL — entry point dan bagian lisensi Engine dibaca pada SHA terkini; kontrak AI/Engine belum lengkap | Perbedaan kontrak dan risiko secret storage belum diselesaikan |
 | G5 Data ownership | Inventaris tabel/options/transients/cron dan pemilik data; kebijakan preserve/retire | BELUM DIUJI untuk target runtime | Ada risiko penghapusan/perpindahan data |
 | G6 Keamanan | Capability, nonce/CSRF, sanitization, escaping, secret redaction, least privilege | BELUM DIUJI | Ada bypass akses atau rahasia tercetak |
 | G7 Test readiness | Lint/unit/integration/runtime commands, baseline hasil sebelum perubahan | BELUM DIUJI | Tes tidak reproducible atau baseline gagal tanpa diagnosis |
@@ -68,7 +68,7 @@ Hanya dokumen perencanaan pada branch terkontrol ini yang diizinkan berubah sela
 
 ### 4.2 File implementasi
 
-**Belum dapat ditetapkan secara jujur pada versi draft ini.** Inventory file aktual dan entry point repository utama belum berhasil diverifikasi melalui sumber yang tersedia dalam pemeriksaan ini. Menebak path entry point atau menulis allowlist berdasarkan asumsi akan melanggar kontrol perubahan.
+**Allowlist implementasi masih belum dapat dikunci.** Pemeriksaan GitHub-only menemukan repository AMANAH SEO utama hanya berisi dokumentasi dan template; source runtime berada di repository AI dan Engine. Entry point awal telah teridentifikasi, tetapi daftar file lengkap, dependensi, side effect, tests, data ownership, dan kontrak lisensi belum selesai diaudit. Jangan menebak atau mengizinkan coding sebelum manifest exact ADD/MODIFY/DELETE disetujui.
 
 Sebelum coding, buat manifest file eksplisit berisi:
 - path relatif persis;
@@ -134,6 +134,15 @@ Tes statis atau pembacaan source saja tidak dapat menggantikan bukti runtime yan
 - Jangan melakukan rollback database produksi atau menghapus plugin sumber otomatis.
 - Jangan lanjut ke migrasi AI/Engine sampai recovery drill dan data mapping disetujui secara terpisah.
 
+## 6A. Bukti inventaris sumber GitHub-only (2026-10-12)
+
+- AMANAH-SEO main commit: 6a9dba3c8d7f424521625955a6ee0c53609a50e7. Repository berisi README, dokumen, audit, dan template; belum berisi plugin runtime Core.
+- AMANAH-SEO-AI main commit: cd83b80fc7030651cee020391081279a9a36e27f. Entry point: plugin/amanah-seo-ai.php; lifecycle/install: plugin/includes/class-activator.php dan plugin/includes/class-install.php.
+- AMANAH-SEO-ENGINE-V2 main commit: 80e7c38a327baeef1d7ad7b13d006d453d5838b1. Entry point: plugin/amanah-seo-engine.php; bootstrap: plugin/Core/Bootstrap/Plugin.php; lisensi: plugin/Platform/License/.
+- Risiko data AI: plugin/includes/class-install.php, fungsi archive_legacy_content_analysis_table(), baris 155–159 pada file SHA bb f923d846a434c047c326fb9aab6186cfd84970 (tanpa spasi: bbf923d846a434c047c326fb9aab6186cfd84970), menjalankan DROP TABLE pada tabel legacy jika tabel arsip sudah ada. Jangan jalankan installer/migrasi sebelum backup dan kebijakan preserve data dibuktikan.
+- Risiko secret Engine: plugin/Platform/License/LicenseSecretStore.php, SHA 8982f7a53781ff184a2bcd5f7109c7c2696dd3c7, memakai fallback literal amanah-seo-engine jika AUTH_KEY tidak tersedia. Jangan menyalin secret store ini ke Core tanpa perbaikan desain dan audit.
+- Lisensi Engine: Plugin.php membuat LicenseClient dengan product ID Amanah SEO Engine V2; kontrak AI yang setara belum dibuktikan pada inventory awal. Dua lisensi independen adalah keputusan arsitektur, bukan bukti implementasi teknis siap.
+- Batas bukti: temuan ini berasal dari GitHub source saja. Target WordPress, database aktif, backup/restore, tes, dan konfigurasi runtime tetap NOT TESTED.
 ## 7. Gerbang persetujuan sebelum coding
 
 Coding hanya boleh dimulai setelah semua butir ini terpenuhi:
@@ -148,7 +157,7 @@ Coding hanya boleh dimulai setelah semua butir ini terpenuhi:
 - [ ] Risiko lisensi dan data yang menyentuh paket pertama dipastikan tidak berubah tanpa izin.
 - [ ] Pemilik memberi persetujuan eksplisit untuk paket implementasi dengan scope tersebut.
 
-**Status akhir saat ini: BELUM SIAP CODING.** PR dokumentasi telah digabung, tetapi G0, G1, G2, G3, G4, G5, G6, G7, dan G8 belum semuanya lulus. Langkah berikutnya adalah menyelesaikan inventory repository dan bukti target runtime, bukan mulai menulis kode.
+**Status akhir saat ini: BELUM SIAP CODING.** Keputusan arsitektur lisensi telah disetujui dan masuk main, tetapi G0 masih perlu dikunci untuk implementasi, G1/G2/G5/G6/G7 belum diuji, G3/G4 baru parsial, dan G8 belum disetujui. Langkah berikutnya adalah menuntaskan source/data/license inventory secara baca-saja dan mendapatkan bukti target runtime/backup-restore; jangan mulai menulis kode.
 
 ## 8. Catatan kendala sumber
 
