@@ -92,7 +92,7 @@ final class AMANAH_SEO_Admin {
    'prioritize_finding'=>array('Tindakan berikutnya: tinjau temuan prioritas tinggi','Ada temuan terbuka berprioritas tinggi atau mendesak. Periksa bukti dan ketidakpastiannya sebelum membuat pekerjaan.','amanah-seo-findings','Tinjau temuan'),
    'continue_task'=>array('Tindakan berikutnya: lanjutkan pekerjaan berjalan','Tinjau pekerjaan yang sedang berjalan dan perbarui status hanya berdasarkan kemajuan serta bukti yang tersedia.','amanah-seo-tasks','Lanjutkan pekerjaan'),
    'review_findings'=>array('Tindakan berikutnya: tinjau temuan terbuka','Periksa bukti dan prioritas temuan terbuka, lalu buat pekerjaan untuk tindak lanjut yang memang diperlukan.','amanah-seo-findings','Tinjau temuan'),
-   'scan_website'=>array('Tindakan berikutnya: periksa kondisi website','Belum ada temuan terbuka yang terdeteksi dalam cakupan daftar saat ini. Jalankan pemeriksaan website/konten atau catat konteks manual untuk menentukan langkah selanjutnya.','amanah-seo','Mulai dari dashboard')
+   'scan_website'=>array('Tindakan berikutnya: periksa kondisi website','Belum ada temuan terbuka yang terdeteksi dalam cakupan daftar saat ini. Jalankan pemeriksaan website/konten atau catat konteks manual untuk menentukan langkah selanjutnya.','amanah-seo-content-checks','Periksa konten')
   );
   $action=$next[$summary['next_action']];
   echo '<div class="notice notice-info" style="margin:18px 0;padding:8px 12px"><h2 style="margin-top:8px">'.esc_html($action[0]).'</h2><p>'.esc_html($action[1]).'</p><p><a class="button button-primary" href="'.esc_url(admin_url('admin.php?page='.$action[2])).'">'.esc_html($action[3]).'</a></p></div>';
