@@ -8,13 +8,14 @@
 2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — fungsi MVP, batas yang tidak termasuk, keputusan dasar, dan kriteria penerimaan.
 3. **[Paket Tunggal Kesiapan Implementasi dan Migrasi Modul](docs/13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md)** — satu paket untuk audit WordPress, bukti WordPress/GSC, audit source AI/Engine, risiko database/kredensial/lisensi, migrasi, dan acceptance criteria.
 4. [Paket Kesiapan MVP versi sebelumnya](docs/12_MVP_IMPLEMENTATION_PACKAGE.md) dipertahankan sebagai riwayat; gunakan paket tunggal versi 1.0 sebagai acuan kerja.
+5. **[Paket Implementasi Terkontrol Core AMANAH SEO](docs/14_CONTROLLED_IMPLEMENTATION_PACKAGE_AMANAH_SEO.md)** — rencana persiapan implementasi pertama, gerbang teknis, batas scope, acceptance tests, dan recovery. Statusnya perencanaan saja; belum menjadi izin coding.
 
 Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/README.md). Dokumen arsip dan laporan audit historis merupakan rekam jejak, bukan bukti otomatis bahwa keadaan kode atau runtime saat ini sudah lulus.
 
 ## Arsitektur produk
 
 - **AMANAH SEO** adalah satu-satunya plugin WordPress yang dipasang pengguna pada target akhir.
-- Pengguna cukup memasang AMANAH SEO dan menggunakan satu lisensi AMANAH SEO untuk aktivasi produk; plugin AI dan Engine tidak dipasang atau diaktifkan terpisah pada target akhir. Kesiapan fitur modul dan entitlement tetap harus diverifikasi.
+- AMANAH SEO menjadi satu tempat untuk mengelola dua lisensi modul yang terpisah: lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Status dan entitlement keduanya independen; plugin AI/Engine tidak dipasang terpisah pada target akhir. Kebutuhan lisensi tersendiri untuk Core AMANAH SEO belum diputuskan.
 - Kemampuan dari **AMANAH SEO AI** dan **AMANAH SEO ENGINE V2** ditata sebagai modul internal setelah audit dan migrasi terkontrol; kedua repository tetap baseline sumber sampai paket migrasi disetujui.
 - Core, modul AI, dan modul Engine tetap memiliki batas tanggung jawab, kontrak, pengujian, dan kepemilikan data yang jelas. Fitur modul tidak otomatis menjadi bagian MVP fungsional.
 - AMANAH SEO Lifecycle Manager menjadi koordinator tunggal lifecycle komponen internal. Keputusan packaging ini bukan izin untuk memindahkan kode atau mengubah runtime.
