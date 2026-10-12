@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 final class AMANAH_SEO_Activator {
  public static function activate() {
+  self::grant_admin_capability();
   global $wpdb;
   require_once ABSPATH . 'wp-admin/includes/upgrade.php';
   $collate = $wpdb->get_charset_collate();
@@ -15,7 +16,14 @@ final class AMANAH_SEO_Activator {
   update_option( 'amanah_seo_schema_version', '1.2.0', false );
   if ( ! get_option( 'amanah_seo_installed_at' ) ) update_option( 'amanah_seo_installed_at', current_time( 'mysql' ), false );
  }
+ public static function grant_admin_capability() {
+  $role = get_role( 'administrator' );
+  if ( $role && ! $role->has_cap( 'manage_amanah_seo' ) ) {
+   $role->add_cap( 'manage_amanah_seo' );
+  }
+ }
  public static function maybe_upgrade() {
+  self::grant_admin_capability();
   if ( '1.2.0' !== get_option( 'amanah_seo_schema_version', '' ) ) {
    self::activate();
   }
