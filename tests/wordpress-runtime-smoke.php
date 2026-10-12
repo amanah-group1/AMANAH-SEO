@@ -53,11 +53,11 @@ if ( ! class_exists( 'AMANAH_SEO_Module_Licenses' ) || ! class_exists( '\\Amanah
 	}
 }
 
-$secret_store = new \\Amanah\\SEOEngine\\Infrastructure\\AI\\SecretStore();
+$secret_store = new \Amanah\SEOEngine\Infrastructure\AI\SecretStore();
 $legacy_secret = 'dataforseo-preservation-smoke-test';
 try {
 	$secret_store->set( 'dataforseo', $legacy_secret );
-	$migration = new \\Amanah\\SEOEngine\\Infrastructure\\Migration\\Migrations\\Version17RemoveLegacySerpCredentials();
+	$migration = new \Amanah\SEOEngine\Infrastructure\Migration\Migrations\Version17RemoveLegacySerpCredentials();
 	$migration->up();
 	if ( $secret_store->get( 'dataforseo' ) !== $legacy_secret ) {
 		$failures[] = 'ENGINE Version 17 migration did not preserve the existing DataForSEO credential.';
