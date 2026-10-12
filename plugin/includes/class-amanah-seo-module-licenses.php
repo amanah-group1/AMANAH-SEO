@@ -108,8 +108,8 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 		$stored = get_option( self::OPTION, array() );
 		$stored = is_array( $stored ) ? $stored : array();
-		unset( $stored[ $module ] );
 		$had_license = isset( $stored[ $module ] );
+		unset( $stored[ $module ] );
 		$updated = update_option( self::OPTION, $stored, false );
 		return true === $updated || ! $had_license;
 	}
