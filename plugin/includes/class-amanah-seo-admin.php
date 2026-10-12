@@ -234,6 +234,16 @@ final class AMANAH_SEO_Admin {
   $notice=is_wp_error($result)?'finding_update_error':'finding_updated';
   self::redirect($notice,'amanah-seo-findings');
  }
+ /**
+  * Match a duplicate only when it refers to the same issue code and WordPress post.
+  * Different posts can legitimately have the same title and must remain distinct findings.
+  */
+ public static function is_duplicate_content_issue($existing,$finding_title,$post_id,$code){
+  if(!is_object($existing)||!isset($existing->source,$existing->title,$existing->status,$existing->evidence)) return false;
+  if($existing->source!=='wordpress'||$existing->title!==$finding_title||!in_array($existing->status,array('open','in_progress'),true)) return false;
+  $identity='Pemeriksaan: '.$code.'; konten ID '.(int)$post_id.';';
+  return strpos((string)$existing->evidence,$identity)!==false;
+ }
  public static function import_content_issue(){
   if(!current_user_can('manage_amanah_seo')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));
   $post_id=absint($_POST['post_id']??0);
@@ -253,7 +263,7 @@ final class AMANAH_SEO_Admin {
   $finding_title='['.$issue['code'].'] '.$issue['title'];
   if(function_exists('mb_substr')) $finding_title=mb_substr($finding_title,0,255,'UTF-8'); else $finding_title=substr($finding_title,0,255);
   foreach(AMANAH_SEO_Store::findings(100) as $existing){
-   if($existing->source==='wordpress'&&$existing->title===$finding_title&&in_array($existing->status,array('open','in_progress'),true)){
+   if(self::is_duplicate_content_issue($existing,$finding_title,$post_id,$code)){
     self::redirect('content_issue_exists','amanah-seo-content-checks');
    }
   }
