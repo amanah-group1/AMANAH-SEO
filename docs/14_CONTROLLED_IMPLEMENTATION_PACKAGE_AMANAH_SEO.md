@@ -143,19 +143,19 @@ Tes statis atau pembacaan source saja tidak dapat menggantikan bukti runtime yan
 - Risiko secret Engine: plugin/Platform/License/LicenseSecretStore.php, SHA 8982f7a53781ff184a2bcd5f7109c7c2696dd3c7, memakai fallback literal amanah-seo-engine jika AUTH_KEY tidak tersedia. Jangan menyalin secret store ini ke Core tanpa perbaikan desain dan audit.
 - Lisensi Engine: Plugin.php membuat LicenseClient dengan product ID Amanah SEO Engine V2; kontrak AI yang setara belum dibuktikan pada inventory awal. Dua lisensi independen adalah keputusan arsitektur, bukan bukti implementasi teknis siap.
 - Batas bukti: temuan ini berasal dari GitHub source saja. Target WordPress, database aktif, backup/restore, tes, dan konfigurasi runtime tetap NOT TESTED.
-## 7. Gerbang persetujuan sebelum coding
+## 7. Gerbang sebelum migrasi modul dan deployment
 
-Coding hanya boleh dimulai setelah semua butir ini terpenuhi:
+Instruksi pemilik pada 2026-10-12 mengizinkan implementasi fondasi Core MVP pada branch terkontrol. Persetujuan itu tidak mengizinkan migrasi kode AI/ENGINE atau perubahan runtime/database tanpa bukti dan pemeriksaan tersendiri.
 
-- [ ] Koreksi arsitektur lisensi per modul sudah masuk ke `main` dan referensi satu-lisensi lama tidak lagi menjadi keputusan aktif.
-- [ ] SHA terkini repository utama dan baseline terkait sudah dikunci.
-- [ ] Inventory source dan entry point telah diverifikasi.
-- [ ] Target WordPress testing dan path plugin disetujui pemilik.
-- [ ] Backup dan restore clone terbukti.
-- [ ] File allowlist ADD/MODIFY telah ditulis persis.
-- [ ] Acceptance tests dan recovery drill disepakati.
-- [ ] Risiko lisensi dan data yang menyentuh paket pertama dipastikan tidak berubah tanpa izin.
-- [ ] Pemilik memberi persetujuan eksplisit untuk paket implementasi dengan scope tersebut.
+- [x] Arsitektur lisensi dua modul independen telah disetujui dan tercatat pada `main`.
+- [x] Fondasi plugin Core dibuat di branch terkontrol; PHP syntax check dijalankan melalui GitHub Actions.
+- [ ] Runtime WordPress testing dan path tujuan final diverifikasi.
+- [ ] Backup dan restore clone dibuktikan.
+- [ ] Acceptance test WordPress, otorisasi/nonce, database, serta recovery drill lulus.
+- [ ] Kontrak API lisensi server dan perilaku lisensi AI/ENGINE dibuktikan.
+- [ ] Source inventory lengkap, dependency map, dan allowlist migrasi modul ditinjau.
+- [ ] GSC property/access dan perilaku kegagalan diuji sebelum integrasi GSC dinyatakan berfungsi.
+- [ ] Persetujuan terpisah untuk migrasi modul dan deployment diberikan setelah hasil di atas tersedia.
 
 **Status setelah paket fondasi Core MVP (2026-10-12):** plugin entry point, tabel milik Core, dashboard, temuan, tugas, persetujuan, bukti penyelesaian, dan riwayat telah ditambahkan pada PR #40. GitHub Actions PHP syntax check PASS. Ini belum memenuhi penerimaan MVP: runtime WordPress, backup/restore, pengujian nonce/capability, GSC, kontrak lisensi server, integrasi internal AI/ENGINE, dan pemeriksaan dependency/migrasi masih terbuka. Tidak ada runtime/database yang disentuh.
 
