@@ -19,6 +19,7 @@ final class AMANAH_SEO_Admin {
   add_submenu_page('amanah-seo','Temuan','Temuan','manage_options','amanah-seo-findings',array(__CLASS__,'findings_page'));
   add_submenu_page('amanah-seo','Pekerjaan','Pekerjaan','manage_options','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
   add_submenu_page('amanah-seo','Riwayat','Riwayat','manage_options','amanah-seo-history',array(__CLASS__,'history_page'));
+  add_submenu_page('amanah-seo','Diagnostik','Diagnostik','manage_options','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
  }
  private static function guard(){if(!current_user_can('manage_options')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));}
  private static function start($title){self::guard();echo '<div class="wrap"><h1>'.esc_html($title).'</h1>';if(isset($_GET['amanah_notice'])){$n=sanitize_key(wp_unslash($_GET['amanah_notice']));$m=array('saved'=>'Data berhasil disimpan.','error'=>'Data gagal disimpan. Periksa input dan coba lagi.','updated'=>'Status pekerjaan diperbarui.','decision'=>'Keputusan persetujuan dicatat.','evidence_required'=>'Pekerjaan selesai wajib memiliki bukti hasil.','approval_pending'=>'Persetujuan masih menunggu keputusan.','workspace_saved'=>'Pengaturan workspace berhasil disimpan.','finding_updated'=>'Status temuan diperbarui.','finding_update_error'=>'Status temuan tidak dapat diperbarui. Pastikan catatan penyelesaian diisi.','dependency_incomplete'=>'Pekerjaan belum dapat diselesaikan karena dependensinya belum selesai.','invalid_due_date'=>'Format tenggat tidak valid.','dependency_not_found'=>'Pekerjaan dependensi tidak ditemukan.');if(isset($m[$n]))echo '<div class="notice notice-'.(in_array($n,array('error','evidence_required','approval_pending','finding_update_error'),true)?'error':'success').' is-dismissible"><p>'.esc_html($m[$n]).'</p></div>';}}
@@ -81,6 +82,43 @@ final class AMANAH_SEO_Admin {
   self::end();
  }
  public static function tasks_page(){self::start('Pekerjaan');$findings=AMANAH_SEO_Store::findings(100);$tasks=AMANAH_SEO_Store::tasks();echo '<h2>Buat pekerjaan</h2><form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="amanah_seo_create_task">';wp_nonce_field('amanah_seo_create_task');echo '<table class="form-table"><tr><th>Judul</th><td><input class="regular-text" name="title" maxlength="255" required></td></tr><tr><th>Temuan terkait</th><td><select name="finding_id"><option value="0">Belum dipilih</option>';foreach($findings as $f)echo '<option value="'.esc_attr((string)$f->id).'">'.esc_html('#'.$f->id.' — '.$f->title).'</option>';echo '</select></td></tr><tr><th>Deskripsi</th><td><textarea class="large-text" name="description" rows="2" required></textarea></td></tr><tr><th>Penanggung jawab</th><td><input class="regular-text" name="owner"></td></tr><tr><th>Kriteria selesai</th><td><textarea class="large-text" name="success_criteria" rows="2" required></textarea></td></tr><tr><th>Tenggat</th><td><input type="date" name="due_date"></td></tr><tr><th>Dependensi</th><td><select name="dependency_task_id"><option value="0">Tidak ada</option>';foreach($tasks as $dependency_task){echo '<option value="'.esc_attr((string)$dependency_task->id).'">#'.esc_html((string)$dependency_task->id).' — '.esc_html($dependency_task->title).' ('.esc_html($dependency_task->status).')</option>';}echo '</select><p class="description">Pekerjaan ini tidak dapat ditandai selesai sebelum dependensinya selesai.</p></td></tr><tr><th>Status awal</th><td><select name="status">';foreach(self::$statuses as $k=>$v){if('completed'===$k)continue;echo '<option value="'.esc_attr($k).'"'.selected($k,'not_started',false).'>'.esc_html($v).'</option>';}echo '</select><p class="description">Status persetujuan tidak menjalankan tindakan otomatis.</p></td></tr></table>';submit_button('Simpan pekerjaan');echo '</form><hr><h2>Daftar pekerjaan</h2>';if(!$tasks){echo '<p>Belum ada pekerjaan.</p>';}else{echo '<table class="widefat striped"><thead><tr><th>ID</th><th>Pekerjaan</th><th>Temuan</th><th>Pemilik</th><th>Kriteria selesai</th><th>Tenggat</th><th>Dependensi</th><th>Status / persetujuan</th><th>Ubah status / persetujuan</th></tr></thead><tbody>';foreach($tasks as $x){echo '<tr><td>'.esc_html((string)$x->id).'</td><td><strong>'.esc_html($x->title).'</strong><br>'.esc_html($x->description).'</td><td>'.esc_html($x->finding_id?'#'.$x->finding_id:'—').'</td><td>'.esc_html($x->owner?:'Belum ditetapkan').'</td><td>'.esc_html($x->success_criteria).'</td><td>'.esc_html(!empty($x->due_date)?$x->due_date:'—').'</td><td>'.esc_html(!empty($x->dependency_task_id)?'#'.$x->dependency_task_id:'—').'</td><td>'.esc_html(isset(self::$statuses[$x->status])?self::$statuses[$x->status]:$x->status).'<br>Persetujuan: '.esc_html($x->approval_status).(!empty($x->completion_evidence)?'<br>Bukti: '.esc_html($x->completion_evidence):'').'</td><td><form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="amanah_seo_update_task_status"><input type="hidden" name="task_id" value="'.esc_attr((string)$x->id).'">';wp_nonce_field('amanah_seo_update_task_status_'.$x->id);echo '<select name="status">';foreach(self::$statuses as $k=>$v)echo '<option value="'.esc_attr($k).'"'.selected($k,$x->status,false).'>'.esc_html($v).'</option>';echo '</select><br><textarea name="completion_evidence" rows="2" placeholder="Bukti wajib saat status Selesai"></textarea><br><button class="button" type="submit">Perbarui</button></form>';if('pending'===$x->approval_status){echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="amanah_seo_decide_approval"><input type="hidden" name="task_id" value="'.esc_attr((string)$x->id).'">';wp_nonce_field('amanah_seo_decide_approval_'.$x->id);echo '<input type="text" name="decision_note" placeholder="Catatan keputusan (opsional)"><br><button class="button button-primary" name="decision" value="approved">Setujui</button> <button class="button" name="decision" value="rejected">Tolak</button></form>';}echo '</td></tr>';}echo '</tbody></table>';}self::end();}
+ public static function diagnostics_page(){
+  self::start('Diagnostik Sistem');
+  global $wpdb;
+  $table_names=array('Temuan'=>$wpdb->prefix.'amanah_seo_findings','Pekerjaan'=>$wpdb->prefix.'amanah_seo_tasks','Riwayat'=>$wpdb->prefix.'amanah_seo_events');
+  $table_rows=array();
+  foreach($table_names as $label=>$table_name){
+   $found=$wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s',$table_name));
+   $exists=($found===$table_name);
+   $table_rows[]=array($label,$table_name,$exists?'PASS':'GAGAL');
+  }
+  $schema=get_option('amanah_seo_schema_version','belum diset');
+  $schema_ok=('1.2.0'===$schema);
+  $wp_version=get_bloginfo('version');
+  $db_version=method_exists($wpdb,'db_version')?$wpdb->db_version():'Tidak tersedia';
+  $counts=wp_count_posts('post');
+  $published=is_object($counts)&&isset($counts->publish)?(int)$counts->publish:0;
+  echo '<p>Diagnostik ini hanya membaca status dasar AMANAH SEO. Tidak menampilkan API key, lisensi rahasia, konfigurasi sensitif, atau isi kredensial.</p>';
+  echo '<h2>Lingkungan</h2><table class="widefat striped"><tbody>';
+  echo '<tr><th>Plugin</th><td>AMANAH SEO '.esc_html(AMANAH_SEO_VERSION).'</td></tr>';
+  echo '<tr><th>WordPress</th><td>'.esc_html((string)$wp_version).'</td></tr>';
+  echo '<tr><th>PHP</th><td>'.esc_html(PHP_VERSION).'</td></tr>';
+  echo '<tr><th>Database</th><td>'.esc_html((string)$db_version).'</td></tr>';
+  echo '<tr><th>Website</th><td>'.esc_html(home_url('/')).'</td></tr>';
+  echo '<tr><th>Konten terbit</th><td>'.esc_html((string)$published).'</td></tr>';
+  echo '<tr><th>Schema Core</th><td>'.esc_html((string)$schema).' — '.($schema_ok?'PASS':'PERLU PEMBARUAN').'</td></tr>';
+  echo '</tbody></table><h2>Tabel milik AMANAH SEO</h2><table class="widefat striped"><thead><tr><th>Komponen</th><th>Tabel</th><th>Status</th></tr></thead><tbody>';
+  foreach($table_rows as $row){echo '<tr><td>'.esc_html($row[0]).'</td><td><code>'.esc_html($row[1]).'</code></td><td>'.esc_html($row[2]).'</td></tr>';}
+  echo '</tbody></table><h2>Integrasi dan modul</h2><table class="widefat striped"><tbody>';
+  echo '<tr><th>WordPress internal</th><td>Terbaca pada website tempat plugin ini dipasang; jumlah konten terbit ditampilkan di atas.</td></tr>';
+  echo '<tr><th>Google Search Console</th><td>BELUM DIHUBUNGKAN — metrik pencarian tidak tersedia dan tidak dibuat-buat.</td></tr>';
+  echo '<tr><th>AMANAH SEO AI</th><td>BELUM DIMIGRASIKAN sebagai modul internal pada paket ini.</td></tr>';
+  echo '<tr><th>AMANAH SEO ENGINE</th><td>BELUM DIMIGRASIKAN sebagai modul internal pada paket ini.</td></tr>';
+  echo '<tr><th>Lisensi modul</th><td>Integrasi server/entitlement belum tersedia; status lisensi tidak diklaim aktif.</td></tr>';
+  echo '<tr><th>Perubahan website otomatis</th><td>Tidak dijalankan. Perubahan tetap memerlukan tindakan dan persetujuan manusia.</td></tr>';
+  echo '</tbody></table>';
+  self::end();
+ }
  public static function history_page(){self::start('Riwayat Perubahan');$items=AMANAH_SEO_Store::events();if(!$items){echo '<p>Belum ada peristiwa tercatat.</p>';}else{echo '<table class="widefat striped"><thead><tr><th>Waktu</th><th>Objek</th><th>ID</th><th>Peristiwa</th><th>Detail</th><th>Pengguna</th></tr></thead><tbody>';foreach($items as $x)echo '<tr><td>'.esc_html($x->created_at).'</td><td>'.esc_html($x->object_type).'</td><td>'.esc_html((string)$x->object_id).'</td><td>'.esc_html($x->event_type).'</td><td>'.esc_html($x->detail).'</td><td>'.esc_html((string)$x->user_id).'</td></tr>';echo '</tbody></table>';}self::end();}
  public static function save_workspace(){
   self::guard();
