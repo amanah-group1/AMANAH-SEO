@@ -12,7 +12,7 @@ final class AMANAH_SEO_Store {
  public static function create_task( array $d ) {
   if('completed'===$d['status']) return new WP_Error('completion_evidence_required','A task cannot be created as completed without a recorded result.');
   global $wpdb; $now=current_time('mysql');
-  $ok=$wpdb->insert(self::table('tasks'),array('finding_id'=>$d['finding_id'],'title'=>$d['title'],'description'=>$d['description'],'owner'=>$d['owner'],'success_criteria'=>$d['success_criteria'],'status'=>$d['status'],'approval_status'=>('awaiting_approval'===$d['status']?'pending':'not_required'),'completion_evidence'=>null,'created_by'=>get_current_user_id(),'created_at'=>$now,'updated_at'=>$now),array('%d','%s','%s','%s','%s','%s','%s','%d','%s','%s'));
+  $ok=$wpdb->insert(self::table('tasks'),array('finding_id'=>$d['finding_id'],'title'=>$d['title'],'description'=>$d['description'],'owner'=>$d['owner'],'success_criteria'=>$d['success_criteria'],'status'=>$d['status'],'approval_status'=>('awaiting_approval'===$d['status']?'pending':'not_required'),'completion_evidence'=>null,'created_by'=>get_current_user_id(),'created_at'=>$now,'updated_at'=>$now),array('%d','%s','%s','%s','%s','%s','%s','%s','%d','%s','%s'));
   if(false===$ok) return new WP_Error('task_save_failed','Task could not be saved.');
   $id=(int)$wpdb->insert_id; self::event('task',$id,'created','Task created; status='.$d['status']);
   if('awaiting_approval'===$d['status']) self::event('task',$id,'approval_requested','Owner approval is required; no website action was executed.');
