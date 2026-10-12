@@ -74,7 +74,7 @@ final class AMANAH_SEO_Module_Licenses {
 			return false;
 		}
 		$record = $statuses[ $module ];
-		if ( ! isset( $record['status'], $record['entitlements'] ) || 'active' !== $record['status'] || ! is_array( $record['entitlements'] ) ) {
+		if ( ! isset( $record['status'], $record['entitlements'] ) || ! in_array( $record['status'], array( 'active', 'grace' ), true ) || ! is_array( $record['entitlements'] ) ) {
 			return false;
 		}
 		return in_array( sanitize_key( $entitlement ), array_map( 'sanitize_key', array_filter( $record['entitlements'], 'is_string' ) ), true );
@@ -182,7 +182,7 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 		$code = (int) wp_remote_retrieve_response_code( $response );
 		$body = json_decode( (string) wp_remote_retrieve_body( $response ), true );
-		$allowed = array( 'unconfigured', 'active', 'expired', 'revoked', 'suspended', 'invalid', 'unknown' );
+		$allowed = array( 'unconfigured', 'active', 'grace', 'expired', 'revoked', 'suspended', 'invalid', 'unknown' );
 		if ( $code < 200 || $code >= 300 || ! is_array( $body ) || ! isset( $body['product'], $body['status'], $body['entitlements'] ) || ! is_string( $body['product'] ) || 'amanah-seo-ai' !== $body['product'] || ! is_string( $body['status'] ) || ! in_array( $body['status'], $allowed, true ) || ! is_array( $body['entitlements'] ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 		}
@@ -192,7 +192,7 @@ final class AMANAH_SEO_Module_Licenses {
 			}
 		}
 		$entitlements = array_values( array_unique( array_map( 'sanitize_key', $body['entitlements'] ) ) );
-		if ( 'active' === $body['status'] && empty( $entitlements ) ) {
+		if ( in_array( $body['status'], array( 'active', 'grace' ), true ) && empty( $entitlements ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 		}
 		return array(
