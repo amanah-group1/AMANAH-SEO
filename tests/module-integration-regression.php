@@ -13,6 +13,9 @@ $read = static function ( $relative ) use ( $root ) {
 };
 $checks = array();
 $checks['single Core entry loads internal module bootstrap'] = strpos( $read( 'plugin/amanah-seo.php' ), "class-amanah-seo-modules.php" ) !== false;
+$core_entry = $read( 'plugin/amanah-seo.php' );
+$core_admin = $read( 'plugin/includes/class-amanah-seo-admin.php' );
+$checks['Core navigation class is declared once and stale duplicate file is not loaded'] = strpos( $core_admin, 'final class AMANAH_SEO_Module_Navigation' ) !== false && strpos( $core_entry, 'class-amanah-seo-module-navigation.php' ) === false;
 $checks['AI runtime keeps legacy core implementation'] = strpos( $read( 'plugin/modules/ai-runtime/includes/class-plugin-core.php' ), 'class AMANAH_SEO_AI_Plugin_Core' ) !== false;
 $engine_bootstrap = $read( 'plugin/modules/engine-runtime/bootstrap.php' );
 $checks['ENGINE internal bootstrap uses native PSR-4 loader'] = strpos( $engine_bootstrap, 'ClassLoader' ) !== false && strpos( $engine_bootstrap, 'Plugin::boot()' ) !== false;
