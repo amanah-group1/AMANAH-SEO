@@ -355,6 +355,24 @@ final class AMANAH_SEO_Module_Licenses {
 		update_option( 'amanah_seo_module_license_statuses', $all, false );
 	}
 
+	private static function store_and_activate_ai_license( string $license_key, ?string $existing_license_key = null ): bool {
+		if ( ! self::set_license( 'ai', $license_key ) ) {
+			return false;
+		}
+		$same_license_key = is_string( $existing_license_key ) && '' !== $existing_license_key && hash_equals( $existing_license_key, $license_key );
+		$status = self::activate_ai_license( $license_key, $same_license_key );
+		$previous_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
+		$previous_ai_status = is_array( $previous_statuses ) && isset( $previous_statuses['ai'] ) && is_array( $previous_statuses['ai'] ) ? $previous_statuses['ai'] : array();
+		if ( $same_license_key ) {
+			$status = self::apply_ai_grace_fallback( $status, $previous_ai_status );
+		}
+		self::save_license_status( 'ai', $status );
+		if ( 'unknown' === ( $status['status'] ?? '' ) ) {
+			error_log( '[AMANAH SEO] AI license activation could not be verified: ' . ( $status['reason'] ?? 'unknown' ) );
+		}
+		return true;
+	}
+
 	public static function save() {
 		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO module access.', 'amanah-seo' ), '', array( 'response' => 403 ) );
@@ -366,23 +384,16 @@ final class AMANAH_SEO_Module_Licenses {
 		check_admin_referer( 'amanah_seo_save_module_license_' . $module );
 		$license_key = isset( $_POST['license_key'] ) ? trim( (string) wp_unslash( $_POST['license_key'] ) ) : '';
 		$existing_license_key = self::get_license( $module );
-		if ( ! self::set_license( $module, $license_key ) ) {
+		if ( 'ai' === $module ) {
+			if ( ! self::store_and_activate_ai_license( $license_key, $existing_license_key ) ) {
+				wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
+				exit;
+			}
+		} elseif ( ! self::set_license( $module, $license_key ) ) {
 			wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
 			exit;
 		}
-		if ( 'ai' === $module ) {
-			$same_license_key = is_string( $existing_license_key ) && '' !== $existing_license_key && hash_equals( $existing_license_key, $license_key );
-			$status = self::activate_ai_license( $license_key, $same_license_key );
-			$previous_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
-			$previous_ai_status = is_array( $previous_statuses ) && isset( $previous_statuses['ai'] ) && is_array( $previous_statuses['ai'] ) ? $previous_statuses['ai'] : array();
-			if ( $same_license_key ) {
-				$status = self::apply_ai_grace_fallback( $status, $previous_ai_status );
-			}
-			self::save_license_status( 'ai', $status );
-			if ( 'unknown' === $status['status'] ) {
-				error_log( '[AMANAH SEO] AI license activation could not be verified: ' . ( $status['reason'] ?? 'unknown' ) );
-			}
-		} else {
+		if ( 'ai' !== $module ) {
 			try {
 				$services = \Amanah\SEOEngine\Core\Bootstrap\Plugin::boot();
 				$state = $services->get( 'license_client' )->activate( $license_key );
