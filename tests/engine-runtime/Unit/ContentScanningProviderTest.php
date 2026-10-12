@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-use PHPUnit\\Framework\\TestCase;
+use PHPUnit\Framework\TestCase;
 
 final class ContentScanningProviderTest extends TestCase {
 	private function engine_root(): string {
