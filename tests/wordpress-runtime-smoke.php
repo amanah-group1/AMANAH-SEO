@@ -62,12 +62,14 @@ $mock_ai_license_response = static function ( $preempt, $args, $url ) use ( &$ca
 	return array(
 		'headers' => array( 'content-type' => 'application/json' ),
 		'body' => wp_json_encode( array(
-			'license' => array( 'id' => 'runtime-smoke' ),
-			'product' => 'amanah-seo-ai',
-			'status' => 'active',
-			'plan' => 'test',
-			'entitlements' => array( 'content_analyzer' ),
-			'validated_at' => gmdate( 'c' ),
+			'success' => true,
+			'data' => array(
+				'status' => 'ACTIVE',
+				'plan' => 'test',
+				'expires_at' => 'LIFETIME',
+				'entitlements' => array( 'content_analyzer' ),
+				'activation_id' => 'runtime-smoke',
+			),
 		) ),
 		'response' => array( 'code' => 200, 'message' => 'OK' ),
 		'cookies' => array(),
@@ -88,7 +90,7 @@ try {
 	if ( ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' ) ) {
 		$failures[] = 'Validated AI entitlement was not persisted for runtime enforcement.';
 	}
-	if ( 'amanah-seo-ai' !== ( $captured_ai_activation_payload['product'] ?? '' ) || 'runtime-smoke-ai-license-key' !== ( $captured_ai_activation_payload['license_key'] ?? '' ) ) {
+	if ( 'amanah-seo-ai' !== ( $captured_ai_activation_payload['product_id'] ?? '' ) || 'runtime-smoke-ai-license-key' !== ( $captured_ai_activation_payload['license_key'] ?? '' ) ) {
 		$failures[] = 'Core AI license activation did not send the expected product and key payload.';
 	}
 } catch ( Throwable $exception ) {
