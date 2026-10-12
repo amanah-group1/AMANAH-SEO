@@ -6,6 +6,7 @@ namespace Amanah\SEOEngine\Tests\Unit;
 
 use Amanah\SEOEngine\Application\DTO\ContentPlanData;
 use Amanah\SEOEngine\Application\DTO\ContentStrategyData;
+use Amanah\SEOEngine\Domain\ContentPlan\ContentPlan;
 use Amanah\SEOEngine\Application\UseCase\ContentPlanGeneratorInterface;
 use Amanah\SEOEngine\Application\UseCase\StrategyGeneratorInterface;
 use Amanah\SEOEngine\Application\UseCase\GenerateStrategyWorkflow;
