@@ -20,6 +20,7 @@ function update_option( $key, $value, $autoload = null ) {
 function delete_option( $key ) { unset( $GLOBALS['amanah_license_test_options'][ $key ] ); return true; }
 function sanitize_key( $value ) { return strtolower( preg_replace( '/[^a-z0-9_\\-]/', '', (string) $value ) ); }
 function sanitize_text_field( $value ) { return trim( strip_tags( (string) $value ) ); }
+function wp_json_encode( $value ) { return json_encode( $value ); }
 function wp_remote_post( $url, $args = array() ) {
 	$GLOBALS['amanah_license_last_request'] = array( 'url' => $url, 'args' => $args );
 	return $GLOBALS['amanah_license_mock_error'] ? new AMANAH_SEO_Test_WP_Error() : $GLOBALS['amanah_license_mock_response'];
