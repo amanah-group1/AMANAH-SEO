@@ -251,6 +251,7 @@ final class AMANAH_SEO_Admin {
    self::redirect('content_issue_stale','amanah-seo-content-checks');
   }
   $finding_title='['.$issue['code'].'] '.$issue['title'];
+  if(function_exists('mb_substr')) $finding_title=mb_substr($finding_title,0,255,'UTF-8'); else $finding_title=substr($finding_title,0,255);
   foreach(AMANAH_SEO_Store::findings(100) as $existing){
    if($existing->source==='wordpress'&&$existing->title===$finding_title&&in_array($existing->status,array('open','in_progress'),true)){
     self::redirect('content_issue_exists','amanah-seo-content-checks');
