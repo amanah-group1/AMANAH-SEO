@@ -27,20 +27,32 @@ final class AMANAH_SEO_Store {
  }
  public static function create_task( array $d ) {
   if('completed'===$d['status']) return new WP_Error('completion_evidence_required','A task cannot be created as completed without a recorded result.');
-  global $wpdb; $now=current_time('mysql');
-  $ok=$wpdb->insert(self::table('tasks'),array('finding_id'=>$d['finding_id'],'title'=>$d['title'],'description'=>$d['description'],'owner'=>$d['owner'],'success_criteria'=>$d['success_criteria'],'status'=>$d['status'],'approval_status'=>('awaiting_approval'===$d['status']?'pending':'not_required'),'completion_evidence'=>null,'created_by'=>get_current_user_id(),'created_at'=>$now,'updated_at'=>$now),array('%d','%s','%s','%s','%s','%s','%s','%s','%d','%s','%s'));
+  global $wpdb;
+  $due_date=isset($d['due_date'])?trim((string)$d['due_date']):'';
+  if(''!==$due_date && !preg_match('/^\\d{4}-\\d{2}-\\d{2}$/',$due_date)) return new WP_Error('invalid_due_date','Due date must use YYYY-MM-DD.');
+  $dependency_id=isset($d['dependency_task_id'])?absint($d['dependency_task_id']):0;
+  if($dependency_id>0){
+   $dependency=$wpdb->get_row($wpdb->prepare("SELECT id FROM ".self::table('tasks')." WHERE id = %d",$dependency_id));
+   if(!$dependency) return new WP_Error('dependency_not_found','Selected dependency task does not exist.');
+  }
+  $now=current_time('mysql');
+  $ok=$wpdb->insert(self::table('tasks'),array('finding_id'=>$d['finding_id'],'title'=>$d['title'],'description'=>$d['description'],'owner'=>$d['owner'],'success_criteria'=>$d['success_criteria'],'due_date'=>(''===$due_date?null:$due_date),'dependency_task_id'=>$dependency_id,'status'=>$d['status'],'approval_status'=>('awaiting_approval'===$d['status']?'pending':'not_required'),'completion_evidence'=>null,'created_by'=>get_current_user_id(),'created_at'=>$now,'updated_at'=>$now),array('%d','%s','%s','%s','%s','%s','%d','%s','%s','%s','%d','%s','%s'));
   if(false===$ok) return new WP_Error('task_save_failed','Task could not be saved.');
-  $id=(int)$wpdb->insert_id; self::event('task',$id,'created','Task created; status='.$d['status']);
+  $id=(int)$wpdb->insert_id; self::event('task',$id,'created','Task created; status='.$d['status'].'; dependency='.$dependency_id.'; due_date='.$due_date);
   if('awaiting_approval'===$d['status']) self::event('task',$id,'approval_requested','Owner approval is required; no website action was executed.');
   return $id;
  }
  public static function update_task_status($id,$status,$completion_evidence='') {
   global $wpdb; $allowed=array('not_started','ready','in_progress','awaiting_approval','blocked','failed','completed','cancelled');
   if(!in_array($status,$allowed,true)) return new WP_Error('invalid_task_status','Invalid task status.');
-  $table=self::table('tasks'); $row=$wpdb->get_row($wpdb->prepare("SELECT status,approval_status FROM {$table} WHERE id = %d",$id));
+  $table=self::table('tasks'); $row=$wpdb->get_row($wpdb->prepare("SELECT status,approval_status,dependency_task_id FROM {$table} WHERE id = %d",$id));
   if(!$row) return new WP_Error('task_not_found','Task not found.');
   if('completed'===$status && ''===trim($completion_evidence)) return new WP_Error('completion_evidence_required','Completion requires evidence.');
   if('completed'===$status && 'pending'===$row->approval_status) return new WP_Error('approval_pending','Task cannot be completed while approval is pending.');
+  if('completed'===$status && !empty($row->dependency_task_id)){
+   $dependency=$wpdb->get_row($wpdb->prepare("SELECT status FROM {$table} WHERE id = %d",absint($row->dependency_task_id)));
+   if(!$dependency || 'completed'!==$dependency->status) return new WP_Error('dependency_incomplete','Task cannot be completed until its dependency is complete.');
+  }
   $old=$row->status;
   $values=array('status'=>$status,'updated_at'=>current_time('mysql'));
   $formats=array('%s','%s');
