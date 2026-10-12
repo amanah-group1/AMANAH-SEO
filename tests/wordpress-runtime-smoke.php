@@ -36,14 +36,21 @@ if ( 18 !== $engine_version ) {
 	$failures[] = 'ENGINE migration version expected 18; found ' . $engine_version;
 }
 
-if ( ! class_exists( 'AMANAH_SEO_Module_Licenses' ) ) {
-	$failures[] = 'Core module license manager is not loaded.';
+if ( ! class_exists( 'AMANAH_SEO_Module_Licenses' ) || ! class_exists( '\\Amanah\\SEOEngine\\Platform\\License\\LicenseSecretStore' ) ) {
+	$failures[] = 'Core license manager or ENGINE license adapter is not loaded.';
 } else {
 	$test_key = 'engine-runtime-smoke-test-temporary-key';
-	if ( ! AMANAH_SEO_Module_Licenses::set_license( 'engine', $test_key ) || AMANAH_SEO_Module_Licenses::get_license( 'engine' ) !== $test_key ) {
-		$failures[] = 'Core-managed ENGINE license storage round-trip failed.';
+	$engine_store = new \\Amanah\\SEOEngine\\Platform\\License\\LicenseSecretStore();
+	try {
+		$engine_store->set( $test_key );
+		if ( $engine_store->get() !== $test_key || AMANAH_SEO_Module_Licenses::get_license( 'engine' ) !== $test_key ) {
+			$failures[] = 'ENGINE license adapter does not round-trip through Core-managed encrypted storage.';
+		}
+	} catch ( Throwable $exception ) {
+		$failures[] = 'ENGINE license adapter failed: ' . $exception->getMessage();
+	} finally {
+		$engine_store->delete();
 	}
-	AMANAH_SEO_Module_Licenses::delete_license( 'engine' );
 }
 
 wp_set_current_user( 1 );
