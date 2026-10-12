@@ -57,6 +57,26 @@ $checks['Valid service response activates the AI product'] = 'active' === $state
 $payload = json_decode( $GLOBALS['amanah_license_last_request']['args']['body'] ?? '', true );
 $checks['Activation follows the signed v1 service contract'] = 'https://api.amanahseoai.my.id/v1/activate' === $GLOBALS['amanah_license_last_request']['url'] && 'amanah-seo-ai' === ( $payload['product_id'] ?? '' ) && 'ai-license-regression-key' === ( $payload['license_key'] ?? '' ) && ! empty( $payload['site_id'] ) && ! empty( $payload['domain'] ) && ! empty( $payload['request_id'] ) && ! empty( $payload['timestamp'] ) && hash_equals( hash_hmac( 'sha256', $payload['request_id'] . "\n" . $payload['timestamp'] . "\n/V1/ACTIVATE\n" . $payload['site_id'], 'ai-license-regression-key' ), $payload['signature'] ?? '' );
 
+$store_activate = new ReflectionMethod( 'AMANAH_SEO_Module_Licenses', 'store_and_activate_ai_license' );
+$store_activate->setAccessible( true );
+$GLOBALS['amanah_license_mock_response'] = $valid_response();
+$store_flow_success = $store_activate->invoke( null, 'ai-license-store-flow-key', null );
+$checks['Core key-save flow stores encrypted key and persists the service-validated entitlement'] = true === $store_flow_success
+	&& 'ai-license-store-flow-key' === AMANAH_SEO_Module_Licenses::get_license( 'ai' )
+	&& 'active' === get_option( 'amanah_seo_module_license_statuses', array() )['ai']['status']
+	&& in_array( 'content_analyzer', get_option( 'amanah_seo_module_license_statuses', array() )['ai']['entitlements'], true )
+	&& false === strpos( serialize( get_option( 'amanah_seo_module_license_secrets', array() ) ), 'ai-license-store-flow-key' );
+
+$GLOBALS['amanah_license_mock_response'] = array(
+	'response' => array( 'code' => 401 ),
+	'body' => json_encode( array( 'success' => false, 'error' => array( 'code' => 'LICENSE_INVALID' ) ) ),
+);
+$store_flow_failure = $store_activate->invoke( null, 'ai-license-rejected-store-flow-key', 'ai-license-store-flow-key' );
+$checks['Core key-save flow stores rejected key without granting entitlement'] = true === $store_flow_failure
+	&& 'ai-license-rejected-store-flow-key' === AMANAH_SEO_Module_Licenses::get_license( 'ai' )
+	&& 'invalid' === get_option( 'amanah_seo_module_license_statuses', array() )['ai']['status']
+	&& ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' );
+
 $GLOBALS['amanah_license_mock_error'] = true;
 $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Network failure fails closed without exposing credentials'] = 'unknown' === $state['status'] && 'service_unavailable' === $state['reason'] && false === strpos( serialize( $state ), 'ai-license-regression-key' );
