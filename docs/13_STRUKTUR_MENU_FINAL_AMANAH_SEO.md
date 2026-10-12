@@ -1,6 +1,6 @@
 # STRUKTUR MENU FINAL AMANAH SEO
 
-**Status:** FINAL — ditetapkan oleh pemilik produk pada 2026-10-11  
+**Status:** FINAL — struktur menu ditetapkan 2026-10-11; aturan paket tunggal dan lisensi modul diperbarui 2026-10-12  
 **Jenis dokumen:** Keputusan produk dan acuan navigasi  
 **Acuan induk:** [Pedoman Induk AMANAH SEO](PEDOMAN_INDUK_AMANAH_SEO.md)  
 **Batas perubahan:** Dokumentasi dan desain navigasi saja; bukan persetujuan implementasi.
