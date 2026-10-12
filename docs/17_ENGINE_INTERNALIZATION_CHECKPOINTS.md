@@ -86,3 +86,12 @@ Internal namespace root remains `Amanah\\SEOEngine\\` to avoid a broad, risky na
 - Core regression on the same head: PASS on PHP 8.1 and 8.2, including 20 integration checks, 5 module-license checks, and PHPUnit 9.6.38 with 105 tests / 317 assertions / zero failures or errors.
 - Core PHP syntax workflow on the same head: PASS.
 - These CI results establish fresh-install activation and reactivation in a clean WordPress/MySQL environment. They do not replace staging verification against a copy of an existing site database, especially for existing license entitlements and stored data.
+
+
+## Checkpoint 12 — Core license adapter namespace and live WordPress proof
+- Expanded the real WordPress smoke test to exercise `Amanah\\SEOEngine\\Platform\\License\\LicenseSecretStore` directly, not only the Core storage class. Test updates: `0f861b552ec35a8d3473a41edfd59839e6b1199c` and syntax correction `1610d4e6781fe37657f8e74ca99ccb517e24b5a4`.
+- The live smoke run exposed a namespace-resolution bug in the Engine adapter: unqualified static references resolved to `Amanah\\SEOEngine\\Platform\\License\\AMANAH_SEO_Module_Licenses`, which does not exist.
+- Fix commit: `5212c956e5f6689f85fc0bc677bee331190ca157` explicitly qualifies all three calls to the global Core license manager; regression guard commit: `30a8374b36bf89697ddf6fa651bca81760cf27d4`.
+- WordPress + MySQL runtime smoke on head `30a8374b36bf89697ddf6fa651bca81760cf27d4`: PASS twice (activation and reactivation). Both runs exercised Engine-to-Core encrypted license storage round-trip, migration version 18, required tables, and Core-owned menu registration.
+- Core regression on that head: PASS on PHP 8.1 and 8.2. Core PHP syntax workflow: PASS. The exact head's WordPress runtime run passed.
+- Remaining non-CI release gate: staging verification against a copy of an existing database and confirmation that the configured licensing API returns expected active/entitlement state. Clean-install CI cannot establish existing-site data compatibility or live external entitlement validity.
