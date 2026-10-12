@@ -119,3 +119,11 @@ Internal namespace root remains `Amanah\\SEOEngine\\` to avoid a broad, risky na
   - Core regression: PASS on PHP 8.1 and 8.2; 22 integration checks, 5 license checks, and 105 PHPUnit tests / 317 assertions, with zero failures/errors.
   - WordPress + MySQL runtime: PASS twice for activation/reactivation, ENGINE-to-Core license storage, populated keyword-row preservation, DataForSEO credential preservation, and Core-owned menu registration.
 - The test provides a controlled existing-row migration rehearsal; an upgrade test against a copy of the real active site's database remains a separate release gate.
+
+
+## Checkpoint 15 — AI licensing response validation hardening
+- Code commit `f6b6a55b67d5650b1f6b7c1778b6d1d737e59ed8` requires the licensing service's `success` envelope field to be a boolean. Missing or string-valued flags now produce `unknown / invalid_response`, not a potentially accepted success or a generic server-error path.
+- The same change removes malformed `invalid_response` from the grace-fallback allowlist. A malformed revalidation response therefore cannot retain prior entitlements via grace; only the established transient `service_unavailable` / `service_error` states may use the bounded seven-day fallback.
+- Regression commit `4096f6198bb206597409fdc196a18aeebae37cab` adds checks for missing and non-boolean success flags, actual stale-entitlement revalidation with a malformed response, and the bounded grace path for a transient service error.
+- CI on `4096f6198bb206597409fdc196a18aeebae37cab`: Core PHP checks PASS; Core regression PASS on PHP 8.1 and 8.2; AI license/entitlement regression 23 checks, 0 failures; module integration 24 checks, 0 failures; module licensing 5 checks, 0 failures; ENGINE PHPUnit 105 tests / 317 assertions, 0 failures/errors; WordPress + MySQL activation/reactivation smoke PASS.
+- Remaining external release gate: CI uses a deterministic mock of the verified upstream v1 contract. A successful activation using a legitimate live AI license key through Settings & Access, and confirmation of the production service's entitlement identifiers for AI tasks beyond `content_analyzer`, still require a staging license accepted by the service. No license key is stored in source or logs.
