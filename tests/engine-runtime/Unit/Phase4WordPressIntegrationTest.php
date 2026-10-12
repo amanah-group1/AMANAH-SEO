@@ -35,7 +35,7 @@ final class Phase4WordPressIntegrationTest extends TestCase {
 		$configuration = new Configuration( $store );
 		$configuration->initializeDefaults();
 
-		$this->assertFalse( $configuration->get( 'ai_enabled' ) );
+		$this->assertTrue( $configuration->get( 'ai_enabled' ) );
 		$this->assertFalse( $configuration->get( 'debug_logging' ) );
 		$this->assertFalse( $configuration->get( 'automatic_publishing' ) );
 		$this->assertTrue( $configuration->get( 'background_processing' ) );
