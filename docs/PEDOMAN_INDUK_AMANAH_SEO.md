@@ -1,5 +1,5 @@
 # PEDOMAN INDUK AMANAH SEO
-**Versi:** 1.0-candidate  
+**Versi:** 1.0-final-konseptual  
 **Tanggal penyusunan:** 2026-10-10  
 **Tanggal konsolidasi keputusan:** 2026-10-11  
 **Status:** PEDOMAN KONSEPTUAL SELESAI — pemilik memerintahkan penuntasan pada 2026-10-11; implementasi tetap memerlukan persetujuan terpisah  
@@ -35,72 +35,101 @@ AMANAH SEO menyatukan alur pengambilan keputusan dan pengelolaan pekerjaan itu. 
 4. **Manusia tetap memegang kendali.** Pemilik atau pengguna yang berwenang mengendalikan persetujuan, penerbitan, perubahan berisiko, serta tindakan yang berdampak pada website.
 5. **Tidak mengarang hasil.** Pisahkan fakta terukur, hasil analisis, perkiraan, rekomendasi, dan hal yang belum diketahui.
 6. **Tidak menjanjikan ranking.** Sistem membantu kualitas dan proses SEO; mesin pencari dan hasil bisnis tidak sepenuhnya dapat dikendalikan.
-7. **Satu plugin untuk pengguna, modul dengan batas fungsi yang jelas.** Pengguna cukup memasang dan mengaktifkan satu plugin WordPress, yaitu AMANAH SEO. Modul AMANAH SEO AI dan AMANAH SEO ENGINE dibundel di dalam paket yang sama dan tidak memerlukan plugin terpisah. Keduanya tetap memiliki identitas, tanggung jawab, serta hak lisensi masing-masing.
-8. **Lisensi modul independen dan navigasi konsisten.** Semua menu modul tetap terlihat di bawah satu menu induk AMANAH SEO, termasuk saat lisensi modul belum dimiliki. Lisensi AI tidak mengaktifkan Engine dan lisensi Engine tidak mengaktifkan AI. Halaman modul tanpa entitlement aktif menampilkan sales page yang menjelaskan kebutuhan lisensi, manfaat modul, status yang relevan, dan langkah aktivasi/pembelian; fitur yang dilindungi lisensi tidak boleh dijalankan.
-9. **Kontrol terpusat, penegakan di server.** AMANAH SEO menjadi pusat pengelolaan API key/kredensial AI, status lisensi, dan entitlement modul. Hak penggunaan diperiksa di sisi server pada setiap operasi yang dilindungi; menyembunyikan tombol atau halaman saja tidak cukup. Lisensi kedaluwarsa, tidak valid, dicabut, atau gagal diverifikasi tidak boleh dianggap aktif.
-10. **Jangan menduplikasi mesin khusus.** AMANAH SEO mengatur konteks website, prioritas, pekerjaan, persetujuan, dan pemantauan. Kemampuan AI khusus tetap berada di modul AMANAH SEO AI; mesin workflow konten terstruktur tetap berada di modul AMANAH SEO ENGINE.
+7. **Satu plugin runtime, dua modul internal.** Pengguna cukup memasang dan mengaktifkan satu plugin WordPress, yaitu AMANAH SEO. AMANAH SEO AI dan AMANAH SEO ENGINE V2 berada sebagai modul internal dalam paket tersebut, tetap memiliki fungsi dan batas tanggung jawab masing-masing. Integrasi dengan sistem eksternal tetap opsional dan tidak boleh dianggap berhasil tanpa bukti.
+8. **Jangan menduplikasi mesin khusus.** AMANAH SEO mengatur konteks website, prioritas, pekerjaan, persetujuan, dan pemantauan. Kemampuan AI khusus tetap milik AMANAH SEO AI; mesin workflow konten terstruktur tetap milik AMANAH SEO ENGINE V2.
 9. **Bukti sebelum klaim.** Status fitur, keamanan, pengujian, dan kesiapan harus didukung bukti.
 10. **Perubahan terkendali.** Tidak ada implementasi sebelum ruang lingkup dan kriteria penerimaan disepakati.
 11. **Sederhana dan dapat dipahami.** Dashboard dan pedoman tidak boleh memaksa pemilik mengikuti proses dokumentasi yang berputar-putar tanpa menghasilkan keputusan atau produk yang lebih jelas.
 12. **Aman secara default.** Akses mengikuti kewenangan; rahasia dan data pengguna dilindungi; tindakan penting dicatat; kegagalan dijelaskan tanpa membocorkan rahasia.
 
-## 4. Pembagian tiga produk
+## 4. Arsitektur produk dan batas modul
 
-### 4.1 AMANAH SEO — produk utama, plugin tunggal, dan pengelola
+**Target packaging yang disetujui:** pengguna memasang satu plugin WordPress bernama **AMANAH SEO**. Kemampuan yang berasal dari AMANAH SEO AI dan AMANAH SEO ENGINE V2 ditata sebagai **modul internal** di dalam plugin induk setelah audit dan migrasi terkontrol; keduanya bukan plugin runtime tambahan yang dipasang berdampingan pada target akhir ini.
 
-AMANAH SEO adalah satu-satunya plugin yang perlu dipasang pengguna. Paket plugin memuat core serta modul AI dan Engine. Pengguna tidak perlu memasang plugin AMANAH SEO AI atau AMANAH SEO ENGINE secara terpisah.
+### 4.1 Core AMANAH SEO — pengelola utama
 
-Tanggung jawab konsep:
-- Pengalaman utama dan dashboard pengelolaan website.
+Tanggung jawab core:
+- Pengalaman utama, navigasi, dan dashboard pengelolaan website.
 - Ringkasan kondisi website dan status pekerjaan.
-- Daftar masalah, peluang, dan prioritas beserta alasannya.
+- Daftar masalah, peluang, dan prioritas beserta alasan/buktinya.
 - Pengelolaan tugas, status, ketergantungan, tenggat, dan penanggung jawab.
 - Alur pemeriksaan, persetujuan, dan keputusan pengguna.
 - Gambaran hasil, perubahan kondisi, dan rekomendasi langkah berikutnya.
-- Pengaturan akses, status lisensi, entitlement, dan kredensial antarmodul melalui kontrol terpusat AMANAH SEO.
-- Navigasi tunggal untuk seluruh halaman core dan modul, tanpa menu induk terpisah dari plugin lain.
-- Penegakan lisensi di sisi server sebelum fitur terlindungi dijalankan.
+- Kepemilikan kontrak modul, hak akses lintas modul, lifecycle produk yang terkoordinasi, serta pusat pengelolaan API key/kredensial AI dan lisensi/entitlement modul.
+- Navigasi tunggal untuk seluruh menu core dan modul; semua menu modul tetap terlihat terlepas dari status lisensinya.
+- Pemeriksaan entitlement dan penolakan operasi berlisensi yang tidak sah di sisi server.
 
-AMANAH SEO tetap menjadi pengelola dan **tidak mengambil alih tanggung jawab fungsional khusus** modul AI atau Engine hanya karena keduanya berada dalam satu paket.
+Core tidak boleh menyalin atau menggandakan mesin AI atau workflow konten. Core memanggil kontrak modul yang disetujui jika diperlukan dan tersedia; siklus MVP dasar tetap dapat diuji tanpa mengandalkan fitur AI/Engine yang belum dipindahkan atau diverifikasi.
 
-### 4.2 Modul AMANAH SEO AI
+### 4.2 Modul AI — baseline AMANAH SEO AI
 
-Peran konseptual: menyediakan kemampuan SEO berbantuan AI, pemahaman konteks/entity, analisis, atau fungsi AI lain yang benar-benar tersedia dan teruji. Modul ini dibundel dalam plugin AMANAH SEO; pengguna tidak memasangnya secara terpisah.
+Modul ini dapat menyediakan kemampuan SEO berbantuan AI, pemahaman entity, analisis, dan fungsi AI lain yang benar-benar tersedia dan teruji pada baseline sumbernya. Repository AMANAH SEO AI tetap baseline audit/migrasi sampai perubahan terkontrol disetujui.
 
 Batasan:
-- Hak penggunaan fitur AI ditentukan oleh lisensi/entitlement AI yang independen.
-- Menu modul tetap dapat dibuka saat entitlement tidak aktif, tetapi halaman fitur menampilkan sales page yang sesuai dan operasi berlisensi ditolak.
-- Tidak boleh dinyatakan menyediakan kemampuan tertentu hanya berdasarkan rencana atau nama fitur; harus diverifikasi melalui repositori dan pengujian.
+- Hak penggunaan fitur AI ditentukan oleh lisensi/entitlement AI yang independen dari lisensi Engine.
+- Menu AI tetap terlihat dan dapat dibuka. Jika entitlement AI tidak aktif, halaman fitur AI yang dilindungi menampilkan sales page yang menjelaskan kebutuhan lisensi dan cara mengaktifkannya; operasi berlisensi tetap ditolak.
+- Fitur modul tidak otomatis menjadi bagian MVP fungsional hanya karena kode modul disertakan.
+- Konfigurasi, kredensial, lisensi, data, provider/fallback, dan perilaku kegagalan harus diaudit sebelum migrasi; kontrak yang telah dikunci tidak boleh diubah tanpa keputusan terkontrol.
+- Jangan menjalankan lifecycle plugin lama secara paralel setelah migrasi ke satu plugin induk.
 
-### 4.3 Modul AMANAH SEO ENGINE
+### 4.3 Modul Engine — baseline AMANAH SEO ENGINE V2
 
-Peran konseptual: menyediakan intelligence dan workflow SEO/konten yang terstruktur, dari kebutuhan dan strategi hingga pembuatan, evaluasi, perbaikan, peninjauan, dan kesiapan publikasi. Modul ini dibundel dalam plugin AMANAH SEO; pengguna tidak memasangnya secara terpisah.
+Modul ini dapat menyediakan workflow SEO/konten terstruktur, dari kebutuhan dan strategi hingga generasi, evaluasi, refinement, review, dan kesiapan publikasi sesuai kemampuan baseline yang terbukti. Repository AMANAH SEO ENGINE V2 tetap baseline audit/migrasi sampai perubahan terkontrol disetujui.
 
 Batasan:
 - Hak penggunaan fitur Engine ditentukan oleh lisensi/entitlement Engine yang independen dari lisensi AI.
-- Menu modul tetap dapat dibuka saat entitlement tidak aktif, tetapi halaman fitur menampilkan sales page yang sesuai dan operasi berlisensi ditolak.
-- Tidak menjamin peringkat mesin pencari.
+- Menu Engine tetap terlihat dan dapat dibuka. Jika entitlement Engine tidak aktif, halaman fitur Engine yang dilindungi menampilkan sales page yang menjelaskan kebutuhan lisensi dan cara mengaktifkannya; operasi berlisensi tetap ditolak.
+- Fitur modul tidak otomatis menjadi bagian MVP fungsional hanya karena kode modul disertakan.
+- Model data, migrasi, cron/jobs, route/menu, kapabilitas, lisensi, dan uninstall harus diaudit sebelum migrasi; rollback tidak boleh diasumsikan jika tidak ada kontrak teruji.
+- Jangan menyalin registrasi plugin dan lifecycle lama secara apa adanya ke plugin induk.
 
-### 4.4 Aturan hubungan core dan modul
+### 4.4 Kontrak packaging dan lifecycle
 
-Core AMANAH SEO, modul AI, dan modul Engine berada dalam satu paket distribusi, tetapi batas tanggung jawab fungsional tetap dipisahkan. Modul dapat dijalankan secara independen berdasarkan entitlement masing-masing. Integrasi dengan sistem eksternal tetap opsional dan harus memiliki kontrak yang jelas: tujuan, pemilik data, input/output, autentikasi/otorisasi, kegagalan, pencatatan, kompatibilitas versi, serta cara memutus koneksi. Jika integrasi eksternal tidak tersedia atau gagal, sistem harus menunjukkan status yang jujur.
+- **Satu plugin runtime:** hanya plugin AMANAH SEO yang dipasang dan diaktifkan pada target akhir. Modul AI dan Engine memiliki batas internal yang jelas, bukan registrasi plugin mandiri tambahan.
+- **Lisensi modul independen:** lisensi AI tidak mengaktifkan Engine, dan lisensi Engine tidak mengaktifkan AI. Menu modul selalu terlihat; tanpa entitlement aktif, halaman modul menampilkan sales page yang informatif, sementara operasi berlisensi ditolak.
+- **Kontrol lisensi dan kredensial terpusat:** AMANAH SEO menjadi tempat pengelolaan API key/kredensial AI dan lisensi/entitlement setiap modul. API key adalah kredensial layanan, bukan lisensi produk.
+- **Pemeriksaan sisi server:** entitlement diperiksa sebelum operasi yang dilindungi, termasuk akses halaman fitur, submit form, AJAX/REST API, proses latar belakang, dan jalur eksekusi lain yang relevan. Menyembunyikan menu atau tombol saja tidak cukup.
+- **Satu koordinator lifecycle:** AMANAH SEO Lifecycle Manager mengoordinasikan aktivasi, upgrade, migrasi, deaktivasi, uninstall, dan cleanup komponen internal yang hanya perlu satu instance. Modul mempertahankan logika migrasi/cleanup domainnya dan versi database masing-masing, tetapi koordinator memanggilnya dengan urutan, status, logging, dan pemulihan yang terkendali.
+- **Migrasi aman:** jangan menjalankan installer/lifecycle lama yang destruktif sebelum schema, tabel legacy/arsip, kredensial, cron, dan strategi backup/restore diaudit. Data pengguna dipertahankan secara default saat uninstall; penghapusan data memerlukan kebijakan eksplisit dan perlindungan rahasia.
+- **Batas fase:** keputusan packaging satu plugin tidak memberi izin untuk memindahkan kode sekarang. Source repositories AI/Engine, runtime, database, lisensi, dan konfigurasi tidak diubah pada tahap penutupan pedoman. Migrasi dilakukan satu paket terkontrol setelah scope, file, tes, dan rollback disetujui.
 
 ## 5. Alur kerja utama AMANAH SEO
 
-Alur konseptual dari awal hingga perbaikan berkelanjutan:
+Alur konseptual dari awal hingga perbaikan berkelanjutan. Alur ini adalah milik AMANAH SEO sebagai pengelola pekerjaan; ia tidak menyalin mesin produksi konten atau workflow khusus milik produk pendamping.
 
-1. **Daftarkan dan pahami website.** Catat identitas website, tujuan pemilik, cakupan akses, kondisi awal, sumber data yang tersedia, dan batasan. Jangan mengasumsikan koneksi atau data tersedia sebelum diverifikasi.
-2. **Bangun gambaran kondisi.** Kumpulkan sinyal yang dapat diakses, tandai kualitas/keterkinian data, lalu kelompokkan temuan menjadi masalah, peluang, risiko, dan hal yang belum diketahui.
-3. **Susun prioritas.** Urutkan pekerjaan berdasarkan tujuan pemilik, dampak yang diharapkan, urgensi, usaha, risiko, dependensi, serta kekuatan bukti. Jelaskan alasan rekomendasi; jangan menyajikan skor sebagai fakta objektif bila itu hanya estimasi.
-4. **Buat rencana kerja.** Setiap pekerjaan memiliki tujuan, dasar temuan, hasil yang diharapkan, pemilik/penanggung jawab, dependensi, risiko, status, dan kriteria selesai.
-5. **Pilih cara pelaksanaan.** Kerjakan secara manual, melalui AMANAH SEO AI, melalui AMANAH SEO ENGINE V2, atau melalui integrasi lain yang telah disetujui. Jangan menganggap semua metode selalu tersedia.
-6. **Periksa hasil.** Validasi hasil terhadap persyaratan, mutu, bukti, dan risiko. Kegagalan harus dapat dilihat, didiagnosis, dicoba ulang secara aman, atau dialihkan ke penanganan manual.
-7. **Minta persetujuan bila diperlukan.** Perubahan penting dan publikasi tidak boleh dilakukan tanpa persetujuan dari pengguna yang berwenang, kecuali kebijakan otomatisasi yang eksplisit telah disetujui dan dibatasi dengan aman.
-8. **Laksanakan dan catat.** Setelah diizinkan, lakukan tindakan melalui komponen yang bertanggung jawab. Simpan status, waktu, pelaksana, hasil, dan referensi perubahan yang relevan.
-9. **Pantau hasil.** Bandingkan hasil dengan kondisi awal dan tujuan menggunakan data yang benar-benar tersedia. Pisahkan korelasi dari sebab-akibat dan jelaskan keterbatasan atribusi.
-10. **Perbarui prioritas.** Gunakan hasil terbaru untuk mempertahankan, mengubah, atau menutup pekerjaan. Siklus berulang tanpa menghapus jejak keputusan sebelumnya.
+1. **Daftarkan dan pahami website.** Catat identitas website, tujuan pemilik, cakupan akses, kondisi awal, dan kewenangan yang diberikan.
+2. **Hubungkan dan verifikasi sumber data awal.** Gunakan data internal WordPress untuk struktur website, URL, judul, konten, dan hubungan konten yang benar-benar dapat dibaca dengan izin yang tersedia. Gunakan Google Search Console (GSC) untuk kueri, klik, tayangan, CTR, posisi, dan halaman pencarian ketika properti serta akses baca-saja telah diverifikasi. Keduanya adalah sumber awal yang dipilih secara konseptual; koneksi aktual tidak boleh diasumsikan.
+3. **Bangun gambaran kondisi.** Tandai asal, waktu, cakupan, keterkinian, dan keterbatasan data. Kelompokkan temuan menjadi masalah, peluang, risiko, dan hal yang belum diketahui. Bedakan hasil pengukuran, masukan manual, analisis, dan perkiraan.
+4. **Susun prioritas.** Urutkan pekerjaan menurut tujuan pemilik, dampak yang diperkirakan, urgensi, usaha, risiko, dependensi, serta kekuatan bukti. Jelaskan alasan; skor atau dampak estimasi bukan fakta objektif.
+5. **Buat rencana kerja.** Setiap tugas memiliki tujuan, dasar temuan, hasil yang diharapkan, penanggung jawab/pemilik keputusan, dependensi, risiko, status, dan kriteria selesai.
+6. **Pilih cara pelaksanaan.** Pekerjaan dapat dilakukan manual atau melalui integrasi yang secara khusus disetujui dan telah diverifikasi. AMANAH SEO AI dan AMANAH SEO ENGINE V2 tetap produk terpisah dan opsional; jangan menganggap koneksi, fitur, atau keberhasilan integrasinya tersedia tanpa bukti.
+7. **Periksa hasil.** Bandingkan hasil dengan kriteria selesai, mutu, bukti, dan risiko. Kegagalan harus terlihat, dapat didiagnosis, dicoba ulang secara aman, atau dialihkan ke penanganan manual.
+8. **Minta dan catat persetujuan.** Tindakan yang mengubah website dan publikasi memerlukan persetujuan eksplisit pengguna yang berwenang. Persetujuan terkait versi/isi tertentu; perubahan material setelah persetujuan membutuhkan pemeriksaan dan persetujuan ulang.
+9. **Laksanakan tindakan yang diizinkan.** Pada MVP dasar, AMANAH SEO mengelola tugas dan keputusan, bukan mengubah atau menerbitkan website secara otonom. Setiap tindakan yang kelak disetujui harus mencatat pelaksana, waktu, versi/target, hasil, dan referensi bukti.
+10. **Pantau hasil dan perbarui prioritas.** Bandingkan kondisi dengan baseline memakai data yang benar-benar tersedia. Pisahkan korelasi dari sebab-akibat; gunakan hasil untuk mempertahankan, mengubah, atau menutup tugas tanpa menghapus riwayat.
 
-Setiap tahap dapat berhenti bila prasyarat tidak terpenuhi. Status minimum yang harus dibedakan: **Belum dimulai, Siap, Berjalan, Menunggu persetujuan, Terhambat, Gagal, Selesai, Dibatalkan**. Status tidak boleh dimajukan tanpa bukti yang sesuai.
+### 5.1 Kontrak sumber data awal
+
+| Sumber | Penggunaan | Syarat bukti | Jika tidak tersedia |
+|---|---|---|---|
+| WordPress internal | Struktur website, URL, judul, konten dan hubungan konten yang dapat diakses | Izin dan metode baca terbukti; cakupan serta waktu pembacaan dicatat | Tandai tidak tersedia/gagal; gunakan masukan manual bila sesuai dan beri label sumber |
+| Google Search Console | Kueri, klik, tayangan, CTR, posisi, dan halaman pencarian | Properti benar, akses baca-saja sah, data contoh terbaca, rentang tanggal dan keterkinian dicatat | Jangan mengarang metrik atau mengubah data hilang menjadi nol; fitur GSC berstatus belum terhubung/terhambat |
+| Masukan manual pengguna | Temuan atau konteks yang belum dapat diperoleh otomatis | Identitas sumber, waktu masukan, alasan, dan label manual | Jangan tampilkan sebagai hasil pengukuran otomatis |
+
+Sumber eksternal lain ditunda sampai kebutuhan nyata, nilai guna, biaya, izin, keamanan, dan dampaknya diaudit serta disetujui. Pemilihan sumber secara konseptual tidak sama dengan kelulusan gerbang akses teknis.
+
+### 5.2 Status, transisi, dan pemulihan
+
+Status minimum tugas: **Belum dimulai, Siap, Berjalan, Menunggu persetujuan, Terhambat, Gagal, Selesai, Dibatalkan**. Setiap perubahan status harus memiliki waktu, pelaku/sumber, dan alasan yang sesuai. Status **Selesai** memerlukan bukti terhadap kriteria selesai; status **Menunggu persetujuan** tidak boleh diperlakukan sebagai izin; **Terhambat** membutuhkan alasan dan langkah berikutnya; **Gagal** harus mempertahankan diagnostik yang aman dan hasil parsial; **Dibatalkan** membutuhkan alasan dan tidak boleh menghapus riwayat.
+
+- Prasyarat atau akses tidak terpenuhi: hentikan tahap yang bergantung padanya, tampilkan sebab dan langkah pemulihan, serta jangan memalsukan keberhasilan.
+- Data kosong, usang, parsial, atau gagal diambil: bedakan tiap keadaan dan pertahankan waktu pemeriksaan terakhir yang berhasil.
+- Percobaan ulang hanya dilakukan jika aman/idempoten atau telah dipastikan tidak menggandakan perubahan; tindakan yang hasilnya tidak pasti harus diverifikasi sebelum diulang.
+- Penolakan persetujuan: kembalikan pekerjaan untuk revisi atau tandai dibatalkan sesuai keputusan pemilik; jangan melanjutkan tindakan.
+- Perubahan material setelah persetujuan: batalkan kelayakan persetujuan untuk versi lama dan minta persetujuan ulang.
+- Kegagalan satu integrasi opsional tidak boleh membuat seluruh produk berpura-pura gagal/sukses; isolasi dampak, tampilkan status koneksi, dan pertahankan jalur manual jika aman.
+
+Setiap tahap dapat berhenti bila prasyarat tidak terpenuhi. Status tidak boleh dimajukan tanpa bukti yang sesuai.
 
 ## 6. Dashboard dan pengalaman pengguna
 
@@ -125,8 +154,8 @@ Persyaratan konseptual minimum:
 - Data website hanya diakses sesuai izin yang diberikan; koneksi dapat dicabut.
 - Perubahan penting, persetujuan, publikasi, kegagalan, dan perubahan hak akses memiliki jejak audit yang sesuai.
 - Backup, pemulihan, retensi/penghapusan data, privasi, dan penanganan insiden harus ditetapkan sebelum peluncuran produksi.
-- Lisensi modul, entitlement fitur, aktivasi website, kredensial integrasi, dan API key AI adalah konsep berbeda; jangan mencampuradukkannya. API key adalah kredensial layanan, bukan lisensi produk. Core AMANAH SEO mengelola pengaturan kredensial AI dan status lisensi, sedangkan setiap modul memiliki entitlement sendiri.
-- Penolakan lisensi harus ditegakkan di sisi server pada akses halaman berfitur, aksi formulir, AJAX/REST API, proses latar belakang, dan jalur eksekusi lain yang relevan. Semua menu tetap dapat terlihat; tampilan sales page tidak boleh membuka operasi berlisensi.
+- Lisensi produk/modul, entitlement fitur, aktivasi website, kredensial integrasi, dan API key AI adalah konsep berbeda; jangan mencampuradukkannya. API key tidak memberikan hak lisensi. AMANAH SEO mengelola status lisensi dan kredensial AI secara terpusat; entitlement modul tetap independen.
+- Semua menu modul harus tetap dapat dilihat dan dibuka. Ketika entitlement tidak aktif, tampilkan sales page yang jelas; jangan menjalankan operasi berlisensi. Pemeriksaan dilakukan di sisi server pada semua jalur eksekusi yang dilindungi.
 
 Detail teknis, kebijakan retensi, yurisdiksi, dan model komersial belum dianggap final hanya karena dicantumkan sebagai kebutuhan.
 
@@ -153,29 +182,32 @@ Selama tahap penyusunan pedoman (tahap konseptual kini telah ditutup):
 - Jangan mulai implementasi AMANAH SEO sebelum lingkup awal dan kriteria penerimaannya disetujui.
 - Jangan membuka fase baru hanya karena ada dokumen tambahan. Dokumen baru dibuat hanya jika menjawab keputusan atau kebutuhan nyata yang belum tercakup di sini.
 
-## 10. Urutan penyelesaian pedoman — satu jalur, tanpa putaran tak berujung
+## 10. Riwayat penutupan pedoman — satu jalur, tanpa putaran tak berujung
 
-**Langkah 1 — Tetapkan dasar produk.** Konfirmasi atau koreksi tujuan, peran tiga produk, prinsip kemandirian, dan kendali pemilik.  
-**Langkah 2 — Tetapkan alur pemilik website.** Lengkapi input, output, status, persetujuan, kondisi gagal, dan akhir tiap tahap.  
-**Langkah 3 — Tetapkan lingkup MVP AMANAH SEO.** Pisahkan fungsi wajib versi pertama, fungsi setelah MVP, dan hal di luar cakupan.  
-**Langkah 4 — Cocokkan dengan kemampuan nyata AI dan ENGINE.** Baca-saja; beri label tersedia-terverifikasi, tersedia-belum-teruji, belum ada, atau belum diketahui.  
-**Langkah 5 — Putuskan arsitektur dan integrasi minimum.** Hanya berdasarkan kebutuhan MVP dan hasil langkah 4; tidak perlu mendesain semua kemungkinan masa depan.  
-**Langkah 6 — Putuskan keamanan, akses, data, lisensi, serta komersial yang diperlukan untuk MVP.** Hal yang belum diperlukan untuk MVP tetap dicatat, bukan dijadikan penghalang tanpa alasan.  
-**Langkah 7 — Tetapkan kriteria penerimaan dan kesiapan.** Tentukan bukti apa yang membuktikan tiap fungsi berjalan dan batas klaim yang diperbolehkan.  
-**Langkah 8 — Tutup pedoman.** Terbitkan satu daftar keputusan final, satu daftar keputusan terbuka yang benar-benar memblokir MVP, lingkup MVP, dan acceptance criteria. Setelah pemilik menyetujui, pedoman dinyatakan selesai. Implementasi baru dimulai melalui persetujuan ruang lingkup terpisah.
+Urutan berikut dicatat sebagai rekam jejak penyelesaian, bukan daftar pekerjaan yang masih terbuka:
 
-Setiap langkah menghasilkan artefak/keputusan yang dapat ditinjau. Jangan mengulang langkah yang telah ditutup kecuali ada bukti baru yang mengubah keputusan. Temuan yang tidak memblokir MVP masuk backlog, bukan alasan untuk menunda penutupan.
+1. Dasar produk, target packaging satu plugin, pembagian core/modul internal, prinsip kemandirian tanggung jawab, dan kendali pemilik ditetapkan.
+2. Alur end-to-end, sumber data awal, status, persetujuan, kegagalan, pemulihan, dan evaluasi ditetapkan.
+3. Lingkup MVP, hal di luar MVP, serta tujuh keputusan MVP disepakati.
+4. Kemampuan AI/ENGINE diperlakukan secara konservatif: integrasi tetap opsional dan status yang belum diuji tidak dianggap tersedia.
+5. Keputusan lifecycle internal, keamanan minimum, kriteria penerimaan, dan batas klaim dicatat.
+6. Keputusan non-pemblokir dipindahkan ke backlog; bukti akses sumber dan pengujian dipisahkan sebagai gerbang implementasi.
+7. Pedoman konseptual ditutup atas instruksi pemilik pada 2026-10-11. Implementasi memerlukan persetujuan ruang lingkup terpisah.
+
+Langkah yang telah ditutup tidak dibuka kembali kecuali ada bukti baru yang mengubah keputusan. Temuan non-pemblokir tetap di backlog, bukan alasan untuk menunda penutupan.
 
 ## 11. Status keputusan dan backlog
 
 ### 11.1 Keputusan dasar MVP yang sudah disetujui
 
-Ketujuh keputusan MVP-01 sampai MVP-07 disetujui pemilik pada 2026-10-11. Rincian, alasan, dan batas persetujuan tercatat di [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md). Persetujuan ini menetapkan WordPress sebagai platform pertama, cakupan satu website per ruang kerja/pengaturan, prinsip sumber data terkecil yang dapat diverifikasi, persetujuan manusia untuk perubahan/publikasi, model akses awal owner/admin, integrasi AI/ENGINE yang opsional, dan kriteria keberhasilan berbasis siklus inti.
+Ketujuh keputusan MVP-01 sampai MVP-07 disetujui pemilik pada 2026-10-11. Rincian, alasan, dan batas persetujuan tercatat di [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md). Persetujuan ini menetapkan WordPress sebagai platform pertama, cakupan satu website per ruang kerja/pengaturan, sumber awal konseptual berupa WordPress internal dan GSC (dengan verifikasi teknis sebelum fitur terkait), persetujuan manusia untuk perubahan/publikasi, model akses awal owner/admin, integrasi AI/ENGINE yang opsional, dan kriteria keberhasilan berbasis siklus inti.
 
-### 11.2 Satu gerbang yang wajib diselesaikan sebelum implementasi
+### 11.2 Gerbang implementasi dan keputusan arsitektur
 
-- **GATE-DATA-01 — Verifikasi sumber data awal.** Sebelum kode MVP dirancang untuk mengonsumsi sumber tertentu, pilih dan buktikan satu sumber data yang dapat diakses secara sah, memiliki data yang relevan, dan dapat diuji. Catat pemilik akses, cakupan data, keterkinian, batas penggunaan, metode pengambilan, kondisi gagal, dan bukti pengujian. Ini adalah gerbang implementasi, bukan penghalang penutupan pedoman konsep.
-- **GATE-CAPABILITY-01 — Verifikasi kemampuan produk pendamping bila integrasi diusulkan.** Jangan mengandalkan AI atau ENGINE sebagai dependensi MVP. Jika suatu integrasi kelak diusulkan, audit repository/versi yang tepat, kontrak, autentikasi/otorisasi, alur data, penanganan gagal, dan tes terlebih dahulu. Sampai bukti tersebut tersedia, status kemampuan integrasi adalah **BELUM TERVERIFIKASI**.
+- **GATE-DATA-01 — Verifikasi akses WordPress dan GSC.** Sumber awal konseptual telah dipilih: WordPress internal untuk struktur/konten dan GSC untuk performa pencarian. Sebelum fitur terkait dibangun atau dinyatakan berfungsi, buktikan izin, cakupan, metode baca, contoh data nyata, keterkinian, batas penggunaan, dan kondisi gagal untuk masing-masing sumber. Untuk menguji siklus dasar tugas, temuan manual yang diberi label jelas boleh digunakan tanpa mengklaim koneksi sumber otomatis lulus. Ini adalah gerbang implementasi, bukan penghalang penutupan pedoman konsep.
+- **GATE-CAPABILITY-01 — Verifikasi integrasi AI/ENGINE bila diusulkan.** Produk pendamping tetap opsional. Jika integrasi dipilih, audit repositori/versi, kontrak, autentikasi/otorisasi, alur data, penanganan gagal, dan pengujian. Sampai bukti tersedia, status integrasi adalah **BELUM TERVERIFIKASI**.
+- **ARCH-PACKAGING-01 — Target satu plugin.** AMANAH SEO menjadi satu-satunya plugin runtime yang dipasang. Kemampuan AI dan Engine menjadi modul internal setelah audit/migrasi terkontrol; repository AI/Engine tetap baseline sumber, bukan plugin runtime tambahan pada target akhir. Keputusan packaging tidak memasukkan seluruh fitur modul ke MVP dasar dan bukan izin untuk memindahkan kode.
+- **ARCH-LIFECYCLE-01 — Pemilik siklus hidup.** AMANAH SEO Lifecycle Manager menjadi satu koordinator untuk aktivasi, upgrade, migrasi, deaktivasi, uninstall, dan cleanup komponen internal yang hanya perlu satu instance. Modul tetap memiliki logika migrasi/cleanup domain dan versi database masing-masing, dipanggil secara terkendali oleh koordinator. Kegagalan harus dicatat dan ditangani aman; uninstall default mempertahankan data pengguna, dan penghapusan data hanya mengikuti kebijakan eksplisit serta perlindungan rahasia/data.
 
 ### 11.3 Keputusan non-pemblokir yang dipindahkan ke backlog
 
@@ -183,10 +215,10 @@ Hal-hal berikut tidak perlu diputuskan untuk menutup pedoman atau membuktikan si
 
 | ID backlog | Topik | Kapan diputuskan |
 |---|---|---|
-| BL-01 | Model komersial, harga, paket, trial, renewal, aturan masa tenggang, dan detail komersial lisensi | Sebelum penawaran/komersialisasi yang relevan; prinsip lisensi AI dan Engine yang independen serta perilaku menu/sales page sudah diputuskan |
+| BL-01 | Model komersial, harga, paket, trial, renewal, masa tenggang, dan rincian komersial lisensi | Sebelum penawaran/komersialisasi yang relevan; prinsip entitlement independen dan perilaku menu/sales page telah diputuskan |
 | BL-02 | Kebijakan retensi, ekspor, penghapusan, backup, pemulihan, dan kepatuhan spesifik | Sebelum menyimpan data produksi atau meluncurkan layanan |
 | BL-03 | Framework, topologi deployment, database, dan arsitektur rinci | Setelah kebutuhan MVP dan verifikasi lingkungan diselesaikan, sebelum implementasi teknis |
-| BL-04 | Kontrak integrasi eksternal, manifest modul, kompatibilitas versi, dan detail teknis komunikasi antarkomponen | Hanya jika kebutuhan nyata memerlukannya; modul AI/Engine tetap dibundel dalam satu plugin, bukan dipasang sebagai plugin terpisah |
+| BL-04 | Kontrak integrasi eksternal, manifest modul, kompatibilitas versi, dan detail komunikasi teknis antarkomponen | Hanya jika kebutuhan nyata memerlukannya; modul AI/Engine tetap dibundel dalam satu plugin |
 | BL-05 | Banyak website per workspace, organisasi/tim kompleks, customer portal | Setelah kebutuhan penggunaan nyata melampaui MVP |
 | BL-06 | Target numerik KPI dan periode evaluasi | Setelah baseline dan sumber pengukuran yang dapat dipercaya tersedia |
 | BL-07 | Otomatisasi terbatas di masa depan | Hanya melalui persetujuan perubahan ruang lingkup dan kontrol risiko tersendiri |
@@ -215,31 +247,42 @@ Pedoman dinyatakan **SIAP DITUTUP** ketika:
 7. Satu dokumen induk menjadi sumber acuan, keputusan MVP memiliki catatan persetujuan, dan dokumen lama yang bertentangan ditandai superseded.
 8. Pemilik memberi instruksi eksplisit untuk menutup pedoman; instruksi penuntasan diberikan pada 2026-10-11.
 
-**Status saat ini:** pedoman konseptual dinyatakan selesai berdasarkan instruksi pemilik tanggal 2026-10-11. Butir 1–3, 5–7 telah dikonsolidasikan di branch ini. Butir 4 terpenuhi pada tingkat pencatatan evidence dan batas klaim, bukan audit runtime menyeluruh: dokumentasi AMANAH SEO AI tersedia secara baca-saja, tetapi status/runtime terkini dan kemampuan integrasi belum diverifikasi; dokumen sumber utama ENGINE V2 belum berhasil diidentifikasi dari path yang dapat diakses pada pemeriksaan ini. Kekurangan bukti dicatat secara eksplisit dan tidak dipakai untuk mengklaim integrasi tersedia. Karena integrasi bersifat opsional, kekurangan ini bukan penghalang penutupan pedoman konseptual.
+**Status saat ini:** pedoman konseptual dinyatakan selesai berdasarkan instruksi pemilik tanggal 2026-10-11. Tujuan, batas produk, alur utama, lingkup MVP, prinsip keamanan, dan kriteria penerimaan telah dikonsolidasikan dalam dokumen acuan. Sumber awal konseptual adalah WordPress internal dan GSC; akses aktual keduanya tetap harus dibuktikan melalui GATE-DATA-01 sebelum fitur terkait diklaim berfungsi. Kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan bukan dependensi MVP. Keterbatasan bukti ini dicatat secara eksplisit dan bukan penghalang penutupan pedoman konseptual.
 
 Persetujuan pedoman bukan persetujuan otomatis untuk mengubah kode, menggabungkan pull request, mengubah runtime, atau menerbitkan produk. Implementasi membutuhkan ruang lingkup dan persetujuan terpisah.
 
 
 
-## 14. Keputusan arsitektur tambahan — 2026-10-12
-
-Pemilik menetapkan keputusan arsitektur berikut pada 2026-10-12. Keputusan ini melengkapi dan, jika bertentangan, menggantikan rumusan lama tentang AI/Engine sebagai plugin terpisah atau integrasi antarproduk yang menjadi prasyarat navigasi.
-
-1. Pengguna cukup memasang dan mengaktifkan **satu plugin WordPress: AMANAH SEO**.
-2. Modul AMANAH SEO AI dan AMANAH SEO ENGINE disertakan dalam paket AMANAH SEO; pengguna tidak perlu memasang plugin AI atau Engine secara terpisah.
-3. AMANAH SEO menjadi pusat kendali untuk pengelolaan API key/kredensial AI, status lisensi, dan entitlement modul.
-4. Lisensi AI dan Engine independen. Lisensi salah satu modul tidak memberikan hak penggunaan modul lainnya.
-5. Semua menu modul tetap tampil dan dapat dibuka dari menu induk AMANAH SEO, terlepas dari status lisensinya.
-6. Jika entitlement modul tidak aktif, halaman terkait menampilkan sales page yang jelas tentang modul dan kebutuhan lisensinya. Fitur berlisensi tidak dapat dijalankan sampai entitlement yang sah aktif.
-7. Lisensi harus diverifikasi di sisi server pada setiap jalur eksekusi yang dilindungi; menu yang terlihat bukan bukti hak akses.
-8. Prinsip paket tunggal ini tidak berarti semua fitur otomatis tersedia atau lulus pengujian. Kemampuan fitur tetap harus dibuktikan melalui audit dan pengujian sebelum diklaim siap.
-
-Keputusan ini adalah persetujuan arsitektur konseptual dan dokumentasi. Ini **bukan** persetujuan untuk mulai implementasi kode, mengubah repositori AI/Engine, mengubah runtime, atau menggabungkan pull request. Implementasi membutuhkan ruang lingkup teknis, acceptance criteria, dan persetujuan terpisah.
-
-## 15. Lingkup MVP dan keputusan pemilik
+## 14. Lingkup MVP dan keputusan pemilik
 
 Gunakan [Usulan Lingkup MVP AMANAH SEO](11_MVP_SCOPE_PROPOSAL.md) sebagai daftar tunggal fungsi MVP dan keputusan MVP-01 sampai MVP-07. Ketujuh keputusan dasar tersebut disetujui pemilik pada 2026-10-11. Keputusan non-pemblokir yang tidak dibutuhkan untuk menetapkan siklus utama, keamanan minimum, atau kriteria penerimaan telah dipindahkan ke backlog pada Bagian 11.
 
-**Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber data tertentu tetap harus diverifikasi sebelum implementasi; kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
+**Status penutupan:** pedoman konseptual dinyatakan selesai atas instruksi pemilik tanggal 2026-10-11. Sumber awal konseptual telah dipilih (WordPress internal dan GSC); akses dan kualitas data tetap harus diverifikasi sebelum fitur terkait dibuat atau dinyatakan lulus. Kemampuan integrasi AI/ENGINE tetap belum terverifikasi dan tidak menjadi prasyarat MVP mandiri.
 
 Persetujuan penutupan pedoman tidak berarti persetujuan implementasi, sinkronisasi runtime, atau penggabungan pull request. Semua itu memerlukan persetujuan terpisah.
+
+
+## 15. Konsolidasi final alur dan status penutupan
+
+- Alur AMANAH SEO adalah siklus pengelolaan website → sumber/kondisi → temuan → prioritas beralasan → tugas → pemeriksaan/keputusan → pelaksanaan yang diizinkan → pencatatan hasil → pemantauan → pembaruan prioritas.
+- Packaging runtime target adalah satu plugin AMANAH SEO dengan core serta modul internal AI/Engine. Batas modul dan kontrak internal harus dipertahankan; integrasi/packaging tidak berarti seluruh fitur modul masuk ke MVP.
+- Alur produksi konten terperinci tetap dimiliki modul Engine; core tidak menduplikasi workflow dan hanya menggunakan kontrak internal yang disetujui.
+- Sumber awal konseptual yang disetujui: WordPress internal dan Google Search Console. Sumber lain ditunda sampai ada alasan serta persetujuan.
+- Keputusan konseptual yang memblokir penutupan pedoman: **tidak ada yang tersisa**. Gerbang verifikasi akses sumber, uji lingkungan, dan verifikasi integrasi adalah prasyarat implementasi/fitur terkait, bukan keputusan produk terbuka.
+- Lingkup MVP dan tujuh keputusan MVP-01 sampai MVP-07 tetap menjadi acuan. Tidak ada persetujuan implementasi, merge, deployment, atau perubahan produk pendamping yang tersirat dari penutupan ini.
+
+
+## 16. Keputusan arsitektur lisensi modul — 2026-10-12
+
+Pemilik menetapkan keputusan berikut sebagai prinsip arsitektur resmi:
+
+1. Pengguna cukup memasang dan mengaktifkan satu plugin WordPress, yaitu AMANAH SEO. Modul AI dan Engine disertakan dalam paket tersebut dan tidak memerlukan plugin terpisah.
+2. AMANAH SEO menjadi pusat kendali pengelolaan API key/kredensial AI, status lisensi, entitlement modul, dan pembaruan produk yang dikelola secara terpusat.
+3. Lisensi AMANAH SEO AI dan AMANAH SEO ENGINE independen. Lisensi satu modul tidak mengaktifkan modul lainnya.
+4. Seluruh menu modul tetap terlihat dan dapat dibuka, meskipun pengguna belum memiliki lisensi modul tersebut.
+5. Jika lisensi/entitlement tidak aktif, halaman fitur modul menampilkan sales page yang menjelaskan modul yang dibuka, manfaatnya, kebutuhan lisensi, status yang relevan, dan langkah mendapatkan atau mengaktifkan lisensi.
+6. Operasi yang dilindungi lisensi tidak boleh dijalankan tanpa entitlement sah. Pemeriksaan wajib dilakukan di sisi server pada semua jalur eksekusi relevan; tampilan menu atau tombol bukan kontrol akses yang cukup.
+7. API key/kredensial provider adalah rahasia layanan dan berbeda dari lisensi/entitlement produk.
+8. Keputusan ini mengunci arsitektur produk dan perilaku pengguna, bukan detail harga, trial, renewal, masa tenggang, atau implementasi teknis. Implementasi memerlukan audit, scope terkontrol, acceptance criteria, rencana rollback, dan persetujuan terpisah.
+
+Keputusan ini melengkapi dan menggantikan bagian dokumen terdahulu yang dapat ditafsirkan sebagai pemasangan plugin AI/Engine secara terpisah. Tidak ada perubahan kode, runtime, database, atau repositori produk pendamping yang disetujui oleh keputusan dokumentasi ini.
