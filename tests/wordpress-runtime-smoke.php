@@ -53,6 +53,44 @@ if ( ! class_exists( 'AMANAH_SEO_Module_Licenses' ) || ! class_exists( '\\Amanah
 	}
 }
 
+$captured_ai_activation_payload = null;
+$mock_ai_license_response = static function ( $preempt, $args, $url ) use ( &$captured_ai_activation_payload ) {
+	if ( false === strpos( (string) $url, '/activate' ) ) {
+		return $preempt;
+	}
+	$captured_ai_activation_payload = json_decode( (string) ( $args['body'] ?? '' ), true );
+	return array(
+		'headers' => array( 'content-type' => 'application/json' ),
+		'body' => wp_json_encode( array(
+			'license' => array( 'id' => 'runtime-smoke' ),
+			'product' => 'amanah-seo-ai',
+			'status' => 'active',
+			'plan' => 'test',
+			'entitlements' => array( 'content_analyzer' ),
+			'validated_at' => gmdate( 'c' ),
+		) ),
+		'response' => array( 'code' => 200, 'message' => 'OK' ),
+		'cookies' => array(),
+		'filename' => null,
+	);
+};
+add_filter( 'pre_http_request', $mock_ai_license_response, 10, 3 );
+try {
+	$activation_method = new ReflectionMethod( 'AMANAH_SEO_Module_Licenses', 'activate_ai_license' );
+	$activation_method->setAccessible( true );
+	$ai_license_state = $activation_method->invoke( null, 'runtime-smoke-ai-license-key' );
+	if ( 'active' !== ( $ai_license_state['status'] ?? '' ) || ! in_array( 'content_analyzer', $ai_license_state['entitlements'] ?? array(), true ) ) {
+		$failures[] = 'Core AI license activation did not accept a valid AI product entitlement response.';
+	}
+	if ( 'amanah-seo-ai' !== ( $captured_ai_activation_payload['product'] ?? '' ) || 'runtime-smoke-ai-license-key' !== ( $captured_ai_activation_payload['license_key'] ?? '' ) ) {
+		$failures[] = 'Core AI license activation did not send the expected product and key payload.';
+	}
+} catch ( Throwable $exception ) {
+	$failures[] = 'Core AI license activation contract smoke test failed: ' . $exception->getMessage();
+} finally {
+	remove_filter( 'pre_http_request', $mock_ai_license_response, 10 );
+}
+
 $secret_store = new \Amanah\SEOEngine\Infrastructure\AI\SecretStore();
 $legacy_secret = 'dataforseo-preservation-smoke-test';
 try {
@@ -129,4 +167,4 @@ if ( $failures ) {
 	exit( 1 );
 }
 
-echo 'PASS: WordPress activation/reactivation, ENGINE data and credential preservation, Core license storage, and Core-owned ENGINE menus.' . PHP_EOL;
+echo 'PASS: WordPress activation/reactivation, Core AI license API contract, ENGINE data and credential preservation, Core license storage, and Core-owned ENGINE menus.' . PHP_EOL;
