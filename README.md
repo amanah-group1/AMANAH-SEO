@@ -11,23 +11,25 @@
 
 Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/README.md). Dokumen arsip dan laporan audit historis merupakan rekam jejak, bukan bukti otomatis bahwa keadaan kode atau runtime saat ini sudah lulus.
 
-## Batas tiga produk
+## Arsitektur paket dan modul
 
-- **AMANAH SEO** — produk utama yang mengelola website, kondisi/temuan, prioritas, tugas, keputusan, dan pemantauan hasil.
-- **AMANAH SEO AI** — produk AI/SEO tersendiri; bukan dependensi wajib AMANAH SEO.
-- **AMANAH SEO ENGINE V2** — produk workflow SEO/konten tersendiri; bukan dependensi wajib AMANAH SEO.
-
-Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau integrasi tersedia sampai versi, kontrak, izin, dan perilakunya benar-benar diverifikasi.
+- **AMANAH SEO** adalah satu-satunya plugin WordPress yang dipasang dan diaktifkan pengguna.
+- **AMANAH SEO AI** dan **AMANAH SEO ENGINE** adalah modul di dalam paket AMANAH SEO, bukan plugin yang perlu dipasang terpisah.
+- AMANAH SEO menjadi pusat pengelolaan API key/kredensial AI, status lisensi, dan entitlement modul.
+- Lisensi AI dan Engine independen; lisensi satu modul tidak mengaktifkan modul lainnya.
+- Semua menu modul tetap terlihat dan dapat dibuka. Jika lisensi modul tidak aktif, halaman menampilkan sales page yang menjelaskan kebutuhan lisensi; fitur berlisensi tetap ditolak.
+- Pemeriksaan entitlement wajib ditegakkan di sisi server pada setiap jalur eksekusi yang dilindungi.
+- Batas fungsi setiap modul tetap dipertahankan. Integrasi dengan sistem eksternal tetap opsional dan harus diverifikasi sebelum dinyatakan tersedia.
 
 ## Status dokumen dan persetujuan
 
-- Pedoman Induk dan Lingkup MVP tersedia di branch `main`. Perubahan pedoman dikonsolidasikan melalui [PR #23](https://github.com/amanahgroup123/AMANAH-SEO/pull/23), yang sudah digabung.
+- Pedoman Induk dan Lingkup MVP menjadi acuan utama; prinsip paket tunggal dan lisensi modul independen ditambahkan pada 2026-10-12 melalui perubahan dokumentasi terkontrol.
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
 - Lingkup MVP adalah satu siklus: **website → kondisi/temuan → prioritas beralasan → tugas → pemeriksaan/keputusan pemilik → hasil → langkah berikutnya**.
 - Sumber data tertentu harus dibuktikan sebelum fitur yang bergantung padanya dibuat atau dinyatakan berfungsi.
 - Paket kesiapan pengerjaan MVP sedang diajukan melalui [PR #24](https://github.com/amanahgroup123/AMANAH-SEO/pull/24). PR tersebut masih draft dan belum digabung.
 - Website WordPress testing dapat dipakai untuk menguji siklus dasar tanpa website resmi atau Google Search Console. Data yang belum tersedia harus ditandai jelas; sistem tidak boleh mengarang metrik.
-- Pedoman konseptual selesai bukan berarti implementasi, sinkronisasi runtime, deployment, atau merge berikutnya otomatis disetujui.
+- Pedoman konseptual selesai bukan berarti implementasi, sinkronisasi runtime, deployment, atau merge berikutnya otomatis disetujui. Keputusan arsitektur paket tunggal juga belum menjadi persetujuan implementasi kode.
 
 ## Aturan kerja
 
