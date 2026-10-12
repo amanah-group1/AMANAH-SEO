@@ -35,5 +35,13 @@ final class AMANAH_SEO_Modules {
 		// The legacy installer uses dbDelta and preserves existing schema options.
 		// Its legacy-table archival path is guarded against destructive duplicate archives.
 		add_action( 'plugins_loaded', array( 'AMANAH_SEO_AI_Install', 'maybe_upgrade' ), 20 );
+
+		// ENGINE is an internal module of AMANAH SEO; it must not register a
+		// separate plugin entry point, activation hook, or top-level menu.
+		try {
+			require_once AMANAH_SEO_PATH . 'modules/engine-runtime/bootstrap.php';
+		} catch ( \\Throwable $exception ) {
+			error_log( '[AMANAH SEO] ENGINE module initialization failed: ' . $exception->getMessage() );
+		}
 	}
 }
