@@ -20,6 +20,9 @@ $checks['Entity Profile is nested under Core menu'] = strpos( $read( 'plugin/mod
 $entity_controller = $read( 'plugin/modules/ai-runtime/modules/entity/class-entity-controller.php' );
 $checks['Entity save redirects to registered Entity Profile slug'] = strpos( $entity_controller, "admin.php?page=amanah-entity-profile" ) !== false;
 $checks['Entity controller has no stale unregistered page redirects'] = strpos( $entity_controller, "admin.php?page=amanah-seo-ai" ) === false;
+$entity_view = $read( 'plugin/modules/ai-runtime/modules/entity/views/entity-form.php' );
+$checks['Entity list links use the registered Entity Profile slug'] = strpos( $entity_view, "admin.php?page=amanah-entity-profile&entity_id=" ) !== false;
+$checks['Entity list has no stale unregistered page links'] = strpos( $entity_view, "admin.php?page=amanah-seo-ai&entity_id=" ) === false;
 $checks['Authority is nested under Core menu'] = strpos( $read( 'plugin/modules/ai-runtime/modules/authority/class-authority-admin.php' ), "'amanah-seo'," ) !== false;
 $install = $read( 'plugin/modules/ai-runtime/includes/class-install.php' );
 $checks['legacy table migration never drops duplicate archive source'] = strpos( $install, 'DROP TABLE {$legacy}' ) === false;
