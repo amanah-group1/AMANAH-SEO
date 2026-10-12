@@ -77,7 +77,74 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( ! isset( $record['status'], $record['entitlements'] ) || ! in_array( $record['status'], array( 'active', 'grace' ), true ) || ! is_array( $record['entitlements'] ) ) {
 			return false;
 		}
-		return in_array( sanitize_key( $entitlement ), array_map( 'sanitize_key', array_filter( $record['entitlements'], 'is_string' ) ), true );
+		foreach ( $record['entitlements'] as $granted ) {
+			if ( ! is_string( $granted ) || '' === trim( $granted ) ) {
+				return false;
+			}
+		}
+		if ( ! in_array( sanitize_key( $entitlement ), array_map( 'sanitize_key', $record['entitlements'] ), true ) ) {
+			return false;
+		}
+		$now = time();
+		$expires_at = isset( $record['expires_at'] ) && is_string( $record['expires_at'] ) ? trim( $record['expires_at'] ) : '';
+		if ( '' !== $expires_at && 'LIFETIME' !== strtoupper( $expires_at ) ) {
+			$expires_timestamp = strtotime( $expires_at . ' UTC' );
+			if ( false === $expires_timestamp || $expires_timestamp < $now ) {
+				return false;
+			}
+		}
+		if ( 'grace' === $record['status'] ) {
+			$grace_until = isset( $record['grace_until'] ) && is_string( $record['grace_until'] ) ? trim( $record['grace_until'] ) : '';
+			$grace_timestamp = '' !== $grace_until ? strtotime( $grace_until . ' UTC' ) : false;
+			if ( false === $grace_timestamp || $grace_timestamp < $now ) {
+				return false;
+			}
+		}
+		$validated_at = isset( $record['validated_at'] ) && is_string( $record['validated_at'] ) ? strtotime( $record['validated_at'] ) : false;
+		if ( false === $validated_at || ( $now - $validated_at ) >= DAY_IN_SECONDS ) {
+			$key = 'ai' === $module ? self::get_license( 'ai' ) : null;
+			if ( ! is_string( $key ) || '' === $key ) {
+				return false;
+			}
+			$refreshed = self::activate_ai_license( $key, true );
+			$refreshed = self::apply_ai_grace_fallback( $refreshed, $record );
+			self::save_license_status( $module, $refreshed );
+			if ( ! in_array( $refreshed['status'] ?? '', array( 'active', 'grace' ), true ) || ! is_array( $refreshed['entitlements'] ?? null ) || ! in_array( sanitize_key( $entitlement ), array_map( 'sanitize_key', array_filter( $refreshed['entitlements'], 'is_string' ) ), true ) ) {
+				return false;
+			}
+			if ( 'grace' === ( $refreshed['status'] ?? '' ) ) {
+				$until = isset( $refreshed['grace_until'] ) ? strtotime( (string) $refreshed['grace_until'] ) : false;
+				if ( false === $until || $until < $now ) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private static function apply_ai_grace_fallback( array $status, array $previous ): array {
+		if ( ! in_array( $status['status'] ?? '', array( 'unknown' ), true ) || ! in_array( $status['reason'] ?? '', array( 'service_unavailable', 'service_error', 'invalid_response' ), true ) ) {
+			return $status;
+		}
+		if ( ! in_array( $previous['status'] ?? '', array( 'active', 'grace' ), true ) || ! is_array( $previous['entitlements'] ?? null ) ) {
+			return $status;
+		}
+		$last_validated = isset( $previous['validated_at'] ) && is_string( $previous['validated_at'] ) ? strtotime( $previous['validated_at'] ) : false;
+		if ( false === $last_validated || time() - $last_validated > 604800 || empty( $previous['entitlements'] ) ) {
+			return $status;
+		}
+		$grace_until = gmdate( 'c', $last_validated + 604800 );
+		if ( strtotime( $grace_until ) < time() ) {
+			return $status;
+		}
+		return array_merge(
+			$previous,
+			array(
+				'status'      => 'grace',
+				'grace_until' => $grace_until,
+				'reason'      => $status['reason'],
+			)
+		);
 	}
 
 	public static function get_license( string $module ): ?string {
@@ -280,12 +347,16 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 		check_admin_referer( 'amanah_seo_save_module_license_' . $module );
 		$license_key = isset( $_POST['license_key'] ) ? trim( (string) wp_unslash( $_POST['license_key'] ) ) : '';
+		$existing_license_key = self::get_license( $module );
 		if ( ! self::set_license( $module, $license_key ) ) {
 			wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
 			exit;
 		}
 		if ( 'ai' === $module ) {
-			$status = self::activate_ai_license( $license_key );
+			$status = self::activate_ai_license( $license_key, is_string( $existing_license_key ) && '' !== $existing_license_key && hash_equals( $existing_license_key, $license_key ) );
+			$previous_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
+			$previous_ai_status = is_array( $previous_statuses ) && isset( $previous_statuses['ai'] ) && is_array( $previous_statuses['ai'] ) ? $previous_statuses['ai'] : array();
+			$status = self::apply_ai_grace_fallback( $status, $previous_ai_status );
 			self::save_license_status( 'ai', $status );
 			if ( 'unknown' === $status['status'] ) {
 				error_log( '[AMANAH SEO] AI license activation could not be verified: ' . ( $status['reason'] ?? 'unknown' ) );
