@@ -86,6 +86,13 @@ $GLOBALS['amanah_license_mock_response'] = $valid_response( 'grace' );
 $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Grace-period status preserves the established AI license behavior'] = 'grace' === $state['status'] && in_array( 'content_analyzer', $state['entitlements'], true );
 
+$GLOBALS['amanah_license_mock_response'] = array(
+	'response' => array( 'code' => 200 ),
+	'body' => json_encode( array( 'success' => true, 'data' => array( 'status' => 'GRACE', 'entitlements' => array( 'content_analyzer' ) ) ) ),
+);
+$state = $activate->invoke( null, 'ai-license-regression-key' );
+$checks['Grace response without a service-provided grace expiry is rejected'] = 'unknown' === $state['status'] && 'invalid_response' === $state['reason'];
+
 $GLOBALS['amanah_license_mock_response'] = $valid_response( 'invalid' );
 $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Invalid license status is not treated as active'] = 'invalid' === $state['status'];
