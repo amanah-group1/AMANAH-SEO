@@ -17,6 +17,9 @@ $checks['AI runtime keeps legacy core implementation'] = strpos( $read( 'plugin/
 $checks['FAQ endpoint uses governed AI client'] = strpos( $read( 'plugin/modules/ai-runtime/modules/faq/class-faq-generator.php' ), "generate( 'faq_generation'" ) !== false;
 $checks['Schema endpoint uses governed AI client'] = strpos( $read( 'plugin/modules/ai-runtime/modules/schema/class-schema-generator.php' ), "generate( 'schema_generation'" ) !== false;
 $checks['Entity Profile is nested under Core menu'] = strpos( $read( 'plugin/modules/ai-runtime/modules/entity/class-entity-admin.php' ), "add_submenu_page('amanah-seo'" ) !== false;
+$entity_controller = $read( 'plugin/modules/ai-runtime/modules/entity/class-entity-controller.php' );
+$checks['Entity save redirects to registered Entity Profile slug'] = strpos( $entity_controller, "admin.php?page=amanah-entity-profile" ) !== false;
+$checks['Entity controller has no stale unregistered page redirects'] = strpos( $entity_controller, "admin.php?page=amanah-seo-ai" ) === false;
 $checks['Authority is nested under Core menu'] = strpos( $read( 'plugin/modules/ai-runtime/modules/authority/class-authority-admin.php' ), "'amanah-seo'," ) !== false;
 $install = $read( 'plugin/modules/ai-runtime/includes/class-install.php' );
 $checks['legacy table migration never drops duplicate archive source'] = strpos( $install, 'DROP TABLE {$legacy}' ) === false;
