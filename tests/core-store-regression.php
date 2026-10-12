@@ -64,9 +64,9 @@ $task = array(
 $id = AMANAH_SEO_Store::create_task( $task );
 $task_insert = $wpdb->inserts[0];
 check( is_int( $id ), 'task can be created with valid input' );
-check( count( $task_insert['data'] ) === 11, 'task insert has 11 stored fields' );
-check( count( $task_insert['formats'] ) === 11, 'task insert format count matches stored fields' );
-check( $task_insert['formats'][7] === '%s' && $task_insert['formats'][8] === '%d', 'completion evidence is formatted as string and creator as integer' );
+check( count( $task_insert['data'] ) === 13, 'task insert has 11 stored fields' );
+check( count( $task_insert['formats'] ) === 13, 'task insert format count matches stored fields' );
+check( $task_insert['formats'][9] === '%s' && $task_insert['formats'][10] === '%d', 'completion evidence is formatted as string and creator as integer' );
 check( $task_insert['data']['approval_status'] === 'not_required', 'ordinary task does not require approval by default' );
 
 $completed = $task;
@@ -105,6 +105,21 @@ $result = AMANAH_SEO_Store::update_finding_status( 12, 'resolved', 'Pemeriksaan 
 $last_update = end( $wpdb->updates );
 check( true === $result, 'finding status can be updated with a result note' );
 check( $last_update['data']['status'] === 'resolved', 'finding status update persists selected status' );
+
+$bad_date = $task;
+$bad_date['due_date'] = '12/10/2026';
+$result = AMANAH_SEO_Store::create_task( $bad_date );
+check( is_wp_error( $result ) && $result->get_error_code() === 'invalid_due_date', 'invalid due date format is rejected' );
+
+$missing_dependency = $task;
+$missing_dependency['dependency_task_id'] = 999;
+$wpdb->row = null;
+$result = AMANAH_SEO_Store::create_task( $missing_dependency );
+check( is_wp_error( $result ) && $result->get_error_code() === 'dependency_not_found', 'task cannot depend on a missing task' );
+
+$wpdb->row = (object) array( 'status' => 'in_progress', 'approval_status' => 'not_required', 'dependency_task_id' => 88 );
+$result = AMANAH_SEO_Store::update_task_status( 101, 'completed', 'Hasil telah diperiksa.' );
+check( is_wp_error( $result ) && $result->get_error_code() === 'dependency_incomplete', 'task cannot complete while dependency is incomplete' );
 
 echo "\nRESULT: {$passed} passed; {$failed} failed.\n";
 exit( $failed > 0 ? 1 : 0 );
