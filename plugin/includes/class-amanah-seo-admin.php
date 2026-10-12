@@ -26,25 +26,104 @@ final class AMANAH_SEO_Admin {
  private static function guard(){if(!current_user_can('manage_amanah_seo')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));}
  private static function start($title){self::guard();echo '<div class="wrap"><h1>'.esc_html($title).'</h1>';if(isset($_GET['amanah_notice'])){$n=sanitize_key(wp_unslash($_GET['amanah_notice']));$m=array('saved'=>'Data berhasil disimpan.','error'=>'Data gagal disimpan. Periksa input dan coba lagi.','updated'=>'Status pekerjaan diperbarui.','decision'=>'Keputusan persetujuan dicatat.','evidence_required'=>'Pekerjaan selesai wajib memiliki bukti hasil.','approval_pending'=>'Persetujuan masih menunggu keputusan.','approval_rejected'=>'Persetujuan ditolak. Ajukan kembali setelah pekerjaan direvisi.','workspace_saved'=>'Pengaturan workspace berhasil disimpan.','finding_updated'=>'Status temuan diperbarui.','finding_update_error'=>'Status temuan tidak dapat diperbarui. Pastikan catatan penyelesaian diisi.','self_test_complete'=>'Uji runtime selesai. Lihat hasil pemeriksaan di bawah.','dependency_incomplete'=>'Pekerjaan belum dapat diselesaikan karena dependensinya belum selesai.','invalid_due_date'=>'Format tenggat tidak valid.','dependency_not_found'=>'Pekerjaan dependensi tidak ditemukan.');if(isset($m[$n]))echo '<div class="notice notice-'.(in_array($n,array('error','evidence_required','approval_pending','approval_rejected','finding_update_error'),true)?'error':'success').' is-dismissible"><p>'.esc_html($m[$n]).'</p></div>';}}
  private static function end(){echo '</div>';}
+ public static function dashboard_summary($findings,$tasks){
+  $summary=array('open_findings'=>0,'priority_findings'=>0,'tasks_total'=>count($tasks),'tasks_active'=>0,'tasks_in_progress'=>0,'tasks_waiting_approval'=>0,'tasks_blocked'=>0,'tasks_failed'=>0,'tasks_completed'=>0,'next_action'=>'review_findings');
+  foreach($findings as $finding){
+   $status=isset($finding->status)?$finding->status:'';
+   $priority=isset($finding->priority)?$finding->priority:'';
+   if(in_array($status,array('open','in_progress'),true)){
+    $summary['open_findings']++;
+    if(in_array($priority,array('urgent','high'),true))$summary['priority_findings']++;
+   }
+  }
+  foreach($tasks as $task){
+   $status=isset($task->status)?$task->status:'';
+   if(!in_array($status,array('completed','cancelled'),true))$summary['tasks_active']++;
+   if('in_progress'===$status)$summary['tasks_in_progress']++;
+   if('awaiting_approval'===$status)$summary['tasks_waiting_approval']++;
+   if('blocked'===$status)$summary['tasks_blocked']++;
+   if('failed'===$status)$summary['tasks_failed']++;
+   if('completed'===$status)$summary['tasks_completed']++;
+  }
+  if($summary['tasks_waiting_approval']>0)$summary['next_action']='review_approval';
+  elseif($summary['tasks_blocked']>0||$summary['tasks_failed']>0)$summary['next_action']='resolve_blockers';
+  elseif($summary['priority_findings']>0)$summary['next_action']='prioritize_finding';
+  elseif($summary['tasks_in_progress']>0)$summary['next_action']='continue_task';
+  elseif($summary['open_findings']>0)$summary['next_action']='review_findings';
+  else $summary['next_action']='scan_website';
+  return $summary;
+ }
  public static function dashboard(){
   self::start('AMANAH SEO — Dashboard');
   $f=AMANAH_SEO_Store::findings(100);
   $t=AMANAH_SEO_Store::tasks(100);
-  $counts=wp_count_posts('post');
-  $published=is_object($counts)&&isset($counts->publish)?(int)$counts->publish:0;
+  $events=AMANAH_SEO_Store::events(5);
+  $summary=self::dashboard_summary($f,$t);
+  $post_counts=wp_count_posts('post');
+  $page_counts=wp_count_posts('page');
+  $published_posts=is_object($post_counts)&&isset($post_counts->publish)?(int)$post_counts->publish:0;
+  $published_pages=is_object($page_counts)&&isset($page_counts->publish)?(int)$page_counts->publish:0;
   $workspace=get_option('amanah_seo_workspace',array());
   $workspace_name=isset($workspace['name'])&&$workspace['name']!==''?$workspace['name']:get_bloginfo('name');
   $workspace_goal=isset($workspace['goal'])?$workspace['goal']:'';
-  $open_findings=0;
-  foreach($f as $finding){if(in_array($finding->status,array('open','in_progress'),true))$open_findings++;}
-  $waiting=0;$blocked=0;$failed=0;
-  foreach($t as $task){if('awaiting_approval'===$task->status)$waiting++;if('blocked'===$task->status)$blocked++;if('failed'===$task->status)$failed++;}
-  echo '<p>Ringkasan data WordPress lokal dan catatan manual. GSC, AI, dan ENGINE belum diklaim aktif.</p>';
-  echo '<div class="notice notice-info inline"><p><strong>Workspace:</strong> '.esc_html($workspace_name).' &nbsp; <strong>Website:</strong> '.esc_html(home_url('/')).' &nbsp; <strong>Konten terbit:</strong> '.esc_html((string)$published).'</p>';
+  echo '<p>Ringkasan kondisi dan pekerjaan berdasarkan data yang tersimpan di WordPress. Ringkasan temuan dan pekerjaan mencakup maksimal 100 catatan terbaru untuk masing-masing daftar.</p>';
+  echo '<div class="notice notice-info inline"><p><strong>Workspace:</strong> '.esc_html($workspace_name).' &nbsp; <strong>Website:</strong> <a href="'.esc_url(home_url('/')).'" target="_blank" rel="noopener noreferrer">'.esc_html(home_url('/')).'</a> &nbsp; <strong>Konten terbit:</strong> '.esc_html((string)$published_posts).' artikel dan '.esc_html((string)$published_pages).' halaman</p>';
   if($workspace_goal!=='')echo '<p><strong>Tujuan website:</strong> '.esc_html($workspace_goal).'</p>';
-  echo '<p><strong>Temuan terbuka:</strong> '.esc_html((string)$open_findings).' &nbsp; <strong>Persetujuan menunggu:</strong> '.esc_html((string)$waiting).' &nbsp; <strong>Terhambat:</strong> '.esc_html((string)$blocked).' &nbsp; <strong>Gagal:</strong> '.esc_html((string)$failed).'</p></div>';
-  echo '<h2>Siklus MVP</h2><ol><li>Catat temuan beserta sumber, bukti, prioritas, dan ketidakpastian.</li><li>Ubah status temuan saat pemeriksaan berkembang atau selesai.</li><li>Buat pekerjaan dengan penanggung jawab dan kriteria selesai.</li><li>Catat keputusan persetujuan; tidak ada perubahan website otomatis.</li><li>Tinjau riwayat dan bukti hasil sebelum menentukan langkah berikutnya.</li></ol>';
-  echo '<p><a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-workspace')).'">Website & Workspace</a> <a class="button button-primary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-findings')).'">Kelola temuan</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-tasks')).'">Kelola pekerjaan</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-history')).'">Lihat riwayat</a></p>';
+  echo '</div>';
+  echo '<div class="notice notice-warning inline"><p><strong>Sumber performa pencarian:</strong> Google Search Console belum terhubung. Dashboard ini tidak menampilkan klik, tayangan, CTR, posisi, atau skor SEO yang belum diverifikasi.</p></div>';
+  echo '<h2>Ringkasan kerja</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;max-width:1100px">';
+  $cards=array(
+   array('Temuan terbuka',$summary['open_findings'],'amanah-seo-findings'),
+   array('Temuan prioritas tinggi / mendesak',$summary['priority_findings'],'amanah-seo-findings'),
+   array('Pekerjaan aktif',$summary['tasks_active'],'amanah-seo-tasks'),
+   array('Sedang berjalan',$summary['tasks_in_progress'],'amanah-seo-tasks'),
+   array('Menunggu persetujuan',$summary['tasks_waiting_approval'],'amanah-seo-tasks'),
+   array('Terhambat',$summary['tasks_blocked'],'amanah-seo-tasks'),
+   array('Gagal',$summary['tasks_failed'],'amanah-seo-tasks'),
+   array('Selesai',$summary['tasks_completed'],'amanah-seo-tasks')
+  );
+  foreach($cards as $card){
+   echo '<div style="background:#fff;border:1px solid #c3c4c7;padding:14px;min-height:78px"><p style="margin:0 0 8px"><a href="'.esc_url(admin_url('admin.php?page='.$card[2])).'">'.esc_html($card[0]).'</a></p><p style="font-size:24px;font-weight:600;margin:0">'.esc_html((string)$card[1]).'</p></div>';
+  }
+  echo '</div>';
+  $next=array(
+   'review_approval'=>array('Tindakan berikutnya: tinjau persetujuan','Ada pekerjaan yang menunggu keputusan. Buka daftar pekerjaan dan periksa isi serta bukti sebelum menyetujui atau menolak.','amanah-seo-tasks','Tinjau pekerjaan'),
+   'resolve_blockers'=>array('Tindakan berikutnya: tangani hambatan atau kegagalan','Periksa pekerjaan terhambat atau gagal, baca penyebabnya, lalu tentukan tindak lanjut manual.','amanah-seo-tasks','Periksa pekerjaan'),
+   'prioritize_finding'=>array('Tindakan berikutnya: tinjau temuan prioritas tinggi','Ada temuan terbuka berprioritas tinggi atau mendesak. Periksa bukti dan ketidakpastiannya sebelum membuat pekerjaan.','amanah-seo-findings','Tinjau temuan'),
+   'continue_task'=>array('Tindakan berikutnya: lanjutkan pekerjaan berjalan','Tinjau pekerjaan yang sedang berjalan dan perbarui status hanya berdasarkan kemajuan serta bukti yang tersedia.','amanah-seo-tasks','Lanjutkan pekerjaan'),
+   'review_findings'=>array('Tindakan berikutnya: tinjau temuan terbuka','Periksa bukti dan prioritas temuan terbuka, lalu buat pekerjaan untuk tindak lanjut yang memang diperlukan.','amanah-seo-findings','Tinjau temuan'),
+   'scan_website'=>array('Tindakan berikutnya: periksa kondisi website','Belum ada temuan terbuka yang terdeteksi dalam cakupan daftar saat ini. Jalankan pemeriksaan website/konten atau catat konteks manual untuk menentukan langkah selanjutnya.','amanah-seo','Mulai dari dashboard')
+  );
+  $action=$next[$summary['next_action']];
+  echo '<div class="notice notice-info" style="margin:18px 0;padding:8px 12px"><h2 style="margin-top:8px">'.esc_html($action[0]).'</h2><p>'.esc_html($action[1]).'</p><p><a class="button button-primary" href="'.esc_url(admin_url('admin.php?page='.$action[2])).'">'.esc_html($action[3]).'</a></p></div>';
+  echo '<h2>Temuan yang perlu diperhatikan</h2>';
+  $priority_rank=array('urgent'=>0,'high'=>1,'medium'=>2,'low'=>3);
+  $visible_findings=array();
+  foreach($f as $finding){if(isset($finding->status)&&in_array($finding->status,array('open','in_progress'),true))$visible_findings[]=$finding;}
+  usort($visible_findings,function($a,$b)use($priority_rank){$ap=isset($a->priority)&&isset($priority_rank[$a->priority])?$priority_rank[$a->priority]:4;$bp=isset($b->priority)&&isset($priority_rank[$b->priority])?$priority_rank[$b->priority]:4;if($ap===$bp)return (int)$b->id-(int)$a->id;return $ap-$bp;});
+  if(!$visible_findings)echo '<p>Tidak ada temuan terbuka pada 100 catatan terbaru. Ini bukan bukti bahwa website bebas masalah.</p>';
+  else{
+   echo '<table class="widefat striped"><thead><tr><th>Temuan</th><th>Prioritas</th><th>Ketidakpastian</th><th>Sumber</th><th>Tindakan</th></tr></thead><tbody>';
+   foreach(array_slice($visible_findings,0,5) as $finding)echo '<tr><td><strong>'.esc_html($finding->title).'</strong><br>'.esc_html($finding->description).'<br><small>'.esc_html($finding->evidence).'</small></td><td>'.esc_html(isset($finding->priority)?$finding->priority:'belum diketahui').'</td><td>'.esc_html(isset($finding->uncertainty)?$finding->uncertainty:'belum diketahui').'</td><td>'.esc_html(isset($finding->source)?$finding->source:'belum diketahui').'</td><td><a href="'.esc_url(admin_url('admin.php?page=amanah-seo-tasks&finding_id='.(int)$finding->id)).'">Buat pekerjaan</a></td></tr>';
+   echo '</tbody></table>';
+  }
+  echo '<h2>Perkembangan pekerjaan</h2>';
+  $visible_tasks=array();
+  foreach($t as $task){if(isset($task->status)&&!in_array($task->status,array('completed','cancelled'),true))$visible_tasks[]=$task;}
+  if(!$visible_tasks)echo '<p>Tidak ada pekerjaan aktif pada 100 catatan terbaru.</p>';
+  else{
+   echo '<table class="widefat striped"><thead><tr><th>Pekerjaan</th><th>Status</th><th>Temuan</th><th>Tenggat</th><th>Dependensi</th></tr></thead><tbody>';
+   foreach(array_slice($visible_tasks,0,5) as $task)echo '<tr><td>'.esc_html($task->title).'</td><td>'.esc_html(isset(self::$statuses[$task->status])?self::$statuses[$task->status]:$task->status).'</td><td>'.esc_html(!empty($task->finding_id)?'#'.$task->finding_id:'—').'</td><td>'.esc_html(!empty($task->due_date)?$task->due_date:'—').'</td><td>'.esc_html(!empty($task->dependency_task_id)?'#'.$task->dependency_task_id:'—').'</td></tr>';
+   echo '</tbody></table>';
+  }
+  echo '<h2>Riwayat terbaru</h2>';
+  if(!$events)echo '<p>Belum ada riwayat yang tercatat.</p>';
+  else{
+   echo '<table class="widefat striped"><thead><tr><th>Waktu</th><th>Objek</th><th>Peristiwa</th><th>Detail</th></tr></thead><tbody>';
+   foreach($events as $event)echo '<tr><td>'.esc_html($event->created_at).'</td><td>'.esc_html($event->object_type).' #'.esc_html((string)$event->object_id).'</td><td>'.esc_html($event->event_type).'</td><td>'.esc_html($event->detail).'</td></tr>';
+   echo '</tbody></table><p><a href="'.esc_url(admin_url('admin.php?page=amanah-seo-history')).'">Lihat seluruh riwayat</a></p>';
+  }
+  echo '<h2>Akses cepat</h2><p><a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-workspace')).'">Website &amp; Workspace</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-findings')).'">Temuan dan Prioritas</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-tasks')).'">Pekerjaan</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-history')).'">Riwayat</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=amanah-seo-diagnostics')).'">Diagnostik</a></p>';
   self::end();
  }
  public static function workspace_page(){
