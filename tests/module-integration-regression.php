@@ -25,6 +25,7 @@ foreach ( $engine_all_files as $engine_file ) {
 $checks['ENGINE production source and internal bootstrap are present'] = $engine_php_count >= 297 && is_file( $root . '/plugin/modules/engine-runtime/Infrastructure/Repository/WordPressKeywordRepository.php' ) && is_file( $root . '/plugin/modules/engine-runtime/Presentation/Admin/PageBlueprintAdmin.php' ) && is_file( $root . '/plugin/modules/engine-runtime/Platform/License/LicenseClient.php' );
 $engine_menu = $read( 'plugin/modules/engine-runtime/Presentation/Admin/AdminMenu.php' );
 $checks['ENGINE screens are nested under Core and do not create a second top-level menu'] = preg_match( "/add_submenu_page\\s*\\(\\s*'amanah-seo'/", $engine_menu ) === 1 && strpos( $engine_menu, 'add_menu_page(' ) === false;
+$checks['All ENGINE workflow submenu parents resolve to the Core menu'] = preg_match( "/add_submenu_page\\s*\\(\\s*'amanah-seo-engine'\\s*,/", $engine_menu ) === 0 && substr_count( $engine_menu, "'amanah-seo'," ) >= 3;
 $checks['ENGINE AI configuration and license screens remain Core-owned'] = strpos( $engine_menu, "array( 'license', 'updates', 'ai-configuration', 'ai-usage' )" ) !== false;
 $legacy_migration = $read( 'plugin/modules/engine-runtime/Infrastructure/Migration/Migrations/Version17RemoveLegacySerpCredentials.php' );
 $checks['ENGINE legacy credential migration preserves existing DataForSEO secrets'] = strpos( $legacy_migration, "delete( 'dataforseo' )" ) === false;
