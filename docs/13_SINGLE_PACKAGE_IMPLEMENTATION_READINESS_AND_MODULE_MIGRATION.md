@@ -12,7 +12,7 @@
 ## 1. Keputusan dan target yang mengikat
 
 1. Target akhir adalah **satu plugin WordPress yang dipasang pengguna: AMANAH SEO**.
-2. Pengguna cukup memasang AMANAH SEO dan menggunakan satu lisensi AMANAH SEO untuk aktivasi produk; tidak diwajibkan memasang/mengaktifkan plugin AI atau Engine secara terpisah.
+2. AMANAH SEO menjadi satu pusat pengelolaan lisensi untuk dua lisensi modul yang berbeda: lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Keduanya diverifikasi secara independen dan satu lisensi tidak memberi entitlement modul lainnya; plugin AI/Engine tidak dipasang sebagai plugin runtime terpisah. Kebutuhan lisensi tersendiri untuk Core AMANAH SEO belum diputuskan.
 3. Plugin induk memiliki **Core AMANAH SEO**, modul internal AI (baseline dari repository AMANAH SEO AI), dan modul internal Engine (baseline dari repository AMANAH SEO ENGINE V2).
 4. Repository AI dan Engine tetap baseline sumber/audit; keduanya tidak dipasang sebagai plugin runtime tambahan pada target akhir.
 5. **Lifecycle Manager** di plugin induk menjadi koordinator tunggal lifecycle internal. Setiap modul tetap memiliki migrasi domain dan versi schema yang dapat dilacak; koordinator mengatur urutan, hasil, logging, dan pemulihan.
@@ -117,7 +117,7 @@ Temuan:
 | MIG-05 | Engine `Schema::VERSION=11` vs migration manager hingga 18 | Dokumentasikan lifecycle sebenarnya dan uji fresh install/upgrade/drift |
 | MIG-06 | Nomor file migrasi Engine 9/10 tidak selaras | Periksa seluruh registrasi/version class dan uji migrasi 8→current pada clone |
 | MIG-07 | Cleanup Engine menghapus option `amanah_seo_ai_credentials` | Kepemilikan option dipastikan; hapus perilaku cross-module dan uji uninstall induk |
-| MIG-08 | License secrets/entitlement/updater tidak seragam | Peta lisensi dan endpoint; jangan menggabungkan secret stores atau lisensi sebelum kontrak kompatibilitas disetujui |
+| MIG-08 | Kontrak lisensi AI dan Engine berbeda atau belum seragam | Petakan dua lisensi secara terpisah: product ID, client/server API, activation/deactivation, status, expiry, renewal, domain binding, entitlement, updater, cache/grace/offline, secret storage, dan error handling. Jangan gabungkan secret store atau menganggap satu lisensi mencakup modul lain tanpa kontrak kompatibilitas yang disetujui |
 | MIG-09 | Hook, cron, menu, capability, REST/AJAX, class names dapat bentrok | Inventaris hook/class/route/capability; namespace/adapter internal; uji tidak ada double registration |
 | MIG-10 | Rollback setelah data/schema berubah belum terbukti | Backup database + files, rehearsal restore ke clone, migration journal, stop-on-failure, dan rencana forward-fix/rollback eksplisit |
 | MIG-11 | Perbedaan versi PHP/WordPress/runtime | Catat versi aktual dan jalankan unit, static/lint, integration, activation/upgrade/deactivation/uninstall tests |
@@ -216,7 +216,7 @@ Paket ini mengatur urutan yang sama untuk menghindari pekerjaan terpisah yang ti
 ### Gate 2 — kontrak modul dan data
 - Tetapkan bootstrap/loader internal, namespace, kontrak Core↔AI dan Core↔Engine, ownership table/option, capability, cron, route, logging, serta error boundary.
 - Tetapkan nama/version marker modul internal yang baru tanpa menimpa marker legacy.
-- Tetapkan credential handling (pertahankan kompatibilitas yang aman atau re-entry) dan license/entitlement handling.
+- Tetapkan credential handling (pertahankan kompatibilitas yang aman atau re-entry) dan kontrak lisensi AI serta Engine secara terpisah; pusat pengelolaan berada di AMANAH SEO, tetapi validasi/status/entitlement tetap independen. Jangan mengasumsikan lisensi Core tanpa keputusan pemilik.
 - Buat mapping schema per tabel dan per option; tandai keep/migrate/archive/manual re-entry/retire, dengan alasan dan row-count checks.
 - Tentukan migration journal, idempotency, stop-on-error, backup reference, dan prosedur recovery.
 
@@ -241,7 +241,7 @@ Satu package berarti satu change-set/PR terkontrol, tetapi tahapan di atas tetap
 | PKG-05 | GSC siap bila scope dipilih | property verified, read-only request success, metadata hasil |
 | PKG-06 | Schema mapping lengkap | setiap tabel/option memiliki owner, source, destination, policy, row counts |
 | PKG-07 | Kredensial aman | tidak ada plaintext; kebijakan key compatibility/re-entry diuji |
-| PKG-08 | Lisensi aman | state/secret/cache/endpoint/entitlement mapping dan negative tests |
+| PKG-08 | Dua lisensi modul aman dan independen | Kontrak, state/secret/cache/endpoint/expiry/renewal/entitlement dipetakan per modul; uji AI-valid/Engine-invalid, Engine-valid/AI-invalid, keduanya valid, keduanya invalid, dan kegagalan server tanpa kebocoran rahasia |
 | PKG-09 | Lifecycle terkoordinasi | aktivasi/upgrade/deaktivasi/uninstall, double hooks avoided, failure states visible |
 | PKG-10 | Migrasi idempotent | dua kali run tidak menggandakan/menghapus data; marker hanya maju setelah sukses |
 | PKG-11 | Modul terisolasi | kegagalan AI/Engine tidak membuat Core fatal error |
