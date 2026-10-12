@@ -9,20 +9,22 @@
 
 Dokumen lama yang sudah digantikan dipindahkan ke [arsip dokumentasi](docs/archive/README.md), tetap dipertahankan sebagai rekam jejak historis, dan bukan sumber aturan aktif kecuali diadopsi kembali secara eksplisit. Laporan audit historis tetap terpisah di `docs/audits/` dan tidak otomatis menjadi bukti kondisi runtime saat ini.
 
-## Batas tiga produk
+## Arsitektur paket dan modul
 
-- **AMANAH SEO** — produk utama yang mengelola konteks website, kondisi, prioritas pekerjaan, tugas, persetujuan, status, dan pemantauan hasil.
-- **AMANAH SEO AI** — produk AI/SEO tersendiri; bukan dependensi wajib.
-- **AMANAH SEO ENGINE V2** — produk workflow SEO/konten terstruktur tersendiri; bukan dependensi wajib.
-
-Integrasi produk pendamping bersifat opsional. Jangan menyatakan fitur atau integrasi tersedia sampai repositori/versi, kontrak, dan perilakunya benar-benar diverifikasi.
+- **AMANAH SEO** adalah satu-satunya plugin WordPress yang dipasang dan diaktifkan pengguna.
+- **AMANAH SEO AI** dan **AMANAH SEO ENGINE** adalah modul di dalam paket AMANAH SEO, bukan plugin yang perlu dipasang terpisah.
+- AMANAH SEO menjadi pusat pengelolaan API key/kredensial AI, status lisensi, dan entitlement modul.
+- Lisensi AI dan Engine independen; lisensi satu modul tidak mengaktifkan modul lainnya.
+- Semua menu modul tetap terlihat dan dapat dibuka. Jika lisensi modul tidak aktif, halaman menampilkan sales page yang menjelaskan kebutuhan lisensi; fitur berlisensi tetap ditolak.
+- Pemeriksaan entitlement wajib ditegakkan di sisi server pada setiap jalur eksekusi yang dilindungi.
+- Batas fungsi setiap modul tetap dipertahankan. Integrasi dengan sistem eksternal tetap opsional dan harus diverifikasi sebelum dinyatakan tersedia.
 
 ## Status pedoman
 
 - Tujuh keputusan dasar MVP disetujui pemilik pada 2026-10-11.
 - Lingkup MVP telah dikonsolidasikan: satu siklus **website → kondisi/temuan → prioritas beralasan → tugas → keputusan/pemeriksaan pemilik → hasil → langkah berikutnya**.
 - Sumber data SEO spesifik harus dipilih dan diverifikasi sebelum implementasi.
-- Kemampuan integrasi AI/ENGINE belum dinyatakan terverifikasi; integrasi tidak wajib untuk MVP.
+- Paket tunggal dan lisensi modul independen telah ditetapkan sebagai prinsip arsitektur pada 2026-10-12; kemampuan fitur tetap harus diverifikasi sebelum dinyatakan siap.
 - Keputusan komersial dan teknis non-pemblokir dipindahkan ke backlog agar tidak menghambat penutupan pedoman.
 - Pedoman konseptual dinyatakan **SELESAI** atas instruksi pemilik pada 2026-10-11 dan berada di branch `controlled/rebuild-product-pedoman`. Branch belum digabung ke `main`; implementasi belum disetujui.
 
