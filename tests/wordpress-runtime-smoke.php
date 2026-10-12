@@ -40,7 +40,7 @@ if ( ! class_exists( 'AMANAH_SEO_Module_Licenses' ) || ! class_exists( '\\Amanah
 	$failures[] = 'Core license manager or ENGINE license adapter is not loaded.';
 } else {
 	$test_key = 'engine-runtime-smoke-test-temporary-key';
-	$engine_store = new \\Amanah\\SEOEngine\\Platform\\License\\LicenseSecretStore();
+	$engine_store = new \Amanah\SEOEngine\Platform\License\LicenseSecretStore();
 	try {
 		$engine_store->set( $test_key );
 		if ( $engine_store->get() !== $test_key || AMANAH_SEO_Module_Licenses::get_license( 'engine' ) !== $test_key ) {
