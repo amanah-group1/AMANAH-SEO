@@ -8,6 +8,7 @@ final class AMANAH_SEO_Admin {
   add_action('admin_post_amanah_seo_run_self_test',array(__CLASS__,'run_self_test'));
   add_action('admin_post_amanah_seo_save_workspace',array(__CLASS__,'save_workspace'));
   add_action('admin_post_amanah_seo_create_finding',array(__CLASS__,'create_finding'));
+  add_action('admin_post_amanah_seo_import_content_issue',array(__CLASS__,'import_content_issue'));
   add_action('admin_post_amanah_seo_update_finding_status',array(__CLASS__,'update_finding_status'));
   add_action('admin_post_amanah_seo_create_task',array(__CLASS__,'create_task'));
   add_action('admin_post_amanah_seo_update_task_status',array(__CLASS__,'update_task_status'));
@@ -232,6 +233,40 @@ final class AMANAH_SEO_Admin {
   $result=AMANAH_SEO_Store::update_finding_status($id,$status,$note);
   $notice=is_wp_error($result)?'finding_update_error':'finding_updated';
   self::redirect($notice,'amanah-seo-findings');
+ }
+ public static function import_content_issue(){
+  if(!current_user_can('manage_amanah_seo')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));
+  $post_id=absint($_POST['post_id']??0);
+  $code=sanitize_key(wp_unslash($_POST['issue_code']??''));
+  check_admin_referer('amanah_seo_import_content_issue_'.$post_id.'_'.$code);
+  if(!class_exists('AMANAH_SEO_Content_Checks')||$post_id<1||!in_array($code,array('title_missing','content_empty','title_duplicate'),true)){
+   self::redirect('error','amanah-seo-content-checks');
+  }
+  $scan=AMANAH_SEO_Content_Checks::scan_data();
+  $issue=null;
+  foreach($scan['issues'] as $candidate){
+   if((int)$candidate['post_id']===$post_id&&$candidate['code']===$code){$issue=$candidate;break;}
+  }
+  if(!$issue){
+   self::redirect('content_issue_stale','amanah-seo-content-checks');
+  }
+  $finding_title='['.$issue['code'].'] '.$issue['title'];
+  foreach(AMANAH_SEO_Store::findings(100) as $existing){
+   if($existing->source==='wordpress'&&$existing->title===$finding_title&&in_array($existing->status,array('open','in_progress'),true)){
+    self::redirect('content_issue_exists','amanah-seo-content-checks');
+   }
+  }
+  $description=$issue['label'].'. '.$issue['suggestion'];
+  $evidence='Pemeriksaan: '.$issue['code'].'; konten ID '.$post_id.'; URL '.$issue['url'].'; bukti: '.$issue['evidence'];
+  $result=AMANAH_SEO_Store::create_finding(array(
+   'title'=>$finding_title,
+   'description'=>$description,
+   'source'=>'wordpress',
+   'evidence'=>$evidence,
+   'priority'=>'medium',
+   'uncertainty'=>'medium',
+  ));
+  self::redirect(is_wp_error($result)?'error':'content_issue_imported','amanah-seo-content-checks');
  }
  public static function create_finding(){self::guard();check_admin_referer('amanah_seo_create_finding');$d=array('title'=>sanitize_text_field(wp_unslash($_POST['title']??'')),'description'=>sanitize_textarea_field(wp_unslash($_POST['description']??'')),'source'=>sanitize_key(wp_unslash($_POST['source']??'manual')),'evidence'=>sanitize_textarea_field(wp_unslash($_POST['evidence']??'')),'priority'=>sanitize_key(wp_unslash($_POST['priority']??'medium')),'uncertainty'=>sanitize_key(wp_unslash($_POST['uncertainty']??'medium')));$d['source']=in_array($d['source'],array('manual','wordpress','gsc_unverified'),true)?$d['source']:'manual';$d['priority']=in_array($d['priority'],array('low','medium','high','urgent'),true)?$d['priority']:'medium';$d['uncertainty']=in_array($d['uncertainty'],array('low','medium','high','unknown'),true)?$d['uncertainty']:'medium';$r=($d['title']&&$d['description']&&$d['evidence'])?AMANAH_SEO_Store::create_finding($d):new WP_Error('invalid','Required fields missing');self::redirect(is_wp_error($r)?'error':'saved','amanah-seo-findings');}
  public static function create_task(){self::guard();check_admin_referer('amanah_seo_create_task');$d=array('finding_id'=>absint($_POST['finding_id']??0),'title'=>sanitize_text_field(wp_unslash($_POST['title']??'')),'description'=>sanitize_textarea_field(wp_unslash($_POST['description']??'')),'owner'=>sanitize_text_field(wp_unslash($_POST['owner']??'')),'success_criteria'=>sanitize_textarea_field(wp_unslash($_POST['success_criteria']??'')),'due_date'=>sanitize_text_field(wp_unslash($_POST['due_date']??'')),'dependency_task_id'=>absint($_POST['dependency_task_id']??0),'status'=>sanitize_key(wp_unslash($_POST['status']??'not_started')));if(!array_key_exists($d['status'],self::$statuses))$d['status']='not_started';if($d['finding_id']&&!self::finding_exists($d['finding_id']))$d['finding_id']=0;$r=($d['title']&&$d['description']&&$d['success_criteria'])?AMANAH_SEO_Store::create_task($d):new WP_Error('invalid','Required fields missing');self::redirect(is_wp_error($r)?'error':'saved','amanah-seo-tasks');}
