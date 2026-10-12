@@ -24,8 +24,29 @@ class AMANAH_SEO_AI_AI_Client {
 		$this->logger = new AMANAH_SEO_AI_AI_Logger();
 	}
 
+	private function required_entitlement_for_task( string $task ): ?string {
+		$entitlements = array(
+			'content_analysis'   => 'content_analyzer',
+			'content_generation' => 'content_generation',
+			'content_refinement' => 'content_generation',
+			'faq_generation'     => 'faq_generation',
+			'schema_generation'  => 'schema_generation',
+			'entity_analysis'    => 'entity_analysis',
+		);
+		return $entitlements[ $task ] ?? null;
+	}
+
 	public function generate( $task, array $input = array(), $user_id = null ) {
 		$task = sanitize_key( $task );
+		$entitlement = $this->required_entitlement_for_task( $task );
+		if ( null === $entitlement || ! class_exists( 'AMANAH_SEO_Module_Licenses' ) || ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', $entitlement ) ) {
+			throw new AMANAH_SEO_AI_AI_Exception(
+				'AI feature is not available under the current license.',
+				'authentication',
+				403,
+				'ai_entitlement_missing'
+			);
+		}
 		$prompt = $this->prompts->build( $task, $input );
 		$provider = $this->resolver->resolve( $user_id );
 		$fallback = $this->resolver->resolve_fallback( $user_id );
