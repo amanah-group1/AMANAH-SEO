@@ -2,7 +2,7 @@
 
 **Versi:** 0.1-draft-controlled  
 **Tanggal:** 2026-10-12  
-**Status:** IMPLEMENTASI FONDASI CORE MVP — PHP LINT PASS; RUNTIME BELUM DIUJI  
+**Status terkini (2026-10-12):** CORE MVP BERTAHAP TERIMPLEMENTASI — PHP LINT + REGRESSION PASS (PHP 7.4/8.2); UJI RUNTIME WORDPRESS MENUNGGU EKSEKUSI  
 **Produk:** AMANAH SEO (produk utama)  
 **Acuan:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), [Paket Tunggal Kesiapan dan Migrasi](13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md)
 
@@ -62,13 +62,13 @@ Temuan historis di atas harus diperiksa ulang terhadap SHA terkini sebelum paket
 
 ## 4. Kunci ruang lingkup dan file
 
-### 4.1 Allowlist yang dikunci sekarang
+### 4.1 Allowlist implementasi Core yang telah dijalankan
 
-Hanya dokumen perencanaan pada branch terkontrol ini yang diizinkan berubah selama tahap persiapan. `main`, kode plugin, tes produk, konfigurasi, database, credential, serta runtime tidak berubah melalui paket ini.
+Atas instruksi pemilik untuk menuntaskan target teknis, implementasi Core dilanjutkan melalui PR terkontrol #40–#45. File yang telah diubah berada di `plugin/`, `tests/core-store-regression.php`, dan `.github/workflows/core-regression.yml`. Perubahan mencakup Core MVP, koreksi format insert tugas, workspace/status temuan, tenggat/dependensi, diagnostik, dan uji runtime satu-klik. Perubahan ini tidak mengubah source AI/ENGINE, server lisensi, API key, atau data produksi.
 
-### 4.2 File implementasi
+### 4.2 File implementasi berikutnya
 
-**Allowlist implementasi masih belum dapat dikunci.** Pemeriksaan GitHub-only menemukan repository AMANAH SEO utama hanya berisi dokumentasi dan template; source runtime berada di repository AI dan Engine. Entry point awal telah teridentifikasi, tetapi daftar file lengkap, dependensi, side effect, tests, data ownership, dan kontrak lisensi belum selesai diaudit. Jangan menebak atau mengizinkan coding sebelum manifest exact ADD/MODIFY/DELETE disetujui.
+Core MVP telah memiliki entry point runtime dan perubahan terkontrol. Perluasan berikutnya—khususnya migrasi source AI/ENGINE, kontrak lisensi, integrasi GSC, dan migrasi data—tetap membutuhkan inventory lengkap, dependency map, ownership, dan manifest file exact sebelum dijalankan. File source produk pendamping tidak termasuk dalam paket Core yang sudah digabung.
 
 Sebelum coding, buat manifest file eksplisit berisi:
 - path relatif persis;
@@ -81,13 +81,15 @@ Sebelum coding, buat manifest file eksplisit berisi:
 
 File di luar manifest otomatis **OUT OF SCOPE**. Perluasan manifest memerlukan persetujuan pemilik sebelum perubahan.
 
-### 4.3 Perubahan yang dilarang tanpa persetujuan terpisah
+### 4.3 Perubahan yang tetap memerlukan gerbang/persetujuan terpisah
 
 - file pada repository AMANAH SEO AI atau AMANAH SEO ENGINE V2;
-- API licensing server, skema database, credential store, endpoint lisensi atau entitlement;
-- schema/data migration, uninstall cleanup, atau penghapusan data;
-- production files, runtime WordPress, konfigurasi, branch `main`, secrets, dan database;
-- dependensi/framework baru, build/release pipeline, atau perubahan scope MVP.
+- API licensing server, credential store, endpoint lisensi atau entitlement;
+- migrasi schema/data lintas modul, uninstall cleanup, atau penghapusan data;
+- production files, secrets, dan database produksi;
+- dependensi/framework baru, perubahan build/release pipeline, atau perubahan scope MVP.
+
+Migrasi aditif yang hanya menyentuh tabel milik Core untuk kolom tenggat/dependensi sudah menjadi bagian implementasi terkontrol; ini bukan izin untuk migrasi schema AI/ENGINE.
 
 ## 5. Kriteria penerimaan paket Core Shell
 
@@ -163,3 +165,16 @@ Instruksi pemilik pada 2026-10-12 mengizinkan implementasi fondasi Core MVP pada
 
 Path aktif `docs/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` tidak ditemukan pada `main`; salinan historis tersedia di `docs/archive/RENCANA_INDUK_PENUNTASAN_PEDOMAN_AMANAH_SEO.md` dan secara eksplisit berstatus superseded. Karena itu, gunakan `docs/PEDOMAN_INDUK_AMANAH_SEO.md` sebagai acuan konseptual aktif dan paket implementasi ini untuk gerbang implementasi. Jangan memperlakukan dokumen arsip sebagai checklist operasional terkini tanpa persetujuan eksplisit.
 
+
+
+## 9. Status implementasi dan bukti otomatis terkini — 2026-10-12
+
+PR #40–#45 telah digabungkan ke `main`. Fitur Core yang ada: dashboard, workspace satu website, temuan dengan status dan catatan penyelesaian, tugas dengan tenggat/dependensi, persetujuan, bukti penyelesaian, riwayat, halaman diagnostik, dan tombol uji runtime Core.
+
+- GitHub Actions PHP syntax: **PASS**.
+- Tes regresi store pada PHP 7.4: **PASS**.
+- Tes regresi store pada PHP 8.2: **PASS**.
+- Uji runtime satu-klik: sudah tersedia pada halaman Diagnostik, tetapi **BELUM DIUJI pada WordPress lokal** sampai tombol dijalankan pada target testing.
+- Backup/restore clone, recovery drill, verifikasi akses GSC, kontrak lisensi server, dan migrasi modul AI/ENGINE: **BELUM DIUJI / BELUM DIIMPLEMENTASIKAN**.
+
+Hasil CI hanya membuktikan sintaks dan aturan data yang tercakup tes otomatis. Jangan menaikkan status runtime atau rilis tanpa bukti dari situs testing.
