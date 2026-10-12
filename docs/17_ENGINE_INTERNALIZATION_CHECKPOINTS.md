@@ -109,3 +109,13 @@ Internal namespace root remains `Amanah\\SEOEngine\\` to avoid a broad, risky na
 - The WordPress/MySQL smoke test now inserts a temporary existing ENGINE keyword row, reruns the idempotent Core-domain schema migration, and confirms the row ID remains present before cleaning up the temporary row. It also invokes the Version 17 migration against a temporary encrypted DataForSEO secret and verifies the secret is preserved.
 - CI at `800f02850d35c979e4a648310633d9c572fe7448`: Core PHP checks PASS; Core regression PASS on PHP 8.1 and 8.2 (22 integration checks, 5 license checks, 105 PHPUnit tests / 317 assertions, zero failures/errors); WordPress + MySQL activation/reactivation PASS twice, including populated-row and credential-preservation checks.
 - This is a controlled existing-row rehearsal, not a substitute for running migrations on a copy of the user's real WordPress database.
+
+
+## Checkpoint 15 — Populated keyword-row preservation
+- Test commit: `800f02850d35c979e4a648310633d9c572fe7448`; namespace correction commit: `e1d5ffbc5ec31842617bd694a0ee9f5cd07692f9`.
+- The runtime smoke now seeds a real row in the ENGINE keyword table, reruns `Version2CoreDomain` against the populated schema, and verifies that the existing row ID survives. The temporary row is removed after the assertion.
+- Latest verified code head before this documentation update: `800f02850d35c979e4a648310633d9c572fe7448`.
+  - Core PHP syntax: PASS.
+  - Core regression: PASS on PHP 8.1 and 8.2; 22 integration checks, 5 license checks, and 105 PHPUnit tests / 317 assertions, with zero failures/errors.
+  - WordPress + MySQL runtime: PASS twice for activation/reactivation, ENGINE-to-Core license storage, populated keyword-row preservation, DataForSEO credential preservation, and Core-owned menu registration.
+- The test provides a controlled existing-row migration rehearsal; an upgrade test against a copy of the real active site's database remains a separate release gate.
