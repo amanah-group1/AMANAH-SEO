@@ -11,6 +11,7 @@ if (!class_exists('WP_Error')) {
         public function get_error_code() { return $this->code; }
     }
 }
+if (!function_exists('is_wp_error')) { function is_wp_error($value) { return $value instanceof WP_Error; } }
 if (!function_exists('wp_unslash')) { function wp_unslash($value) { return $value; } }
 if (!function_exists('sanitize_text_field')) { function sanitize_text_field($value) { return trim(strip_tags((string)$value)); } }
 if (!function_exists('sanitize_textarea_field')) { function sanitize_textarea_field($value) { return trim(strip_tags((string)$value)); } }
