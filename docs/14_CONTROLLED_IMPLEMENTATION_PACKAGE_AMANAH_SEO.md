@@ -2,11 +2,11 @@
 
 **Versi:** 0.1-draft-controlled  
 **Tanggal:** 2026-10-12  
-**Status:** PERENCANAAN SAJA — BELUM DISETUJUI UNTUK CODING  
+**Status:** IMPLEMENTASI FONDASI CORE MVP — PHP LINT PASS; RUNTIME BELUM DIUJI  
 **Produk:** AMANAH SEO (produk utama)  
 **Acuan:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), [Paket Tunggal Kesiapan dan Migrasi](13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md)
 
-> Dokumen ini bukan izin mengubah kode, database, lisensi, konfigurasi, branch utama, runtime WordPress, atau melakukan deployment. Perubahan implementasi hanya boleh dimulai setelah seluruh gate wajib lulus, daftar file diizinkan secara eksplisit, dan pemilik menyetujui paket implementasi.
+ > Pemilik memberikan instruksi eksplisit pada 2026-10-12 untuk menuntaskan target teknis AMANAH SEO. Instruksi ini mengizinkan implementasi terkontrol bertahap; bukan izin untuk mengubah database/runtime WordPress tanpa backup, atau menyatakan fitur belum teruji sebagai PASS.
 
 ## 1. Keputusan produk yang mengikat
 
@@ -157,7 +157,7 @@ Coding hanya boleh dimulai setelah semua butir ini terpenuhi:
 - [ ] Risiko lisensi dan data yang menyentuh paket pertama dipastikan tidak berubah tanpa izin.
 - [ ] Pemilik memberi persetujuan eksplisit untuk paket implementasi dengan scope tersebut.
 
-**Status akhir saat ini: BELUM SIAP CODING.** Keputusan arsitektur lisensi telah disetujui dan masuk main, tetapi G0 masih perlu dikunci untuk implementasi, G1/G2/G5/G6/G7 belum diuji, G3/G4 baru parsial, dan G8 belum disetujui. Langkah berikutnya adalah menuntaskan source/data/license inventory secara baca-saja dan mendapatkan bukti target runtime/backup-restore; jangan mulai menulis kode.
+**Status setelah paket fondasi Core MVP (2026-10-12):** plugin entry point, tabel milik Core, dashboard, temuan, tugas, persetujuan, bukti penyelesaian, dan riwayat telah ditambahkan pada PR #40. GitHub Actions PHP syntax check PASS. Ini belum memenuhi penerimaan MVP: runtime WordPress, backup/restore, pengujian nonce/capability, GSC, kontrak lisensi server, integrasi internal AI/ENGINE, dan pemeriksaan dependency/migrasi masih terbuka. Tidak ada runtime/database yang disentuh.
 
 ## 8. Catatan kendala sumber
 
