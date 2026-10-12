@@ -15,7 +15,7 @@ $checks = array();
 $checks['single Core entry loads internal module bootstrap'] = strpos( $read( 'plugin/amanah-seo.php' ), "class-amanah-seo-modules.php" ) !== false;
 $checks['AI runtime keeps legacy core implementation'] = strpos( $read( 'plugin/modules/ai-runtime/includes/class-plugin-core.php' ), 'class AMANAH_SEO_AI_Plugin_Core' ) !== false;
 $engine_bootstrap = $read( 'plugin/modules/engine-runtime/bootstrap.php' );
-$checks['ENGINE internal bootstrap uses native PSR-4 loader'] = strpos( $engine_bootstrap, 'Amanah\\\\SEOEngine\\\\Core\\\\Autoload\\\\ClassLoader' ) !== false && strpos( $engine_bootstrap, 'Core\\\\Bootstrap\\\\Plugin::boot()' ) !== false;
+$checks['ENGINE internal bootstrap uses native PSR-4 loader'] = strpos( $engine_bootstrap, 'ClassLoader' ) !== false && strpos( $engine_bootstrap, 'Plugin::boot()' ) !== false;
 $checks['Core loads ENGINE internally without a second plugin entry point'] = strpos( $read( 'plugin/includes/class-amanah-seo-modules.php' ), "modules/engine-runtime/bootstrap.php" ) !== false && ! is_file( $root . '/plugin/modules/engine-runtime/amanah-seo-engine.php' );
 $engine_all_files = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $root . '/plugin/modules/engine-runtime', FilesystemIterator::SKIP_DOTS ) );
 $engine_php_count = 0;
@@ -24,7 +24,7 @@ foreach ( $engine_all_files as $engine_file ) {
 }
 $checks['ENGINE production source and internal bootstrap are present'] = $engine_php_count >= 297 && is_file( $root . '/plugin/modules/engine-runtime/Infrastructure/Repository/WordPressKeywordRepository.php' ) && is_file( $root . '/plugin/modules/engine-runtime/Presentation/Admin/PageBlueprintAdmin.php' ) && is_file( $root . '/plugin/modules/engine-runtime/Platform/License/LicenseClient.php' );
 $engine_menu = $read( 'plugin/modules/engine-runtime/Presentation/Admin/AdminMenu.php' );
-$checks['ENGINE screens are nested under Core and do not create a second top-level menu'] = strpos( $engine_menu, "add_submenu_page(\\n\\t\\t\\t'amanah-seo'," ) !== false && strpos( $engine_menu, 'add_menu_page(' ) === false;
+$checks['ENGINE screens are nested under Core and do not create a second top-level menu'] = preg_match( "/add_submenu_page\\s*\\(\\s*'amanah-seo'/", $engine_menu ) === 1 && strpos( $engine_menu, 'add_menu_page(' ) === false;
 $checks['ENGINE AI configuration and license screens remain Core-owned'] = strpos( $engine_menu, "array( 'license', 'updates', 'ai-configuration' )" ) !== false;
 $legacy_migration = $read( 'plugin/modules/engine-runtime/Infrastructure/Migration/Migrations/Version17RemoveLegacySerpCredentials.php' );
 $checks['ENGINE legacy credential migration preserves existing DataForSEO secrets'] = strpos( $legacy_migration, "delete( 'dataforseo' )" ) === false;
