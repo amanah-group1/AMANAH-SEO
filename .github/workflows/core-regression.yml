@@ -29,7 +29,9 @@ jobs:
           find plugin -type f -name '*.php' -print0 | xargs -0 -n1 php -l
           php -l tests/core-store-regression.php
           php -l tests/wordpress-inventory-regression.php
+          php -l tests/content-checks-regression.php
       - name: Core data regression tests
         run: |
           php tests/core-store-regression.php
           php tests/wordpress-inventory-regression.php
+          php tests/content-checks-regression.php
