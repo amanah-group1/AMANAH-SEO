@@ -11,7 +11,7 @@ MVP harus membuktikan satu siklus nilai dari awal sampai akhir:
 
 Jangan menjadikan MVP sebagai upaya membangun semua fitur SEO sekaligus. Target packaging adalah satu plugin AMANAH SEO dengan core dan modul internal AI/Engine setelah audit/migrasi terkontrol. Kemampuan penuh modul tidak otomatis masuk lingkup fungsional MVP; jangan menyalin workflow Engine ke core.
 
-Prinsip packaging/pengelolaan lisensi yang mengikat: pengguna memasang satu plugin runtime, AMANAH SEO, sebagai tempat mengelola dan mengaktifkan dua lisensi modul yang berbeda—lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Kedua lisensi tetap independen dalam identitas, status, validasi, masa berlaku, dan entitlement; lisensi satu modul tidak memberi hak penggunaan modul lainnya. Plugin AI/Engine tidak perlu dipasang terpisah. Apakah Core AMANAH SEO juga membutuhkan lisensi tersendiri belum diputuskan dan tidak boleh diasumsikan. Kontrak teknis dan perilaku kegagalan lisensi tetap menjadi gerbang implementasi.
+Prinsip packaging/lisensi yang disetujui: siapa pun boleh mengunduh, memasang, dan mengaktifkan plugin AMANAH SEO Core tanpa lisensi. AMANAH SEO menjadi tempat mengelola dua lisensi modul terpisah—AMANAH SEO AI dan AMANAH SEO ENGINE V2. Masing-masing lisensi hanya memberikan entitlement untuk modulnya sendiri; satu lisensi tidak membuka modul lainnya. Plugin AI/Engine tidak perlu dipasang terpisah. Kontrak teknis dan perilaku kegagalan lisensi tetap menjadi gerbang implementasi.
 
 ## 2. Fungsi yang direkomendasikan sebagai wajib MVP
 
