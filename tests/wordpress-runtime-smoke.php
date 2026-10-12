@@ -68,6 +68,37 @@ try {
 	$secret_store->delete( 'dataforseo' );
 }
 
+$keyword_table = $wpdb->prefix . 'amanah_seo_keywords';
+$sentinel_keyword = 'migration-preservation-smoke';
+$inserted = $wpdb->insert(
+	$keyword_table,
+	array(
+		'keyword' => $sentinel_keyword,
+		'normalized_keyword' => $sentinel_keyword,
+		'keyword_type' => 'primary',
+		'status' => 'active',
+		'created_at' => current_time( 'mysql', true ),
+		'updated_at' => current_time( 'mysql', true ),
+	)
+);
+if ( false === $inserted ) {
+	$failures[] = 'Could not seed an existing ENGINE keyword row for the migration-preservation check.';
+} else {
+	$sentinel_id = (int) $wpdb->insert_id;
+	try {
+		$schema_migration = new \Amanah\SEOEngine\Infrastructure\Migration\Migrations\Version2CoreDomain( $wpdb );
+		$schema_migration->up();
+		$preserved_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$keyword_table} WHERE id = %d", $sentinel_id ) );
+		if ( (int) $preserved_id !== $sentinel_id ) {
+			$failures[] = 'Existing ENGINE keyword data was not preserved by the idempotent schema migration.';
+		}
+	} catch ( Throwable $exception ) {
+		$failures[] = 'Existing ENGINE data migration smoke test failed: ' . $exception->getMessage();
+	} finally {
+		$wpdb->delete( $keyword_table, array( 'id' => $sentinel_id ), array( '%d' ) );
+	}
+}
+
 wp_set_current_user( 1 );
 do_action( 'admin_menu' );
 global $submenu;
@@ -98,4 +129,4 @@ if ( $failures ) {
 	exit( 1 );
 }
 
-echo 'PASS: WordPress activation tables, ENGINE migration version, Core license storage, and Core-owned ENGINE menus.' . PHP_EOL;
+echo 'PASS: WordPress activation/reactivation, ENGINE data and credential preservation, Core license storage, and Core-owned ENGINE menus.' . PHP_EOL;
