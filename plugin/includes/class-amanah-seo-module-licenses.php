@@ -163,46 +163,106 @@ final class AMANAH_SEO_Module_Licenses {
 		echo '</div>';
 	}
 
-	private static function activate_ai_license( string $license_key ): array {
-		$endpoint = rtrim( (string) get_option( 'amanah_seo_license_api_endpoint', 'https://api.amanahseoai.my.id' ), '/' );
-		$endpoint_parts = function_exists( 'wp_parse_url' ) ? wp_parse_url( $endpoint ) : parse_url( $endpoint );
-		if ( ! is_array( $endpoint_parts ) || 'https' !== strtolower( (string) ( $endpoint_parts['scheme'] ?? '' ) ) || 'api.amanahseoai.my.id' !== strtolower( (string) ( $endpoint_parts['host'] ?? '' ) ) || isset( $endpoint_parts['user'] ) || isset( $endpoint_parts['pass'] ) ) {
-			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_endpoint' );
+	private static function activate_ai_license( string $license_key, bool $validate_existing = false ): array {
+		$base_url = 'https://api.amanahseoai.my.id';
+		$endpoint_path = $validate_existing ? '/v1/validate' : '/v1/activate';
+		$endpoint = $base_url . $endpoint_path;
+		$site_id = get_option( 'amanah_seo_ai_license_site_id', '' );
+		if ( ! is_string( $site_id ) || ! preg_match( '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i', $site_id ) ) {
+			$site_id = wp_generate_uuid4();
+			update_option( 'amanah_seo_ai_license_site_id', $site_id, false );
 		}
+		$site_id = strtolower( $site_id );
+		$domain = strtolower( trim( (string) wp_parse_url( home_url(), PHP_URL_HOST ) ) );
+		if ( '' === $domain ) {
+			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_site_domain' );
+		}
+
+		$request_id = wp_generate_uuid4();
+		$timestamp = time();
+		$signature_payload = $request_id . "\n" . $timestamp . "\n" . strtoupper( $endpoint_path ) . "\n" . $site_id;
+		$signature = hash_hmac( 'sha256', $signature_payload, $license_key );
 		$response = wp_remote_post(
-			$endpoint . '/activate',
+			$endpoint,
 			array(
-				'timeout' => 10,
-				'headers' => array( 'Content-Type' => 'application/json' ),
-				'body' => wp_json_encode( array( 'license_key' => $license_key, 'product' => 'amanah-seo-ai' ) ),
+				'timeout'     => 15,
+				'redirection' => 0,
+				'headers'     => array( 'Content-Type' => 'application/json' ),
+				'body'        => wp_json_encode(
+					array(
+						'request_id' => $request_id,
+						'timestamp'  => $timestamp,
+						'license_key' => $license_key,
+						'signature'  => $signature,
+						'product_id' => 'amanah-seo-ai',
+						'site_id'    => $site_id,
+						'domain'     => $domain,
+					)
+				),
 			)
 		);
 		if ( is_wp_error( $response ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'service_unavailable' );
 		}
+
 		$code = (int) wp_remote_retrieve_response_code( $response );
 		$body = json_decode( (string) wp_remote_retrieve_body( $response ), true );
-		$allowed = array( 'unconfigured', 'active', 'grace', 'expired', 'revoked', 'suspended', 'invalid', 'unknown' );
-		if ( $code < 200 || $code >= 300 || ! is_array( $body ) || ! isset( $body['product'], $body['status'], $body['entitlements'] ) || ! is_string( $body['product'] ) || 'amanah-seo-ai' !== $body['product'] || ! is_string( $body['status'] ) || ! in_array( $body['status'], $allowed, true ) || ! is_array( $body['entitlements'] ) ) {
+		if ( ! is_array( $body ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 		}
-		foreach ( $body['entitlements'] as $entitlement ) {
+		if ( empty( $body['success'] ) ) {
+			$error = isset( $body['error'] ) && is_array( $body['error'] ) ? $body['error'] : array();
+			$error_code = isset( $error['code'] ) && is_string( $error['code'] ) ? strtoupper( sanitize_key( $error['code'] ) ) : 'SERVER_ERROR';
+			$statuses = array(
+				'LICENSE_NOT_FOUND' => 'invalid',
+				'LICENSE_INVALID' => 'invalid',
+				'LICENSE_EXPIRED' => 'expired',
+				'LICENSE_SUSPENDED' => 'suspended',
+				'LICENSE_REVOKED' => 'revoked',
+				'PRODUCT_MISMATCH' => 'invalid',
+				'ACTIVATION_LIMIT_REACHED' => 'invalid',
+				'SITE_NOT_FOUND' => 'invalid',
+				'SITE_MISMATCH' => 'invalid',
+				'AUTHENTICATION_FAILED' => 'invalid',
+			);
+			return array(
+				'status' => $statuses[ $error_code ] ?? 'unknown',
+				'entitlements' => array(),
+				'reason' => in_array( $error_code, array_keys( $statuses ), true ) ? 'license_rejected' : ( 0 === $code ? 'service_unavailable' : 'service_error' ),
+			);
+		}
+		if ( $code < 200 || $code >= 300 || ! isset( $body['data'] ) || ! is_array( $body['data'] ) ) {
+			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
+		}
+
+		$data = $body['data'];
+		if ( ! isset( $data['status'], $data['entitlements'] ) || ! is_string( $data['status'] ) || ! is_array( $data['entitlements'] ) ) {
+			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
+		}
+		$service_status = strtoupper( $data['status'] );
+		$allowed_statuses = array( 'ACTIVE', 'GRACE', 'NOT_ENTITLED', 'EXPIRED', 'REVOKED', 'SUSPENDED', 'INVALID', 'UNCONFIGURED', 'UNKNOWN' );
+		if ( ! in_array( $service_status, $allowed_statuses, true ) ) {
+			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
+		}
+		foreach ( $data['entitlements'] as $entitlement ) {
 			if ( ! is_string( $entitlement ) || '' === trim( $entitlement ) ) {
 				return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 			}
 		}
-		$entitlements = array_values( array_unique( array_map( 'sanitize_key', $body['entitlements'] ) ) );
-		if ( in_array( $body['status'], array( 'active', 'grace' ), true ) && empty( $entitlements ) ) {
+		$entitlements = array_values( array_unique( array_map( 'sanitize_key', $data['entitlements'] ) ) );
+		if ( in_array( $service_status, array( 'ACTIVE', 'GRACE' ), true ) && empty( $entitlements ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 		}
 		return array(
-			'status' => $body['status'],
+			'status'       => strtolower( $service_status ),
 			'entitlements' => $entitlements,
-			'validated_at' => isset( $body['validated_at'] ) ? sanitize_text_field( (string) $body['validated_at'] ) : '',
-			'reason' => '',
+			'validated_at' => gmdate( 'c' ),
+			'expires_at'   => isset( $data['expires_at'] ) && is_string( $data['expires_at'] ) ? sanitize_text_field( $data['expires_at'] ) : '',
+			'grace_until'  => isset( $data['grace_until'] ) && is_string( $data['grace_until'] ) ? sanitize_text_field( $data['grace_until'] ) : '',
+			'plan'         => isset( $data['plan'] ) && is_string( $data['plan'] ) ? sanitize_text_field( $data['plan'] ) : '',
+			'reason'       => '',
 		);
 	}
-
 	private static function save_license_status( string $module, array $status ): void {
 		$all = get_option( 'amanah_seo_module_license_statuses', array() );
 		$all = is_array( $all ) ? $all : array();
