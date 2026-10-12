@@ -133,7 +133,7 @@ final class AMANAH_SEO_Module_Licenses {
 	}
 
 	private static function apply_ai_grace_fallback( array $status, array $previous ): array {
-		if ( ! in_array( $status['status'] ?? '', array( 'unknown' ), true ) || ! in_array( $status['reason'] ?? '', array( 'service_unavailable', 'service_error', 'invalid_response' ), true ) ) {
+		if ( ! in_array( $status['status'] ?? '', array( 'unknown' ), true ) || ! in_array( $status['reason'] ?? '', array( 'service_unavailable', 'service_error' ), true ) ) {
 			return $status;
 		}
 		if ( ! in_array( $previous['status'] ?? '', array( 'active', 'grace' ), true ) || ! is_array( $previous['entitlements'] ?? null ) ) {
@@ -287,7 +287,10 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( ! is_array( $body ) ) {
 			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
 		}
-		if ( empty( $body['success'] ) ) {
+		if ( ! array_key_exists( 'success', $body ) || ! is_bool( $body['success'] ) ) {
+			return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
+		}
+		if ( false === $body['success'] ) {
 			$error = isset( $body['error'] ) && is_array( $body['error'] ) ? $body['error'] : array();
 			$error_code = isset( $error['code'] ) && is_string( $error['code'] ) ? strtoupper( sanitize_key( $error['code'] ) ) : 'SERVER_ERROR';
 			$statuses = array(
