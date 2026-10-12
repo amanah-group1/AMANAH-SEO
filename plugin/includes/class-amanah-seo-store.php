@@ -9,6 +9,22 @@ final class AMANAH_SEO_Store {
   if ( false === $ok ) return new WP_Error('finding_save_failed','Finding could not be saved.');
   $id=(int)$wpdb->insert_id; self::event('finding',$id,'created','Finding created; source='.$d['source']); return $id;
  }
+ public static function update_finding_status($id,$status,$note='') {
+  global $wpdb;
+  $allowed=array('open','in_progress','resolved','dismissed');
+  if(!in_array($status,$allowed,true)) return new WP_Error('invalid_finding_status','Invalid finding status.');
+  if(in_array($status,array('resolved','dismissed'),true) && ''===trim($note)) return new WP_Error('finding_note_required','A result note is required to resolve or dismiss a finding.');
+  $table=self::table('findings');
+  $row=$wpdb->get_row($wpdb->prepare("SELECT id,status FROM {$table} WHERE id = %d",$id));
+  if(!$row) return new WP_Error('finding_not_found','Finding not found.');
+  $old=$row->status;
+  $ok=$wpdb->update($table,array('status'=>$status,'updated_at'=>current_time('mysql')),array('id'=>$id),array('%s','%s'),array('%d'));
+  if(false===$ok) return new WP_Error('finding_update_failed','Finding status could not be updated.');
+  $detail='from='.$old.'; to='.$status;
+  if(trim($note)!=='')$detail.='; note='.sanitize_textarea_field($note);
+  self::event('finding',$id,'status_changed',$detail);
+  return true;
+ }
  public static function create_task( array $d ) {
   if('completed'===$d['status']) return new WP_Error('completion_evidence_required','A task cannot be created as completed without a recorded result.');
   global $wpdb; $now=current_time('mysql');
