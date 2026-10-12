@@ -110,6 +110,9 @@ $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['a
 );
 $GLOBALS['amanah_license_mock_response'] = $valid_response();
 $checks['Stale entitlement is revalidated through the v1 validate endpoint before use'] = AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' ) && 'https://api.amanahseoai.my.id/v1/validate' === $GLOBALS['amanah_license_last_request']['url'];
+$latest_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
+$latest_statuses['ai']['entitlements'] = array();
+update_option( 'amanah_seo_module_license_statuses', $latest_statuses, false );
 
 $client = ( new ReflectionClass( 'AMANAH_SEO_AI_AI_Client' ) )->newInstanceWithoutConstructor();
 try {
