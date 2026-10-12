@@ -15,9 +15,8 @@ $checks = array();
 $checks['single Core entry loads internal module bootstrap'] = strpos( $read( 'plugin/amanah-seo.php' ), "class-amanah-seo-modules.php" ) !== false;
 $checks['AI runtime keeps legacy core implementation'] = strpos( $read( 'plugin/modules/ai-runtime/includes/class-plugin-core.php' ), 'class AMANAH_SEO_AI_Plugin_Core' ) !== false;
 $engine_bootstrap = $read( 'plugin/modules/engine-runtime/bootstrap.php' );
-$checks['ENGINE internal bootstrap uses native PSR-4 loader'] = strpos( $engine_bootstrap, "Amanah\\\\SEOEngine\\\\Core\\\\Autoload\\\\ClassLoader" ) !== false && strpos( $engine_bootstrap, "Core\\\\Bootstrap\\\\Plugin::boot()" ) !== false;
+$checks['ENGINE internal bootstrap uses native PSR-4 loader'] = strpos( $engine_bootstrap, 'Amanah\\\\SEOEngine\\\\Core\\\\Autoload\\\\ClassLoader' ) !== false && strpos( $engine_bootstrap, 'Core\\\\Bootstrap\\\\Plugin::boot()' ) !== false;
 $checks['Core loads ENGINE internally without a second plugin entry point'] = strpos( $read( 'plugin/includes/class-amanah-seo-modules.php' ), "modules/engine-runtime/bootstrap.php" ) !== false && ! is_file( $root . '/plugin/modules/engine-runtime/amanah-seo-engine.php' );
-$engine_files = glob( $root . '/plugin/modules/engine-runtime/**/*.php' );
 $engine_all_files = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $root . '/plugin/modules/engine-runtime', FilesystemIterator::SKIP_DOTS ) );
 $engine_php_count = 0;
 foreach ( $engine_all_files as $engine_file ) {
