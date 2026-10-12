@@ -15,8 +15,9 @@ Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/RE
 
 ## Status implementasi teknis
 
-- Fondasi runtime plugin WordPress tersedia di direktori `plugin/` pada paket implementasi Core MVP. Status: PHP syntax checks PASS; penerimaan runtime WordPress, backup/restore, GSC, dan integrasi lisensi belum diuji.
-- Jangan menganggap fondasi ini sebagai MVP lengkap atau menyalinnya ke produksi. Lihat [PR implementasi Core MVP](https://github.com/amanahgroup123/AMANAH-SEO/pull/40) untuk perubahan dan batas penerimaannya.
+- Core MVP saat ini mencakup dashboard, profil satu website/workspace, temuan dengan status dan catatan penyelesaian, tugas dengan tenggat/dependensi, persetujuan, riwayat, diagnostik aman, serta uji runtime satu-klik yang membersihkan catatan uji.
+- GitHub Actions PHP syntax dan regression tests PASS pada PHP 7.4 dan 8.2. Uji runtime WordPress pada situs lokal belum dijalankan; backup/restore, GSC, integrasi server lisensi, serta migrasi modul AI/ENGINE tetap BELUM DIUJI/belum tersedia.
+- Jangan menganggap Core MVP sudah memenuhi seluruh produk atau menyalinnya ke produksi. Paket perubahan: [Core MVP](https://github.com/amanahgroup123/AMANAH-SEO/pull/40), [perbaikan regresi](https://github.com/amanahgroup123/AMANAH-SEO/pull/41), [workspace dan status temuan](https://github.com/amanahgroup123/AMANAH-SEO/pull/42), [tenggat dan dependensi](https://github.com/amanahgroup123/AMANAH-SEO/pull/43), [diagnostik](https://github.com/amanahgroup123/AMANAH-SEO/pull/44), dan [uji runtime satu-klik](https://github.com/amanahgroup123/AMANAH-SEO/pull/45).
 
 ## Arsitektur produk
 
@@ -42,7 +43,7 @@ Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/RE
 2. Audit kondisi nyata sebelum implementasi dan jangan menyatakan PASS tanpa bukti.
 3. Gunakan bahasa yang mudah dipahami pada penjelasan dan antarmuka.
 4. Jangan mengubah website, database, runtime, konfigurasi, atau repository sumber AI/Engine selama tahap persiapan dokumen.
-5. Mulai coding hanya setelah paket, ruang lingkup, daftar perubahan, kriteria penerimaan, rencana rollback, dan persetujuan pemilik jelas.
+5. Implementasi berjalan melalui paket terkontrol dengan ruang lingkup, kriteria penerimaan, dan rencana pemulihan yang jelas; jangan mengubah source AI/ENGINE, server lisensi, atau data produksi tanpa gerbang dan persetujuan khusus.
 
 
 **Penutupan pedoman:** keputusan konseptual yang diperlukan untuk menetapkan arah produk dan MVP telah dikonsolidasikan. Bukti akses WordPress/GSC dan pengujian penerimaan adalah gerbang teknis sebelum implementasi/fitur terkait, bukan alasan untuk membuka kembali keputusan konsep. Implementasi tetap memerlukan persetujuan terpisah.
