@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ["7.4", "8.2"]
+        php: ["8.1", "8.2"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,6 +34,7 @@ jobs:
           php -l tests/finding-to-task-regression.php
           php -l tests/dashboard-work-direction-regression.php
           php -l tests/task-form-integrity-regression.php
+          php -l tests/module-integration-regression.php
       - name: Core data regression tests
         run: |
           php tests/core-store-regression.php
@@ -43,3 +44,4 @@ jobs:
           php tests/finding-to-task-regression.php
           php tests/dashboard-work-direction-regression.php
           php tests/task-form-integrity-regression.php
+          php tests/module-integration-regression.php

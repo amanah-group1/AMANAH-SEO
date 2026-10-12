@@ -1,0 +1,8 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+class AMANAH_SEO_AI_Article_Package {
+	private $package_id,$content_brief_id,$version,$parent_version,$status,$package,$quality,$traceability;
+	public function __construct($package_id,$content_brief_id,$version,$parent_version,$status,array $package,array $quality=array(),array $traceability=array()){ $this->package_id=(string)$package_id;$this->content_brief_id=absint($content_brief_id);$this->version=max(1,absint($version));$this->parent_version=null===$parent_version?null:max(1,absint($parent_version));$this->status=sanitize_text_field($status);$this->package=$package;$this->quality=$quality;$this->traceability=$traceability; }
+	public function get_package_id(){return $this->package_id;} public function get_content_brief_id(){return $this->content_brief_id;} public function get_version(){return $this->version;} public function get_parent_version(){return $this->parent_version;} public function get_status(){return $this->status;} public function get_package(){return $this->package;} public function get_quality_evaluation(){return $this->quality;} public function get_traceability(){return $this->traceability;}
+	public function to_array(){return array('package_id'=>$this->package_id,'content_brief_id'=>$this->content_brief_id,'version'=>$this->version,'parent_version'=>$this->parent_version,'status'=>$this->status,'package'=>$this->package,'quality_evaluation'=>$this->quality,'traceability'=>$this->traceability);}
+}
