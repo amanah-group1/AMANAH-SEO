@@ -49,6 +49,7 @@ final class AMANAH_SEO_Store {
   if(!$row) return new WP_Error('task_not_found','Task not found.');
   if('completed'===$status && ''===trim($completion_evidence)) return new WP_Error('completion_evidence_required','Completion requires evidence.');
   if('completed'===$status && 'pending'===$row->approval_status) return new WP_Error('approval_pending','Task cannot be completed while approval is pending.');
+  if('completed'===$status && 'rejected'===$row->approval_status) return new WP_Error('approval_rejected','Task cannot be completed after approval was rejected. Submit a revised approval request first.');
   if('completed'===$status && !empty($row->dependency_task_id)){
    $dependency=$wpdb->get_row($wpdb->prepare("SELECT status FROM {$table} WHERE id = %d",absint($row->dependency_task_id)));
    if(!$dependency || 'completed'!==$dependency->status) return new WP_Error('dependency_incomplete','Task cannot be completed until its dependency is complete.');
