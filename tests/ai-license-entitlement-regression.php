@@ -54,6 +54,10 @@ $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Network failure fails closed without exposing credentials'] = 'unknown' === $state['status'] && 'service_unavailable' === $state['reason'] && false === strpos( serialize( $state ), 'ai-license-regression-key' );
 $GLOBALS['amanah_license_mock_error'] = false;
 
+$GLOBALS['amanah_license_mock_response'] = $valid_response( 'grace' );
+$state = $activate->invoke( null, 'ai-license-regression-key' );
+$checks['Grace-period status preserves the established AI license behavior'] = 'grace' === $state['status'] && in_array( 'content_analyzer', $state['entitlements'], true );
+
 $GLOBALS['amanah_license_mock_response'] = $valid_response( 'invalid' );
 $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Invalid license status is not treated as active'] = 'invalid' === $state['status'];
@@ -80,6 +84,9 @@ $GLOBALS['amanah_license_mock_response'] = $valid_response();
 $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses'] = array( 'ai' => array( 'status' => 'active', 'entitlements' => array( 'content_analyzer' ) ) );
 $checks['Active entitlement grants the matching AI capability'] = AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' );
 $checks['Active entitlement does not grant a different capability'] = ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'schema_generation' );
+$GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['ai']['status'] = 'grace';
+$checks['Grace-period entitlement remains available when explicitly granted'] = AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' );
+$GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['ai']['status'] = 'active';
 $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['ai']['status'] = 'expired';
 $checks['Expired license denies previously stored entitlement'] = ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' );
 $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['ai']['status'] = 'active';
