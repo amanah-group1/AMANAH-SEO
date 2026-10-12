@@ -347,8 +347,11 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 		$validated_at = gmdate( 'c' );
 		$grace_until = isset( $data['grace_until'] ) && is_string( $data['grace_until'] ) ? sanitize_text_field( $data['grace_until'] ) : '';
-		if ( 'GRACE' === $service_status && '' === $grace_until ) {
-			$grace_until = gmdate( 'c', time() + 604800 );
+		if ( 'GRACE' === $service_status ) {
+			$grace_timestamp = '' !== $grace_until ? strtotime( $grace_until ) : false;
+			if ( false === $grace_timestamp || $grace_timestamp < time() ) {
+				return array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'invalid_response' );
+			}
 		}
 		return array(
 			'status'       => strtolower( $service_status ),
