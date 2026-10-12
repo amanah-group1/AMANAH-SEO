@@ -53,6 +53,21 @@ if ( ! class_exists( 'AMANAH_SEO_Module_Licenses' ) || ! class_exists( '\\Amanah
 	}
 }
 
+$secret_store = new \\Amanah\\SEOEngine\\Infrastructure\\AI\\SecretStore();
+$legacy_secret = 'dataforseo-preservation-smoke-test';
+try {
+	$secret_store->set( 'dataforseo', $legacy_secret );
+	$migration = new \\Amanah\\SEOEngine\\Infrastructure\\Migration\\Migrations\\Version17RemoveLegacySerpCredentials();
+	$migration->up();
+	if ( $secret_store->get( 'dataforseo' ) !== $legacy_secret ) {
+		$failures[] = 'ENGINE Version 17 migration did not preserve the existing DataForSEO credential.';
+	}
+} catch ( Throwable $exception ) {
+	$failures[] = 'ENGINE credential preservation smoke test failed: ' . $exception->getMessage();
+} finally {
+	$secret_store->delete( 'dataforseo' );
+}
+
 wp_set_current_user( 1 );
 do_action( 'admin_menu' );
 global $submenu;
