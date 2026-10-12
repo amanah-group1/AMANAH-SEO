@@ -44,4 +44,13 @@ final class AMANAH_SEO_Modules {
 			error_log( '[AMANAH SEO] ENGINE module initialization failed: ' . $exception->getMessage() );
 		}
 	}
+
+	public static function deactivate_engine() {
+		try {
+			require_once AMANAH_SEO_PATH . 'modules/engine-runtime/bootstrap.php';
+			\\Amanah\\SEOEngine\\Core\\Bootstrap\\Plugin::deactivate();
+		} catch ( \\Throwable $exception ) {
+			error_log( '[AMANAH SEO] ENGINE deactivation cleanup failed: ' . $exception->getMessage() );
+		}
+	}
 }
