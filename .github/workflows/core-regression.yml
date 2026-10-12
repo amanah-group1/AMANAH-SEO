@@ -1,0 +1,32 @@
+name: Core regression checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, "controlled/**"]
+  workflow_dispatch:
+
+jobs:
+  php-regression:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["7.4", "8.2"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: PHP syntax checks
+        shell: bash
+        run: |
+          set -e
+          find plugin -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          php -l tests/core-store-regression.php
+      - name: Core data regression tests
+        run: php tests/core-store-regression.php
