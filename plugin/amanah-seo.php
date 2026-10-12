@@ -20,6 +20,7 @@ require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-content-checks.php';
 require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-modules.php';
 require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-module-navigation.php';
 register_activation_hook( __FILE__, array( 'AMANAH_SEO_Activator', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'AMANAH_SEO_Modules', 'deactivate_engine' ) );
 add_action( 'plugins_loaded', array( 'AMANAH_SEO_Activator', 'maybe_upgrade' ) );
 add_action( 'plugins_loaded', array( 'AMANAH_SEO_Admin', 'register' ) );
 add_action( 'plugins_loaded', array( 'AMANAH_SEO_Site_Inspector', 'register' ) );
