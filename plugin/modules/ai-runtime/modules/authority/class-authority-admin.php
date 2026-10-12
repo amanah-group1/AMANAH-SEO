@@ -15,7 +15,7 @@ class AMANAH_SEO_AI_Authority_Admin {
 	public function register() {
 		add_action( 'admin_post_amanah_save_authority', array( $this->controller, 'handle_save' ) );
 		add_action( 'admin_post_amanah_delete_authority', array( $this->controller, 'handle_delete' ) );
-		add_action( 'admin_menu', array( $this, 'register_menu' ) );
+		add_action( 'admin_menu', array( $this, 'register_menu' ), 25 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_profile_photo_assets' ) );
 		add_filter( 'get_avatar_url', array( $this, 'filter_avatar_url' ), 10, 3 );
 		add_filter( 'user_contactmethods', array( $this, 'register_social_contact_methods' ), 10, 2 );
