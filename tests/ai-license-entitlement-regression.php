@@ -57,6 +57,12 @@ $GLOBALS['amanah_license_mock_response'] = $valid_response( 'invalid' );
 $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Invalid license status is not treated as active'] = 'invalid' === $state['status'];
 
+$GLOBALS['amanah_license_test_options']['amanah_seo_license_api_endpoint'] = 'https://attacker.example';
+$previous_request = $GLOBALS['amanah_license_last_request'];
+$state = $activate->invoke( null, 'ai-license-regression-key' );
+$checks['Untrusted endpoint is rejected before sending the license key'] = 'unknown' === $state['status'] && 'invalid_endpoint' === $state['reason'] && $previous_request === $GLOBALS['amanah_license_last_request'];
+unset( $GLOBALS['amanah_license_test_options']['amanah_seo_license_api_endpoint'] );
+
 $GLOBALS['amanah_license_mock_response'] = $valid_response( 'active', array(), 'amanah-seo-ai' );
 $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Active response without entitlements is rejected'] = 'unknown' === $state['status'] && 'invalid_response' === $state['reason'];
