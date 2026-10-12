@@ -88,6 +88,27 @@ $GLOBALS['amanah_license_mock_response'] = array( 'response' => array( 'code' =>
 $state = $activate->invoke( null, 'ai-license-regression-key' );
 $checks['Non-success HTTP response fails closed'] = 'unknown' === $state['status'];
 
+$GLOBALS['amanah_license_mock_response'] = array( 'response' => array( 'code' => 200 ), 'body' => json_encode( array( 'data' => array( 'status' => 'ACTIVE', 'entitlements' => array( 'content_analyzer' ) ) ) ) );
+$state = $activate->invoke( null, 'ai-license-regression-key' );
+$checks['Missing success flag is rejected as a malformed service envelope'] = 'unknown' === $state['status'] && 'invalid_response' === $state['reason'];
+
+$GLOBALS['amanah_license_mock_response'] = array( 'response' => array( 'code' => 200 ), 'body' => json_encode( array( 'success' => 'true', 'data' => array( 'status' => 'ACTIVE', 'entitlements' => array( 'content_analyzer' ) ) ) ) );
+$state = $activate->invoke( null, 'ai-license-regression-key' );
+$checks['Non-boolean success flag cannot activate an AI license'] = 'unknown' === $state['status'] && 'invalid_response' === $state['reason'];
+
+AMANAH_SEO_Module_Licenses::set_license( 'ai', 'ai-license-regression-key' );
+$GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses'] = array( 'ai' => array( 'status' => 'active', 'entitlements' => array( 'content_analyzer' ), 'validated_at' => gmdate( 'c', time() - DAY_IN_SECONDS - 60 ), 'expires_at' => 'LIFETIME' ) );
+$GLOBALS['amanah_license_mock_response'] = array( 'response' => array( 'code' => 200 ), 'body' => json_encode( array( 'data' => array( 'status' => 'ACTIVE', 'entitlements' => array( 'content_analyzer' ) ) ) ) );
+$checks['Malformed revalidation response does not grant grace entitlement during AI execution'] = ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' ) && 'unknown' === get_option( 'amanah_seo_module_license_statuses', array() )['ai']['status'];
+
+$GLOBALS['amanah_license_mock_response'] = array( 'response' => array( 'code' => 503 ), 'body' => json_encode( array( 'success' => false, 'error' => array( 'code' => 'SERVER_ERROR' ) ) ) );
+$previous = array( 'status' => 'active', 'entitlements' => array( 'content_analyzer' ), 'validated_at' => gmdate( 'c', time() - 60 ), 'expires_at' => 'LIFETIME' );
+$grace_fallback = new ReflectionMethod( 'AMANAH_SEO_Module_Licenses', 'apply_ai_grace_fallback' );
+$grace_fallback->setAccessible( true );
+$transient = $activate->invoke( null, 'ai-license-regression-key' );
+$fallback = $grace_fallback->invoke( null, $transient, $previous );
+$checks['Transient service errors retain only the bounded upstream-compatible grace window'] = 'grace' === $fallback['status'] && strtotime( $fallback['grace_until'] ) <= time() + 604800 && in_array( 'content_analyzer', $fallback['entitlements'], true );
+
 $GLOBALS['amanah_license_mock_response'] = $valid_response();
 $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses'] = array( 'ai' => array( 'status' => 'active', 'entitlements' => array( 'content_analyzer' ), 'validated_at' => gmdate( 'c' ), 'expires_at' => 'LIFETIME' ) );
 $checks['Active entitlement grants the matching AI capability'] = AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' );
