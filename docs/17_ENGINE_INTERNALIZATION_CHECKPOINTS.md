@@ -102,3 +102,10 @@ Internal namespace root remains `Amanah\\SEOEngine\\` to avoid a broad, risky na
 - The WordPress smoke test now writes a temporary encrypted DataForSEO credential through ENGINE's real `SecretStore`, invokes migration `Version17RemoveLegacySerpCredentials::up()`, and verifies the credential remains readable before cleaning up the temporary test option.
 - CI at `e1d5ffbc5ec31842617bd694a0ee9f5cd07692f9`: Core regression PASS on PHP 8.1 and 8.2; Core PHP syntax PASS; WordPress + MySQL activation/reactivation smoke PASS twice, including the ENGINE license adapter round-trip and DataForSEO credential-preservation assertion.
 - This verifies the integrated migration implementation in a clean database. It does not replace an upgrade rehearsal against a copy of a real, previously populated site database.
+
+
+## Checkpoint 14 — Existing-row schema migration rehearsal
+- Test commit: `800f02850d35c979e4a648310633d9c572fe7448`.
+- The WordPress/MySQL smoke test now inserts a temporary existing ENGINE keyword row, reruns the idempotent Core-domain schema migration, and confirms the row ID remains present before cleaning up the temporary row. It also invokes the Version 17 migration against a temporary encrypted DataForSEO secret and verifies the secret is preserved.
+- CI at `800f02850d35c979e4a648310633d9c572fe7448`: Core PHP checks PASS; Core regression PASS on PHP 8.1 and 8.2 (22 integration checks, 5 license checks, 105 PHPUnit tests / 317 assertions, zero failures/errors); WordPress + MySQL activation/reactivation PASS twice, including populated-row and credential-preservation checks.
+- This is a controlled existing-row rehearsal, not a substitute for running migrations on a copy of the user's real WordPress database.
