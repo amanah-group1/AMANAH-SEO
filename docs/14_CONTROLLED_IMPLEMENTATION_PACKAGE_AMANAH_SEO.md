@@ -11,12 +11,12 @@
 ## 1. Keputusan produk yang mengikat
 
 1. Target akhir adalah satu plugin WordPress yang dipasang pengguna: **AMANAH SEO**.
-2. Pengguna cukup memasang AMANAH SEO dan mengaktifkan produk menggunakan satu lisensi AMANAH SEO. Plugin AMANAH SEO AI dan AMANAH SEO ENGINE V2 tidak boleh menjadi prasyarat instalasi/aktivasi terpisah.
+2. AMANAH SEO menjadi satu pusat pengelolaan dan aktivasi untuk dua lisensi modul yang berbeda: lisensi AMANAH SEO AI dan lisensi AMANAH SEO ENGINE V2. Kedua lisensi memiliki status dan entitlement independen; lisensi satu modul tidak mengaktifkan atau memberi hak penggunaan modul lainnya. Plugin AI/Engine tidak perlu dipasang sebagai plugin runtime terpisah. Kebutuhan lisensi tersendiri untuk Core AMANAH SEO belum diputuskan.
 3. Kemampuan AI dan Engine menjadi modul internal setelah audit dan migrasi terkontrol; fitur modul tidak otomatis termasuk MVP dasar.
 4. AMANAH SEO Lifecycle Manager adalah koordinator tunggal lifecycle komponen internal. Jangan menjalankan lifecycle/installer lama secara paralel tanpa kontrak yang telah diuji.
 5. Core harus tetap bisa aktif dan menampilkan diagnostik aman saat modul opsional gagal. Kegagalan modul tidak boleh menyebabkan fatal error pada core.
 6. Tidak ada perubahan produksi, tindakan otonom terhadap website, penghapusan data, atau klaim PASS tanpa bukti.
-7. PR dokumentasi single-license telah digabungkan ke `main` melalui commit `eab46a05f6e923de9b8511383e42ac89e6dd713d`. Ini mengesahkan perubahan dokumentasi, bukan persetujuan coding.
+7. PR #34 yang sebelumnya menetapkan satu lisensi telah digabungkan ke `main` melalui commit `eab46a05f6e923de9b8511383e42ac89e6dd713d`; prinsip tersebut kini dikoreksi oleh paket dokumentasi ini dan tidak boleh dipakai sebagai dasar implementasi sampai koreksi lisensi per modul disetujui/masuk `main`. Perubahan dokumentasi bukan persetujuan coding.
 
 ## 2. Sasaran paket implementasi pertama
 
@@ -43,7 +43,7 @@ Status di bawah ini adalah status bukti, bukan perkiraan.
 | G1 Target runtime | Identitas target WordPress AMANAH SEO, path plugin, versi WP/PHP/DB, plugin aktif | BELUM DIUJI | Target atau path ambigu |
 | G2 Backup/recovery | Backup files + DB, restore ke clone, row count pembanding | BELUM DIUJI | Restore belum terbukti |
 | G3 Source inventory | Daftar entry point, autoload/bootstrap, hooks, routes, admin pages, capabilities, tests, config/build files | TERHAMBAT — inventory lengkap belum tersedia pada pemeriksaan ini | File allowlist belum bisa ditetapkan |
-| G4 Lisensi tunggal | Audit client/server API, aktivasi, entitlement, expiry, renewal, offline/grace, secret storage, domain binding, update path | BELUM DIAUDIT ULANG pada SHA terkini | Kontrak lisensi tidak jelas atau memerlukan keputusan pemilik |
+| G4 Lisensi per modul | Audit kontrak lisensi AI dan Engine secara independen: client/server API, product ID, aktivasi/deaktivasi, entitlement, expiry, renewal, offline/grace, secret storage, domain binding, update path, cache, dan error states | BELUM DIAUDIT ULANG pada SHA terkini | Kontrak lisensi salah satu modul tidak jelas atau belum kompatibel dengan pusat pengelolaan |
 | G5 Data ownership | Inventaris tabel/options/transients/cron dan pemilik data; kebijakan preserve/retire | BELUM DIUJI untuk target runtime | Ada risiko penghapusan/perpindahan data |
 | G6 Keamanan | Capability, nonce/CSRF, sanitization, escaping, secret redaction, least privilege | BELUM DIUJI | Ada bypass akses atau rahasia tercetak |
 | G7 Test readiness | Lint/unit/integration/runtime commands, baseline hasil sebelum perubahan | BELUM DIUJI | Tes tidak reproducible atau baseline gagal tanpa diagnosis |
@@ -105,7 +105,7 @@ Setiap kriteria harus memiliki status PASS/FAIL/BELUM DIUJI/TERHAMBAT, bukti, SH
 | CORE-08 | Kompatibilitas runtime yang ditargetkan terbukti | Versi PHP/WP/DB tercatat dan lint/test lulus |
 | CORE-09 | Backup/restore berhasil | Bukti restore clone dan pembanding dasar |
 | CORE-10 | Tidak ada file di luar allowlist | Diff final hanya berisi file yang disetujui |
-| CORE-11 | Lisensi tunggal tidak membuat asumsi entitlement | Tes/kontrak memisahkan aktivasi produk dari akses fitur modul |
+| CORE-11 | Lisensi AI dan Engine independen | Tes membuktikan lisensi valid untuk satu modul tidak membuka modul lain; pusat pengelolaan tetap satu di AMANAH SEO |
 | CORE-12 | Recovery terdokumentasi dan dapat dijalankan | Simulasi gagal aktivasi/upgrade dan recovery pada clone |
 
 Tes statis atau pembacaan source saja tidak dapat menggantikan bukti runtime yang diwajibkan oleh masing-masing kriteria.
@@ -138,7 +138,7 @@ Tes statis atau pembacaan source saja tidak dapat menggantikan bukti runtime yan
 
 Coding hanya boleh dimulai setelah semua butir ini terpenuhi:
 
-- [ ] PR dokumentasi single-license sudah masuk ke `main`.
+- [ ] Koreksi arsitektur lisensi per modul sudah masuk ke `main` dan referensi satu-lisensi lama tidak lagi menjadi keputusan aktif.
 - [ ] SHA terkini repository utama dan baseline terkait sudah dikunci.
 - [ ] Inventory source dan entry point telah diverifikasi.
 - [ ] Target WordPress testing dan path plugin disetujui pemilik.
