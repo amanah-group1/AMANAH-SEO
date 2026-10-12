@@ -38,3 +38,31 @@ Internal namespace root remains `Amanah\\SEOEngine\\` to avoid a broad, risky na
 - Migration `Version17RemoveLegacySerpCredentials` was identified for review because it deletes stored `dataforseo` credentials; it must not be run during integration until that destructive behavior is replaced by a safe, explicitly approved migration.
 - ENGINE has its own release-gate workflow in the source repository. Its source-repository PASS does not establish integrated Core+AI+ENGINE PASS.
 - Required remaining work: complete source/dependency transfer (excluding dev artifacts and standalone entry point), inspect and safely adapt menu/license/migration ownership, add Core bootstrap registration and integration regression tests, run PHP lint and all Core/ENGINE tests via CI, and verify the latest PR workflow results. Local WordPress runtime verification is separate and must not be claimed from CI alone.
+
+
+## Integration checkpoint update — 2026-10-12
+
+### Production source transfer
+- The full current ENGINE production PHP source set was internalized under `plugin/modules/engine-runtime/`: **296 source PHP files**, excluding the standalone `plugin/amanah-seo-engine.php` entry point. The internal bootstrap adds one additional PHP file.
+- Production layers now include Domain, Application, AI providers, Infrastructure/WordPress, repositories, migrations, Platform license/update implementations, and Presentation/Admin workflows.
+- No Composer runtime packages are required by ENGINE. Composer development dependencies and release-building tools were not copied into the production plugin.
+- The original namespace prefix `Amanah\\SEOEngine\\` is preserved and mapped by the imported PSR-4 class loader.
+- The Engine admin menu is nested under the existing `amanah-seo` Core menu. It no longer registers a second top-level menu; Engine license, update, AI configuration, and usage screens are hidden so these responsibilities remain Core-owned.
+- Core loads `modules/engine-runtime/bootstrap.php` internally. The Core plugin deactivation hook delegates to ENGINE's lifecycle cleanup; deactivation clears both scheduled job hooks.
+- The historical Version 17 credential migration is replaced with a compatibility marker/no-op so existing DataForSEO credentials are preserved. Source migration audit found this was the only migration matching destructive delete/drop patterns among versions 1–18.
+
+### Integrated regression suite
+- Added 24 ENGINE unit-test files under `tests/engine-runtime/Unit/` plus an internal PHPUnit bootstrap and config.
+- The standalone release-metadata test was not imported because it checks the standalone ENGINE ZIP/release metadata, which is not the Core plugin's release artifact.
+- Core regression CI now runs PHPUnit 9.6 in addition to existing regression scripts and PHP syntax checks.
+- Current verified CI commit before this documentation-only update: `5bc4f36b2d3105f30b5998f55f777d452e3fb83c`.
+  - [Core regression checks — PASS, PHP 8.1 and 8.2](https://github.com/amanahgroup123/AMANAH-SEO/actions/runs/38237747923)
+  - [Core PHP checks — PASS](https://github.com/amanahgroup123/AMANAH-SEO/actions/runs/38237747958)
+  - PHPUnit result: 105 tests, 313 assertions, 0 failures/errors on the verified Core regression run.
+- Static regression checks confirm internal bootstrap presence, production source coverage, Core-owned menu placement, and preservation of legacy SERP credentials.
+
+### Remaining release gates
+- Keep PR #58 in draft until the current head's workflows are verified after all changes.
+- Perform WordPress runtime smoke testing on a staging instance: activation, admin menu order/capabilities, Engine page load, database migration on a database copy, AI/Engine key-management integration, and deactivation/re-activation.
+- Resolve any remaining Core-managed module-license integration gaps before calling this release-ready. Hidden ENGINE license screens prevent duplicate UI, but do not by themselves prove that ENGINE entitlement management is wired to the Core licensing dashboard.
+- Do not copy this branch into the active WordPress plugin directory until the release gates above pass.
