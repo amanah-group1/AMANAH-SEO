@@ -8,6 +8,7 @@
 2. **[Lingkup MVP AMANAH SEO](docs/11_MVP_SCOPE_PROPOSAL.md)** — fungsi MVP, batas yang tidak termasuk, keputusan dasar, dan kriteria penerimaan.
 3. **[Paket Tunggal Kesiapan Implementasi dan Migrasi Modul](docs/13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md)** — satu paket untuk audit WordPress, bukti WordPress/GSC, audit source AI/Engine, risiko database/kredensial/lisensi, migrasi, dan acceptance criteria.
 4. [Paket Kesiapan MVP versi sebelumnya](docs/12_MVP_IMPLEMENTATION_PACKAGE.md) dipertahankan sebagai riwayat; gunakan paket tunggal versi 1.0 sebagai acuan kerja.
+5. **[Paket Implementasi Terkontrol Core AMANAH SEO](docs/14_CONTROLLED_IMPLEMENTATION_PACKAGE_AMANAH_SEO.md)** — rencana persiapan implementasi pertama, gerbang teknis, batas scope, acceptance tests, dan recovery. Statusnya perencanaan saja; belum menjadi izin coding.
 
 Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/README.md). Dokumen arsip dan laporan audit historis merupakan rekam jejak, bukan bukti otomatis bahwa keadaan kode atau runtime saat ini sudah lulus.
 
