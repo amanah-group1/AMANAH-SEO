@@ -95,3 +95,10 @@ Internal namespace root remains `Amanah\\SEOEngine\\` to avoid a broad, risky na
 - WordPress + MySQL runtime smoke on head `30a8374b36bf89697ddf6fa651bca81760cf27d4`: PASS twice (activation and reactivation). Both runs exercised Engine-to-Core encrypted license storage round-trip, migration version 18, required tables, and Core-owned menu registration.
 - Core regression on that head: PASS on PHP 8.1 and 8.2. Core PHP syntax workflow: PASS. The exact head's WordPress runtime run passed.
 - Remaining non-CI release gate: staging verification against a copy of an existing database and confirmation that the configured licensing API returns expected active/entitlement state. Clean-install CI cannot establish existing-site data compatibility or live external entitlement validity.
+
+
+## Checkpoint 13 — Preserve existing DataForSEO credential
+- Runtime smoke enhancement commit: `29d9356043ba2a69944c803353c30647284b005c`; follow-up namespace syntax correction: `e1d5ffbc5ec31842617bd694a0ee9f5cd07692f9`.
+- The WordPress smoke test now writes a temporary encrypted DataForSEO credential through ENGINE's real `SecretStore`, invokes migration `Version17RemoveLegacySerpCredentials::up()`, and verifies the credential remains readable before cleaning up the temporary test option.
+- CI at `e1d5ffbc5ec31842617bd694a0ee9f5cd07692f9`: Core regression PASS on PHP 8.1 and 8.2; Core PHP syntax PASS; WordPress + MySQL activation/reactivation smoke PASS twice, including the ENGINE license adapter round-trip and DataForSEO credential-preservation assertion.
+- This verifies the integrated migration implementation in a clean database. It does not replace an upgrade rehearsal against a copy of a real, previously populated site database.
