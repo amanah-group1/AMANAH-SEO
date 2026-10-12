@@ -19,7 +19,6 @@ require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-site-inspector.php';
 require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-content-checks.php';
 require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-modules.php';
 require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-module-licenses.php';
-require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-module-navigation.php';
 register_activation_hook( __FILE__, array( 'AMANAH_SEO_Activator', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'AMANAH_SEO_Modules', 'deactivate_engine' ) );
 AMANAH_SEO_Module_Licenses::register();
