@@ -123,7 +123,10 @@ $deadline_task = $task;
 $deadline_task['due_date'] = '2026-10-20';
 $wpdb->row = null;
 $deadline_id = AMANAH_SEO_Store::create_task( $deadline_task );
-$deadline_insert = end( $wpdb->inserts );
+$deadline_insert = null;
+foreach ( $wpdb->inserts as $insert ) {
+    if ( 'wp_amanah_seo_tasks' === $insert['table'] ) { $deadline_insert = $insert; }
+}
 check( is_int( $deadline_id ), 'task with a valid deadline can be created' );
 check( $deadline_insert['data']['due_date'] === '2026-10-20', 'valid task deadline is persisted exactly as submitted' );
 
