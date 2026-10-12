@@ -31,9 +31,11 @@ jobs:
           php -l tests/wordpress-inventory-regression.php
           php -l tests/content-checks-regression.php
           php -l tests/content-issue-dedupe-regression.php
+          php -l tests/finding-to-task-regression.php
       - name: Core data regression tests
         run: |
           php tests/core-store-regression.php
           php tests/wordpress-inventory-regression.php
           php tests/content-checks-regression.php
           php tests/content-issue-dedupe-regression.php
+          php tests/finding-to-task-regression.php
