@@ -16,4 +16,5 @@ require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-store.php';
 require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-activator.php';
 require_once AMANAH_SEO_PATH . 'includes/class-amanah-seo-admin.php';
 register_activation_hook( __FILE__, array( 'AMANAH_SEO_Activator', 'activate' ) );
-add_action( 'plugins_loaded', static function () { AMANAH_SEO_Admin::register(); } );
+add_action( 'plugins_loaded', array( 'AMANAH_SEO_Activator', 'maybe_upgrade' ) );
+add_action( 'plugins_loaded', array( 'AMANAH_SEO_Admin', 'register' ) );
