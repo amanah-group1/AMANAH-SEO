@@ -32,6 +32,9 @@ $checks['All ENGINE workflow submenu parents resolve to the Core menu'] = preg_m
 $checks['ENGINE AI configuration and license screens remain Core-owned'] = strpos( $engine_menu, "array( 'license', 'updates', 'ai-configuration', 'ai-usage' )" ) !== false;
 $engine_license_store = $read( 'plugin/modules/engine-runtime/Platform/License/LicenseSecretStore.php' );
 $checks['ENGINE license adapter calls Core license manager in the global namespace'] = strpos( $engine_license_store, '\\AMANAH_SEO_Module_Licenses::set_license' ) !== false && strpos( $engine_license_store, '\\AMANAH_SEO_Module_Licenses::get_license' ) !== false && strpos( $engine_license_store, '\\AMANAH_SEO_Module_Licenses::delete_license' ) !== false;
+$core_licenses = $read( 'plugin/includes/class-amanah-seo-module-licenses.php' );
+$checks['Core activates AI licenses using the AI product identifier over HTTPS'] = strpos( $core_licenses, "wp_remote_post(" ) !== false && strpos( $core_licenses, "'https://api.amanahseoai.my.id'" ) !== false && strpos( $core_licenses, "'product' => 'amanah-seo-ai'" ) !== false;
+$checks['Core validates AI activation response product, status, and entitlements before recording state'] = strpos( $core_licenses, "'amanah-seo-ai' !== (string) $body['product']" ) !== false && strpos( $core_licenses, "! in_array( $body['status'], $allowed, true )" ) !== false && strpos( $core_licenses, "save_license_status( 'ai', $status )" ) !== false;
 $legacy_migration = $read( 'plugin/modules/engine-runtime/Infrastructure/Migration/Migrations/Version17RemoveLegacySerpCredentials.php' );
 $checks['ENGINE legacy credential migration preserves existing DataForSEO secrets'] = strpos( $legacy_migration, "delete( 'dataforseo' )" ) === false;
 
