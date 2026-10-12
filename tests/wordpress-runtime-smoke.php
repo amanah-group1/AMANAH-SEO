@@ -82,6 +82,12 @@ try {
 	if ( 'active' !== ( $ai_license_state['status'] ?? '' ) || ! in_array( 'content_analyzer', $ai_license_state['entitlements'] ?? array(), true ) ) {
 		$failures[] = 'Core AI license activation did not accept a valid AI product entitlement response.';
 	}
+	$status_method = new ReflectionMethod( 'AMANAH_SEO_Module_Licenses', 'save_license_status' );
+	$status_method->setAccessible( true );
+	$status_method->invoke( null, 'ai', $ai_license_state );
+	if ( ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' ) ) {
+		$failures[] = 'Validated AI entitlement was not persisted for runtime enforcement.';
+	}
 	if ( 'amanah-seo-ai' !== ( $captured_ai_activation_payload['product'] ?? '' ) || 'runtime-smoke-ai-license-key' !== ( $captured_ai_activation_payload['license_key'] ?? '' ) ) {
 		$failures[] = 'Core AI license activation did not send the expected product and key payload.';
 	}
