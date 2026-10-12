@@ -305,10 +305,22 @@ final class AMANAH_SEO_Module_Licenses {
 				'SITE_MISMATCH' => 'invalid',
 				'AUTHENTICATION_FAILED' => 'invalid',
 			);
+			$known_license_error = in_array( $error_code, array_keys( $statuses ), true );
+			if ( $known_license_error ) {
+				$reason = 'license_rejected';
+			} elseif ( 0 === $code ) {
+				$reason = 'service_unavailable';
+			} elseif ( $code >= 500 && $code < 600 ) {
+				$reason = 'service_error';
+			} else {
+				// Unknown client-side/service responses are not evidence of a transient
+				// outage and must never trigger the cached-entitlement grace fallback.
+				$reason = 'invalid_response';
+			}
 			return array(
 				'status' => $statuses[ $error_code ] ?? 'unknown',
 				'entitlements' => array(),
-				'reason' => in_array( $error_code, array_keys( $statuses ), true ) ? 'license_rejected' : ( 0 === $code ? 'service_unavailable' : 'service_error' ),
+				'reason' => $reason,
 			);
 		}
 		if ( $code < 200 || $code >= 300 || ! isset( $body['data'] ) || ! is_array( $body['data'] ) ) {
