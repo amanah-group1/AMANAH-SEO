@@ -115,6 +115,13 @@ final class AMANAH_SEO_Module_Licenses {
 			if ( ! in_array( $refreshed['status'] ?? '', array( 'active', 'grace' ), true ) || ! is_array( $refreshed['entitlements'] ?? null ) || ! in_array( sanitize_key( $entitlement ), array_map( 'sanitize_key', array_filter( $refreshed['entitlements'], 'is_string' ) ), true ) ) {
 				return false;
 			}
+			$refreshed_expiry = isset( $refreshed['expires_at'] ) && is_string( $refreshed['expires_at'] ) ? trim( $refreshed['expires_at'] ) : '';
+			if ( '' !== $refreshed_expiry && 'LIFETIME' !== strtoupper( $refreshed_expiry ) ) {
+				$refreshed_expiry_timestamp = strtotime( $refreshed_expiry . ' UTC' );
+				if ( false === $refreshed_expiry_timestamp || $refreshed_expiry_timestamp < $now ) {
+					return false;
+				}
+			}
 			if ( 'grace' === ( $refreshed['status'] ?? '' ) ) {
 				$until = isset( $refreshed['grace_until'] ) ? strtotime( (string) $refreshed['grace_until'] ) : false;
 				if ( false === $until || $until < $now ) {
