@@ -368,10 +368,13 @@ final class AMANAH_SEO_Module_Licenses {
 			exit;
 		}
 		if ( 'ai' === $module ) {
-			$status = self::activate_ai_license( $license_key, is_string( $existing_license_key ) && '' !== $existing_license_key && hash_equals( $existing_license_key, $license_key ) );
+			$same_license_key = is_string( $existing_license_key ) && '' !== $existing_license_key && hash_equals( $existing_license_key, $license_key );
+			$status = self::activate_ai_license( $license_key, $same_license_key );
 			$previous_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
 			$previous_ai_status = is_array( $previous_statuses ) && isset( $previous_statuses['ai'] ) && is_array( $previous_statuses['ai'] ) ? $previous_statuses['ai'] : array();
-			$status = self::apply_ai_grace_fallback( $status, $previous_ai_status );
+			if ( $same_license_key ) {
+				$status = self::apply_ai_grace_fallback( $status, $previous_ai_status );
+			}
 			self::save_license_status( 'ai', $status );
 			if ( 'unknown' === $status['status'] ) {
 				error_log( '[AMANAH SEO] AI license activation could not be verified: ' . ( $status['reason'] ?? 'unknown' ) );
