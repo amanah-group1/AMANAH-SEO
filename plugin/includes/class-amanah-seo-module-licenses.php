@@ -156,9 +156,9 @@ final class AMANAH_SEO_Module_Licenses {
 		}
 		if ( 'engine' === $module ) {
 			try {
-				$services = \\Amanah\\SEOEngine\\Core\\Bootstrap\\Plugin::boot();
+				$services = \Amanah\SEOEngine\Core\Bootstrap\Plugin::boot();
 				$services->get( 'license_client' )->activate( $license_key );
-			} catch ( \\Throwable $exception ) {
+			} catch ( \Throwable $exception ) {
 				// Keep the encrypted key so a transient licensing-service outage does not lose it.
 				error_log( '[AMANAH SEO] ENGINE license activation deferred: ' . $exception->getMessage() );
 			}
