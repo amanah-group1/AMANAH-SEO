@@ -16,7 +16,7 @@ Dokumen lama yang sudah digantikan berada di [arsip dokumentasi](docs/archive/RE
 ## Status implementasi teknis
 
 - Core MVP saat ini mencakup dashboard, profil satu website/workspace, temuan dengan status dan catatan penyelesaian, tugas dengan tenggat/dependensi, persetujuan, riwayat, diagnostik aman, serta uji runtime satu-klik yang membersihkan catatan uji.
-- GitHub Actions PHP syntax dan regression tests PASS pada PHP 7.4 dan 8.2. Uji runtime WordPress pada situs lokal belum dijalankan; backup/restore, GSC, integrasi server lisensi, serta migrasi modul AI/ENGINE tetap BELUM DIUJI/belum tersedia.
+- GitHub Actions PHP syntax dan regression tests berjalan pada PHP 7.4 dan 8.2. Pemilik melaporkan uji runtime WordPress **11/11 PASS** pada versi sebelum PR #48. PR #48 memperkuat pemeriksaan persetujuan, pembacaan kembali tenggat, dan verifikasi pembersihan; uji runtime versi baru **menunggu pengulangan**. Backup/restore, GSC, integrasi server lisensi, serta migrasi modul AI/ENGINE tetap BELUM DIUJI/belum tersedia.
 - Jangan menganggap Core MVP sudah memenuhi seluruh produk atau menyalinnya ke produksi. Paket perubahan: [Core MVP](https://github.com/amanahgroup123/AMANAH-SEO/pull/40), [perbaikan regresi](https://github.com/amanahgroup123/AMANAH-SEO/pull/41), [workspace dan status temuan](https://github.com/amanahgroup123/AMANAH-SEO/pull/42), [tenggat dan dependensi](https://github.com/amanahgroup123/AMANAH-SEO/pull/43), [diagnostik](https://github.com/amanahgroup123/AMANAH-SEO/pull/44), dan [uji runtime satu-klik](https://github.com/amanahgroup123/AMANAH-SEO/pull/45).
 
 ## Arsitektur produk

@@ -23,7 +23,7 @@ final class AMANAH_SEO_Admin {
   add_submenu_page('amanah-seo','Diagnostik','Diagnostik','manage_amanah_seo','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
  }
  private static function guard(){if(!current_user_can('manage_amanah_seo')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));}
- private static function start($title){self::guard();echo '<div class="wrap"><h1>'.esc_html($title).'</h1>';if(isset($_GET['amanah_notice'])){$n=sanitize_key(wp_unslash($_GET['amanah_notice']));$m=array('saved'=>'Data berhasil disimpan.','error'=>'Data gagal disimpan. Periksa input dan coba lagi.','updated'=>'Status pekerjaan diperbarui.','decision'=>'Keputusan persetujuan dicatat.','evidence_required'=>'Pekerjaan selesai wajib memiliki bukti hasil.','approval_pending'=>'Persetujuan masih menunggu keputusan.','workspace_saved'=>'Pengaturan workspace berhasil disimpan.','finding_updated'=>'Status temuan diperbarui.','finding_update_error'=>'Status temuan tidak dapat diperbarui. Pastikan catatan penyelesaian diisi.','self_test_complete'=>'Uji runtime selesai. Lihat hasil pemeriksaan di bawah.','dependency_incomplete'=>'Pekerjaan belum dapat diselesaikan karena dependensinya belum selesai.','invalid_due_date'=>'Format tenggat tidak valid.','dependency_not_found'=>'Pekerjaan dependensi tidak ditemukan.');if(isset($m[$n]))echo '<div class="notice notice-'.(in_array($n,array('error','evidence_required','approval_pending','finding_update_error'),true)?'error':'success').' is-dismissible"><p>'.esc_html($m[$n]).'</p></div>';}}
+ private static function start($title){self::guard();echo '<div class="wrap"><h1>'.esc_html($title).'</h1>';if(isset($_GET['amanah_notice'])){$n=sanitize_key(wp_unslash($_GET['amanah_notice']));$m=array('saved'=>'Data berhasil disimpan.','error'=>'Data gagal disimpan. Periksa input dan coba lagi.','updated'=>'Status pekerjaan diperbarui.','decision'=>'Keputusan persetujuan dicatat.','evidence_required'=>'Pekerjaan selesai wajib memiliki bukti hasil.','approval_pending'=>'Persetujuan masih menunggu keputusan.','approval_rejected'=>'Persetujuan ditolak. Ajukan kembali setelah pekerjaan direvisi.','workspace_saved'=>'Pengaturan workspace berhasil disimpan.','finding_updated'=>'Status temuan diperbarui.','finding_update_error'=>'Status temuan tidak dapat diperbarui. Pastikan catatan penyelesaian diisi.','self_test_complete'=>'Uji runtime selesai. Lihat hasil pemeriksaan di bawah.','dependency_incomplete'=>'Pekerjaan belum dapat diselesaikan karena dependensinya belum selesai.','invalid_due_date'=>'Format tenggat tidak valid.','dependency_not_found'=>'Pekerjaan dependensi tidak ditemukan.');if(isset($m[$n]))echo '<div class="notice notice-'.(in_array($n,array('error','evidence_required','approval_pending','approval_rejected','finding_update_error'),true)?'error':'success').' is-dismissible"><p>'.esc_html($m[$n]).'</p></div>';}}
  private static function end(){echo '</div>';}
  public static function dashboard(){
   self::start('AMANAH SEO — Dashboard');
@@ -153,9 +153,12 @@ final class AMANAH_SEO_Admin {
    $finding_status=AMANAH_SEO_Store::update_finding_status($finding_id,'resolved','Temporary self-test resolution.');
    $check(true===$finding_status,'Finding status and resolution note can be saved');
 
-   $parent=AMANAH_SEO_Store::create_task(array('finding_id'=>$finding_id,'title'=>'[AMANAH SEO SELF TEST '.$token.'] Dependency parent','description'=>'Temporary runtime test record.','owner'=>'Runtime self-test','success_criteria'=>'Self-test only.','due_date'=>gmdate('Y-m-d'),'dependency_task_id'=>0,'status'=>'in_progress'));
+   $expected_due_date=gmdate('Y-m-d');
+   $parent=AMANAH_SEO_Store::create_task(array('finding_id'=>$finding_id,'title'=>'[AMANAH SEO SELF TEST '.$token.'] Dependency parent','description'=>'Temporary runtime test record.','owner'=>'Runtime self-test','success_criteria'=>'Self-test only.','due_date'=>$expected_due_date,'dependency_task_id'=>0,'status'=>'in_progress'));
    $check(!is_wp_error($parent)&&is_numeric($parent),'Core can save a task with a deadline');
    $parent_id=(int)$parent;$task_ids[]=$parent_id;
+   $stored_due_date=$wpdb->get_var($wpdb->prepare('SELECT due_date FROM '.$wpdb->prefix.'amanah_seo_tasks WHERE id = %d',$parent_id));
+   $check($stored_due_date===$expected_due_date,'Task deadline is saved and can be read back exactly');
 
    $child=AMANAH_SEO_Store::create_task(array('finding_id'=>$finding_id,'title'=>'[AMANAH SEO SELF TEST '.$token.'] Dependency child','description'=>'Temporary runtime test record.','owner'=>'Runtime self-test','success_criteria'=>'Self-test only.','due_date'=>'','dependency_task_id'=>$parent_id,'status'=>'in_progress'));
    $check(!is_wp_error($child)&&is_numeric($child),'Core can save a task dependency');
@@ -175,22 +178,38 @@ final class AMANAH_SEO_Admin {
    $check(true===$approved,'Approval decision is recorded');
    $approval_done=AMANAH_SEO_Store::update_task_status($approval_id,'completed','Temporary self-test evidence.');
    $check(true===$approval_done,'Approved task can complete with evidence');
+
+   $rejected_task=AMANAH_SEO_Store::create_task(array('finding_id'=>$finding_id,'title'=>'[AMANAH SEO SELF TEST '.$token.'] Rejected approval','description'=>'Temporary runtime test record.','owner'=>'Runtime self-test','success_criteria'=>'Self-test only.','due_date'=>'','dependency_task_id'=>0,'status'=>'awaiting_approval'));
+   $check(!is_wp_error($rejected_task)&&is_numeric($rejected_task),'Core can create a second approval request');
+   $rejected_id=(int)$rejected_task;$task_ids[]=$rejected_id;
+   $rejection=AMANAH_SEO_Store::decide_approval($rejected_id,'rejected','Temporary self-test rejection.');
+   $check(true===$rejection,'Rejected approval decision is recorded');
+   $rejected_done=AMANAH_SEO_Store::update_task_status($rejected_id,'completed','Temporary self-test evidence.');
+   $check(is_wp_error($rejected_done)&&'approval_rejected'===$rejected_done->get_error_code(),'Rejected approval prevents task completion');
   }catch(Throwable $error){
    if(0===$failed){$failed++;$results[]=array('status'=>'FAIL','label'=>'Uji runtime terhenti; detail teknis tidak ditampilkan pada halaman.');}
   }
   $cleanup_ok=true;
+  $task_table=$wpdb->prefix.'amanah_seo_tasks';
+  $event_table=$wpdb->prefix.'amanah_seo_events';
   foreach($task_ids as $task_id){
-   $event_delete=$wpdb->delete($wpdb->prefix.'amanah_seo_events',array('object_type'=>'task','object_id'=>$task_id),array('%s','%d'));
-   $task_delete=$wpdb->delete($wpdb->prefix.'amanah_seo_tasks',array('id'=>$task_id),array('%d'));
+   $event_delete=$wpdb->delete($event_table,array('object_type'=>'task','object_id'=>$task_id),array('%s','%d'));
+   $task_delete=$wpdb->delete($task_table,array('id'=>$task_id),array('%d'));
    if(false===$event_delete||false===$task_delete)$cleanup_ok=false;
+   $remaining_task=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$task_table} WHERE id = %d",$task_id));
+   $remaining_events=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$event_table} WHERE object_type = %s AND object_id = %d",'task',$task_id));
+   if($remaining_task!==0||$remaining_events!==0)$cleanup_ok=false;
   }
   if($finding_id>0){
-   $event_delete=$wpdb->delete($wpdb->prefix.'amanah_seo_events',array('object_type'=>'finding','object_id'=>$finding_id),array('%s','%d'));
+   $event_delete=$wpdb->delete($event_table,array('object_type'=>'finding','object_id'=>$finding_id),array('%s','%d'));
    $finding_delete=$wpdb->delete($wpdb->prefix.'amanah_seo_findings',array('id'=>$finding_id),array('%d'));
    if(false===$event_delete||false===$finding_delete)$cleanup_ok=false;
+   $remaining_finding=(int)$wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM '.$wpdb->prefix.'amanah_seo_findings WHERE id = %d',$finding_id));
+   $remaining_events=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$event_table} WHERE object_type = %s AND object_id = %d",'finding',$finding_id));
+   if($remaining_finding!==0||$remaining_events!==0)$cleanup_ok=false;
   }
-  if($cleanup_ok){$passed++;$results[]=array('status'=>'PASS','label'=>'Catatan uji dan riwayat sementara dibersihkan');}
-  else{$failed++;$results[]=array('status'=>'FAIL','label'=>'Pembersihan catatan uji tidak tuntas; periksa tabel Core sebelum mengulang');}
+  if($cleanup_ok){$passed++;$results[]=array('status'=>'PASS','label'=>'Catatan uji dan riwayat sementara dihapus dan dipastikan tidak tersisa');}
+  else{$failed++;$results[]=array('status'=>'FAIL','label'=>'Pembersihan catatan uji tidak tuntas atau masih ada catatan tersisa; periksa tabel Core sebelum mengulang');}
   set_transient('amanah_seo_self_test_'.get_current_user_id(),array('passed'=>$passed,'failed'=>$failed,'results'=>$results,'time'=>current_time('mysql')),10*MINUTE_IN_SECONDS);
   self::redirect('self_test_complete','amanah-seo-diagnostics');
  }
@@ -217,7 +236,7 @@ final class AMANAH_SEO_Admin {
  public static function create_finding(){self::guard();check_admin_referer('amanah_seo_create_finding');$d=array('title'=>sanitize_text_field(wp_unslash($_POST['title']??'')),'description'=>sanitize_textarea_field(wp_unslash($_POST['description']??'')),'source'=>sanitize_key(wp_unslash($_POST['source']??'manual')),'evidence'=>sanitize_textarea_field(wp_unslash($_POST['evidence']??'')),'priority'=>sanitize_key(wp_unslash($_POST['priority']??'medium')),'uncertainty'=>sanitize_key(wp_unslash($_POST['uncertainty']??'medium')));$d['source']=in_array($d['source'],array('manual','wordpress','gsc_unverified'),true)?$d['source']:'manual';$d['priority']=in_array($d['priority'],array('low','medium','high','urgent'),true)?$d['priority']:'medium';$d['uncertainty']=in_array($d['uncertainty'],array('low','medium','high','unknown'),true)?$d['uncertainty']:'medium';$r=($d['title']&&$d['description']&&$d['evidence'])?AMANAH_SEO_Store::create_finding($d):new WP_Error('invalid','Required fields missing');self::redirect(is_wp_error($r)?'error':'saved','amanah-seo-findings');}
  public static function create_task(){self::guard();check_admin_referer('amanah_seo_create_task');$d=array('finding_id'=>absint($_POST['finding_id']??0),'title'=>sanitize_text_field(wp_unslash($_POST['title']??'')),'description'=>sanitize_textarea_field(wp_unslash($_POST['description']??'')),'owner'=>sanitize_text_field(wp_unslash($_POST['owner']??'')),'success_criteria'=>sanitize_textarea_field(wp_unslash($_POST['success_criteria']??'')),'due_date'=>sanitize_text_field(wp_unslash($_POST['due_date']??'')),'dependency_task_id'=>absint($_POST['dependency_task_id']??0),'status'=>sanitize_key(wp_unslash($_POST['status']??'not_started')));if(!array_key_exists($d['status'],self::$statuses))$d['status']='not_started';if($d['finding_id']&&!self::finding_exists($d['finding_id']))$d['finding_id']=0;$r=($d['title']&&$d['description']&&$d['success_criteria'])?AMANAH_SEO_Store::create_task($d):new WP_Error('invalid','Required fields missing');self::redirect(is_wp_error($r)?'error':'saved','amanah-seo-tasks');}
  private static function finding_exists($id){global $wpdb;$table=$wpdb->prefix.'amanah_seo_findings';return (bool)$wpdb->get_var($wpdb->prepare("SELECT id FROM {$table} WHERE id = %d",$id));}
- public static function update_task_status(){self::guard();$id=absint($_POST['task_id']??0);check_admin_referer('amanah_seo_update_task_status_'.$id);$status=sanitize_key(wp_unslash($_POST['status']??''));$evidence=sanitize_textarea_field(wp_unslash($_POST['completion_evidence']??''));$r=AMANAH_SEO_Store::update_task_status($id,$status,$evidence);$notice=is_wp_error($r)?('completion_evidence_required'===$r->get_error_code()?'evidence_required':('approval_pending'===$r->get_error_code()?'approval_pending':('dependency_incomplete'===$r->get_error_code()?'dependency_incomplete':'error'))):'updated';self::redirect($notice,'amanah-seo-tasks');}
+ public static function update_task_status(){self::guard();$id=absint($_POST['task_id']??0);check_admin_referer('amanah_seo_update_task_status_'.$id);$status=sanitize_key(wp_unslash($_POST['status']??''));$evidence=sanitize_textarea_field(wp_unslash($_POST['completion_evidence']??''));$r=AMANAH_SEO_Store::update_task_status($id,$status,$evidence);$notice=is_wp_error($r)?('completion_evidence_required'===$r->get_error_code()?'evidence_required':('approval_pending'===$r->get_error_code()?'approval_pending':('approval_rejected'===$r->get_error_code()?'approval_rejected':('dependency_incomplete'===$r->get_error_code()?'dependency_incomplete':'error')))):'updated';self::redirect($notice,'amanah-seo-tasks');}
  public static function decide_approval(){self::guard();$id=absint($_POST['task_id']??0);check_admin_referer('amanah_seo_decide_approval_'.$id);$decision=sanitize_key(wp_unslash($_POST['decision']??''));$note=sanitize_textarea_field(wp_unslash($_POST['decision_note']??''));$r=AMANAH_SEO_Store::decide_approval($id,$decision,$note);self::redirect(is_wp_error($r)?'error':'decision','amanah-seo-tasks');}
  private static function redirect($notice,$page){wp_safe_redirect(add_query_arg(array('page'=>$page,'amanah_notice'=>$notice),admin_url('admin.php')));exit;}
 }

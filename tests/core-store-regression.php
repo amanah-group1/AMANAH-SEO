@@ -35,8 +35,9 @@ class AMANAH_SEO_Test_DB {
     public function get_row( $query ) { return $this->row; }
     public function update( $table, $data, $where, $formats = null, $where_formats = null ) {
         $this->updates[] = array( 'table' => $table, 'data' => $data, 'where' => $where, 'formats' => $formats, 'where_formats' => $where_formats );
-        if ( isset( $data['approval_status'] ) && is_object( $this->row ) ) {
-            $this->row->approval_status = $data['approval_status'];
+        if ( is_object( $this->row ) ) {
+            if ( isset( $data['approval_status'] ) ) { $this->row->approval_status = $data['approval_status']; }
+            if ( isset( $data['status'] ) ) { $this->row->status = $data['status']; }
         }
         return 1;
     }
@@ -90,6 +91,18 @@ $result = AMANAH_SEO_Store::decide_approval( 101, 'approved', 'Ditinjau.' );
 check( true === $result, 'authorized approval decision can be recorded by the data layer' );
 check( $wpdb->row->approval_status === 'approved', 'approval decision updates pending state' );
 
+$wpdb->row = (object) array( 'id' => 102, 'status' => 'awaiting_approval', 'approval_status' => 'pending', 'dependency_task_id' => 0 );
+$result = AMANAH_SEO_Store::decide_approval( 102, 'rejected', 'Perlu revisi.' );
+check( true === $result && $wpdb->row->approval_status === 'rejected', 'rejection is recorded for a pending approval' );
+$result = AMANAH_SEO_Store::update_task_status( 102, 'completed', 'Hasil telah ditulis.' );
+check( is_wp_error( $result ) && $result->get_error_code() === 'approval_rejected', 'rejected approval blocks task completion' );
+$result = AMANAH_SEO_Store::update_task_status( 102, 'awaiting_approval', '' );
+check( true === $result && $wpdb->row->approval_status === 'pending', 'revised task can request approval again' );
+$result = AMANAH_SEO_Store::decide_approval( 102, 'approved', 'Revisi diterima.' );
+check( true === $result && $wpdb->row->approval_status === 'approved', 'revised approval can be approved' );
+$result = AMANAH_SEO_Store::update_task_status( 102, 'completed', 'Hasil revisi telah diverifikasi.' );
+check( true === $result && $wpdb->row->status === 'completed', 'task can complete after revised approval is approved' );
+
 $wpdb->row = (object) array( 'id' => 101, 'approval_status' => 'not_required' );
 $result = AMANAH_SEO_Store::decide_approval( 101, 'approved', '' );
 check( is_wp_error( $result ) && $result->get_error_code() === 'approval_not_pending', 'approval cannot be decided when no request is pending' );
@@ -105,6 +118,17 @@ $result = AMANAH_SEO_Store::update_finding_status( 12, 'resolved', 'Pemeriksaan 
 $last_update = end( $wpdb->updates );
 check( true === $result, 'finding status can be updated with a result note' );
 check( $last_update['data']['status'] === 'resolved', 'finding status update persists selected status' );
+
+$deadline_task = $task;
+$deadline_task['due_date'] = '2026-10-20';
+$wpdb->row = null;
+$deadline_id = AMANAH_SEO_Store::create_task( $deadline_task );
+$deadline_insert = null;
+foreach ( $wpdb->inserts as $insert ) {
+    if ( 'wp_amanah_seo_tasks' === $insert['table'] ) { $deadline_insert = $insert; }
+}
+check( is_int( $deadline_id ), 'task with a valid deadline can be created' );
+check( $deadline_insert['data']['due_date'] === '2026-10-20', 'valid task deadline is persisted exactly as submitted' );
 
 $bad_date = $task;
 $bad_date['due_date'] = '12/10/2026';

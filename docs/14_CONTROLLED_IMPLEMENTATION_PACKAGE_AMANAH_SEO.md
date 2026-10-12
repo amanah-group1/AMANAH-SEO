@@ -2,7 +2,7 @@
 
 **Versi:** 0.1-draft-controlled  
 **Tanggal:** 2026-10-12  
-**Status terkini (2026-10-12):** CORE MVP BERTAHAP TERIMPLEMENTASI — PHP LINT + REGRESSION PASS (PHP 7.4/8.2); UJI RUNTIME WORDPRESS MENUNGGU EKSEKUSI  
+**Status terkini (2026-10-12):** CORE MVP BERTAHAP TERIMPLEMENTASI — pemilik melaporkan runtime 11/11 PASS pada versi sebelum PR #48; pemeriksaan runtime diperkuat dan pengujian ulang versi terbaru MENUNGGU  
 **Produk:** AMANAH SEO (produk utama)  
 **Acuan:** [Pedoman Induk](PEDOMAN_INDUK_AMANAH_SEO.md), [Lingkup MVP](11_MVP_SCOPE_PROPOSAL.md), [Paket Tunggal Kesiapan dan Migrasi](13_SINGLE_PACKAGE_IMPLEMENTATION_READINESS_AND_MODULE_MIGRATION.md)
 
@@ -174,7 +174,7 @@ PR #40–#45 telah digabungkan ke `main`. Fitur Core yang ada: dashboard, worksp
 - GitHub Actions PHP syntax: **PASS**.
 - Tes regresi store pada PHP 7.4: **PASS**.
 - Tes regresi store pada PHP 8.2: **PASS**.
-- Uji runtime satu-klik: sudah tersedia pada halaman Diagnostik, tetapi **BELUM DIUJI pada WordPress lokal** sampai tombol dijalankan pada target testing.
+- Uji runtime satu-klik: pemilik melaporkan **11/11 PASS** pada versi sebelum PR #48. PR #48 menambahkan verifikasi tenggat baca-kembali, alur persetujuan ditolak, dan pemeriksaan bahwa data uji benar-benar sudah terhapus. Uji runtime versi terbaru **MENUNGGU DIULANG** pada WordPress lokal.
 - Backup/restore clone, recovery drill, verifikasi akses GSC, kontrak lisensi server, dan migrasi modul AI/ENGINE: **BELUM DIUJI / BELUM DIIMPLEMENTASIKAN**.
 
 Hasil CI hanya membuktikan sintaks dan aturan data yang tercakup tes otomatis. Jangan menaikkan status runtime atau rilis tanpa bukti dari situs testing.
