@@ -7,7 +7,7 @@ final class LicenseSecretStore {
  private function key(): string { return hash('sha256',defined('AUTH_KEY')?AUTH_KEY:'amanah-seo-engine',true); }
  public function set(string $secret): void {
   if ( class_exists( 'AMANAH_SEO_Module_Licenses' ) ) {
-   if ( ! AMANAH_SEO_Module_Licenses::set_license( 'engine', $secret ) ) throw new \RuntimeException( 'license_secret_storage_error' );
+   if ( ! \AMANAH_SEO_Module_Licenses::set_license( 'engine', $secret ) ) throw new \RuntimeException( 'license_secret_storage_error' );
    return;
   }
   $iv=random_bytes(openssl_cipher_iv_length(self::CIPHER));$tag='';
@@ -17,7 +17,7 @@ final class LicenseSecretStore {
  }
  public function get(): ?string {
   if ( class_exists( 'AMANAH_SEO_Module_Licenses' ) ) {
-   $shared = AMANAH_SEO_Module_Licenses::get_license( 'engine' );
+   $shared = \AMANAH_SEO_Module_Licenses::get_license( 'engine' );
    if ( null !== $shared ) return $shared;
   }
   $value=get_option(self::OPTION,'');if(!is_string($value)||0!==strpos($value,'v1:'))return null;
@@ -28,7 +28,7 @@ final class LicenseSecretStore {
   return false===$plain?null:$plain;
  }
  public function delete(): void {
-  if ( class_exists( 'AMANAH_SEO_Module_Licenses' ) ) AMANAH_SEO_Module_Licenses::delete_license( 'engine' );
+  if ( class_exists( 'AMANAH_SEO_Module_Licenses' ) ) \AMANAH_SEO_Module_Licenses::delete_license( 'engine' );
   delete_option(self::OPTION);
  }
 }
