@@ -94,5 +94,17 @@ $wpdb->row = (object) array( 'id' => 101, 'approval_status' => 'not_required' );
 $result = AMANAH_SEO_Store::decide_approval( 101, 'approved', '' );
 check( is_wp_error( $result ) && $result->get_error_code() === 'approval_not_pending', 'approval cannot be decided when no request is pending' );
 
+$result = AMANAH_SEO_Store::update_finding_status( 12, 'resolved', '' );
+check( is_wp_error( $result ) && $result->get_error_code() === 'finding_note_required', 'resolved finding requires a result note' );
+
+$result = AMANAH_SEO_Store::update_finding_status( 12, 'invented', 'Note' );
+check( is_wp_error( $result ) && $result->get_error_code() === 'invalid_finding_status', 'invalid finding status is rejected' );
+
+$wpdb->row = (object) array( 'id' => 12, 'status' => 'open' );
+$result = AMANAH_SEO_Store::update_finding_status( 12, 'resolved', 'Pemeriksaan selesai dan hasil dicatat.' );
+$last_update = end( $wpdb->updates );
+check( true === $result, 'finding status can be updated with a result note' );
+check( $last_update['data']['status'] === 'resolved', 'finding status update persists selected status' );
+
 echo "\nRESULT: {$passed} passed; {$failed} failed.\n";
 exit( $failed > 0 ? 1 : 0 );
