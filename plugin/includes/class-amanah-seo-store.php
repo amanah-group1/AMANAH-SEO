@@ -10,6 +10,7 @@ final class AMANAH_SEO_Store {
   $id=(int)$wpdb->insert_id; self::event('finding',$id,'created','Finding created; source='.$d['source']); return $id;
  }
  public static function create_task( array $d ) {
+  if('completed'===$d['status']) return new WP_Error('completion_evidence_required','A task cannot be created as completed without a recorded result.');
   global $wpdb; $now=current_time('mysql');
   $ok=$wpdb->insert(self::table('tasks'),array('finding_id'=>$d['finding_id'],'title'=>$d['title'],'description'=>$d['description'],'owner'=>$d['owner'],'success_criteria'=>$d['success_criteria'],'status'=>$d['status'],'approval_status'=>('awaiting_approval'===$d['status']?'pending':'not_required'),'completion_evidence'=>null,'created_by'=>get_current_user_id(),'created_at'=>$now,'updated_at'=>$now),array('%d','%s','%s','%s','%s','%s','%s','%d','%s','%s'));
   if(false===$ok) return new WP_Error('task_save_failed','Task could not be saved.');
