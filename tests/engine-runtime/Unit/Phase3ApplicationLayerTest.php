@@ -35,8 +35,15 @@ final class Phase3ApplicationLayerTest extends TestCase {
 			}
 		};
 
-		$result = ( new CreateKeyword( $repository ) )->execute(
-			new CreateKeywordCommand( '  Jual   iPhone  ' )
+		$owner_urls = new class implements OwnerUrlRepositoryInterface {
+			public function findById( int $id ): ?OwnerUrl { return null; }
+			public function findByNormalizedUrl( string $normalized_url ): ?OwnerUrl { return null; }
+			public function findAll( int $limit = 100 ): array { return array(); }
+			public function save( OwnerUrl $owner_url ): OwnerUrl { return new OwnerUrl( $owner_url->getUrl(), 'active', 7 ); }
+		};
+
+		$result = ( new CreateKeyword( $repository, new ResolveOwnerUrl( $owner_urls ) ) )->execute(
+			new CreateKeywordCommand( '  Jual   iPhone  ', 'primary', 'https://example.com/jual-iphone/', 'pillar' )
 		);
 
 		$this->assertInstanceOf( KeywordData::class, $result );

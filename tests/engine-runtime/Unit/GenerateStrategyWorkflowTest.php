@@ -40,7 +40,7 @@ final class GenerateStrategyWorkflowTest extends TestCase {
 		$generate_content_plan->expects( $this->once() )
 			->method( 'execute' )
 			->with( 7 )
-			->willReturn( $this->createMock( ContentPlanData::class ) );
+			->willReturn( ContentPlanData::fromDomain( new ContentPlan( 7, array(), 1, 'planned', null, 9 ) ) );
 
 		$result = ( new GenerateStrategyWorkflow(
 			$generate_strategy,
@@ -67,8 +67,8 @@ final class GenerateStrategyWorkflowTest extends TestCase {
 			'draft'
 		);
 
-		$generate_strategy = $this->createMock( GenerateKeywordStrategy::class );
-		$generate_content_plan = $this->createMock( GenerateContentPlan::class );
+		$generate_strategy = $this->createMock( StrategyGeneratorInterface::class );
+		$generate_content_plan = $this->createMock( ContentPlanGeneratorInterface::class );
 
 		$generate_strategy->expects( $this->once() )
 			->method( 'execute' )
@@ -86,8 +86,8 @@ final class GenerateStrategyWorkflowTest extends TestCase {
 	}
 
 	public function test_strategy_failure_does_not_call_content_plan(): void {
-		$generate_strategy = $this->createMock( GenerateKeywordStrategy::class );
-		$generate_content_plan = $this->createMock( GenerateContentPlan::class );
+		$generate_strategy = $this->createMock( StrategyGeneratorInterface::class );
+		$generate_content_plan = $this->createMock( ContentPlanGeneratorInterface::class );
 
 		$generate_strategy->expects( $this->once() )
 			->method( 'execute' )

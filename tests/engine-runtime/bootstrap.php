@@ -31,3 +31,14 @@ $autoloader = new \Amanah\SEOEngine\Core\Autoload\ClassLoader(
 	$root . '/plugin/modules/engine-runtime'
 );
 $autoloader->register();
+
+if ( ! function_exists( 'sanitize_key' ) ) {
+	function sanitize_key( $key ) {
+		return strtolower( preg_replace( '/[^a-z0-9_\\-]/i', '', (string) $key ) );
+	}
+}
+if ( ! function_exists( 'wp_strip_all_tags' ) ) {
+	function wp_strip_all_tags( $text ) {
+		return strip_tags( (string) $text );
+	}
+}
