@@ -7,12 +7,12 @@
 
 ## 1. Keputusan arsitektur navigasi
 
-AMANAH SEO adalah produk utama dan satu-satunya menu induk. Dua kelompok modul berada di bawahnya:
+AMANAH SEO adalah produk utama, satu-satunya plugin yang dipasang pengguna, dan satu-satunya menu induk. Paket plugin yang sama memuat dua modul:
 
 - **AMANAH SEO AI** — kemampuan SEO berbantuan AI.
 - **AMANAH SEO ENGINE** — intelligence SEO dan workflow produksi konten.
 
-AMANAH SEO AI dan AMANAH SEO ENGINE tidak ditampilkan sebagai menu produk induk yang sejajar dengan AMANAH SEO. Masing-masing tetap mempertahankan tanggung jawab, alur, dan fungsi khususnya sebagai kelompok modul di dalam navigasi AMANAH SEO.
+Pengguna tidak perlu memasang plugin AI atau Engine secara terpisah. Kedua modul tetap mempertahankan tanggung jawab, alur, dan fungsi khususnya di dalam navigasi AMANAH SEO, serta memiliki lisensi/entitlement independen.
 
 ## 2. Pohon menu final
 
@@ -46,6 +46,9 @@ AMANAH SEO
 │   ├── Pengaturan Workspace
 │   ├── Pengguna dan Hak Akses
 │   ├── Integrasi dan Sumber Data
+│   ├── AI Provider & API Credentials
+│   ├── Module Licenses & Entitlements
+│   ├── Updates
 │   └── Preferensi Sistem
 ├── 9. AMANAH SEO AI
 │   ├── Dashboard AI
@@ -66,10 +69,7 @@ AMANAH SEO
 │   │   └── Schema Validation
 │   ├── AI Reports
 │   ├── AI Settings
-│   │   ├── AI Provider & Models
-│   │   ├── API Credentials
 │   │   └── Konfigurasi AI
-│   └── License & Entitlement AI
 └── 10. AMANAH SEO ENGINE
     ├── Dashboard ENGINE
     ├── Content Production
@@ -118,8 +118,7 @@ AMANAH SEO
     └── Administration
         ├── Settings
         ├── Import / Export
-        ├── System Status
-        └── License & Updates
+        └── System Status
 ```
 
 ## 3. Tanggung jawab tiap kelompok
@@ -128,24 +127,27 @@ AMANAH SEO
 
 Menghubungkan kondisi website dengan temuan, prioritas, tugas, keputusan, hasil pelaksanaan, dan siklus monitoring berikutnya. Dashboard utama harus membantu pengguna memahami apa yang perlu diperhatikan, mengapa, statusnya, dan keputusan apa yang dibutuhkan.
 
-### AMANAH SEO AI — kemampuan AI
+### AMANAH SEO AI — modul kemampuan AI
 
-Menampung fitur entity dan authority, audit AI, analisis serta pembuatan/optimasi konten, topic authority, internal linking berbantuan AI, schema, laporan, konfigurasi provider/kredensial, serta entitlement AI sesuai kemampuan yang benar-benar tersedia.
+Menampung fitur entity dan authority, audit AI, analisis serta pembuatan/optimasi konten, topic authority, internal linking berbantuan AI, schema, laporan, dan konfigurasi AI sesuai kemampuan yang benar-benar tersedia. Pengaturan provider/API credentials dan pengelolaan lisensi/entitlement berada di pusat pengaturan AMANAH SEO; halaman modul tidak menjadi sumber lisensi terpisah.
 
-### AMANAH SEO ENGINE — intelligence dan workflow
+### AMANAH SEO ENGINE — modul intelligence dan workflow
 
-Menampung riset keyword dan search intelligence, strategi/perencanaan, workspace produksi konten, generation, evaluation, refinement, maturity gate, human review, approval, persiapan publikasi, dukungan SEO, monitoring, penggunaan AI, dan administrasi ENGINE.
+Menampung riset keyword dan search intelligence, strategi/perencanaan, workspace produksi konten, generation, evaluation, refinement, maturity gate, human review, approval, persiapan publikasi, dukungan SEO, monitoring, penggunaan AI, dan administrasi ENGINE. Lisensi/entitlement Engine dikelola secara terpusat di AMANAH SEO dan tidak diaktifkan otomatis oleh lisensi AI.
 
 ## 4. Aturan implementasi navigasi
 
-1. Seluruh kelompok berada di bawah satu menu induk **AMANAH SEO**.
-2. Jangan membuat AMANAH SEO AI atau AMANAH SEO ENGINE menjadi menu induk sejajar yang terpisah.
-3. Pertahankan nama dan fungsi khusus AI/ENGINE dalam kelompok masing-masing; hindari memindahkan tanggung jawab mesin khusus ke modul inti hanya demi menyamakan menu.
-4. Menu yang belum diimplementasikan atau belum lulus pengujian tidak boleh ditampilkan seolah-olah sudah berfungsi. Catat statusnya sebagai belum tersedia, belum diuji, atau terhambat sesuai bukti.
-5. Kemampuan integrasi AI/ENGINE bersifat opsional untuk MVP AMANAH SEO. Jangan mengasumsikan koneksi, sinkronisasi, atau pertukaran data telah berjalan tanpa kontrak dan bukti uji.
-6. Perubahan website dan publikasi memerlukan persetujuan eksplisit dari pengguna yang berwenang. Struktur menu tidak memberikan izin untuk otomatisasi atau publikasi mandiri.
-7. Hak akses harus diterapkan pada sisi server sesuai fungsi; menyembunyikan menu saja bukan kontrol otorisasi yang memadai.
-8. Penamaan teknis, slug, capability, urutan registrasi menu, dan detail implementasi ditetapkan dalam rencana implementasi terpisah setelah audit kode dan persetujuan ruang lingkup.
+1. Seluruh kelompok berada di bawah satu menu induk **AMANAH SEO**; pengguna cukup memasang satu plugin.
+2. Jangan membuat AMANAH SEO AI atau AMANAH SEO ENGINE menjadi plugin/menu induk terpisah.
+3. Semua menu modul tetap terlihat dan dapat dibuka, baik lisensi aktif maupun belum aktif.
+4. Jika lisensi/entitlement modul tidak aktif, halaman modul menampilkan sales page yang menjelaskan nama modul, manfaat, status lisensi, dan langkah mendapatkan/mengaktifkan lisensi. Jangan menampilkan halaman error generik untuk kondisi lisensi normal.
+5. Lisensi AI dan Engine independen. Lisensi satu modul tidak memberi akses ke fitur modul lainnya.
+6. Pengelolaan API key/kredensial AI, lisensi modul, entitlement, dan pembaruan dipusatkan pada AMANAH SEO. API key bukan lisensi dan tidak boleh dicampuradukkan dengan entitlement.
+7. Fitur berlisensi harus ditolak di sisi server jika entitlement tidak aktif, termasuk pada aksi formulir, AJAX/REST API, proses latar belakang, dan jalur eksekusi terkait. Menyembunyikan tombol atau menu saja tidak cukup.
+8. Pertahankan batas fungsi khusus AI/ENGINE; satu paket tidak berarti semua fungsi harus digabung menjadi satu mesin.
+9. Menu yang belum diimplementasikan atau belum lulus pengujian tidak boleh ditampilkan seolah-olah sudah berfungsi. Catat statusnya sebagai belum tersedia, belum diuji, atau terhambat sesuai bukti.
+10. Perubahan website dan publikasi memerlukan persetujuan eksplisit dari pengguna yang berwenang. Struktur menu tidak memberikan izin untuk otomatisasi atau publikasi mandiri.
+11. Penamaan teknis, slug, capability, mekanisme lisensi, urutan registrasi menu, dan detail implementasi ditetapkan dalam rencana implementasi terpisah setelah audit kode dan persetujuan ruang lingkup.
 
 ## 5. Batas status keputusan
 
