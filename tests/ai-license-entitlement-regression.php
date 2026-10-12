@@ -101,6 +101,16 @@ $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['a
 unset( $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['ai']['entitlements'] );
 $checks['Malformed stored status denies entitlement'] = ! AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' );
 
+AMANAH_SEO_Module_Licenses::set_license( 'ai', 'ai-license-regression-key' );
+$GLOBALS['amanah_license_test_options']['amanah_seo_module_license_statuses']['ai'] = array(
+	'status' => 'active',
+	'entitlements' => array( 'content_analyzer' ),
+	'validated_at' => gmdate( 'c', time() - DAY_IN_SECONDS - 60 ),
+	'expires_at' => 'LIFETIME',
+);
+$GLOBALS['amanah_license_mock_response'] = $valid_response();
+$checks['Stale entitlement is revalidated through the v1 validate endpoint before use'] = AMANAH_SEO_Module_Licenses::has_entitlement( 'ai', 'content_analyzer' ) && 'https://api.amanahseoai.my.id/v1/validate' === $GLOBALS['amanah_license_last_request']['url'];
+
 $client = ( new ReflectionClass( 'AMANAH_SEO_AI_AI_Client' ) )->newInstanceWithoutConstructor();
 try {
 	$client->generate( 'content_analysis', array(), 1 );
