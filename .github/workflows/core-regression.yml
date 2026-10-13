@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ["7.4", "8.2"]
+        php: ["8.1", "8.2"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,6 +22,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          tools: phpunit:9.6
       - name: PHP syntax checks
         shell: bash
         run: |
@@ -34,6 +35,10 @@ jobs:
           php -l tests/finding-to-task-regression.php
           php -l tests/dashboard-work-direction-regression.php
           php -l tests/task-form-integrity-regression.php
+          php -l tests/module-integration-regression.php
+          php -l tests/module-licensing-regression.php
+          php -l tests/ai-license-entitlement-regression.php
+          find tests/engine-runtime -type f -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: Core data regression tests
         run: |
           php tests/core-store-regression.php
@@ -43,3 +48,8 @@ jobs:
           php tests/finding-to-task-regression.php
           php tests/dashboard-work-direction-regression.php
           php tests/task-form-integrity-regression.php
+          php tests/module-integration-regression.php
+          php tests/module-licensing-regression.php
+          php tests/ai-license-entitlement-regression.php
+
+          phpunit -c tests/engine-runtime/phpunit.xml.dist

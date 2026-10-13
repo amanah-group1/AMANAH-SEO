@@ -1,0 +1,6 @@
+Evaluate the supplied Article Package against exactly these 12 dimensions: Content Identity, Search Intent Satisfaction, Topic Coverage, Content Completeness, Factual Integrity, Entity & Context, Article Structure, Readability & User Experience, Semantic SEO, Value & Differentiation, FAQ Quality, AI/Search Readiness.
+Return JSON only: {"quality_evaluation":{"score":0,"weaknesses":[],"recommendations":[],"faq_suggestions":[],"dimensions":{},"severity":"pass"}}
+Severity must be critical, high, medium, or pass. Evaluate only supplied material. Do not invent facts or sources.
+Article Package: {{article_package}}
+Context: {{context}}
+Dimensions: {{dimensions}}

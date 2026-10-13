@@ -1,0 +1,61 @@
+name: WordPress runtime integration smoke
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  wordpress-runtime:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: wordpress
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: curl, dom, fileinfo, gd, intl, mbstring, mysqli, openssl, simplexml, xml, zip
+          tools: none
+          coverage: none
+
+      - name: Install WP-CLI
+        run: |
+          curl --fail --silent --show-error --location https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --output "$RUNNER_TEMP/wp-cli.phar"
+          php "$RUNNER_TEMP/wp-cli.phar" --info
+
+      - name: Install a clean WordPress site
+        env:
+          WP_PATH: ${{ runner.temp }}/wordpress
+        run: |
+          php "$RUNNER_TEMP/wp-cli.phar" core download --path="$WP_PATH" --skip-content
+          php "$RUNNER_TEMP/wp-cli.phar" config create --path="$WP_PATH" --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          php "$RUNNER_TEMP/wp-cli.phar" core install --path="$WP_PATH" --url=http://localhost --title="AMANAH SEO CI" --admin_user=amanah-admin --admin_password="ci-temporary-password" --admin_email=ci@example.invalid --skip-email
+          mkdir -p "$WP_PATH/wp-content/plugins/amanah-seo"
+          cp -R plugin/. "$WP_PATH/wp-content/plugins/amanah-seo/"
+
+      - name: Activate plugin and verify runtime integration
+        env:
+          WP_PATH: ${{ runner.temp }}/wordpress
+        run: |
+          php "$RUNNER_TEMP/wp-cli.phar" plugin activate amanah-seo --path="$WP_PATH"
+          php "$RUNNER_TEMP/wp-cli.phar" eval-file tests/wordpress-runtime-smoke.php --path="$WP_PATH"
+          php "$RUNNER_TEMP/wp-cli.phar" plugin deactivate amanah-seo --path="$WP_PATH"
+          php "$RUNNER_TEMP/wp-cli.phar" plugin activate amanah-seo --path="$WP_PATH"
+          php "$RUNNER_TEMP/wp-cli.phar" eval-file tests/wordpress-runtime-smoke.php --path="$WP_PATH"

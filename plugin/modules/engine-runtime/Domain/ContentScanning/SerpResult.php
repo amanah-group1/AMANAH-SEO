@@ -1,0 +1,9 @@
+<?php
+declare(strict_types=1);
+namespace Amanah\SEOEngine\Domain\ContentScanning;
+defined('ABSPATH') || exit;
+final class SerpResult {
+ private $id; private $scan_id; private $position; private $page_number; private $title; private $url; private $domain; private $snippet; private $result_type; private $fetch_status; private $http_status; private $error_message; private $page_data;
+ public function __construct(int $scan_id,int $position,int $page_number,string $title,string $url,string $domain,string $snippet,string $result_type='organic',string $fetch_status='pending',int $http_status=0,string $error_message='',array $page_data=[],?int $id=null){$this->scan_id=$scan_id;$this->position=$position;$this->page_number=$page_number;$this->title=$title;$this->url=$url;$this->domain=$domain;$this->snippet=$snippet;$this->result_type=$result_type;$this->fetch_status=$fetch_status;$this->http_status=$http_status;$this->error_message=$error_message;$this->page_data=$page_data;$this->id=$id;}
+ public function getId():?int{return $this->id;} public function getScanId():int{return $this->scan_id;} public function getPosition():int{return $this->position;} public function getPageNumber():int{return $this->page_number;} public function getTitle():string{return $this->title;} public function getUrl():string{return $this->url;} public function getDomain():string{return $this->domain;} public function getSnippet():string{return $this->snippet;} public function getResultType():string{return $this->result_type;} public function getFetchStatus():string{return $this->fetch_status;} public function getHttpStatus():int{return $this->http_status;} public function getErrorMessage():string{return $this->error_message;} public function getPageData():array{return $this->page_data;}
+}

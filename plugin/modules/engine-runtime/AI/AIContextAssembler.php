@@ -1,0 +1,1 @@
+<?php declare( strict_types=1 ); namespace Amanah\SEOEngine\AI; defined( 'ABSPATH' ) || exit; final class AIContextAssembler { public function assemble(array $requirements,array $available_context): array{$result=array();foreach($requirements as $key){if(array_key_exists($key,$available_context))$result[$key]=$available_context[$key];}return $result;} }
