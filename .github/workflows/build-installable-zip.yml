@@ -1,0 +1,55 @@
+name: Build installable AMANAH SEO ZIP
+
+on:
+  push:
+    branches:
+      - integration/core-ai-engine-20261012
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Verify plugin entry point
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f plugin/amanah-seo.php
+          grep -q "Plugin Name: AMANAH SEO" plugin/amanah-seo.php
+          test -d plugin/includes
+          test -d plugin/modules
+
+      - name: Build WordPress installable ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf package-staging amanah-seo.zip
+          mkdir -p package-staging/amanah-seo
+          cp -a plugin/. package-staging/amanah-seo/
+          test -f package-staging/amanah-seo/amanah-seo.php
+          cd package-staging
+          zip -qr ../amanah-seo.zip amanah-seo
+          cd ..
+          unzip -Z1 amanah-seo.zip | grep -qx 'amanah-seo/amanah-seo.php'
+          if unzip -Z1 amanah-seo.zip | grep -q '^plugin/'; then
+            echo "Unexpected nested plugin/ directory in ZIP"
+            exit 1
+          fi
+          sha256sum amanah-seo.zip
+
+      - name: Upload installable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: amanah-seo-installable-zip
+          path: amanah-seo.zip
+          if-no-files-found: error
+          retention-days: 30
