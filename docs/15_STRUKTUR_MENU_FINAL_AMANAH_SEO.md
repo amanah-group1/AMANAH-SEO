@@ -83,7 +83,7 @@ Setiap kartu menampilkan status **Belum diimplementasikan** dan tombol **Buka ar
 
 ## 5. Aturan implementasi
 
-1. Hanya tiga menu utama yang terlihat: CORE, AMANAH SEO AI, dan AMANAH SEO ENGINE.
+1. Hanya tiga menu utama yang terlihat: CORE, AMANAH SEO AI, dan AMANAH SEO ENGINE. Tidak ada submenu internal yang ditampilkan di sidebar; halaman fitur tetap terdaftar dan dibuka melalui tombol **Buka area** pada kartu dashboard. Menu induk lama `AMANAH SEO` dan menu modul lama yang duplikat disembunyikan.
 2. Ketiganya menggunakan capability `manage_amanah_seo`; pengubahan tampilan tidak boleh melemahkan pemeriksaan akses.
 3. Dashboard tiap menu menampilkan kartu responsif, dengan gaya konsisten mengikuti dashboard AI.
 4. Pertahankan slug halaman internal yang sudah digunakan oleh kartu AI agar tautan tidak rusak.
