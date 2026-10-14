@@ -150,15 +150,20 @@ final class AMANAH_SEO_Admin_Navigation {
 				var page = '';
 				try { page = new URL(window.location.href).searchParams.get('page') || ''; }
 				catch (e) {}
-				var active = page.indexOf('amanah-seo-engine-') === 0 ? 'engine' : 'core';
-				if (
-					page === 'amanah-entity-profile' ||
-					page === 'amanah-authority' ||
-					page === 'amanah-seo-ai-settings' ||
-					page.indexOf('amanah-seo-ai-') === 0 ||
-					page.indexOf('amanah-ai-') === 0 ||
-					page.indexOf('amanah-content-analyzer') === 0 ||
-					page.indexOf('amanah-article-generation') === 0
+				var active = 'core';
+				if (page.indexOf('amanah-seo-engine-') === 0 || page === 'amanah-seo-engine') {
+					active = 'engine';
+				} else if (
+					page !== 'amanah-seo-ai-settings' && (
+						page === 'amanah-seo-ai' ||
+						page === 'amanah-entity-profile' ||
+						page === 'amanah-authority' ||
+						page === 'amanah-content-generation' ||
+						page.indexOf('amanah-seo-ai-') === 0 ||
+						page.indexOf('amanah-ai-') === 0 ||
+						page.indexOf('amanah-content-analyzer') === 0 ||
+						page.indexOf('amanah-article-generation') === 0
+					)
 				) {
 					active = 'ai';
 				}
