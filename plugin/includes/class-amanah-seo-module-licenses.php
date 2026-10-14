@@ -237,6 +237,17 @@ final class AMANAH_SEO_Module_Licenses {
 			submit_button( __( 'Save License Key', 'amanah-seo' ), 'primary', 'submit', false );
 			echo '</form></div>';
 		}
+		echo '<h2 style="margin-top:32px">AI Provider &amp; Model</h2>';
+		echo '<p>Atur provider AI, model, dan API key dari satu halaman AMANAH SEO. API key yang sudah tersimpan tidak ditampilkan kembali.</p>';
+		if ( class_exists( 'AMANAH_SEO_AI_AI_Settings' ) && class_exists( 'AMANAH_SEO_AI_AI_Credentials' ) && class_exists( 'AMANAH_SEO_AI_AI_Model_Catalog' ) && class_exists( 'AMANAH_SEO_AI_AI_Settings_Controller' ) ) {
+			$ai_settings = new AMANAH_SEO_AI_AI_Settings();
+			$ai_credentials = new AMANAH_SEO_AI_AI_Credentials( $ai_settings );
+			$ai_catalog = new AMANAH_SEO_AI_AI_Model_Catalog();
+			$ai_controller = new AMANAH_SEO_AI_AI_Settings_Controller( $ai_settings, $ai_credentials, $ai_catalog );
+			$ai_controller->render();
+		} else {
+			echo '<div class="notice notice-warning inline"><p>Komponen pengaturan AI belum tersedia pada runtime plugin ini.</p></div>';
+		}
 		echo '</div>';
 	}
 
