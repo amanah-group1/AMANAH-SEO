@@ -515,13 +515,14 @@ final class AMANAH_SEO_Module_Navigation {
    .amanah-seo-ai-hero h2{font-size:clamp(22px,2vw,30px);line-height:1.25;margin:0 0 14px;color:#123b61}
    .amanah-seo-ai-hero p{font-size:15px;line-height:1.75;margin:0 0 12px}
    .amanah-seo-ai-hero p:last-child{margin-bottom:0}
-   .amanah-seo-ai-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;width:100%;align-items:stretch}
-   .amanah-seo-ai-card{box-sizing:border-box;min-width:0;margin:0;padding:20px;display:flex;flex-direction:column;height:100%;border:1px solid #dcdcde;border-top:3px solid #2271b1;border-radius:6px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04)}
-   .amanah-seo-ai-card .amanah-seo-ai-card-description{flex:1;margin:0 0 16px}
+   .amanah-seo-ai-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;width:100%;align-items:stretch}
+   .amanah-seo-ai-card{box-sizing:border-box;min-width:0;margin:0;padding:18px;display:flex;flex-direction:column;height:100%;border:1px solid #dcdcde;border-top:3px solid #2271b1;border-radius:6px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+   .amanah-seo-ai-card .amanah-seo-ai-card-description{flex:1;margin:0 0 16px;overflow-wrap:anywhere}
    .amanah-seo-ai-card .amanah-seo-ai-card-status{margin:0 0 14px;font-size:12px;color:#646970}
    .amanah-seo-ai-card .amanah-seo-ai-card-actions{margin:0}
-   @media(max-width:1400px){.amanah-seo-ai-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-   @media(max-width:1100px){.amanah-seo-ai-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+   @media(max-width:1500px){.amanah-seo-ai-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+   @media(max-width:1200px){.amanah-seo-ai-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+   @media(max-width:900px){.amanah-seo-ai-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
    @media(max-width:782px){.amanah-seo-ai-hero{padding:22px 20px}.amanah-seo-ai-grid{grid-template-columns:minmax(0,1fr)}}
   </style>';
   echo '<div class="amanah-seo-ai-dashboard">';
