@@ -151,7 +151,7 @@ Menampung riset keyword dan search intelligence, strategi/perencanaan, workspace
 
 ## 5. Batas status keputusan
 
-Struktur dan pengelompokan menu pada dokumen ini berstatus **FINAL** sebagai keputusan produk. Dokumen ini tidak menyatakan bahwa seluruh fitur telah tersedia, tidak mengubah kode, tidak menyetujui integrasi, dan tidak memberikan persetujuan untuk mulai implementasi. Pekerjaan implementasi tetap mengikuti gerbang dan persetujuan yang ditetapkan dalam Pedoman Induk AMANAH SEO.
+Struktur dan pengelompokan menu pada dokumen ini berstatus **FINAL** sebagai keputusan produk. Bagian 6 mencatat keputusan visual yang lebih baru dan persetujuan pengguna untuk mengimplementasikan perilaku sidebar tiga kategori. Persetujuan tersebut hanya mencakup navigasi; bukan bukti bahwa seluruh fitur tersedia, bukan persetujuan untuk merge/deploy, dan tidak menggantikan gerbang pengujian integrasi serta lisensi dalam Pedoman Induk AMANAH SEO.
 
 ---
 
