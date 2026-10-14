@@ -22,8 +22,8 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 	}
 
 	public function render() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO AI settings.', 'amanah-seo-ai' ) );
+		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
+			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO settings.', 'amanah-seo-ai' ) );
 		}
 
 		$provider = sanitize_key( (string) $this->settings->get( 'ai_provider' ) );
@@ -75,7 +75,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 	}
 
 	public function save() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO AI settings.', 'amanah-seo-ai' ) );
 		}
 
@@ -128,7 +128,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 		}
 
 		$redirect = add_query_arg(
-			array( 'page' => 'amanah-seo-ai-settings', 'updated' => '1' ),
+			array( 'page' => 'amanah-seo-access', 'updated' => '1' ),
 			admin_url( 'admin.php' )
 		);
 
@@ -137,7 +137,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 	}
 
 	public function save_license() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage the AMANAH SEO AI license.', 'amanah-seo-ai' ) );
 		}
 
@@ -179,7 +179,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 		}
 
 		$redirect = add_query_arg(
-			array( 'page' => 'amanah-seo-ai-settings', 'license_saved' => '1' ),
+			array( 'page' => 'amanah-seo-access', 'license_saved' => '1' ),
 			admin_url( 'admin.php' )
 		);
 
@@ -216,7 +216,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 
 	private function redirect_with_error( $code ) {
 		$redirect = add_query_arg(
-			array( 'page' => 'amanah-seo-ai-settings', 'error' => sanitize_key( $code ) ),
+			array( 'page' => 'amanah-seo-access', 'error' => sanitize_key( $code ) ),
 			admin_url( 'admin.php' )
 		);
 		wp_safe_redirect( $redirect );
@@ -225,7 +225,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 
 	private function redirect_with_license_error( $code ) {
 		$redirect = add_query_arg(
-			array( 'page' => 'amanah-seo-ai-settings', 'license_error' => sanitize_key( $code ) ),
+			array( 'page' => 'amanah-seo-access', 'license_error' => sanitize_key( $code ) ),
 			admin_url( 'admin.php' )
 		);
 		wp_safe_redirect( $redirect );
