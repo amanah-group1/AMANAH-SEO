@@ -78,6 +78,10 @@ final class AMANAH_SEO_Admin_Navigation {
 					catch (e) { return 'core'; }
 					var slug = url.searchParams.get('page') || '';
 					var label = (link.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+					if (slug === 'amanah-seo-ai-settings') {
+						link.textContent = 'AI Provider & API Credentials';
+						return 'core';
+					}
 
 					if (slug.indexOf('amanah-seo-engine-') === 0 || slug === 'amanah-seo-engine') {
 						return 'engine';
