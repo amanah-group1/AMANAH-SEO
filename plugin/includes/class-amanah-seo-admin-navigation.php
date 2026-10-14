@@ -22,52 +22,52 @@ final class AMANAH_SEO_Admin_Navigation {
 		}
 
 		/*
-		 * Remove any legacy top-level Core or standalone module entries.
-		 * The canonical parent is now the single AMANAH SEO menu.
+		 * Remove every legacy AMANAH SEO top-level entry except the canonical
+		 * parent. This catches old feature slugs such as Article Generation too.
 		 */
-		$legacy_top_level_slugs = array(
-			'amanah-seo-core',
-			'amanah-seo-ai',
-			'amanah-seo-ai-tools',
-			'amanah-seo-engine',
-			'amanah-seo-engine-workflow',
-		);
-
-		foreach ( $legacy_top_level_slugs as $slug ) {
-			remove_menu_page( $slug );
+		global $menu, $submenu;
+		if ( is_array( $menu ) ) {
+			foreach ( $menu as $item ) {
+				$slug = isset( $item[2] ) ? (string) $item[2] : '';
+				if ( 'amanah-seo' !== $slug && 0 === strpos( $slug, 'amanah-seo' ) ) {
+					remove_menu_page( $slug );
+				}
+			}
 		}
 
-		global $submenu;
-
 		/*
-		 * WordPress automatically inserts the parent page as the first
-		 * submenu item. Remove that duplicate so Sales Page is only reached
-		 * by clicking the parent menu itself, not through a submenu link.
+		 * Keep WordPress's auto-inserted parent submenu row in the menu data:
+		 * WordPress uses it to resolve clicks on the top-level parent. Hide it
+		 * visually with CSS instead of deleting it, or the parent can open the
+		 * first feature submenu (for example Article Generation).
 		 */
 		if ( isset( $submenu['amanah-seo'] ) && is_array( $submenu['amanah-seo'] ) ) {
+			$allowed = array( 'amanah-seo', 'amanah-seo-access', 'amanah-seo-core', 'amanah-seo-ai-tools', 'amanah-seo-engine-workflow' );
 			foreach ( $submenu['amanah-seo'] as $index => $item ) {
-				if ( isset( $item[2] ) && 'amanah-seo' === $item[2] ) {
+				$slug = isset( $item[2] ) ? (string) $item[2] : '';
+				if ( ! in_array( $slug, $allowed, true ) ) {
 					unset( $submenu['amanah-seo'][ $index ] );
 				}
 			}
-
 			$submenu['amanah-seo'] = array_values( $submenu['amanah-seo'] );
 		}
 
 		/*
-		 * Feature pages remain registered for dashboard-card links, but their
-		 * individual sidebar entries stay hidden under the three dashboards.
+		 * Feature pages remain routable from dashboard cards, but do not expose
+		 * their individual entries in the WordPress sidebar.
 		 */
-		$dashboard_parents = array(
-			'amanah-seo-core',
-			'amanah-seo-ai-tools',
-			'amanah-seo-engine-workflow',
-		);
-
-		foreach ( $dashboard_parents as $parent_slug ) {
+		foreach ( array( 'amanah-seo-core', 'amanah-seo-ai-tools', 'amanah-seo-engine-workflow' ) as $parent_slug ) {
 			if ( isset( $submenu[ $parent_slug ] ) ) {
 				unset( $submenu[ $parent_slug ] );
 			}
 		}
+		add_action( 'admin_head', array( __CLASS__, 'hide_duplicate_sales_page_submenu' ) );
 	}
+	public static function hide_duplicate_sales_page_submenu(): void {
+		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
+			return;
+		}
+		echo '<style>#adminmenu .wp-submenu li:has(> a[href="admin.php?page=amanah-seo"]) { display: none !important; }</style>';
+	}
+
 }
