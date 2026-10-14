@@ -9,8 +9,8 @@ defined( 'ABSPATH' ) || exit;
 $model_options = 'gemini' === $data['provider'] ? $data['gemini_models'] : $data['openai_models'];
 ?>
 <div class="wrap">
-	<h1><?php echo esc_html__( 'AMANAH SEO AI Settings', 'amanah-seo-ai' ); ?></h1>
-	<p><?php echo esc_html__( 'Konfigurasi provider AI dan pilih model yang tersedia langsung dari provider. Model tidak perlu diisi secara manual.', 'amanah-seo-ai' ); ?></p>
+	<h1><?php echo esc_html__( 'AI Provider & Model', 'amanah-seo-ai' ); ?></h1>
+	<p><?php echo esc_html__( 'Pilih provider dan model yang tersedia pada katalog terkontrol AMANAH SEO. Simpan API key provider yang akan digunakan oleh modul AI.', 'amanah-seo-ai' ); ?></p>
 
 	<?php if ( isset( $_GET['updated'] ) ) : ?>
 		<div class="notice notice-success is-dismissible"><p><?php echo esc_html__( 'AI configuration saved.', 'amanah-seo-ai' ); ?></p></div>
@@ -44,7 +44,7 @@ $model_options = 'gemini' === $data['provider'] ? $data['gemini_models'] : $data
 							<option value="<?php echo esc_attr( $model ); ?>" <?php selected( $data['current_model'], $model ); ?>><?php echo esc_html( $model ); ?></option>
 						<?php endforeach; ?>
 					</select>
-					<p class="description" id="ai_model_help"><?php echo esc_html( $data['provider'] ? 'Models are loaded from the selected provider.' : 'Select a provider and configure its API key to load available models.' ); ?></p>
+					<p class="description" id="ai_model_help"><?php echo esc_html( $data['provider'] ? 'Models are shown from the AMANAH SEO supported model catalog.' : 'Select a provider and choose a supported model.' ); ?></p>
 				</td>
 			</tr>
 			<tr>
@@ -60,7 +60,7 @@ $model_options = 'gemini' === $data['provider'] ? $data['gemini_models'] : $data
 		<?php submit_button( __( 'Save AI Configuration', 'amanah-seo-ai' ) ); ?>
 	</form>
 
-	<div class="card" style="max-width: 900px; margin-top: 32px; padding: 28px;">
+	<div class="card" style="max-width: 900px; margin-top: 32px; padding: 28px; background: #eef6ff; border-left: 4px solid #2271b1;">
 		<h2 style="font-size: 24px; margin-top: 0;"><?php echo esc_html__( 'Jika AI belum mengenal bisnis Anda, apakah calon pelanggan akan menemukannya?', 'amanah-seo-ai' ); ?></h2>
 		<h3><?php echo esc_html__( 'Dunia pencarian sedang berubah.', 'amanah-seo-ai' ); ?></h3>
 		<p><?php echo esc_html__( 'Orang tidak lagi hanya mengetik kata kunci di Google. Mereka mulai bertanya langsung kepada ChatGPT, Gemini, Perplexity, dan berbagai AI lainnya untuk menemukan bisnis, brand, produk, layanan, dan informasi yang mereka percaya.', 'amanah-seo-ai' ); ?></p>
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		help.textContent = models.length
 			? 'Models are loaded from the selected provider.'
-			: 'Configure the selected provider API key to load its available models.';
+			: 'Choose a model from the supported catalog. The provider API key is required for AI requests.';
 	}
 
 	provider.addEventListener('change', refreshModels);
