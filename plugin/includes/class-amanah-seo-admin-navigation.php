@@ -85,7 +85,6 @@ final class AMANAH_SEO_Admin_Navigation {
 					if (
 						slug === 'amanah-entity-profile' ||
 						slug === 'amanah-authority' ||
-						slug === 'amanah-seo-ai-settings' ||
 						slug.indexOf('amanah-seo-ai-') === 0 ||
 						slug.indexOf('amanah-ai-') === 0 ||
 						slug.indexOf('amanah-content-analyzer') === 0 ||
