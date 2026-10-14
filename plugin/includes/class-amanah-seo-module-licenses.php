@@ -214,18 +214,35 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO module access.', 'amanah-seo' ), '', array( 'response' => 403 ) );
 		}
-		echo '<div class="wrap"><h1>' . esc_html__( 'Settings & Access', 'amanah-seo' ) . '</h1>';
-		echo '<p>' . esc_html__( 'Manage the separate AMANAH SEO AI and ENGINE module license keys here. Keys are stored encrypted and are never displayed after saving.', 'amanah-seo' ) . '</p>';
+		echo '<div class="wrap amanah-seo-access-page"><h1>' . esc_html__( 'Settings & Access', 'amanah-seo' ) . '</h1>';
+		echo '<style>
+		.amanah-seo-access-copy{box-sizing:border-box;width:100%;margin:16px 0 22px;padding:22px 26px;background:#eef6ff;border:1px solid #c6def5;border-left:5px solid #2271b1;border-radius:4px}
+		.amanah-seo-access-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start;width:100%}
+		.amanah-seo-access-column{box-sizing:border-box;min-width:0;padding:20px;background:#fff;border:1px solid #dcdcde;border-radius:5px}
+		.amanah-seo-access-column h2:first-child{margin-top:0}
+		.amanah-seo-access-column .card{box-sizing:border-box;width:100%;max-width:none;margin:16px 0;padding:16px}
+		.amanah-seo-access-ai .wrap{margin:0;padding:0}
+		.amanah-seo-access-ai .wrap>h1,.amanah-seo-access-ai .wrap>p:first-of-type{display:none}
+		.amanah-seo-access-ai form{max-width:100%}
+		.amanah-seo-access-ai .form-table th{width:32%;padding-left:0}
+		.amanah-seo-access-ai .form-table td{padding-right:0}
+		.amanah-seo-access-ai input.regular-text{max-width:100%;width:100%}
+		@media(max-width:1000px){.amanah-seo-access-grid{grid-template-columns:minmax(0,1fr)}}
+		</style>';
+		echo '<section class="amanah-seo-access-copy"><h2 style="margin:0 0 10px;font-size:22px">' . esc_html__( 'Jika AI belum mengenal bisnis Anda, bagaimana calon pelanggan akan menemukannya?', 'amanah-seo' ) . '</h2>';
+		echo '<p>' . esc_html__( 'Pencarian berkembang melampaui daftar tautan. Identitas bisnis yang jelas, otoritas yang dapat dipercaya, dan konten yang relevan membantu mesin pencari serta sistem AI memahami siapa Anda dan apa yang Anda kuasai.', 'amanah-seo' ) . '</p>';
+		echo '<p style="margin-bottom:0"><strong>' . esc_html__( 'AMANAH SEO menyatukan pengaturan akses modul dan konfigurasi AI dalam satu tempat agar fondasi SEO dapat dikelola secara terarah.', 'amanah-seo' ) . '</strong></p></section>';
 		if ( isset( $_GET['license_saved'] ) && in_array( sanitize_key( wp_unslash( $_GET['license_saved'] ) ), array( 'ai', 'engine' ), true ) ) {
 			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Module license key stored securely. Entitlement status depends on the configured licensing service.', 'amanah-seo' ) . '</p></div>';
 		}
 		$license_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
 		$license_statuses = is_array( $license_statuses ) ? $license_statuses : array();
+		echo '<div class="amanah-seo-access-grid"><section class="amanah-seo-access-column amanah-seo-access-licenses"><h2>' . esc_html__( 'Settings & Access', 'amanah-seo' ) . '</h2>';
+		echo '<p>' . esc_html__( 'Kelola lisensi AMANAH SEO AI dan AMANAH SEO ENGINE. Kunci disimpan terenkripsi dan tidak ditampilkan kembali setelah disimpan.', 'amanah-seo' ) . '</p>';
 		foreach ( array( 'ai' => 'AMANAH SEO AI', 'engine' => 'AMANAH SEO ENGINE' ) as $module => $label ) {
 			$configured = null !== self::get_license( $module );
 			$status = isset( $license_statuses[ $module ]['status'] ) ? sanitize_key( $license_statuses[ $module ]['status'] ) : 'not_checked';
-			echo '<div class="card" style="max-width:900px;margin:20px 0;padding:20px">';
-			echo '<h2>' . esc_html( $label ) . '</h2>';
+			echo '<div class="card"><h3>' . esc_html( $label ) . '</h3>';
 			echo '<p>' . esc_html( $configured ? 'License key is stored.' : 'No license key is stored.' ) . '</p>';
 			echo '<p>' . esc_html( 'License service status: ' . $status ) . '</p>';
 			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
@@ -237,8 +254,8 @@ final class AMANAH_SEO_Module_Licenses {
 			submit_button( __( 'Save License Key', 'amanah-seo' ), 'primary', 'submit', false );
 			echo '</form></div>';
 		}
-		echo '<h2 style="margin-top:32px">AI Provider &amp; Model</h2>';
-		echo '<p>Atur provider AI, model, dan API key dari satu halaman AMANAH SEO. API key yang sudah tersimpan tidak ditampilkan kembali.</p>';
+		echo '</section><section class="amanah-seo-access-column amanah-seo-access-ai"><h2>' . esc_html__( 'AI Provider & Model', 'amanah-seo' ) . '</h2>';
+		echo '<p>' . esc_html__( 'Atur provider AI, model, dan API key dari satu halaman AMANAH SEO. API key yang sudah tersimpan tidak ditampilkan kembali.', 'amanah-seo' ) . '</p>';
 		if ( class_exists( 'AMANAH_SEO_AI_AI_Settings' ) && class_exists( 'AMANAH_SEO_AI_AI_Credentials' ) && class_exists( 'AMANAH_SEO_AI_AI_Model_Catalog' ) && class_exists( 'AMANAH_SEO_AI_AI_Settings_Controller' ) ) {
 			$ai_settings = new AMANAH_SEO_AI_AI_Settings();
 			$ai_credentials = new AMANAH_SEO_AI_AI_Credentials( $ai_settings );
@@ -246,9 +263,9 @@ final class AMANAH_SEO_Module_Licenses {
 			$ai_controller = new AMANAH_SEO_AI_AI_Settings_Controller( $ai_settings, $ai_credentials, $ai_catalog );
 			$ai_controller->render();
 		} else {
-			echo '<div class="notice notice-warning inline"><p>Komponen pengaturan AI belum tersedia pada runtime plugin ini.</p></div>';
+			echo '<div class="notice notice-warning inline"><p>' . esc_html__( 'Komponen pengaturan AI belum tersedia pada runtime plugin ini.', 'amanah-seo' ) . '</p></div>';
 		}
-		echo '</div>';
+		echo '</section></div></div>';
 	}
 
 	private static function activate_ai_license( string $license_key, bool $validate_existing = false ): array {
