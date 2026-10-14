@@ -81,7 +81,6 @@ final class AMANAH_SEO_Admin_Navigation {
 				];
 				var groupDefinitions = {
 					core: [
-						{ id: 'dashboard', label: 'Dashboard' },
 						{ id: 'website', label: 'Website & Workspace' },
 						{ id: 'seo', label: 'SEO & Opportunities' },
 						{ id: 'tasks', label: 'Tasks & Workflow' }
@@ -109,6 +108,11 @@ final class AMANAH_SEO_Admin_Navigation {
 					var link = item.querySelector('a');
 					return link ? (link.textContent || '').replace(/\\s+/g, ' ').trim().toLowerCase() : '';
 				}
+				// The top-level AMANAH SEO link is the sales page, not a duplicate submenu item.
+				pageItems = pageItems.filter(function (item) {
+					if (getSlug(item) === 'amanah-seo') { item.remove(); return false; }
+					return true;
+				});
 				function categoryFor(item) {
 					var slug = getSlug(item);
 					var label = getLabel(item);
@@ -131,7 +135,6 @@ final class AMANAH_SEO_Admin_Navigation {
 					var slug = getSlug(item);
 					var label = getLabel(item);
 					if (category === 'core') {
-						if (slug === 'amanah-seo') return 'dashboard';
 						if (/workspace|website/.test(slug + ' ' + label)) return 'website';
 						if (/tasks|history|approval|execution|pekerjaan|riwayat/.test(slug + ' ' + label)) return 'tasks';
 						return 'seo';
@@ -222,12 +225,15 @@ final class AMANAH_SEO_Admin_Navigation {
 
 				var page = '';
 				try { page = new URL(window.location.href).searchParams.get('page') || ''; } catch (e) {}
-				var activeCategory = 'core';
+				var activeCategory = page === 'amanah-seo' ? null : 'core';
 				var activeGroup = null;
 				var activeItem = pageItems.find(function (item) { return getSlug(item) === page; });
 				if (activeItem) {
 					activeCategory = activeItem.dataset.amanahCategory || 'core';
 					activeGroup = activeItem.dataset.amanahGroup || null;
+				} else if (page === 'amanah-seo') {
+					activeCategory = null;
+					activeGroup = null;
 				} else if (page.indexOf('amanah-seo-engine-') === 0 || page === 'amanah-seo-engine') {
 					activeCategory = 'engine';
 					activeGroup = 'workflow';
