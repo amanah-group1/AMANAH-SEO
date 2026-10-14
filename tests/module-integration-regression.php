@@ -40,7 +40,11 @@ $checks['ENGINE legacy credential migration preserves existing DataForSEO secret
 
 $checks['FAQ endpoint uses governed AI client'] = strpos( $read( 'plugin/modules/ai-runtime/modules/faq/class-faq-generator.php' ), "generate( 'faq_generation'" ) !== false;
 $checks['Schema endpoint uses governed AI client'] = strpos( $read( 'plugin/modules/ai-runtime/modules/schema/class-schema-generator.php' ), "generate( 'schema_generation'" ) !== false;
-$checks['Entity Profile is nested under Core menu'] = strpos( $read( 'plugin/modules/ai-runtime/modules/entity/class-entity-admin.php' ), "add_submenu_page('amanah-seo'" ) !== false;
+$entity_admin = $read( 'plugin/modules/ai-runtime/modules/entity/class-entity-admin.php' );
+$checks['Entity Profile is nested under Core menu and uses the Core page capability'] = strpos( $entity_admin, "add_submenu_page('amanah-seo'" ) !== false && strpos( $entity_admin, "'manage_amanah_seo','amanah-entity-profile'" ) !== false && strpos( $entity_admin, "current_user_can('manage_amanah_seo')" ) !== false;
+$activator = $read( 'plugin/includes/class-amanah-seo-activator.php' );
+$checks['Administrator role receives Core page and legacy entity action capabilities'] = strpos( $activator, "'manage_amanah_seo', 'amanah_view_entity', 'amanah_manage_entity'" ) !== false;
+$checks['Entity mutations retain their explicit legacy capability gate'] = substr_count( $read( 'plugin/modules/ai-runtime/modules/entity/class-entity-controller.php' ), "current_user_can('amanah_manage_entity')" ) >= 3;
 $entity_controller = $read( 'plugin/modules/ai-runtime/modules/entity/class-entity-controller.php' );
 $checks['Entity save redirects to registered Entity Profile slug'] = strpos( $entity_controller, "admin.php?page=amanah-entity-profile" ) !== false;
 $checks['Entity controller has no stale unregistered page redirects'] = strpos( $entity_controller, "admin.php?page=amanah-seo-ai" ) === false;

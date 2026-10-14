@@ -155,6 +155,52 @@ $core_slugs = array_map(
 	},
 	$core_submenus
 );
+$entity_submenu = null;
+foreach ( $core_submenus as $submenu_item ) {
+	if ( isset( $submenu_item[2] ) && 'amanah-entity-profile' === $submenu_item[2] ) {
+		$entity_submenu = $submenu_item;
+		break;
+	}
+}
+if ( ! current_user_can( 'manage_amanah_seo' ) || ! current_user_can( 'amanah_view_entity' ) || ! current_user_can( 'amanah_manage_entity' ) ) {
+	$failures[] = 'Administrator lacks the expected Core or entity capabilities.';
+}
+if ( ! is_array( $entity_submenu ) || ! isset( $entity_submenu[1] ) || 'manage_amanah_seo' !== $entity_submenu[1] ) {
+	$failures[] = 'Entity Profile submenu is missing or does not use the Core page capability.';
+}
+
+// Verify Core activation/upgrade checks leave an existing Entity Profile row untouched.
+$entities_table = $wpdb->prefix . 'amanah_entities';
+$sentinel_name = 'Entity Profile capability regression sentinel';
+$sentinel = $wpdb->get_row( $wpdb->prepare( "SELECT id, user_id, entity_name, entity_type, industry, status FROM {$entities_table} WHERE entity_name = %s LIMIT 1", $sentinel_name ) );
+if ( ! $sentinel ) {
+	$inserted_entity = $wpdb->insert(
+		$entities_table,
+		array(
+			'user_id' => 1,
+			'entity_name' => $sentinel_name,
+			'entity_type' => 'Organization',
+			'industry' => 'Regression test',
+			'status' => 'active',
+		),
+		array( '%d', '%s', '%s', '%s', '%s' )
+	);
+	if ( false === $inserted_entity ) {
+		$failures[] = 'Could not create Entity Profile preservation sentinel.';
+	} else {
+		$sentinel = $wpdb->get_row( $wpdb->prepare( "SELECT id, user_id, entity_name, entity_type, industry, status FROM {$entities_table} WHERE id = %d", $wpdb->insert_id ) );
+	}
+}
+if ( $sentinel ) {
+	$before = array( (int) $sentinel->id, (int) $sentinel->user_id, $sentinel->entity_name, $sentinel->entity_type, $sentinel->industry, $sentinel->status );
+	AMANAH_SEO_Activator::maybe_upgrade();
+	$after = $wpdb->get_row( $wpdb->prepare( "SELECT id, user_id, entity_name, entity_type, industry, status FROM {$entities_table} WHERE id = %d", $sentinel->id ) );
+	$after_values = $after ? array( (int) $after->id, (int) $after->user_id, $after->entity_name, $after->entity_type, $after->industry, $after->status ) : null;
+	if ( $before !== $after_values ) {
+		$failures[] = 'Entity Profile data changed during Core capability/upgrade regression check.';
+	}
+}
+
 if ( ! in_array( 'amanah-seo-engine-dashboard', $core_slugs, true ) ) {
 	$failures[] = 'ENGINE dashboard is not registered under the AMANAH SEO Core menu.';
 }
@@ -175,4 +221,4 @@ if ( $failures ) {
 	exit( 1 );
 }
 
-echo 'PASS: WordPress activation/reactivation, Core AI license API contract, ENGINE data and credential preservation, Core license storage, and Core-owned ENGINE menus.' . PHP_EOL;
+echo 'PASS: WordPress activation/reactivation, Core AI license API contract, ENGINE and Entity Profile data preservation, Core license storage, Entity Profile capability, and Core-owned menus.' . PHP_EOL;
