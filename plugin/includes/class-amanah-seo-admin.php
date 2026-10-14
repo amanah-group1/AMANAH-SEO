@@ -17,7 +17,7 @@ final class AMANAH_SEO_Admin {
  }
  public static function menu() {
   if(!current_user_can('manage_amanah_seo')) return;
-  add_menu_page('AMANAH SEO','AMANAH SEO','manage_amanah_seo','amanah-seo',array(__CLASS__,'dashboard'),'dashicons-chart-area',58);
+  add_menu_page('AMANAH SEO','AMANAH SEO','manage_amanah_seo','amanah-seo',array(__CLASS__,'sales_page'),'dashicons-chart-area',58);
   add_submenu_page('amanah-seo','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
   add_submenu_page('amanah-seo','Temuan','Temuan','manage_amanah_seo','amanah-seo-findings',array(__CLASS__,'findings_page'));
   add_submenu_page('amanah-seo','Pekerjaan','Pekerjaan','manage_amanah_seo','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
@@ -83,6 +83,27 @@ final class AMANAH_SEO_Admin {
   elseif($summary['open_findings']>0)$summary['next_action']='review_findings';
   else $summary['next_action']='scan_website';
   return $summary;
+ }
+ public static function sales_page(){
+  self::start('AMANAH SEO');
+  echo '<div class="amanah-seo-sales" style="max-width:1180px">';
+  echo '<section style="background:linear-gradient(135deg,#102b4e 0%,#175b83 58%,#218b91 100%);color:#fff;padding:38px 34px;border-radius:12px;margin:18px 0 24px">';
+  echo '<p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ccecf7">SEO WORKSPACE FOR WORDPRESS</p>';
+  echo '<h1 style="font-size:34px;line-height:1.2;color:#fff;margin:0 0 14px">AMANAH SEO</h1>';
+  echo '<p style="font-size:17px;line-height:1.7;max-width:820px;margin:0 0 22px;color:#f1f8fb">Satu pusat kendali untuk memahami kondisi website, menentukan prioritas SEO, dan mengelola pekerjaan secara terstruktur—langsung dari WordPress.</p>';
+  echo '<a class="button button-primary" style="background:#fff;border-color:#fff;color:#123b59" href="'.esc_url(admin_url('admin.php?page=amanah-seo-workspace')).'">Mulai dari Website &amp; Workspace</a>';
+  echo '</section>';
+  echo '<h2 style="font-size:22px">Satu platform. Tiga area utama.</h2>';
+  echo '<p style="max-width:850px">Gunakan CORE untuk mengelola workspace dan pekerjaan inti. Area AI dan ENGINE disediakan sebagai modul terpisah yang dikelola dari AMANAH SEO; akses fitur modul mengikuti status aktivasi dan lisensinya.</p>';
+  echo '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:20px 0 26px">';
+  echo '<article class="postbox" style="padding:22px;margin:0"><p style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#2271b1;margin:0 0 8px">01 · CORE</p><h3 style="font-size:19px;margin:0 0 10px">Kelola dan prioritaskan</h3><p>Atur website dan workspace, tinjau temuan, susun pekerjaan, serta pantau persetujuan dan riwayat melalui satu area inti.</p><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-workspace')).'">Buka Workspace</a></article>';
+  echo '<article class="postbox" style="padding:22px;margin:0"><p style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#2271b1;margin:0 0 8px">02 · AI</p><h3 style="font-size:19px;margin:0 0 10px">Dukungan kecerdasan buatan</h3><p>Area untuk profil entitas, analisis konten, dan pembuatan konten berbantuan AI. Ketersediaan mengikuti implementasi dan lisensi modul AI.</p><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-ai')).'">Lihat Area AI</a></article>';
+  echo '<article class="postbox" style="padding:22px;margin:0"><p style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#2271b1;margin:0 0 8px">03 · ENGINE</p><h3 style="font-size:19px;margin:0 0 10px">Alur kerja SEO terstruktur</h3><p>Area untuk riset keyword, perencanaan, alur konten, evaluasi, dan pemantauan SEO. Fitur yang belum tersedia tetap ditandai sebagai belum diimplementasikan.</p><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-engine')).'">Lihat Area ENGINE</a></article>';
+  echo '</div>';
+  echo '<section style="background:#f0f6fc;border-left:4px solid #2271b1;padding:16px 20px;margin:0 0 20px"><h2 style="margin:0 0 8px;font-size:17px">Dibangun dengan kendali pengguna</h2><p style="margin:0">AMANAH SEO membantu mengatur temuan, prioritas, dan alur kerja. Halaman ini tidak menjalankan perubahan SEO, membuat konten, atau menerbitkan apa pun secara otomatis.</p></section>';
+  echo '<p style="color:#646970;font-size:12px">Status dan kemampuan aktual mengikuti versi plugin, modul yang aktif, serta lisensi yang berlaku.</p>';
+  echo '</div>';
+  self::end();
  }
  public static function dashboard(){
   self::start('AMANAH SEO — Dashboard');
