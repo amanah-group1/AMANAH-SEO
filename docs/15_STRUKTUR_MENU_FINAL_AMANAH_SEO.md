@@ -1,201 +1,98 @@
 # STRUKTUR MENU FINAL AMANAH SEO
 
-**Status:** FINAL — struktur menu ditetapkan 2026-10-11; aturan paket tunggal dan lisensi modul diperbarui 2026-10-12  
-**Jenis dokumen:** Keputusan produk dan acuan navigasi  
-**Acuan induk:** [Pedoman Induk AMANAH SEO](PEDOMAN_INDUK_AMANAH_SEO.md)  
-**Batas perubahan:** Dokumentasi dan desain navigasi saja; bukan persetujuan implementasi.
+**Status:** Implementasi pada PR — menunggu validasi otomatis dan uji runtime WordPress  
+**Tanggal:** 2026-10-14  
+**Berlaku untuk:** satu plugin WordPress bernama AMANAH SEO  
+**Tujuan:** sidebar admin hanya memiliki tiga menu utama; masing-masing membuka halaman dashboard berbasis kartu.
 
-## 1. Keputusan arsitektur navigasi
+## 1. Tiga menu utama
 
-AMANAH SEO adalah produk utama, satu-satunya plugin yang dipasang pengguna, dan satu-satunya menu induk. Paket plugin yang sama memuat dua modul:
+Urutan menu utama harus tepat seperti berikut:
 
-- **AMANAH SEO AI** — kemampuan SEO berbantuan AI.
-- **AMANAH SEO ENGINE** — intelligence SEO dan workflow produksi konten.
+1. **CORE**
+2. **AMANAH SEO AI**
+3. **AMANAH SEO ENGINE**
 
-Pengguna tidak perlu memasang plugin AI atau Engine secara terpisah. Kedua modul tetap mempertahankan tanggung jawab, alur, dan fungsi khususnya di dalam navigasi AMANAH SEO, serta memiliki lisensi/entitlement independen.
+Menu induk lama **AMANAH SEO** tidak ditampilkan lagi sebagai menu utama. Dengan demikian, tidak ada menu utama keempat atau menu AI/ENGINE duplikat.
 
-## 2. Pohon menu final
+Setiap menu utama membuka halaman dashboard tersendiri. Dashboard menampilkan kartu responsif dengan kategori, judul, deskripsi singkat, status implementasi, dan tombol **Buka area**. Kartu tidak boleh menyatakan fitur telah tersedia jika integrasinya belum selesai.
 
-```text
-AMANAH SEO
-├── 1. Dashboard
-├── 2. Website & Workspace
-├── 3. SEO Intelligence
-│   ├── Ringkasan Kondisi SEO
-│   ├── Hasil Pemeriksaan Website
-│   ├── Temuan dan Masalah SEO
-│   ├── Peluang Pertumbuhan
-│   └── Sumber Data dan Tingkat Keyakinan
-├── 4. Prioritas & Tasks
-│   ├── Daftar Prioritas SEO
-│   ├── Daftar Tugas
-│   ├── Penanggung Jawab dan Status
-│   └── Tenggat dan Dependensi
-├── 5. Execution & Approval
-│   ├── Rencana Pelaksanaan
-│   ├── Antrean Persetujuan
-│   ├── Riwayat Keputusan
-│   └── Catatan Perubahan dan Hasil Eksekusi
-├── 6. Monitoring & Results
-│   ├── Status Pekerjaan
-│   ├── Perubahan Kondisi SEO
-│   ├── Hasil Sebelum dan Sesudah
-│   └── Siklus Evaluasi Berikutnya
-├── 7. Reports
-├── 8. Settings & Access
-│   ├── Pengaturan Workspace
-│   ├── Pengguna dan Hak Akses
-│   ├── Integrasi dan Sumber Data
-│   ├── AI Provider & API Credentials
-│   ├── Module Licenses & Entitlements
-│   ├── Updates
-│   └── Preferensi Sistem
-├── 9. AMANAH SEO AI
-│   ├── Dashboard AI
-│   ├── Entity & Authority
-│   │   ├── Entity Profile
-│   │   └── Authority & Author
-│   ├── AI Audit
-│   ├── Content AI
-│   │   ├── Content Analyzer
-│   │   ├── Content Brief
-│   │   ├── Article Generation
-│   │   ├── FAQ Generator
-│   │   └── Content Optimizer
-│   ├── Topic Authority
-│   ├── Internal Link AI
-│   ├── Schema Manager
-│   │   ├── Schema Generator
-│   │   └── Schema Validation
-│   ├── AI Reports
-│   ├── AI Settings
-│   │   └── Konfigurasi AI
-└── 10. AMANAH SEO ENGINE
-    ├── Dashboard ENGINE
-    ├── Content Production
-    │   ├── Article Workspace
-    │   ├── Create New Article
-    │   ├── All Articles
-    │   └── Published Content
-    ├── Keyword & Search Intelligence
-    │   ├── Keyword Research
-    │   ├── Search Intent
-    │   ├── Content Scanning
-    │   ├── Keyword Clusters
-    │   └── URL Mapping
-    ├── Strategy & Planning
-    │   ├── Requirements
-    │   ├── Content Strategy
-    │   ├── Content Plan
-    │   ├── Content Brief
-    │   └── Content Blueprint
-    ├── Content Workflow
-    │   ├── Generation
-    │   ├── Evaluation
-    │   ├── Refinement
-    │   ├── Maturity Gate
-    │   ├── Human Review
-    │   ├── Approval
-    │   └── Publishing Preparation
-    ├── Quality & Maturity
-    │   ├── Evaluation Results
-    │   ├── Deficiencies & Refinement
-    │   ├── Maturity Status
-    │   └── Review & Approval Queue
-    ├── SEO Support
-    │   ├── Internal Links
-    │   ├── Orphan Pages
-    │   ├── SEO Issues
-    │   ├── Cannibalization
-    │   └── Recommendations
-    ├── Monitoring
-    │   ├── Performance
-    │   ├── Keyword Monitoring
-    │   └── Site Health
-    ├── AI & Usage
-    │   ├── AI Configuration
-    │   └── Usage & Limits
-    └── Administration
-        ├── Settings
-        ├── Import / Export
-        └── System Status
-```
+## 2. Dashboard CORE
 
-## 3. Tanggung jawab tiap kelompok
+Halaman CORE menggunakan pola kartu yang sama seperti dashboard AMANAH SEO AI. Kartu yang direncanakan:
 
-### AMANAH SEO — pusat kendali utama
+- **Website & Workspace** — identitas website dan konteks kerja utama. Mengarah ke halaman workspace yang sudah tersedia.
+- **SEO Intelligence** — area intelijen dan peluang SEO; placeholder sampai implementasi diverifikasi.
+- **Tasks & Workflow** — pekerjaan dan tindak lanjut yang tercatat.
+- **Execution & Approval** — placeholder untuk pelaksanaan dan persetujuan.
+- **Monitoring & Results** — placeholder untuk pemantauan dan hasil terverifikasi.
+- **Reports** — placeholder laporan.
+- **AI Provider & API Key** — area pengaturan provider/kredensial AI. Jangan mengklaim integrasi aktif sebelum implementasi diuji.
+- **Settings & Access** — halaman pengaturan akses dan lisensi modul yang dikelola melalui CORE.
 
-Menghubungkan kondisi website dengan temuan, prioritas, tugas, keputusan, hasil pelaksanaan, dan siklus monitoring berikutnya. Dashboard utama harus membantu pengguna memahami apa yang perlu diperhatikan, mengapa, statusnya, dan keputusan apa yang dibutuhkan.
+Lisensi AI dan ENGINE tetap terpisah satu sama lain, dan pengelolaannya dilakukan melalui AMANAH SEO. CORE sendiri tidak membutuhkan lisensi untuk dipasang.
 
-### AMANAH SEO AI — modul kemampuan AI
+## 3. Dashboard AMANAH SEO AI
 
-Menampung fitur entity dan authority, audit AI, analisis serta pembuatan/optimasi konten, topic authority, internal linking berbantuan AI, schema, laporan, dan konfigurasi AI sesuai kemampuan yang benar-benar tersedia. Pengaturan provider/API credentials dan pengelolaan lisensi/entitlement berada di pusat pengaturan AMANAH SEO; halaman modul tidak menjadi sumber lisensi terpisah.
+Gunakan copywriting dan susunan kartu berikut. Status setiap kartu tetap **Belum diimplementasikan** sampai integrasi fiturnya benar-benar diverifikasi.
 
-### AMANAH SEO ENGINE — modul intelligence dan workflow
+### Copywriting
 
-Menampung riset keyword dan search intelligence, strategi/perencanaan, workspace produksi konten, generation, evaluation, refinement, maturity gate, human review, approval, persiapan publikasi, dukungan SEO, monitoring, penggunaan AI, dan administrasi ENGINE. Lisensi/entitlement Engine dikelola secara terpusat di AMANAH SEO dan tidak diaktifkan otomatis oleh lisensi AI.
+**Jika AI belum mengenal bisnis Anda, bagaimana calon pelanggan akan menemukannya?**
 
-## 4. Aturan implementasi navigasi
+Pencarian berkembang melampaui daftar tautan. Identitas bisnis yang jelas, otoritas yang dapat dipercaya, dan konten yang relevan membantu mesin pencari serta sistem AI memahami siapa Anda dan apa yang Anda kuasai.
 
-1. Seluruh kelompok berada di bawah satu menu induk **AMANAH SEO**; pengguna cukup memasang satu plugin.
-2. Jangan membuat AMANAH SEO AI atau AMANAH SEO ENGINE menjadi plugin/menu induk terpisah.
-3. Semua menu modul tetap terlihat dan dapat dibuka, baik lisensi aktif maupun belum aktif.
-4. Jika lisensi/entitlement modul tidak aktif, halaman modul menampilkan sales page yang menjelaskan nama modul, manfaat, status lisensi, dan langkah mendapatkan/mengaktifkan lisensi. Jangan menampilkan halaman error generik untuk kondisi lisensi normal.
-5. Lisensi AI dan Engine independen. Lisensi satu modul tidak memberi akses ke fitur modul lainnya.
-6. Pengelolaan API key/kredensial AI, lisensi modul, entitlement, dan pembaruan dipusatkan pada AMANAH SEO. API key bukan lisensi dan tidak boleh dicampuradukkan dengan entitlement.
-7. Fitur berlisensi harus ditolak di sisi server jika entitlement tidak aktif, termasuk pada aksi formulir, AJAX/REST API, proses latar belakang, dan jalur eksekusi terkait. Menyembunyikan tombol atau menu saja tidak cukup.
-8. Pertahankan batas fungsi khusus AI/ENGINE; satu paket tidak berarti semua fungsi harus digabung menjadi satu mesin.
-9. Menu yang belum diimplementasikan atau belum lulus pengujian tidak boleh ditampilkan seolah-olah sudah berfungsi. Catat statusnya sebagai belum tersedia, belum diuji, atau terhambat sesuai bukti.
-10. Perubahan website dan publikasi memerlukan persetujuan eksplisit dari pengguna yang berwenang. Struktur menu tidak memberikan izin untuk otomatisasi atau publikasi mandiri.
-11. Penamaan teknis, slug, capability, mekanisme lisensi, urutan registrasi menu, dan detail implementasi ditetapkan dalam rencana implementasi terpisah setelah audit kode dan persetujuan ruang lingkup.
+**AMANAH SEO AI dirancang untuk mendukung fondasi tersebut sebagai bagian dari satu sistem SEO terpadu — bukan sekadar menghasilkan konten.**
 
-## 5. Batas status keputusan
+**Kemampuan AI**
 
-Struktur dan pengelompokan menu pada dokumen ini berstatus **FINAL** sebagai keputusan produk. Bagian 6 mencatat keputusan visual yang lebih baru dan persetujuan pengguna untuk mengimplementasikan perilaku sidebar tiga kategori. Persetujuan tersebut hanya mencakup navigasi; bukan bukti bahwa seluruh fitur tersedia, bukan persetujuan untuk merge/deploy, dan tidak menggantikan gerbang pengujian integrasi serta lisensi dalam Pedoman Induk AMANAH SEO.
+Pilih area kerja yang dibutuhkan. Halaman yang belum terintegrasi akan menampilkan status placeholder dengan jelas.
 
----
+### Kartu dan tujuan
 
-## 6. Keputusan navigasi visual — 2026-10-14
+| Kelompok | Kartu | Deskripsi | Slug tujuan |
+|---|---|---|---|
+| Entity & Authority | Entity Profile | Identitas dan konteks utama bisnis. | `amanah-entity-profile` |
+| Entity & Authority | Authority & Author | Kredibilitas penulis dan keahlian. | `amanah-authority` |
+| Intelligence | AI Audit | Area audit SEO berbantuan AI. | `amanah-seo-ai-audit` |
+| Content AI | Content Analyzer | Analisis kualitas dan konteks konten. | `amanah-content-analyzer` |
+| Content AI | Content Brief | Kerangka konten sebelum penulisan. | `amanah-seo-ai-content-brief` |
+| Content AI | Article Generation | Alur pembuatan artikel terarah. | `amanah-content-generation` |
+| Content AI | FAQ Generator | Perencanaan pertanyaan dan jawaban. | `amanah-seo-ai-faq-generator` |
+| Content AI | Content Optimizer | Penyempurnaan konten yang sudah ada. | `amanah-seo-ai-content-optimizer` |
+| Authority | Topic Authority | Cakupan topik dan kedalaman keahlian. | `amanah-seo-ai-topic-authority` |
+| Technical SEO | Internal Link AI | Dukungan perencanaan tautan internal. | `amanah-seo-ai-internal-links` |
+| Technical SEO | Schema Manager | Akses ke generator dan validasi schema. | `amanah-seo-ai-schema-generator` plus tautan **Validasi** ke `amanah-seo-ai-schema-validation` |
 
-**Status: DISETUJUI PENGGUNA — menggantikan tampilan pohon datar pada bagian 2 untuk perilaku sidebar.**
+Semua tautan harus tetap menuju slug yang sesuai. Halaman placeholder harus menyatakan bahwa integrasi belum tersedia dan tidak menjalankan proses AI tanpa implementasi yang nyata.
 
-Di bawah satu menu induk WordPress **AMANAH SEO**, sidebar menampilkan tepat tiga kategori yang dapat dibuka/tutup:
+## 4. Dashboard AMANAH SEO ENGINE
 
-```text
-AMANAH SEO
-├── ▼ CORE
-│   ├── Dashboard
-│   ├── Website & Workspace
-│   ├── SEO Intelligence
-│   ├── Priorities & Tasks
-│   ├── Execution & Approval
-│   ├── Monitoring & Results
-│   ├── Reports
-│   └── Settings & Access
-├── ▶ AI
-│   ├── Entity Profile
-│   ├── Authority & Author
-│   ├── Content Analyzer
-│   ├── Article Generation
-│   └── Pengaturan khusus AI (jika diperlukan)
-└── ▶ ENGINE
-    ├── ENGINE Workflow
-    ├── Keyword Research
-    ├── Strategy & Plan
-    ├── Requirements
-    ├── Brief & Blueprint
-    ├── Generation & Evaluation
-    ├── Refinement & Maturity
-    └── Review & Publishing
-```
+Halaman ENGINE menggunakan pola kartu responsif yang sama seperti dashboard AI. Kartu tahap yang ditampilkan:
 
-Perilaku wajib:
+1. **Keyword & Search Intelligence** — riset keyword, search intent, dan pengelompokan peluang.
+2. **Requirements** — kebutuhan dan batasan sebelum strategi disusun.
+3. **Strategy & Planning** — rencana SEO dan prioritas kerja.
+4. **Content Brief & Blueprint** — kerangka konten sebelum produksi.
+5. **Generation & Evaluation** — tahap produksi dan evaluasi konten.
+6. **Refinement & Maturity** — penyempurnaan dan kesiapan konten.
+7. **Human Review & Approval** — pemeriksaan manusia sebelum publikasi.
+8. **Publishing Preparation** — persiapan publikasi tanpa menerbitkan otomatis.
 
-1. Hanya satu kategori terbuka pada satu waktu; membuka kategori lain menutup kategori sebelumnya.
-2. CORE terbuka sebagai pilihan awal bila tidak ada kategori halaman aktif yang dapat ditentukan.
-3. Saat halaman AI atau ENGINE dibuka, kategorinya otomatis terbuka dan tautan halaman aktif tetap mengikuti status WordPress.
-4. Memilih kategori hanya mengubah tampilan sidebar; kategori bukan pengganti halaman dan tidak mengubah URL, callback, capability, atau handler fitur yang sudah terdaftar.
-5. Semua submenu yang telah ada harus tetap dapat dijangkau. Submenu lama yang tidak muncul pada ringkasan visual tetap dipertahankan dalam kategori yang sesuai; penyederhanaan navigasi tidak boleh menghapus fitur.
-6. Pengaturan inti, API credentials, hak akses, dan lisensi/entitlement modul dikelola dari CORE. Pengaturan khusus AI hanya ditampilkan bila memang memiliki fungsi khusus yang terpisah.
-7. Tetap satu plugin WordPress dan satu menu induk AMANAH SEO; CORE, AI, dan ENGINE bukan menu induk WordPress terpisah dan bukan plugin terpisah.
+Setiap kartu menampilkan status **Belum diimplementasikan** dan tombol **Buka area** menuju placeholder yang jelas. Kartu atau tombol tidak boleh menyiratkan bahwa ENGINE sudah melakukan produksi atau publikasi.
 
+## 5. Aturan implementasi
+
+1. Hanya tiga menu utama yang terlihat: CORE, AMANAH SEO AI, dan AMANAH SEO ENGINE. Tidak ada submenu internal yang ditampilkan di sidebar; halaman fitur tetap terdaftar dan dibuka melalui tombol **Buka area** pada kartu dashboard. Menu induk lama `AMANAH SEO` dan menu modul lama yang duplikat disembunyikan.
+2. Ketiganya menggunakan capability `manage_amanah_seo`; pengubahan tampilan tidak boleh melemahkan pemeriksaan akses.
+3. Dashboard tiap menu menampilkan kartu responsif, dengan gaya konsisten mengikuti dashboard AI.
+4. Pertahankan slug halaman internal yang sudah digunakan oleh kartu AI agar tautan tidak rusak.
+5. Placeholder harus jelas dan tidak membuat hasil, data, atau status palsu.
+6. Pengaturan provider/API key dan lisensi modul dikelola dari CORE; API key tidak sama dengan lisensi.
+7. Lisensi AI dan ENGINE independen; CORE tidak dibatasi lisensi.
+8. Perubahan ini tidak menghapus data, menjalankan migrasi, mengaktifkan layanan eksternal, membuat konten, atau menerbitkan konten.
+9. Validasi PHP/CI tidak menggantikan uji runtime WordPress. Sebelum dianggap selesai, periksa bahwa sidebar hanya memiliki tiga menu utama dan masing-masing menu membuka dashboard kartu yang benar.
+
+## 6. Cakupan PR
+
+Perubahan mencakup struktur menu utama dan dashboard kartu CORE, AI, dan ENGINE serta dokumentasi ini. Status tetap **menunggu validasi runtime WordPress** sampai halaman diuji pada staging.
