@@ -1,40 +1,46 @@
 # STRUKTUR MENU FINAL AMANAH SEO
 
-**Status:** Implementasi pada PR — menunggu validasi otomatis dan uji runtime WordPress  
+**Status:** Implementasi pada branch — menunggu pemeriksaan otomatis dan uji runtime WordPress  
 **Tanggal:** 2026-10-14  
-**Berlaku untuk:** satu plugin WordPress bernama AMANAH SEO  
-**Tujuan:** sidebar admin hanya memiliki tiga menu utama; masing-masing membuka halaman dashboard berbasis kartu.
+**Berlaku untuk:** satu plugin WordPress bernama AMANAH SEO
 
-## 1. Tiga menu utama
+## 1. Struktur sidebar final
 
-Urutan menu utama harus tepat seperti berikut:
+Hanya ada satu menu induk untuk seluruh area AMANAH SEO. Ketika pengguna mengeklik menu induk, halaman yang terbuka adalah Sales Page.
 
-1. **CORE**
-2. **AMANAH SEO AI**
-3. **AMANAH SEO ENGINE**
+Urutan menu yang terlihat:
 
-Menu induk lama **AMANAH SEO** tidak ditampilkan lagi sebagai menu utama. Dengan demikian, tidak ada menu utama keempat atau menu AI/ENGINE duplikat.
+1. **🚀 AMANAH SEO** — membuka Sales Page; tidak memiliki submenu Sales Page.
+2. **⚙️ Settings & Access** — pengaturan utama, API key, serta pengelolaan lisensi modul.
+3. **🧩 CORE** — membuka dashboard CORE berbasis kartu.
+4. **🤖 AMANAH SEO AI** — membuka dashboard AI berbasis kartu.
+5. **🔍 AMANAH SEO ENGINE** — membuka dashboard ENGINE berbasis kartu.
 
-Setiap menu utama membuka halaman dashboard tersendiri. Dashboard menampilkan kartu responsif dengan kategori, judul, deskripsi singkat, status implementasi, dan tombol **Buka area**. Kartu tidak boleh menyatakan fitur telah tersedia jika integrasinya belum selesai.
+Empat item di bawah AMANAH SEO merupakan submenu dari menu induk tersebut. Sales Page bukan submenu dan tidak ditampilkan sebagai item terpisah.
+
+Menu bawaan WordPress seperti Dashboard, Posts, Media, Pages, Comments, Appearance, Plugins, Users, Tools, dan Settings tetap tersedia.
 
 ## 2. Dashboard CORE
 
-Halaman CORE menggunakan pola kartu yang sama seperti dashboard AMANAH SEO AI. Kartu yang direncanakan:
+CORE dibuka melalui submenu **🧩 CORE** dan menampilkan kartu responsif, termasuk kartu **Dashboard**. Dashboard bukan menu sidebar tersendiri.
 
-- **Website & Workspace** — identitas website dan konteks kerja utama. Mengarah ke halaman workspace yang sudah tersedia.
-- **SEO Intelligence** — area intelijen dan peluang SEO; placeholder sampai implementasi diverifikasi.
+Kartu yang ditampilkan:
+
+- **Dashboard** — ringkasan temuan, pekerjaan, dan tindakan berikutnya; mengarah ke halaman ringkasan yang sudah ada.
+- **Website & Workspace** — identitas website dan konteks kerja utama.
+- **SEO Intelligence** — placeholder sampai implementasi diverifikasi.
 - **Tasks & Workflow** — pekerjaan dan tindak lanjut yang tercatat.
 - **Execution & Approval** — placeholder untuk pelaksanaan dan persetujuan.
 - **Monitoring & Results** — placeholder untuk pemantauan dan hasil terverifikasi.
 - **Reports** — placeholder laporan.
-- **AI Provider & API Key** — area pengaturan provider/kredensial AI. Jangan mengklaim integrasi aktif sebelum implementasi diuji.
-- **Settings & Access** — halaman pengaturan akses dan lisensi modul yang dikelola melalui CORE.
 
-Lisensi AI dan ENGINE tetap terpisah satu sama lain, dan pengelolaannya dilakukan melalui AMANAH SEO. CORE sendiri tidak membutuhkan lisensi untuk dipasang.
+Pengaturan API key dan lisensi diakses melalui submenu **⚙️ Settings & Access**, bukan melalui kartu atau submenu ganda di CORE.
+
+Lisensi AI dan ENGINE tetap terpisah satu sama lain dan dikelola melalui AMANAH SEO. CORE sendiri tidak membutuhkan lisensi untuk dipasang.
 
 ## 3. Dashboard AMANAH SEO AI
 
-Gunakan copywriting dan susunan kartu berikut. Status setiap kartu tetap **Belum diimplementasikan** sampai integrasi fiturnya benar-benar diverifikasi.
+Dashboard AI menggunakan copywriting dan kartu berikut. Status fitur tetap **Belum diimplementasikan** sampai integrasi benar-benar diverifikasi.
 
 ### Copywriting
 
@@ -62,13 +68,13 @@ Pilih area kerja yang dibutuhkan. Halaman yang belum terintegrasi akan menampilk
 | Content AI | Content Optimizer | Penyempurnaan konten yang sudah ada. | `amanah-seo-ai-content-optimizer` |
 | Authority | Topic Authority | Cakupan topik dan kedalaman keahlian. | `amanah-seo-ai-topic-authority` |
 | Technical SEO | Internal Link AI | Dukungan perencanaan tautan internal. | `amanah-seo-ai-internal-links` |
-| Technical SEO | Schema Manager | Akses ke generator dan validasi schema. | `amanah-seo-ai-schema-generator` plus tautan **Validasi** ke `amanah-seo-ai-schema-validation` |
+| Technical SEO | Schema Manager | Akses ke generator dan validasi schema. | `amanah-seo-ai-schema-generator` plus tautan Validasi ke `amanah-seo-ai-schema-validation` |
 
-Semua tautan harus tetap menuju slug yang sesuai. Halaman placeholder harus menyatakan bahwa integrasi belum tersedia dan tidak menjalankan proses AI tanpa implementasi yang nyata.
+Semua tautan harus tetap menuju slug yang sesuai. Placeholder harus menyatakan bahwa integrasi belum tersedia dan tidak menjalankan proses AI tanpa implementasi nyata.
 
 ## 4. Dashboard AMANAH SEO ENGINE
 
-Halaman ENGINE menggunakan pola kartu responsif yang sama seperti dashboard AI. Kartu tahap yang ditampilkan:
+Dashboard ENGINE menggunakan kartu responsif dengan status **Belum diimplementasikan** sampai integrasi diverifikasi:
 
 1. **Keyword & Search Intelligence** — riset keyword, search intent, dan pengelompokan peluang.
 2. **Requirements** — kebutuhan dan batasan sebelum strategi disusun.
@@ -79,20 +85,23 @@ Halaman ENGINE menggunakan pola kartu responsif yang sama seperti dashboard AI. 
 7. **Human Review & Approval** — pemeriksaan manusia sebelum publikasi.
 8. **Publishing Preparation** — persiapan publikasi tanpa menerbitkan otomatis.
 
-Setiap kartu menampilkan status **Belum diimplementasikan** dan tombol **Buka area** menuju placeholder yang jelas. Kartu atau tombol tidak boleh menyiratkan bahwa ENGINE sudah melakukan produksi atau publikasi.
+Kartu tidak boleh menyiratkan bahwa ENGINE sudah melakukan produksi atau publikasi.
 
 ## 5. Aturan implementasi
 
-1. Hanya tiga menu utama yang terlihat: CORE, AMANAH SEO AI, dan AMANAH SEO ENGINE. Tidak ada submenu internal yang ditampilkan di sidebar; halaman fitur tetap terdaftar dan dibuka melalui tombol **Buka area** pada kartu dashboard. Menu induk lama `AMANAH SEO` dan menu modul lama yang duplikat disembunyikan.
-2. Ketiganya menggunakan capability `manage_amanah_seo`; pengubahan tampilan tidak boleh melemahkan pemeriksaan akses.
-3. Dashboard tiap menu menampilkan kartu responsif, dengan gaya konsisten mengikuti dashboard AI.
-4. Pertahankan slug halaman internal yang sudah digunakan oleh kartu AI agar tautan tidak rusak.
-5. Placeholder harus jelas dan tidak membuat hasil, data, atau status palsu.
-6. Pengaturan provider/API key dan lisensi modul dikelola dari CORE; API key tidak sama dengan lisensi.
-7. Lisensi AI dan ENGINE independen; CORE tidak dibatasi lisensi.
-8. Perubahan ini tidak menghapus data, menjalankan migrasi, mengaktifkan layanan eksternal, membuat konten, atau menerbitkan konten.
-9. Validasi PHP/CI tidak menggantikan uji runtime WordPress. Sebelum dianggap selesai, periksa bahwa sidebar hanya memiliki tiga menu utama dan masing-masing menu membuka dashboard kartu yang benar.
+1. Hanya satu menu induk AMANAH SEO yang menaungi Settings & Access, CORE, AI, dan ENGINE.
+2. Mengeklik **🚀 AMANAH SEO** membuka Sales Page secara langsung.
+3. Tidak ada submenu Sales Page.
+4. Tidak ada menu CORE, AI, atau ENGINE duplikat di luar induk AMANAH SEO.
+5. Dashboard berada sebagai kartu di halaman CORE, bukan menu sidebar tersendiri.
+6. Submenu fitur internal tidak ditampilkan satu per satu; halaman fitur tetap terdaftar dan dapat diakses dari kartu dashboard yang sesuai.
+7. Gunakan capability `manage_amanah_seo`; perubahan navigasi tidak boleh melemahkan pemeriksaan akses.
+8. Pertahankan slug halaman yang digunakan oleh kartu agar tautan tidak rusak.
+9. Placeholder harus jelas dan tidak membuat hasil, data, atau status palsu.
+10. API key tidak sama dengan lisensi. Pengelolaan lisensi AI dan ENGINE dilakukan dari Settings & Access; lisensi keduanya independen, sedangkan CORE tidak dibatasi lisensi.
+11. Perubahan navigasi tidak menghapus data, menjalankan migrasi, mengaktifkan layanan eksternal, membuat konten, atau menerbitkan konten.
+12. Validasi PHP/CI tidak menggantikan uji runtime WordPress. Sebelum dinyatakan selesai, verifikasi bahwa Sales Page terbuka dari menu induk, urutan submenu benar, kartu Dashboard tersedia di CORE, dan tidak ada menu ganda.
 
-## 6. Cakupan PR
+## 6. Status validasi
 
-Perubahan mencakup struktur menu utama dan dashboard kartu CORE, AI, dan ENGINE serta dokumentasi ini. Status tetap **menunggu validasi runtime WordPress** sampai halaman diuji pada staging.
+Kode navigasi dan dokumentasi telah diperbarui pada branch implementasi. Status belum boleh disebut selesai sampai pemeriksaan otomatis dan uji runtime WordPress staging memberikan hasil yang sesuai.
