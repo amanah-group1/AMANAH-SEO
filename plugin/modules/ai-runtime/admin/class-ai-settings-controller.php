@@ -22,8 +22,8 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 	}
 
 	public function render() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO AI settings.', 'amanah-seo-ai' ) );
+		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
+			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO settings.', 'amanah-seo-ai' ) );
 		}
 
 		$provider = sanitize_key( (string) $this->settings->get( 'ai_provider' ) );
@@ -128,7 +128,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 		}
 
 		$redirect = add_query_arg(
-			array( 'page' => 'amanah-seo-ai-settings', 'updated' => '1' ),
+			array( 'page' => 'amanah-seo-access', 'updated' => '1' ),
 			admin_url( 'admin.php' )
 		);
 
