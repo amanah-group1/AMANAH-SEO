@@ -42,7 +42,7 @@ final class AMANAH_SEO_Admin_Navigation {
 		 * first feature submenu (for example Article Generation).
 		 */
 		if ( isset( $submenu['amanah-seo'] ) && is_array( $submenu['amanah-seo'] ) ) {
-			$allowed = array( 'amanah-seo', 'amanah-seo-access', 'amanah-seo-core', 'amanah-seo-ai-tools', 'amanah-seo-engine-workflow' );
+			$allowed = array( 'amanah-seo', 'amanah-seo-access', 'amanah-seo-ai-tools', 'amanah-seo-engine-workflow' );
 			foreach ( $submenu['amanah-seo'] as $index => $item ) {
 				$slug = isset( $item[2] ) ? (string) $item[2] : '';
 				if ( ! in_array( $slug, $allowed, true ) ) {
