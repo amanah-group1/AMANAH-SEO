@@ -18,8 +18,15 @@ final class AMANAH_SEO_Activator {
  }
  public static function grant_admin_capability() {
   $role = get_role( 'administrator' );
-  if ( $role && ! $role->has_cap( 'manage_amanah_seo' ) ) {
-   $role->add_cap( 'manage_amanah_seo' );
+  if ( ! $role ) {
+   return;
+  }
+  // Core owns the page-access boundary. Keep legacy entity action caps so
+  // existing save/delete/analyze permission checks remain explicit.
+  foreach ( array( 'manage_amanah_seo', 'amanah_view_entity', 'amanah_manage_entity' ) as $capability ) {
+   if ( ! $role->has_cap( $capability ) ) {
+    $role->add_cap( $capability );
+   }
   }
  }
  public static function maybe_upgrade() {
