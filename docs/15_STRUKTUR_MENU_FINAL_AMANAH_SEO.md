@@ -7,28 +7,34 @@
 
 ## 1. Struktur navigasi ringkas
 
-Sidebar memakai tiga kategori yang dapat dibuka/tutup, dengan 11 kelompok fungsi dan satu tautan langsung untuk pengaturan AI Provider & API Key:
+Klik menu induk **AMANAH SEO** membuka sales/landing page. Pada halaman ini sidebar hanya menampilkan tiga kategori utama yang dapat dibuka/tutup: CORE, AI, dan ENGINE. Setelah salah satu kategori dipilih, halaman di dalamnya ditampilkan. Navigasi saat ini memiliki 10 kelompok fungsi dan satu tautan langsung untuk pengaturan AI Provider & API Key:
 
 ```text
-AMANAH SEO
-├── CORE
-│   ├── Dashboard
-│   ├── Website & Workspace
-│   ├── SEO & Opportunities
-│   ├── Tasks & Workflow
-│   └── AI Provider & API Key
-├── AI
-│   ├── Entity & Authority
-│   ├── Content Analysis
-│   └── AI Content Creation
-└── ENGINE
-    ├── Keyword Intelligence
-    ├── Strategy & Planning
-    ├── Content Workflow
-    └── SEO Monitoring
+AMANAH SEO — membuka sales/landing page
+└── Sidebar saat landing page:
+    ├── CORE
+    ├── AI
+    └── ENGINE
+
+Saat kategori CORE dibuka:
+├── Website & Workspace
+├── SEO & Opportunities
+├── Tasks & Workflow
+└── AI Provider & API Key
+
+Saat kategori AI dibuka:
+├── Entity & Authority
+├── Content Analysis
+└── AI Content Creation
+
+Saat kategori ENGINE dibuka:
+├── Keyword Intelligence
+├── Strategy & Planning
+├── Content Workflow
+└── SEO Monitoring
 ```
 
-Kelompok fungsi mengatur tautan halaman yang sudah terdaftar. **AI Provider & API Key** adalah pengecualian yang sengaja ditampilkan sebagai tautan langsung di bawah CORE, tanpa kelompok atau submenu tersendiri.
+Sales page menjelaskan tujuan dan area utama AMANAH SEO tanpa mengklaim fitur yang belum tersedia. Di sidebar pada halaman tersebut hanya terlihat tiga kategori utama. Kelompok fungsi mengatur tautan halaman yang sudah terdaftar setelah kategori dibuka. **AI Provider & API Key** adalah pengecualian yang sengaja ditampilkan sebagai tautan langsung di bawah CORE, tanpa kelompok atau submenu tersendiri.
 
 ## 2. Isi kelompok
 
@@ -54,15 +60,16 @@ Pengelompokan halaman berdasarkan slug dan label menu merupakan aturan presentas
 
 ## 3. Aturan perilaku
 
-1. Hanya satu kategori (CORE, AI, atau ENGINE) dibuka pada satu waktu.
-2. Saat halaman tertentu dibuka, kategori dan kelompok yang menaunginya otomatis dibuka.
-3. Pengguna dapat membuka/tutup kelompok untuk mengurangi kepadatan visual.
-4. Tautan asli, URL, callback, dan capability tidak diganti oleh kontrol kategori/kelompok.
-5. Halaman yang belum cocok dengan pola pengelompokan tetap dimasukkan ke kelompok aman dalam kategori terkait; tidak boleh dibuang atau dibuat tidak terjangkau.
-6. Halaman **AI Provider & API Key** tampil sebagai tautan langsung di CORE, bukan sebagai submenu di bawah kelompok Settings & Access. Pengaturan provider/API credentials dan lisensi modul tetap berada di CORE. API key tidak sama dengan lisensi.
-7. AI dan ENGINE tetap modul berbeda dengan entitlement independen.
-8. Navigasi yang lebih ringkas tidak mengubah izin untuk menjalankan fitur, menyetujui, atau menerbitkan konten.
-9. Implementasi tetap perlu diuji pada WordPress staging, terutama akses capability, penandaan halaman aktif, dan semua tautan anak.
+1. Klik menu induk **AMANAH SEO** membuka sales/landing page dan pada keadaan awal hanya menampilkan tiga kategori utama: CORE, AI, dan ENGINE.
+2. Hanya satu kategori (CORE, AI, atau ENGINE) dibuka pada satu waktu.
+3. Saat halaman tertentu dibuka, kategori dan kelompok yang menaunginya otomatis dibuka.
+4. Pengguna dapat membuka/tutup kelompok untuk mengurangi kepadatan visual.
+5. Tautan asli, URL, callback, dan capability tidak diganti oleh kontrol kategori/kelompok.
+6. Halaman yang belum cocok dengan pola pengelompokan tetap dimasukkan ke kelompok aman dalam kategori terkait; tidak boleh dibuang atau dibuat tidak terjangkau.
+7. Halaman **AI Provider & API Key** tampil sebagai tautan langsung di CORE, bukan sebagai submenu di bawah kelompok Settings & Access. Pengaturan provider/API credentials dan lisensi modul tetap berada di CORE. API key tidak sama dengan lisensi.
+8. AI dan ENGINE tetap modul berbeda dengan entitlement independen.
+9. Navigasi yang lebih ringkas tidak mengubah izin untuk menjalankan fitur, menyetujui, atau menerbitkan konten.
+10. Implementasi tetap perlu diuji pada WordPress staging, terutama sales page, akses capability, penandaan halaman aktif, dan semua tautan anak.
 
 ## 4. Batas perubahan
 
