@@ -44,6 +44,6 @@ class AMANAH_SEO_AI_Plugin_Core {
 		( new AMANAH_SEO_AI_Schema_Controller( $schema_generator ) )->register();
 	}
 
-	private function load_settings_surface(){if(!is_admin())return;require_once AMANAH_SEO_AI_PATH.'admin/class-ai-settings-controller.php';require_once AMANAH_SEO_AI_PATH.'admin/class-admin-menu.php';$settings=new AMANAH_SEO_AI_AI_Settings();$credentials=new AMANAH_SEO_AI_AI_Credentials($settings);$model_catalog=new AMANAH_SEO_AI_AI_Model_Catalog();$this->settings_controller=new AMANAH_SEO_AI_AI_Settings_Controller($settings,$credentials,$model_catalog);$this->settings_controller->register();// Settings are rendered inside the Core-owned Settings & Access page; do not register a legacy sidebar entry.}
+	private function load_settings_surface(){if(!is_admin())return;require_once AMANAH_SEO_AI_PATH.'admin/class-ai-settings-controller.php';$settings=new AMANAH_SEO_AI_AI_Settings();$credentials=new AMANAH_SEO_AI_AI_Credentials($settings);$model_catalog=new AMANAH_SEO_AI_AI_Model_Catalog();$this->settings_controller=new AMANAH_SEO_AI_AI_Settings_Controller($settings,$credentials,$model_catalog);$this->settings_controller->register();// Settings are rendered inside the Core-owned Settings & Access page; do not register a legacy sidebar entry.}
 	public function run(){$this->loader->run();}public function get_ai_client(){return $this->ai_client;}public function get_entity_controller(){return $this->entity_controller;}
 }
