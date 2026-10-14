@@ -84,8 +84,7 @@ final class AMANAH_SEO_Admin_Navigation {
 						{ id: 'dashboard', label: 'Dashboard' },
 						{ id: 'website', label: 'Website & Workspace' },
 						{ id: 'seo', label: 'SEO & Opportunities' },
-						{ id: 'tasks', label: 'Tasks & Workflow' },
-						{ id: 'settings', label: 'Settings & Access' }
+						{ id: 'tasks', label: 'Tasks & Workflow' }
 					],
 					ai: [
 						{ id: 'entity', label: 'Entity & Authority' },
@@ -135,7 +134,6 @@ final class AMANAH_SEO_Admin_Navigation {
 						if (slug === 'amanah-seo') return 'dashboard';
 						if (/workspace|website/.test(slug + ' ' + label)) return 'website';
 						if (/tasks|history|approval|execution|pekerjaan|riwayat/.test(slug + ' ' + label)) return 'tasks';
-						if (/access|settings|pengaturan|license|credential|api key/.test(slug + ' ' + label)) return 'settings';
 						return 'seo';
 					}
 					if (category === 'ai') {
@@ -195,11 +193,18 @@ final class AMANAH_SEO_Admin_Navigation {
 					});
 				});
 
+				var standaloneItems = { core: [], ai: [], engine: [] };
 				pageItems.forEach(function (item) {
 					var category = categoryFor(item);
-					var group = groupFor(item, category);
+					var slug = getSlug(item);
 					item.classList.add('amanah-seo-nav-page');
 					item.dataset.amanahCategory = category;
+					if (slug === 'amanah-seo-ai-settings') {
+						item.dataset.amanahGroup = '';
+						standaloneItems.core.push(item);
+						return;
+					}
+					var group = groupFor(item, category);
 					item.dataset.amanahGroup = group;
 					groups[category][group].push(item);
 				});
@@ -207,6 +212,7 @@ final class AMANAH_SEO_Admin_Navigation {
 				var fragment = document.createDocumentFragment();
 				categories.forEach(function (category) {
 					fragment.appendChild(categoryRows[category.id]);
+					standaloneItems[category.id].forEach(function (item) { fragment.appendChild(item); });
 					groupDefinitions[category.id].forEach(function (definition) {
 						fragment.appendChild(groupRows[category.id + ':' + definition.id]);
 						groups[category.id][definition.id].forEach(function (item) { fragment.appendChild(item); });
