@@ -60,29 +60,6 @@ $model_options = 'gemini' === $data['provider'] ? $data['gemini_models'] : $data
 		<?php submit_button( __( 'Save AI Configuration', 'amanah-seo-ai' ) ); ?>
 	</form>
 
-	<div class="card" style="max-width: 900px; margin-top: 32px; padding: 28px; background: #eef6ff; border-left: 4px solid #2271b1;">
-		<h2 style="font-size: 24px; margin-top: 0;"><?php echo esc_html__( 'Jika AI belum mengenal bisnis Anda, apakah calon pelanggan akan menemukannya?', 'amanah-seo-ai' ); ?></h2>
-		<h3><?php echo esc_html__( 'Dunia pencarian sedang berubah.', 'amanah-seo-ai' ); ?></h3>
-		<p><?php echo esc_html__( 'Orang tidak lagi hanya mengetik kata kunci di Google. Mereka mulai bertanya langsung kepada ChatGPT, Gemini, Perplexity, dan berbagai AI lainnya untuk menemukan bisnis, brand, produk, layanan, dan informasi yang mereka percaya.', 'amanah-seo-ai' ); ?></p>
-		<p><strong><?php echo esc_html__( 'Ketika seseorang bertanya kepada AI tentang bisnis Anda, apakah AI tahu siapa Anda — dan mengapa Anda layak direkomendasikan?', 'amanah-seo-ai' ); ?></strong></p>
-
-		<h3><?php echo esc_html__( 'AMANAH SEO AI membantu Anda membangun fondasinya.', 'amanah-seo-ai' ); ?></h3>
-		<p><?php echo esc_html__( 'Bukan sekadar membuat konten. Bukan sekadar mengejar ranking. AMANAH SEO AI dirancang untuk membantu membangun fondasi AI Visibility Optimization dengan menghubungkan elemen-elemen penting yang membantu AI memahami sebuah brand secara lebih utuh.', 'amanah-seo-ai' ); ?></p>
-		<ul>
-			<li><strong><?php echo esc_html__( 'Identity', 'amanah-seo-ai' ); ?></strong> — <?php echo esc_html__( 'siapa Anda dan apa yang Anda representasikan.', 'amanah-seo-ai' ); ?></li>
-			<li><strong><?php echo esc_html__( 'Authority', 'amanah-seo-ai' ); ?></strong> — <?php echo esc_html__( 'mengapa Anda layak dipercaya.', 'amanah-seo-ai' ); ?></li>
-			<li><strong><?php echo esc_html__( 'Expertise', 'amanah-seo-ai' ); ?></strong> — <?php echo esc_html__( 'bidang apa yang benar-benar Anda kuasai.', 'amanah-seo-ai' ); ?></li>
-			<li><strong><?php echo esc_html__( 'AI Capability', 'amanah-seo-ai' ); ?></strong> — <?php echo esc_html__( 'bagaimana kemampuan AI dikonfigurasi dan digunakan secara terkontrol.', 'amanah-seo-ai' ); ?></li>
-		</ul>
-
-		<h3><?php echo esc_html__( 'Karena AI tidak hanya membaca apa yang Anda tulis.', 'amanah-seo-ai' ); ?></h3>
-		<p><?php echo esc_html__( 'AI juga berusaha memahami siapa yang berada di balik informasi tersebut, apa keahliannya, seberapa kredibel sumbernya, dan bagaimana seluruh informasi itu saling terhubung.', 'amanah-seo-ai' ); ?></p>
-		<p><strong><?php echo esc_html__( 'Semakin AI menjadi bagian dari perjalanan pencarian seseorang, semakin penting bagi sebuah bisnis untuk memiliki identitas dan authority yang dapat dipahami dengan jelas.', 'amanah-seo-ai' ); ?></strong></p>
-
-		<h3><?php echo esc_html__( 'Bangun fondasinya sebelum persaingannya semakin ramai.', 'amanah-seo-ai' ); ?></h3>
-		<p><?php echo esc_html__( 'Gunakan halaman ini untuk mengatur AI Provider dan model AI yang tersedia. Sementara itu, Entity Profile dan Authority & Author menjadi kemampuan terpisah untuk membangun fondasi identitas dan authority bisnis Anda sesuai hak akses yang tersedia.', 'amanah-seo-ai' ); ?></p>
-		<p><strong><?php echo esc_html__( 'Jangan menunggu sampai AI mulai menentukan siapa yang terlihat. Mulai bangun bagaimana AI mengenal bisnis Anda hari ini.', 'amanah-seo-ai' ); ?></strong></p>
-	</div>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
