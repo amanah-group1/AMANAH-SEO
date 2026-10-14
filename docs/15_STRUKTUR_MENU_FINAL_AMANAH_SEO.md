@@ -16,7 +16,7 @@ AMANAH SEO
 │   ├── Website & Workspace
 │   ├── SEO & Opportunities
 │   ├── Tasks & Workflow
-│   └── Settings & Access
+│   └── AI Provider & API Key
 ├── AI
 │   ├── Entity & Authority
 │   ├── Content Analysis
@@ -37,7 +37,7 @@ Angka 12 merujuk pada kelompok fungsi di sidebar, bukan jumlah seluruh halaman. 
 - **Website & Workspace:** identitas website dan workspace.
 - **SEO & Opportunities:** temuan, diagnostik, pemeriksaan konten, peluang, dan informasi SEO terkait.
 - **Tasks & Workflow:** pekerjaan, riwayat, persetujuan, dan catatan pelaksanaan yang telah tersedia.
-- **Settings & Access:** pengaturan inti, API credentials, lisensi/entitlement modul, dan administrasi sistem yang telah tersedia.
+- **AI Provider & API Key:** tautan langsung ke halaman konfigurasi provider AI dan kredensial API di CORE. Menu ini berdiri sendiri dan tidak memiliki submenu/kelompok anak. Pengaturan inti lain dan lisensi/entitlement modul tetap dikelola sesuai halaman yang memang sudah tersedia; jangan menggabungkan fungsi yang belum diimplementasikan ke halaman ini.
 
 ### AI
 - **Entity & Authority:** Entity Profile dan Authority & Author.
@@ -59,7 +59,7 @@ Pengelompokan halaman berdasarkan slug dan label menu merupakan aturan presentas
 3. Pengguna dapat membuka/tutup kelompok untuk mengurangi kepadatan visual.
 4. Tautan asli, URL, callback, dan capability tidak diganti oleh kontrol kategori/kelompok.
 5. Halaman yang belum cocok dengan pola pengelompokan tetap dimasukkan ke kelompok aman dalam kategori terkait; tidak boleh dibuang atau dibuat tidak terjangkau.
-6. Pengaturan provider/API credentials dan lisensi modul tetap dipusatkan di CORE. API key tidak sama dengan lisensi.
+6. Halaman **AI Provider & API Key** tampil sebagai tautan langsung di CORE, bukan sebagai submenu di bawah kelompok Settings & Access. Pengaturan provider/API credentials dan lisensi modul tetap berada di CORE. API key tidak sama dengan lisensi.
 7. AI dan ENGINE tetap modul berbeda dengan entitlement independen.
 8. Navigasi yang lebih ringkas tidak mengubah izin untuk menjalankan fitur, menyetujui, atau menerbitkan konten.
 9. Implementasi tetap perlu diuji pada WordPress staging, terutama akses capability, penandaan halaman aktif, dan semua tautan anak.
