@@ -1,6 +1,8 @@
 name: WordPress runtime integration smoke
 
 on:
+  push:
+    branches: ["controlled/**"]
   pull_request:
     branches: [main]
   workflow_dispatch:
