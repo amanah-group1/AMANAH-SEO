@@ -264,7 +264,8 @@ final class AMANAH_SEO_Admin_Navigation {
 						row.querySelector('a').setAttribute('aria-expanded', expanded ? 'true' : 'false');
 					});
 					pageItems.forEach(function (item) {
-						item.hidden = item.dataset.amanahCategory !== activeCategory || item.dataset.amanahGroup !== activeGroup;
+						var itemGroup = item.dataset.amanahGroup || null;
+						item.hidden = item.dataset.amanahCategory !== activeCategory || itemGroup !== activeGroup;
 					});
 					if (remember) {
 						try { window.localStorage.setItem('amanah-seo-active-menu-category', id); } catch (e) {}
