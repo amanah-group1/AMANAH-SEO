@@ -7,13 +7,13 @@
 
 ## 1. Struktur navigasi ringkas
 
-Klik menu induk **AMANAH SEO** membuka sales/landing page. Pada halaman ini sidebar hanya menampilkan tiga kategori utama yang dapat dibuka/tutup: CORE, AI, dan ENGINE. Setelah salah satu kategori dipilih, halaman di dalamnya ditampilkan. Navigasi saat ini memiliki 10 kelompok fungsi dan satu tautan langsung untuk pengaturan AI Provider & API Key:
+Klik menu induk **AMANAH SEO** membuka sales/landing page. Pada halaman ini sidebar hanya menampilkan tiga kategori utama yang dapat dibuka/tutup: CORE, AMANAH SEO AI, dan ENGINE. Setelah salah satu kategori dipilih, halaman di dalamnya ditampilkan. Navigasi saat ini memiliki 10 kelompok fungsi dan satu tautan langsung untuk pengaturan AI Provider & API Key:
 
 ```text
 AMANAH SEO — membuka sales/landing page
 └── Sidebar saat landing page:
     ├── CORE
-    ├── AI
+    ├── AMANAH SEO AI
     └── ENGINE
 
 Saat kategori CORE dibuka:
@@ -22,7 +22,7 @@ Saat kategori CORE dibuka:
 ├── Tasks & Workflow
 └── AI Provider & API Key
 
-Saat kategori AI dibuka:
+Saat kategori AMANAH SEO AI dibuka:
 ├── Entity & Authority
 ├── Content Analysis
 └── AI Content Creation
@@ -45,7 +45,7 @@ Sales page menjelaskan tujuan dan area utama AMANAH SEO tanpa mengklaim fitur ya
 - **Tasks & Workflow:** pekerjaan, riwayat, persetujuan, dan catatan pelaksanaan yang telah tersedia.
 - **AI Provider & API Key:** tautan langsung ke halaman konfigurasi provider AI dan kredensial API di CORE. Menu ini berdiri sendiri dan tidak memiliki submenu/kelompok anak. Pengaturan inti lain dan lisensi/entitlement modul tetap dikelola sesuai halaman yang memang sudah tersedia; jangan menggabungkan fungsi yang belum diimplementasikan ke halaman ini.
 
-### AI
+### AMANAH SEO AI
 - **Entity & Authority:** Entity Profile dan Authority & Author.
 - **Content Analysis:** Content Analyzer, audit, dan halaman analisis/optimasi terkait.
 - **AI Content Creation:** Article Generation dan alur pembuatan konten berbantuan AI yang sudah terdaftar.
@@ -61,7 +61,7 @@ Pengelompokan halaman berdasarkan slug dan label menu merupakan aturan presentas
 ## 3. Aturan perilaku
 
 1. Klik menu induk **AMANAH SEO** membuka sales/landing page dan pada keadaan awal hanya menampilkan tiga kategori utama: CORE, AI, dan ENGINE.
-2. Hanya satu kategori (CORE, AI, atau ENGINE) dibuka pada satu waktu.
+2. Hanya satu kategori (CORE, AMANAH SEO AI, atau ENGINE) dibuka pada satu waktu.
 3. Saat halaman tertentu dibuka, kategori dan kelompok yang menaunginya otomatis dibuka.
 4. Pengguna dapat membuka/tutup kelompok untuk mengurangi kepadatan visual.
 5. Tautan asli, URL, callback, dan capability tidak diganti oleh kontrol kategori/kelompok.
