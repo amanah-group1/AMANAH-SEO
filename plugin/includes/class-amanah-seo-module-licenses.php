@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 final class AMANAH_SEO_Module_Licenses {
 	private const OPTION = 'amanah_seo_module_license_secrets';
+	private const SOURCES_OPTION = 'amanah_seo_module_license_sources';
 	private const CIPHER = 'aes-256-gcm';
 
 	public static function register() {
@@ -54,7 +55,20 @@ final class AMANAH_SEO_Module_Licenses {
 			$stored = get_option( self::OPTION, array() );
 			$stored = is_array( $stored ) ? $stored : array();
 			$stored[ $module ] = self::encrypt( trim( $license_key ) );
-			return update_option( self::OPTION, $stored, false );
+			$updated = update_option( self::OPTION, $stored, false );
+			if ( ! $updated && get_option( self::OPTION, array() ) !== $stored ) {
+				return false;
+			}
+			if ( 'ai' === $module ) {
+				$sources = get_option( self::SOURCES_OPTION, array() );
+				$sources = is_array( $sources ) ? $sources : array();
+				$sources['ai'] = 'explicit';
+				$source_updated = update_option( self::SOURCES_OPTION, $sources, false );
+				if ( ! $source_updated && get_option( self::SOURCES_OPTION, array() ) !== $sources ) {
+					return false;
+				}
+			}
+			return true;
 		} catch ( Throwable $exception ) {
 			error_log( '[AMANAH SEO] Module license storage failed: ' . $exception->getMessage() );
 			return false;
@@ -165,6 +179,16 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( is_array( $stored ) && isset( $stored[ $module ] ) ) {
 			$plain = self::decrypt( $stored[ $module ] );
 			if ( null !== $plain ) {
+				// Older releases may already have silently imported a legacy AI key.
+				// If the legacy row still exists and no explicit-save marker exists,
+				// preserve the secret but do not treat it as configured or entitled.
+				if ( 'ai' === $module ) {
+					$sources = get_option( self::SOURCES_OPTION, array() );
+					$explicitly_saved = is_array( $sources ) && isset( $sources['ai'] ) && 'explicit' === $sources['ai'];
+					if ( ! $explicitly_saved && self::legacy_ai_license_record_exists() ) {
+						return null;
+					}
+				}
 				return $plain;
 			}
 		}
@@ -177,25 +201,31 @@ final class AMANAH_SEO_Module_Licenses {
 			}
 		}
 
-		// Migrate a legacy AI license record into encrypted Core storage, retaining
-		// the original row for compatibility and recovery.
-		if ( 'ai' === $module ) {
-			global $wpdb;
-			if ( isset( $wpdb ) && is_object( $wpdb ) && method_exists( $wpdb, 'get_var' ) && method_exists( $wpdb, 'prepare' ) ) {
-				$table = $wpdb->prefix . 'amanah_license';
-				$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) );
-				if ( $table === $table_exists ) {
-					$legacy = $wpdb->get_var( $wpdb->prepare(
-						"SELECT license_key FROM {$table} WHERE user_id = %d ORDER BY id DESC LIMIT 1",
-						get_current_user_id()
-					) );
-					if ( is_string( $legacy ) && '' !== $legacy && self::set_license( 'ai', $legacy ) ) {
-						return $legacy;
-					}
-				}
-			}
-		}
+		// Legacy AI license records are detected separately and are never imported
+		// implicitly. The user must provide an official key through Settings & Access.
 		return null;
+	}
+
+	/**
+	 * Detect a legacy AI license row without reading its secret or changing data.
+	 *
+	 * @return bool True when a legacy record exists for the current user.
+	 */
+	public static function legacy_ai_license_record_exists(): bool {
+		global $wpdb;
+		if ( ! isset( $wpdb ) || ! is_object( $wpdb ) || ! method_exists( $wpdb, 'get_var' ) || ! method_exists( $wpdb, 'prepare' ) || ! isset( $wpdb->prefix ) ) {
+			return false;
+		}
+		$table = $wpdb->prefix . 'amanah_license';
+		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) );
+		if ( $table !== $table_exists ) {
+			return false;
+		}
+		$legacy_id = $wpdb->get_var( $wpdb->prepare(
+			"SELECT id FROM {$table} WHERE user_id = %d ORDER BY id DESC LIMIT 1",
+			get_current_user_id()
+		) );
+		return null !== $legacy_id && false !== $legacy_id && '' !== (string) $legacy_id;
 	}
 
 	public static function delete_license( string $module ): bool {
@@ -223,10 +253,17 @@ final class AMANAH_SEO_Module_Licenses {
 		$license_statuses = is_array( $license_statuses ) ? $license_statuses : array();
 		foreach ( array( 'ai' => 'AMANAH SEO AI', 'engine' => 'AMANAH SEO ENGINE' ) as $module => $label ) {
 			$configured = null !== self::get_license( $module );
+			$legacy_ai_record = ! $configured && 'ai' === $module && self::legacy_ai_license_record_exists();
 			$status = isset( $license_statuses[ $module ]['status'] ) ? sanitize_key( $license_statuses[ $module ]['status'] ) : 'not_checked';
+			if ( ! $configured ) {
+				$status = $legacy_ai_record ? 'legacy_detected_not_imported' : 'not_configured';
+			}
 			echo '<div class="card" style="max-width:900px;margin:20px 0;padding:20px">';
 			echo '<h2>' . esc_html( $label ) . '</h2>';
 			echo '<p>' . esc_html( $configured ? 'License key is stored.' : 'No license key is stored.' ) . '</p>';
+			if ( $legacy_ai_record ) {
+				echo '<p>' . esc_html__( 'A legacy AI license record exists, but it has not been imported. Enter an official license key to configure AI access. The existing record is preserved.', 'amanah-seo' ) . '</p>';
+			}
 			echo '<p>' . esc_html( 'License service status: ' . $status ) . '</p>';
 			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
 			echo '<input type="hidden" name="action" value="amanah_seo_save_module_license">';

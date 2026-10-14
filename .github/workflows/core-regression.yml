@@ -2,9 +2,9 @@ name: Core regression checks
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, "integration/**"]
   push:
-    branches: [main, "controlled/**"]
+    branches: [main, "controlled/**", "integration/**"]
   workflow_dispatch:
 
 jobs:
@@ -38,6 +38,7 @@ jobs:
           php -l tests/module-integration-regression.php
           php -l tests/module-licensing-regression.php
           php -l tests/ai-license-entitlement-regression.php
+          php -l tests/legacy-license-detection-regression.php
           find tests/engine-runtime -type f -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: Core data regression tests
         run: |
@@ -51,5 +52,6 @@ jobs:
           php tests/module-integration-regression.php
           php tests/module-licensing-regression.php
           php tests/ai-license-entitlement-regression.php
+          php tests/legacy-license-detection-regression.php
 
           phpunit -c tests/engine-runtime/phpunit.xml.dist
