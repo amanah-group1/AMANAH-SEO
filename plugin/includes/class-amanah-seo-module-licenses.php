@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 final class AMANAH_SEO_Module_Licenses {
 	private const OPTION = 'amanah_seo_module_license_secrets';
+	private const SOURCES_OPTION = 'amanah_seo_module_license_sources';
 	private const CIPHER = 'aes-256-gcm';
 
 	public static function register() {
@@ -54,7 +55,20 @@ final class AMANAH_SEO_Module_Licenses {
 			$stored = get_option( self::OPTION, array() );
 			$stored = is_array( $stored ) ? $stored : array();
 			$stored[ $module ] = self::encrypt( trim( $license_key ) );
-			return update_option( self::OPTION, $stored, false );
+			$updated = update_option( self::OPTION, $stored, false );
+			if ( ! $updated && get_option( self::OPTION, array() ) !== $stored ) {
+				return false;
+			}
+			if ( 'ai' === $module ) {
+				$sources = get_option( self::SOURCES_OPTION, array() );
+				$sources = is_array( $sources ) ? $sources : array();
+				$sources['ai'] = 'explicit';
+				$source_updated = update_option( self::SOURCES_OPTION, $sources, false );
+				if ( ! $source_updated && get_option( self::SOURCES_OPTION, array() ) !== $sources ) {
+					return false;
+				}
+			}
+			return true;
 		} catch ( Throwable $exception ) {
 			error_log( '[AMANAH SEO] Module license storage failed: ' . $exception->getMessage() );
 			return false;
@@ -165,6 +179,16 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( is_array( $stored ) && isset( $stored[ $module ] ) ) {
 			$plain = self::decrypt( $stored[ $module ] );
 			if ( null !== $plain ) {
+				// Older releases may already have silently imported a legacy AI key.
+				// If the legacy row still exists and no explicit-save marker exists,
+				// preserve the secret but do not treat it as configured or entitled.
+				if ( 'ai' === $module ) {
+					$sources = get_option( self::SOURCES_OPTION, array() );
+					$explicitly_saved = is_array( $sources ) && isset( $sources['ai'] ) && 'explicit' === $sources['ai'];
+					if ( ! $explicitly_saved && self::legacy_ai_license_record_exists() ) {
+						return null;
+					}
+				}
 				return $plain;
 			}
 		}
