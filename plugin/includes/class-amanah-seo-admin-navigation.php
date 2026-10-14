@@ -119,7 +119,6 @@ final class AMANAH_SEO_Admin_Navigation {
 					link.href = '#amanah-seo-' + category.id;
 					link.textContent = category.label;
 					link.setAttribute('role', 'button');
-					link.setAttribute('aria-controls', 'amanah-seo-' + category.id + '-pages');
 					link.setAttribute('aria-expanded', 'false');
 					link.addEventListener('click', function (event) {
 						event.preventDefault();
@@ -140,7 +139,6 @@ final class AMANAH_SEO_Admin_Navigation {
 				var fragment = document.createDocumentFragment();
 				categories.forEach(function (category) {
 					var row = categoryRows[category.id];
-					row.id = 'amanah-seo-' + category.id + '-pages';
 					fragment.appendChild(row);
 					groups[category.id].forEach(function (item) { fragment.appendChild(item); });
 				});
