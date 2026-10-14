@@ -7,7 +7,7 @@
 
 ## 1. Struktur navigasi ringkas
 
-Sidebar memakai tiga kategori yang dapat dibuka/tutup. Di dalamnya ada 12 kelompok fungsi:
+Sidebar memakai tiga kategori yang dapat dibuka/tutup, dengan 11 kelompok fungsi dan satu tautan langsung untuk pengaturan AI Provider & API Key:
 
 ```text
 AMANAH SEO
@@ -28,7 +28,7 @@ AMANAH SEO
     └── SEO Monitoring
 ```
 
-Angka 12 merujuk pada kelompok fungsi di sidebar, bukan jumlah seluruh halaman. Halaman yang telah terdaftar tetap menjadi tautan anak dalam kelompok yang sesuai.
+Kelompok fungsi mengatur tautan halaman yang sudah terdaftar. **AI Provider & API Key** adalah pengecualian yang sengaja ditampilkan sebagai tautan langsung di bawah CORE, tanpa kelompok atau submenu tersendiri.
 
 ## 2. Isi kelompok
 
