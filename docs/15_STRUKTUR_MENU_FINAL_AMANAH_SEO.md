@@ -11,7 +11,7 @@ Hanya ada satu menu induk untuk seluruh area AMANAH SEO. Ketika pengguna mengekl
 Urutan menu yang terlihat:
 
 1. **🚀 AMANAH SEO** — membuka Sales Page; tidak memiliki submenu Sales Page.
-2. **⚙️ Settings & Access** — pengaturan utama, API key, serta pengelolaan lisensi modul.
+2. **⚙️ Settings & Access** — AI provider, model, API key, serta pengelolaan lisensi modul AI dan ENGINE.
 3. **🧩 CORE** — membuka dashboard CORE berbasis kartu.
 4. **🤖 AMANAH SEO AI** — membuka dashboard AI berbasis kartu.
 5. **🔍 AMANAH SEO ENGINE** — membuka dashboard ENGINE berbasis kartu.
@@ -34,7 +34,7 @@ Kartu yang ditampilkan:
 - **Monitoring & Results** — placeholder untuk pemantauan dan hasil terverifikasi.
 - **Reports** — placeholder laporan.
 
-Pengaturan API key dan lisensi diakses melalui submenu **⚙️ Settings & Access**, bukan melalui kartu atau submenu ganda di CORE.
+Pengaturan AI provider/model, API key, dan lisensi diakses melalui submenu **⚙️ Settings & Access**, bukan melalui kartu atau submenu ganda di CORE.
 
 Lisensi AI dan ENGINE tetap terpisah satu sama lain dan dikelola melalui AMANAH SEO. CORE sendiri tidak membutuhkan lisensi untuk dipasang.
 
@@ -92,7 +92,7 @@ Kartu tidak boleh menyiratkan bahwa ENGINE sudah melakukan produksi atau publika
 1. Hanya satu menu induk AMANAH SEO yang menaungi Settings & Access, CORE, AI, dan ENGINE.
 2. Mengeklik **🚀 AMANAH SEO** membuka Sales Page secara langsung.
 3. Tidak ada submenu Sales Page.
-4. Tidak ada menu CORE, AI, atau ENGINE duplikat di luar induk AMANAH SEO.
+4. Tidak ada menu CORE, AI, ENGINE, Article Generation, atau fitur AI internal sebagai menu sidebar terpisah.
 5. Dashboard berada sebagai kartu di halaman CORE, bukan menu sidebar tersendiri.
 6. Submenu fitur internal tidak ditampilkan satu per satu; halaman fitur tetap terdaftar dan dapat diakses dari kartu dashboard yang sesuai.
 7. Gunakan capability `manage_amanah_seo`; perubahan navigasi tidak boleh melemahkan pemeriksaan akses.
