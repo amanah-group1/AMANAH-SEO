@@ -53,6 +53,17 @@ $checks['Legacy detection queries record ID only and never reads the secret'] =
 $checks['Legacy record remains untouched and encrypted Core storage remains absent'] =
 	! isset( $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_secrets'] )
 	&& true === AMANAH_SEO_Module_Licenses::legacy_ai_license_record_exists();
+
+$encrypt = new ReflectionMethod( 'AMANAH_SEO_Module_Licenses', 'encrypt' );
+$encrypt->setAccessible( true );
+$GLOBALS['amanah_license_test_options']['amanah_seo_module_license_secrets'] = array(
+	'ai' => $encrypt->invoke( null, 'previously-auto-imported-key' ),
+);
+$checks['Previously auto-imported encrypted key is quarantined when legacy row exists'] =
+	null === AMANAH_SEO_Module_Licenses::get_license( 'ai' )
+	&& isset( $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_secrets']['ai'] )
+	&& ! isset( $GLOBALS['amanah_license_test_options']['amanah_seo_module_license_sources'] );
+
 $checks['Official key can still be explicitly saved and retrieved'] =
 	true === AMANAH_SEO_Module_Licenses::set_license( 'ai', 'official-ai-key-test' )
 	&& 'official-ai-key-test' === AMANAH_SEO_Module_Licenses::get_license( 'ai' );
