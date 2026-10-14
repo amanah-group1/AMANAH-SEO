@@ -1,7 +1,7 @@
 # STRUKTUR MENU FINAL AMANAH SEO
 
-**Status:** Implementasi pada branch — menunggu pemeriksaan otomatis dan uji runtime WordPress  
-**Tanggal:** 2026-10-14  
+**Status:** Implementasi pada branch — menunggu pemeriksaan otomatis dan uji runtime WordPress
+**Tanggal:** 2026-10-14
 **Berlaku untuk:** satu plugin WordPress bernama AMANAH SEO
 
 ## 1. Struktur sidebar final
