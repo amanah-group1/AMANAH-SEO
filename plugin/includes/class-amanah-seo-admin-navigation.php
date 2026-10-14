@@ -151,7 +151,7 @@ final class AMANAH_SEO_Admin_Navigation {
 					var link = item.querySelector('a');
 					if (!link) return;
 					if (getSlug(item) === 'amanah-seo') link.textContent = 'Dashboard';
-					if (getSlug(item) === 'amanah-seo-ai-settings') link.textContent = 'AI Provider & API Credentials';
+					if (getSlug(item) === 'amanah-seo-ai-settings') link.textContent = 'AI Provider & API Key';
 				});
 
 				var categoryRows = {};
