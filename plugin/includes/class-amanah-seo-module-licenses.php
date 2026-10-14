@@ -260,7 +260,7 @@ final class AMANAH_SEO_Module_Licenses {
 			}
 			echo '<div class="card" style="max-width:900px;margin:20px 0;padding:20px">';
 			echo '<h2>' . esc_html( $label ) . '</h2>';
-			echo '<p>' . esc_html( $configured ? 'License key is stored.' : 'No license key is stored.' ) . '</p>';
+			echo '<p>' . esc_html( $configured ? 'License key is stored.' : ( $legacy_ai_record ? 'Legacy license key is retained but not configured.' : 'No license key is stored.' ) ) . '</p>';
 			if ( $legacy_ai_record ) {
 				echo '<p>' . esc_html__( 'A legacy AI license record exists, but it has not been imported. Enter an official license key to configure AI access. The existing record is preserved.', 'amanah-seo' ) . '</p>';
 			}
