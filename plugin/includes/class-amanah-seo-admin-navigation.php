@@ -76,7 +76,7 @@ final class AMANAH_SEO_Admin_Navigation {
 				var pageItems = Array.prototype.slice.call(submenu.querySelectorAll(':scope > li'));
 				var categories = [
 					{ id: 'core', label: 'CORE' },
-					{ id: 'ai', label: 'AI' },
+					{ id: 'ai', label: 'AMANAH SEO AI' },
 					{ id: 'engine', label: 'ENGINE' }
 				];
 				var groupDefinitions = {
