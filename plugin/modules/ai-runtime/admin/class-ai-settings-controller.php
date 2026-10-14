@@ -75,7 +75,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 	}
 
 	public function save() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO AI settings.', 'amanah-seo-ai' ) );
 		}
 
@@ -137,7 +137,7 @@ class AMANAH_SEO_AI_AI_Settings_Controller {
 	}
 
 	public function save_license() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage the AMANAH SEO AI license.', 'amanah-seo-ai' ) );
 		}
 
