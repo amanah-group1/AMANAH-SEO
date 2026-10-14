@@ -87,6 +87,8 @@ final class AMANAH_SEO_Admin_Navigation {
 						return 'engine';
 					}
 					if (
+						slug === 'amanah-seo-ai' ||
+						slug === 'amanah-content-generation' ||
 						slug === 'amanah-entity-profile' ||
 						slug === 'amanah-authority' ||
 						slug.indexOf('amanah-seo-ai-') === 0 ||
