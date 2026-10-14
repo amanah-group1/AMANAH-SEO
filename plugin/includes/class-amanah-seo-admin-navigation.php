@@ -135,7 +135,7 @@ final class AMANAH_SEO_Admin_Navigation {
 						if (slug === 'amanah-seo') return 'dashboard';
 						if (/workspace|website/.test(slug + ' ' + label)) return 'website';
 						if (/tasks|history|approval|execution|pekerjaan|riwayat/.test(slug + ' ' + label)) return 'tasks';
-						if (/access|settings|diagnostic|pengaturan|license|credential|api key/.test(slug + ' ' + label)) return 'settings';
+						if (/access|settings|pengaturan|license|credential|api key/.test(slug + ' ' + label)) return 'settings';
 						return 'seo';
 					}
 					if (category === 'ai') {
@@ -187,7 +187,7 @@ final class AMANAH_SEO_Admin_Navigation {
 						link.setAttribute('aria-expanded', 'false');
 						link.addEventListener('click', function (event) {
 							event.preventDefault();
-							setActiveCategory(category.id, true, definition.id);
+							setActiveCategory(category.id, true, definition.id, true);
 						});
 						row.appendChild(link);
 						groupRows[key] = row;
@@ -235,9 +235,9 @@ final class AMANAH_SEO_Admin_Navigation {
 					} catch (e) {}
 				}
 
-				function setActiveCategory(id, remember, groupId) {
+				function setActiveCategory(id, remember, groupId, toggleGroup) {
 					if (typeof groupId !== 'undefined') {
-						activeGroup = activeGroup === groupId && activeCategory === id ? null : groupId;
+						activeGroup = toggleGroup && activeGroup === groupId && activeCategory === id ? null : groupId;
 					} else if (activeCategory !== id) {
 						activeGroup = null;
 					}
@@ -264,7 +264,7 @@ final class AMANAH_SEO_Admin_Navigation {
 						try { window.localStorage.setItem('amanah-seo-active-menu-category', id); } catch (e) {}
 					}
 				}
-				setActiveCategory(activeCategory, false, activeGroup);
+				setActiveCategory(activeCategory, false, activeGroup, false);
 			}
 			if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeAmanahNavigation);
 			else initializeAmanahNavigation();
