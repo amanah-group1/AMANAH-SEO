@@ -23,9 +23,9 @@ final class AMANAH_SEO_Admin {
 
   // Keep the requested submenu order. Sales Page is the parent callback, not a submenu.
   add_submenu_page('amanah-seo','Settings & Access','⚙️ Settings & Access','manage_amanah_seo','amanah-seo-access',array('AMANAH_SEO_Module_Licenses','render'));
-  add_submenu_page('amanah-seo','CORE','🧩 CORE','manage_amanah_seo','amanah-seo-core',array(__CLASS__,'core_dashboard'));
-  add_submenu_page('amanah-seo','AMANAH SEO AI','🤖 AMANAH SEO AI','manage_amanah_seo','amanah-seo-ai-tools',array(__CLASS__,'ai_dashboard'));
-  add_submenu_page('amanah-seo','AMANAH SEO ENGINE','🔍 AMANAH SEO ENGINE','manage_amanah_seo','amanah-seo-engine-workflow',array(__CLASS__,'engine_dashboard'));
+  add_submenu_page('amanah-seo','CORE','🧩 CORE','manage_amanah_seo','amanah-seo-core',array('AMANAH_SEO_Module_Navigation','core_dashboard'));
+  add_submenu_page('amanah-seo','AMANAH SEO AI','🤖 AMANAH SEO AI','manage_amanah_seo','amanah-seo-ai-tools',array('AMANAH_SEO_Module_Navigation','ai_dashboard'));
+  add_submenu_page('amanah-seo','AMANAH SEO ENGINE','🔍 AMANAH SEO ENGINE','manage_amanah_seo','amanah-seo-engine-workflow',array('AMANAH_SEO_Module_Navigation','engine_dashboard'));
 
   // Feature pages remain registered, but their sidebar entries are hidden by navigation enforcement.
   add_submenu_page('amanah-seo-core','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
