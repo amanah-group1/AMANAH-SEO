@@ -17,7 +17,7 @@ Plugin WordPress tunggal untuk menjalankan siklus dasar pengelolaan SEO: workspa
 - Website yang dikelola pada MVP adalah situs WordPress tempat plugin dipasang; manajemen website jarak jauh belum tersedia.
 - Google Search Console belum terhubung; metrik pencarian tidak dibuat-buat dan tidak diklaim tersedia.
 - Source AMANAH SEO AI dan AMANAH SEO ENGINE V2 belum dimigrasikan sebagai modul internal pada paket ini.
-- Integrasi server lisensi dan entitlement AI/ENGINE belum tersedia. Core tetap bisa diaktifkan tanpa lisensi; status akses modul tidak diklaim aktif.
+- Klien aktivasi/validasi lisensi AI dan ENGINE tersedia di plugin, tetapi source backend lisensi tidak berada di repository ini sehingga kontrak produksi belum dapat diverifikasi end-to-end. Endpoint deactivation server belum tersedia pada kontrak klien yang ada; tombol Deactivate tetap nonaktif agar tidak mengklaim pelepasan lisensi yang belum dikonfirmasi server. Aktivasi hanya dianggap berhasil bila respons server menyatakan status aktif dan memberikan entitlement.
 - Backup/restore, recovery drill, dan penerimaan runtime akhir tetap harus dibuktikan pada WordPress testing sebelum rilis.
 
 ## Instalasi untuk pengujian terkontrol
