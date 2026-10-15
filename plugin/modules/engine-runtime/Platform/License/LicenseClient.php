@@ -14,8 +14,8 @@ final class LicenseClient implements LicenseClientInterface {
  }
  public function validate(): LicenseState {
   $cached=$this->cache->get();$key=$this->secret->get();
-  if(null===$key||''===$this->endpoint)return $cached??new LicenseState(array('status'=>'unconfigured','product'=>$this->product,'entitlements'=>array()));
-  try{$state=$this->request('/validate',$key);$this->cache->save($state);return $state;}catch(\Throwable $e){return $cached??new LicenseState(array('status'=>'unknown','product'=>$this->product,'entitlements'=>array()));}
+  if(null===$key||''===$this->endpoint)return new LicenseState(array('status'=>null===$key?'unconfigured':'unknown','product'=>$this->product,'entitlements'=>array(),'reason'=>null===$key?'license_not_configured':'service_unavailable'));
+  try{$state=$this->request('/validate',$key);$this->cache->save($state);return $state;}catch(\Throwable $e){$state=new LicenseState(array('status'=>'unknown','product'=>$this->product,'entitlements'=>array(),'reason'=>'service_unavailable'));$this->cache->save($state);return $state;}
  }
  public function getState(): LicenseState { return $this->cache->get()??new LicenseState(array('status'=>'unconfigured','product'=>$this->product,'entitlements'=>array())); }
  public function hasEntitlement(string $entitlement): bool { return (new EntitlementResolver())->allows($this->validate(),$entitlement); }
