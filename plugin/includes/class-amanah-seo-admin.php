@@ -539,8 +539,8 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Entity & Authority','slug'=>'amanah-authority','title'=>'Authority & Author','description'=>'Kredibilitas penulis dan keahlian.'),
    array('group'=>'Intelligence','slug'=>'amanah-seo-ai-audit','title'=>'AI Audit','description'=>'Area audit SEO berbantuan AI.'),
    array('group'=>'Content AI','slug'=>'amanah-content-analyzer','title'=>'Content Analyzer','description'=>'Analisis kualitas dan konteks konten.'),
-   array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-brief','title'=>'Content Brief','description'=>'Kerangka konten sebelum penulisan.'),
-   array('group'=>'Content AI','slug'=>'amanah-content-generation','title'=>'Article Generation','description'=>'Alur pembuatan artikel terarah.'),
+
+
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-faq-generator','title'=>'FAQ Generator','description'=>'Perencanaan pertanyaan dan jawaban.'),
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-optimizer','title'=>'Content Optimizer','description'=>'Penyempurnaan konten yang sudah ada.'),
    array('group'=>'Authority','slug'=>'amanah-seo-ai-topic-authority','title'=>'Topic Authority','description'=>'Cakupan topik dan kedalaman keahlian.'),
