@@ -15,6 +15,11 @@ final class LicenseClient implements LicenseClientInterface {
  public function validate(): LicenseState {
   $cached=$this->cache->get();$key=$this->secret->get();
   if(null===$key||''===$this->endpoint)return new LicenseState(array('status'=>null===$key?'unconfigured':'unknown','product'=>$this->product,'entitlements'=>array(),'reason'=>null===$key?'license_not_configured':'service_unavailable'));
+  if(null!==$cached&&$cached->isActive()){
+   $cached_data=$cached->toArray();
+   $next_validation=isset($cached_data['next_validation'])&&is_string($cached_data['next_validation'])?strtotime($cached_data['next_validation']):false;
+   if(false!==$next_validation&&$next_validation>time())return $cached;
+  }
   try{$state=$this->request('/validate',$key);$this->cache->save($state);return $state;}catch(\Throwable $e){$state=new LicenseState(array('status'=>'unknown','product'=>$this->product,'entitlements'=>array(),'reason'=>'service_unavailable'));$this->cache->save($state);return $state;}
  }
  public function getState(): LicenseState { return $this->cache->get()??new LicenseState(array('status'=>'unconfigured','product'=>$this->product,'entitlements'=>array())); }
