@@ -641,7 +641,8 @@ final class AMANAH_SEO_Module_Licenses {
 					'reason' => '',
 				) );
 			} catch ( \Throwable $exception ) {
-				self::save_license_status( 'engine', array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'service_unavailable' ) );
+				$reason = in_array( $exception->getMessage(), array( 'license_server_unavailable', 'license_service_unavailable' ), true ) ? 'service_unavailable' : 'invalid_response';
+				self::save_license_status( 'engine', array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => $reason ) );
 				error_log( '[AMANAH SEO] ENGINE license activation failed; server response was not accepted.' );
 				wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
 				exit;
