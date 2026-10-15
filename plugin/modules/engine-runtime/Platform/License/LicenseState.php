@@ -10,6 +10,7 @@ final class LicenseState {
  public function getPlan(): string { return (string)($this->data['plan']??''); }
  public function getEntitlements(): array { return is_array($this->data['entitlements']??null)?$this->data['entitlements']:array(); }
  public function getExpiration(): ?string { return isset($this->data['expiration'])?(string)$this->data['expiration']:null; }
+ public function getValidatedAt(): ?string { return isset($this->data['validated_at'])?(string)$this->data['validated_at']:null; }
  public function isActive(): bool { return 'active'===$this->getStatus(); }
  public function hasEntitlement(string $entitlement): bool { return in_array($entitlement,$this->getEntitlements(),true); }
  public function toArray(): array { return $this->data; }
