@@ -28,7 +28,7 @@ final class LicenseClient implements LicenseClientInterface {
   if(0!==strpos($this->endpoint,'https://'))throw new \InvalidArgumentException('license_endpoint_must_use_https');
   $response=$this->http->request('POST',$this->endpoint.$path,array('timeout'=>10,'headers'=>array('Content-Type'=>'application/json'),'body'=>wp_json_encode(array('license_key'=>$licenseKey,'product'=>$this->product))));
   if(is_wp_error($response))throw new \RuntimeException('license_server_unavailable');
-  $code=(int)wp_remote_retrieve_response_code($response);if($code<200||$code>=300)throw new \RuntimeException('license_http_error');
+  $code=(int)wp_remote_retrieve_response_code($response);if($code>=500)throw new \RuntimeException('license_service_unavailable');if($code<200||$code>=300)throw new \RuntimeException('license_http_error');
   $body=json_decode((string)wp_remote_retrieve_body($response),true);if(!is_array($body))throw new \InvalidArgumentException('license_response_invalid');
   return $this->validator->validate($body,$this->product);
  }
