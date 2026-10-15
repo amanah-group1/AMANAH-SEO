@@ -42,7 +42,7 @@ final class AMANAH_SEO_Module_Licenses {
 			}
 		} else {
 			try {
-				$services = \\Amanah\\SEOEngine\\Core\\Bootstrap\\Plugin::boot();
+				$services = \Amanah\SEOEngine\Core\Bootstrap\Plugin::boot();
 				$state = $services->get( 'license_client' )->validate();
 				$data = method_exists( $state, 'toArray' ) ? $state->toArray() : array();
 				$record = array(
