@@ -55,7 +55,6 @@ final class AMANAH_SEO_Admin_Navigation {
 				if ( ! in_array( $slug, $allowed, true ) ) {
 					$href = 'admin.php?page=' . $slug;
 					$css[] = '#adminmenu .wp-submenu a[href="' . esc_attr( $href ) . '"]{display:none!important}';
-					$css[] = '#adminmenu .wp-submenu a[href="' . esc_attr( $href ) . '"]{visibility:hidden}';
 				}
 			}
 		}
