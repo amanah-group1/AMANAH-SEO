@@ -481,7 +481,7 @@ final class AMANAH_SEO_Module_Navigation {
   add_submenu_page('amanah-seo-core','Reports','Reports',self::CAPABILITY,'amanah-seo-reports',array(__CLASS__,'core_placeholder'));
   $routes=array(
    'amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit',
-   'amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation',
+   'amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-brief'=>'Content Brief','amanah-seo-ai-article-generation'=>'Article Generation',
    'amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer',
    'amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI',
    'amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation',
@@ -507,7 +507,7 @@ final class AMANAH_SEO_Module_Navigation {
  }
  public static function module_placeholder(){
   $page=isset($_GET['page'])&&is_string($_GET['page'])?sanitize_key(wp_unslash($_GET['page'])):'';
-  $titles=array('amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit','amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation','amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer','amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI','amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation','amanah-seo-ai-reports'=>'AI Reports','amanah-seo-engine-keywords'=>'Keyword & Search Intelligence','amanah-seo-engine-requirements'=>'Requirements','amanah-seo-engine-strategy'=>'Strategy & Planning','amanah-seo-engine-brief'=>'Content Brief & Blueprint','amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity','amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation');
+  $titles=array('amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit','amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-brief'=>'Content Brief','amanah-seo-ai-article-generation'=>'Article Generation','amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer','amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI','amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation','amanah-seo-ai-reports'=>'AI Reports','amanah-seo-engine-keywords'=>'Keyword & Search Intelligence','amanah-seo-engine-requirements'=>'Requirements','amanah-seo-engine-strategy'=>'Strategy & Planning','amanah-seo-engine-brief'=>'Content Brief & Blueprint','amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity','amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation');
   self::start($titles[$page]??'AMANAH SEO AI');
   if(in_array($page,array('amanah-entity-profile','amanah-seo-ai'),true)){
    echo '<div class="notice notice-info inline"><p>'.esc_html__('Rute Entity Profile sekarang ditangani oleh AMANAH SEO Core. Integrasi layar dan penyimpanan entitas lama belum dipindahkan; data yang sudah ada tidak dihapus atau diubah.','amanah-seo').'</p></div>';
@@ -572,6 +572,8 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Entity & Authority','slug'=>'amanah-authority','title'=>'Authority & Author','description'=>'Kredibilitas penulis dan keahlian.'),
    array('group'=>'Intelligence','slug'=>'amanah-seo-ai-audit','title'=>'AI Audit','description'=>'Area audit SEO berbantuan AI.'),
    array('group'=>'Content AI','slug'=>'amanah-content-analyzer','title'=>'Content Analyzer','description'=>'Analisis kualitas dan konteks konten.'),
+   array('group'=>'Content AI','slug'=>'amanah-seo-ai-brief','title'=>'Content Brief','description'=>'Susun kerangka dan kebutuhan konten sebelum penulisan.'),
+   array('group'=>'Content AI','slug'=>'amanah-seo-ai-article-generation','title'=>'Article Generation','description'=>'Area persiapan dan pembuatan artikel dalam alur kerja AI.'),
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-faq-generator','title'=>'FAQ Generator','description'=>'Perencanaan pertanyaan dan jawaban.'),
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-optimizer','title'=>'Content Optimizer','description'=>'Penyempurnaan konten yang sudah ada.'),
    array('group'=>'Authority','slug'=>'amanah-seo-ai-topic-authority','title'=>'Topic Authority','description'=>'Cakupan topik dan kedalaman keahlian.'),
