@@ -215,7 +215,7 @@ final class AMANAH_SEO_Module_Licenses {
 			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO module access.', 'amanah-seo' ), '', array( 'response' => 403 ) );
 		}
 
-		echo '<div class="wrap amanah-seo-access-page">';
+		echo '<div class="wrap amanah-seo-access-page"><h1>' . esc_html__( 'Settings & Access', 'amanah-seo' ) . '</h1>';
 		echo '<style>
 			.amanah-seo-access-page{max-width:none;box-sizing:border-box}
 			.amanah-seo-access-page .amanah-seo-access-copy{box-sizing:border-box;display:block;width:100%;max-width:1200px;height:auto;max-height:none;overflow:visible;white-space:normal;overflow-wrap:anywhere;margin:16px 0 26px;padding:28px 32px;background:#eef6ff;border:1px solid #c6def5;border-left:5px solid #2271b1;border-radius:8px;line-height:1.7;box-shadow:0 4px 16px rgba(28,75,120,.07)}
@@ -227,6 +227,8 @@ final class AMANAH_SEO_Module_Licenses {
 			.amanah-seo-access-page .amanah-seo-access-column{box-sizing:border-box;min-width:0;padding:20px;background:#fff;border:1px solid #dcdcde;border-radius:5px}
 			.amanah-seo-access-page .amanah-seo-access-column h2:first-child{margin-top:0}
 			.amanah-seo-access-page .amanah-seo-access-column .card{box-sizing:border-box;width:100%;max-width:none;margin:16px 0;padding:16px}
+			.amanah-seo-access-page .amanah-seo-access-ai .wrap{margin:0;padding:0}
+			.amanah-seo-access-page .amanah-seo-access-ai .wrap>h1,.amanah-seo-access-page .amanah-seo-access-ai .wrap>p:first-of-type{display:none}
 			.amanah-seo-access-page .amanah-seo-access-ai form{max-width:100%}
 			.amanah-seo-access-page .amanah-seo-access-ai .form-table th{width:32%;padding-left:0}
 			.amanah-seo-access-page .amanah-seo-access-ai .form-table td{padding-right:0}
