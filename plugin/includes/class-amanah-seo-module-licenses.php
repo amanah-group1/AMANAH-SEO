@@ -274,7 +274,10 @@ final class AMANAH_SEO_Module_Licenses {
 		echo '</section>';
 
 		if ( isset( $_GET['license_saved'] ) && in_array( sanitize_key( wp_unslash( $_GET['license_saved'] ) ), array( 'ai', 'engine' ), true ) ) {
-			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Module license key stored securely. Entitlement status depends on the configured licensing service.', 'amanah-seo' ) . '</p></div>';
+			echo '<div class="notice notice-info is-dismissible"><p>' . esc_html__( 'License key was submitted. Access remains locked unless the licensing server confirms an active status and the required entitlement.', 'amanah-seo' ) . '</p></div>';
+		}
+		if ( isset( $_GET['license_error'] ) ) {
+			echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Activation could not be completed or verified. Review the server status shown for the selected module and try again when the licensing service is reachable.', 'amanah-seo' ) . '</p></div>';
 		}
 
 		$license_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
@@ -515,6 +518,8 @@ final class AMANAH_SEO_Module_Licenses {
 			} catch ( \Throwable $exception ) {
 				self::save_license_status( 'engine', array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'service_unavailable' ) );
 				error_log( '[AMANAH SEO] ENGINE license activation failed; server response was not accepted.' );
+				wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
+				exit;
 			}
 		}
 		wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_saved' => $module ), admin_url( 'admin.php' ) ) );
