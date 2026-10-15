@@ -11,7 +11,12 @@ final class LicenseState {
  public function getEntitlements(): array { return is_array($this->data['entitlements']??null)?$this->data['entitlements']:array(); }
  public function getExpiration(): ?string { return isset($this->data['expiration'])?(string)$this->data['expiration']:null; }
  public function getValidatedAt(): ?string { return isset($this->data['validated_at'])?(string)$this->data['validated_at']:null; }
- public function isActive(): bool { return 'active'===$this->getStatus(); }
+ public function isActive(): bool {
+  if('active'!==$this->getStatus())return false;
+  $expiration=$this->getExpiration();
+  if(null!==$expiration&&''!==trim($expiration)&&'LIFETIME'!==strtoupper(trim($expiration))){$timestamp=strtotime($expiration);if(false===$timestamp||$timestamp<time())return false;}
+  return true;
+ }
  public function hasEntitlement(string $entitlement): bool { return in_array($entitlement,$this->getEntitlements(),true); }
  public function toArray(): array { return $this->data; }
 }
