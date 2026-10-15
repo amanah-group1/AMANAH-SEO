@@ -632,7 +632,7 @@ final class AMANAH_SEO_Module_Navigation {
   echo '</div></section></div>';
   self::end();
  }
- function ai_dashboard(){
+ public static function ai_dashboard(){
   self::start('AMANAH SEO AI');
   echo '<style>
    .amanah-seo-ai-dashboard{width:100%;max-width:none;box-sizing:border-box}
