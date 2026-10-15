@@ -28,12 +28,12 @@ final class AMANAH_SEO_Admin {
   add_submenu_page('amanah-seo','AMANAH SEO ENGINE','🔍 AMANAH SEO ENGINE','manage_amanah_seo','amanah-seo-engine-workflow',array('AMANAH_SEO_Module_Navigation','engine_dashboard'));
 
   // Feature pages remain registered, but their sidebar entries are hidden by navigation enforcement.
-  add_submenu_page('amanah-seo-core','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
-  add_submenu_page('amanah-seo-core','Temuan','Temuan','manage_amanah_seo','amanah-seo-findings',array(__CLASS__,'findings_page'));
-  add_submenu_page('amanah-seo-core','Pekerjaan','Pekerjaan','manage_amanah_seo','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
-  add_submenu_page('amanah-seo-core','Riwayat','Riwayat','manage_amanah_seo','amanah-seo-history',array(__CLASS__,'history_page'));
-  add_submenu_page('amanah-seo-core','Diagnostik','Diagnostik','manage_amanah_seo','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
-  add_submenu_page(null,'Dashboard','Dashboard','manage_amanah_seo','amanah-seo-dashboard',array(__CLASS__,'dashboard'));
+  add_submenu_page('amanah-seo','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
+  add_submenu_page('amanah-seo','Temuan','Temuan','manage_amanah_seo','amanah-seo-findings',array(__CLASS__,'findings_page'));
+  add_submenu_page('amanah-seo','Pekerjaan','Pekerjaan','manage_amanah_seo','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
+  add_submenu_page('amanah-seo','Riwayat','Riwayat','manage_amanah_seo','amanah-seo-history',array(__CLASS__,'history_page'));
+  add_submenu_page('amanah-seo','Diagnostik','Diagnostik','manage_amanah_seo','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
+  add_submenu_page('amanah-seo','Dashboard','Dashboard','manage_amanah_seo','amanah-seo-dashboard',array(__CLASS__,'dashboard'));
  }
  private static function guard(){if(!current_user_can('manage_amanah_seo')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));}
  private static function start($title){self::guard();echo '<div class="wrap"><h1>'.esc_html($title).'</h1>';if(isset($_GET['amanah_notice'])){$n=sanitize_key(wp_unslash($_GET['amanah_notice']));$m=array('saved'=>'Data berhasil disimpan.','error'=>'Data gagal disimpan. Periksa input dan coba lagi.','updated'=>'Status pekerjaan diperbarui.','decision'=>'Keputusan persetujuan dicatat.','evidence_required'=>'Pekerjaan selesai wajib memiliki bukti hasil.','approval_pending'=>'Persetujuan masih menunggu keputusan.','approval_rejected'=>'Persetujuan ditolak. Ajukan kembali setelah pekerjaan direvisi.','workspace_saved'=>'Pengaturan workspace berhasil disimpan.','finding_updated'=>'Status temuan diperbarui.','finding_update_error'=>'Status temuan tidak dapat diperbarui. Pastikan catatan penyelesaian diisi.','self_test_complete'=>'Uji runtime selesai. Lihat hasil pemeriksaan di bawah.','dependency_incomplete'=>'Pekerjaan belum dapat diselesaikan karena dependensinya belum selesai.','invalid_due_date'=>'Format tenggat tidak valid.','dependency_not_found'=>'Pekerjaan dependensi tidak ditemukan.','invalid_task_input'=>'Judul, deskripsi, atau kriteria selesai tidak valid. Periksa panjang dan isi; judul tidak boleh berisi label formulir.','task_field_too_long'=>'Satu atau beberapa kolom pekerjaan melebihi batas panjang.','suspicious_task_title'=>'Judul pekerjaan tampak berisi label formulir. Masukkan judul pekerjaan yang ringkas.');if(isset($m[$n]))echo '<div class="notice notice-'.(in_array($n,array('error','evidence_required','approval_pending','approval_rejected','finding_update_error','invalid_task_input','task_field_too_long','suspicious_task_title','invalid_due_date','dependency_not_found'),true)?'error':'success').' is-dismissible"><p>'.esc_html($m[$n]).'</p></div>';}}
@@ -442,10 +442,10 @@ final class AMANAH_SEO_Module_Navigation {
   if(!current_user_can(self::CAPABILITY)) return;
   // AI and ENGINE dashboards are registered as submenus of the AMANAH SEO parent.
 
-  add_submenu_page('amanah-seo-core','SEO Intelligence','SEO Intelligence',self::CAPABILITY,'amanah-seo-intelligence',array(__CLASS__,'core_placeholder'));
-  add_submenu_page('amanah-seo-core','Execution & Approval','Execution & Approval',self::CAPABILITY,'amanah-seo-execution',array(__CLASS__,'core_placeholder'));
-  add_submenu_page('amanah-seo-core','Monitoring & Results','Monitoring & Results',self::CAPABILITY,'amanah-seo-monitoring',array(__CLASS__,'core_placeholder'));
-  add_submenu_page('amanah-seo-core','Reports','Reports',self::CAPABILITY,'amanah-seo-reports',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','SEO Intelligence','SEO Intelligence',self::CAPABILITY,'amanah-seo-intelligence',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','Execution & Approval','Execution & Approval',self::CAPABILITY,'amanah-seo-execution',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','Monitoring & Results','Monitoring & Results',self::CAPABILITY,'amanah-seo-monitoring',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','Reports','Reports',self::CAPABILITY,'amanah-seo-reports',array(__CLASS__,'core_placeholder'));
   $routes=array(
    'amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit',
    'amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation',
@@ -458,7 +458,25 @@ final class AMANAH_SEO_Module_Navigation {
    'amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity',
    'amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation'
   );
-  foreach($routes as $slug=>$title) add_submenu_page(null,$title,$title,self::CAPABILITY,$slug,array(__CLASS__,'module_placeholder'));
+  // Register hidden feature routes beneath the real AMANAH SEO parent.
+  // CSS hides these rows; a real parent keeps WordPress direct-page authorization intact.
+  global $submenu;
+  foreach($routes as $slug=>$title){
+   $already_registered=false;
+   if(is_array($submenu)){
+    foreach($submenu as $items){
+     if(!is_array($items)) continue;
+     foreach($items as $item){
+      if(isset($item[2]) && $slug===(string)$item[2]){
+       $already_registered=true;
+       break 2;
+      }
+     }
+    }
+   }
+   // Preserve real AI module callbacks (for example Entity Profile and Authority & Author).
+   if(!$already_registered) add_submenu_page('amanah-seo',$title,$title,self::CAPABILITY,$slug,array(__CLASS__,'module_placeholder'));
+  }
  }
  private static function start($title){
   if(!current_user_can(self::CAPABILITY)) wp_die(esc_html__('Anda tidak memiliki izin untuk mengakses halaman ini.','amanah-seo'),esc_html__('Akses ditolak','amanah-seo'),array('response'=>403));
