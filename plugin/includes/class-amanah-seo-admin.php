@@ -539,15 +539,13 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Entity & Authority','slug'=>'amanah-authority','title'=>'Authority & Author','description'=>'Kredibilitas penulis dan keahlian.'),
    array('group'=>'Intelligence','slug'=>'amanah-seo-ai-audit','title'=>'AI Audit','description'=>'Area audit SEO berbantuan AI.'),
    array('group'=>'Content AI','slug'=>'amanah-content-analyzer','title'=>'Content Analyzer','description'=>'Analisis kualitas dan konteks konten.'),
-   array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-brief','title'=>'Content Brief','description'=>'Susun brief konten yang terarah sebelum proses produksi.'),
-   array('group'=>'Content AI','slug'=>'amanah-content-generation','title'=>'Article Generation','description'=>'Buat draf artikel berdasarkan brief konten yang telah disetujui.'),
-
-
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-faq-generator','title'=>'FAQ Generator','description'=>'Perencanaan pertanyaan dan jawaban.'),
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-optimizer','title'=>'Content Optimizer','description'=>'Penyempurnaan konten yang sudah ada.'),
    array('group'=>'Authority','slug'=>'amanah-seo-ai-topic-authority','title'=>'Topic Authority','description'=>'Cakupan topik dan kedalaman keahlian.'),
    array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-internal-links','title'=>'Internal Link AI','description'=>'Dukungan perencanaan tautan internal.'),
-   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-generator','title'=>'Schema Manager','description'=>'Akses ke generator dan validasi schema.')
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-generator','title'=>'Schema Generator','description'=>'Pembuatan structured data schema.'),
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-validation','title'=>'Schema Validation','description'=>'Pemeriksaan validitas structured data schema.'),
+   array('group'=>'Reporting','slug'=>'amanah-seo-ai-reports','title'=>'AI Reports','description'=>'Area laporan terkait analisis AI.')
   );
   echo '<div class="amanah-seo-ai-grid">';
   foreach($cards as $card){
