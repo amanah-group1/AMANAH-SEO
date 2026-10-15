@@ -16,6 +16,29 @@ final class AMANAH_SEO_Module_Licenses {
 		return in_array( $module, array( 'ai', 'engine' ), true );
 	}
 
+	/** Convert validated server state into a safe, readable admin label. */
+	private static function status_label( array $record ): string {
+		$status = isset( $record['status'] ) && is_string( $record['status'] ) ? strtolower( $record['status'] ) : 'not_activated';
+		$reason = isset( $record['reason'] ) && is_string( $record['reason'] ) ? $record['reason'] : '';
+		if ( in_array( $reason, array( 'service_unavailable', 'service_error' ), true ) ) {
+			return __( 'Server Unreachable', 'amanah-seo' );
+		}
+		$labels = array(
+			'active' => __( 'Active', 'amanah-seo' ),
+			'grace' => __( 'Temporarily Available (Grace)', 'amanah-seo' ),
+			'expired' => __( 'Expired', 'amanah-seo' ),
+			'invalid' => __( 'Invalid', 'amanah-seo' ),
+			'revoked' => __( 'Revoked', 'amanah-seo' ),
+			'suspended' => __( 'Suspended', 'amanah-seo' ),
+			'not_entitled' => __( 'Not Entitled', 'amanah-seo' ),
+			'unconfigured' => __( 'Not Activated', 'amanah-seo' ),
+			'not_activated' => __( 'Not Activated', 'amanah-seo' ),
+			'unknown' => __( 'Server Unreachable / Unverified', 'amanah-seo' ),
+			'not_checked' => __( 'Not Activated', 'amanah-seo' ),
+		);
+		return $labels[ $status ] ?? __( 'Unverified Status', 'amanah-seo' );
+	}
+
 	private static function encryption_key(): string {
 		return hash( 'sha256', defined( 'AUTH_KEY' ) ? AUTH_KEY : 'amanah-seo-engine', true );
 	}
@@ -264,18 +287,25 @@ final class AMANAH_SEO_Module_Licenses {
 
 		foreach ( array( 'ai' => 'AMANAH SEO AI', 'engine' => 'AMANAH SEO ENGINE' ) as $module => $label ) {
 			$configured = null !== self::get_license( $module );
-			$status = isset( $license_statuses[ $module ]['status'] ) ? sanitize_key( $license_statuses[ $module ]['status'] ) : 'not_checked';
+			$record = isset( $license_statuses[ $module ] ) && is_array( $license_statuses[ $module ] ) ? $license_statuses[ $module ] : array();
+			$status_label = self::status_label( $record );
+			$expires_at = isset( $record['expires_at'] ) && is_string( $record['expires_at'] ) ? trim( $record['expires_at'] ) : ( isset( $record['expiration'] ) && is_string( $record['expiration'] ) ? trim( $record['expiration'] ) : '' );
 			echo '<div class="card amanah-seo-license-card">';
 			echo '<h3>' . esc_html( $label ) . '</h3>';
-			echo '<p class="amanah-seo-license-state">' . esc_html( $configured ? 'License key is stored.' : 'No license key is stored.' ) . '</p>';
-			echo '<p class="amanah-seo-license-state">' . esc_html( 'License service status: ' . $status ) . '</p>';
+			echo '<p class="amanah-seo-license-state">' . esc_html( $configured ? 'License key is stored securely.' : 'No license key is stored.' ) . '</p>';
+			echo '<p class="amanah-seo-license-state"><strong>' . esc_html__( 'Server status:', 'amanah-seo' ) . '</strong> ' . esc_html( $status_label ) . '</p>';
+			if ( '' !== $expires_at ) {
+				echo '<p class="amanah-seo-license-state"><strong>' . esc_html__( 'Valid until:', 'amanah-seo' ) . '</strong> ' . esc_html( $expires_at ) . '</p>';
+			}
 			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
 			echo '<input type="hidden" name="action" value="amanah_seo_save_module_license">';
 			echo '<input type="hidden" name="module" value="' . esc_attr( $module ) . '">';
 			wp_nonce_field( 'amanah_seo_save_module_license_' . $module );
 			echo '<label class="amanah-seo-license-label" for="amanah-seo-license-' . esc_attr( $module ) . '">' . esc_html__( 'License Key', 'amanah-seo' ) . '</label>';
 			echo '<input class="regular-text" type="password" autocomplete="new-password" required maxlength="512" id="amanah-seo-license-' . esc_attr( $module ) . '" name="license_key" value="">';
-			submit_button( __( 'Save License Key', 'amanah-seo' ), 'primary', 'submit', false );
+			submit_button( __( 'Activate', 'amanah-seo' ), 'primary', 'submit', false );
+			echo ' <button type="button" class="button" disabled aria-disabled="true" title="' . esc_attr__( 'Server deactivation API is not available in the current repository contract.', 'amanah-seo' ) . '">' . esc_html__( 'Deactivate unavailable', 'amanah-seo' ) . '</button>';
+			echo '<p class="description">' . esc_html__( 'Activation is confirmed only by the licensing server. Server-side deactivation cannot be safely enabled until its API contract is provided.', 'amanah-seo' ) . '</p>';
 			echo '</form></div>';
 		}
 		echo '</section>';
@@ -472,10 +502,19 @@ final class AMANAH_SEO_Module_Licenses {
 			try {
 				$services = \Amanah\SEOEngine\Core\Bootstrap\Plugin::boot();
 				$state = $services->get( 'license_client' )->activate( $license_key );
-				self::save_license_status( 'engine', array( 'status' => $state->getStatus(), 'entitlements' => $state->getEntitlements() ) );
+				$engine_state = method_exists( $state, 'toArray' ) ? $state->toArray() : array();
+				$engine_status = isset( $engine_state['status'] ) && is_string( $engine_state['status'] ) ? strtolower( $engine_state['status'] ) : 'unknown';
+				self::save_license_status( 'engine', array(
+					'status' => $engine_status,
+					'entitlements' => $state->getEntitlements(),
+					'validated_at' => isset( $engine_state['validated_at'] ) && is_string( $engine_state['validated_at'] ) ? $engine_state['validated_at'] : '',
+					'expires_at' => isset( $engine_state['expiration'] ) && is_string( $engine_state['expiration'] ) ? $engine_state['expiration'] : '',
+					'plan' => isset( $engine_state['plan'] ) && is_string( $engine_state['plan'] ) ? $engine_state['plan'] : '',
+					'reason' => '',
+				) );
 			} catch ( \Throwable $exception ) {
-				self::save_license_status( 'engine', array( 'status' => 'unknown', 'entitlements' => array() ) );
-				error_log( '[AMANAH SEO] ENGINE license activation deferred: ' . $exception->getMessage() );
+				self::save_license_status( 'engine', array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'service_unavailable' ) );
+				error_log( '[AMANAH SEO] ENGINE license activation failed; server response was not accepted.' );
 			}
 		}
 		wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_saved' => $module ), admin_url( 'admin.php' ) ) );
