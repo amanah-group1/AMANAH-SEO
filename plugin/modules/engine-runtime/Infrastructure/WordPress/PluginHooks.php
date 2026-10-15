@@ -59,7 +59,7 @@ final class PluginHooks {
   $this->admin_menu->handleContentEditorSave();
  }
  public function initializeConfiguration():void{$this->configuration->initializeDefaults();}
- public function runJobs():void{if(null===$this->job_worker||!$this->configuration->get('background_processing',true))return;for($i=0;$i<5;$i++){if(!$this->job_worker->runOnce())break;}}
+ public function runJobs():void{if(!class_exists('AMANAH_SEO_Module_Licenses')||!AMANAH_SEO_Module_Licenses::is_module_active('engine'))return;if(null===$this->job_worker||!$this->configuration->get('background_processing',true))return;for($i=0;$i<5;$i++){if(!$this->job_worker->runOnce())break;}}
 
  public function handleContentEditorReturn():void{
   if(!is_admin()||'1'!==sanitize_text_field((string)($_GET['amanah_editor']??''))||!isset($_GET['post'])||'post.php'!==basename((string)($_SERVER['SCRIPT_NAME']??'')))return;
