@@ -447,7 +447,7 @@ final class AMANAH_SEO_Module_Navigation {
   add_submenu_page('amanah-seo','Monitoring & Results','Monitoring & Results',self::CAPABILITY,'amanah-seo-monitoring',array(__CLASS__,'core_placeholder'));
   add_submenu_page('amanah-seo','Reports','Reports',self::CAPABILITY,'amanah-seo-reports',array(__CLASS__,'core_placeholder'));
   $routes=array(
-   'amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit',
+   'amanah-seo-ai'=>'Entity Profile (Legacy Redirect)','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit',
    'amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation',
    'amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer',
    'amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI',
@@ -475,7 +475,10 @@ final class AMANAH_SEO_Module_Navigation {
     }
    }
    // Preserve real AI module callbacks (for example Entity Profile and Authority & Author).
-   if(!$already_registered) add_submenu_page('amanah-seo',$title,$title,self::CAPABILITY,$slug,array(__CLASS__,'module_placeholder'));
+   if(!$already_registered){
+    $callback='amanah-seo-ai'===$slug?array(__CLASS__,'redirect_entity_profile'):array(__CLASS__,'module_placeholder');
+    add_submenu_page('amanah-seo',$title,$title,self::CAPABILITY,$slug,$callback);
+   }
   }
  }
  private static function start($title){
@@ -492,14 +495,30 @@ final class AMANAH_SEO_Module_Navigation {
  }
  public static function module_placeholder(){
   $page=isset($_GET['page'])&&is_string($_GET['page'])?sanitize_key(wp_unslash($_GET['page'])):'';
-  $titles=array('amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit','amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation','amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer','amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI','amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation','amanah-seo-ai-reports'=>'AI Reports','amanah-seo-engine-keywords'=>'Keyword & Search Intelligence','amanah-seo-engine-requirements'=>'Requirements','amanah-seo-engine-strategy'=>'Strategy & Planning','amanah-seo-engine-brief'=>'Content Brief & Blueprint','amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity','amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation');
+  $titles=array('amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit','amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation','amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer','amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI','amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation','amanah-seo-ai-reports'=>'AI Reports','amanah-seo-engine-keywords'=>'Keyword & Search Intelligence','amanah-seo-engine-requirements'=>'Requirements','amanah-seo-engine-strategy'=>'Strategy & Planning','amanah-seo-engine-brief'=>'Content Brief & Blueprint','amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity','amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation');
   self::start($titles[$page]??'AMANAH SEO AI');
-  if(in_array($page,array('amanah-entity-profile','amanah-seo-ai'),true)){
+  if('amanah-entity-profile'===$page){
    echo '<div class="notice notice-info inline"><p>'.esc_html__('Rute Entity Profile sekarang ditangani oleh AMANAH SEO Core. Integrasi layar dan penyimpanan entitas lama belum dipindahkan; data yang sudah ada tidak dihapus atau diubah.','amanah-seo').'</p></div>';
    if(isset($_GET['entity_id'])&&is_scalar($_GET['entity_id'])) echo '<p>'.esc_html(sprintf(__('Permintaan profil entitas ID %d diterima oleh rute AMANAH SEO.','amanah-seo'),absint($_GET['entity_id']))).'</p>';
   }else echo '<div class="notice notice-info inline"><p>'.esc_html__('Halaman ini merupakan placeholder. Integrasi fitur belum tersedia dan belum ada proses AI yang dijalankan.','amanah-seo').'</p></div>';
   self::end();
  }
+
+ /**
+  * Keep the legacy Entity Profile URL working without replacing the real page callback.
+  * Only redirect to the canonical route; the entity module remains responsible for rendering.
+  */
+ public static function redirect_entity_profile(){
+  if(!current_user_can(self::CAPABILITY)) wp_die(esc_html__('Anda tidak memiliki izin untuk mengakses halaman ini.','amanah-seo'),esc_html__('Akses ditolak','amanah-seo'),array('response'=>403));
+  $url=admin_url('admin.php?page=amanah-entity-profile');
+  if(isset($_GET['entity_id'])&&is_scalar($_GET['entity_id'])){
+   $entity_id=absint(wp_unslash($_GET['entity_id']));
+   if($entity_id>0) $url=add_query_arg('entity_id',$entity_id,$url);
+  }
+  wp_safe_redirect($url);
+  exit;
+ }
+
  public static function core_dashboard(){
   self::start('CORE');
   echo '<p class="description" style="max-width:900px">Kelola workspace, temuan, pekerjaan, dan pengaturan inti AMANAH SEO dari satu area.</p>';
