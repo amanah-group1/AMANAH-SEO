@@ -151,4 +151,51 @@ Menampung riset keyword dan search intelligence, strategi/perencanaan, workspace
 
 ## 5. Batas status keputusan
 
-Struktur dan pengelompokan menu pada dokumen ini berstatus **FINAL** sebagai keputusan produk. Dokumen ini tidak menyatakan bahwa seluruh fitur telah tersedia, tidak mengubah kode, tidak menyetujui integrasi, dan tidak memberikan persetujuan untuk mulai implementasi. Pekerjaan implementasi tetap mengikuti gerbang dan persetujuan yang ditetapkan dalam Pedoman Induk AMANAH SEO.
+Struktur dan pengelompokan menu pada dokumen ini berstatus **FINAL** sebagai keputusan produk. Bagian 6 mencatat keputusan visual yang lebih baru dan persetujuan pengguna untuk mengimplementasikan perilaku sidebar tiga kategori. Persetujuan tersebut hanya mencakup navigasi; bukan bukti bahwa seluruh fitur tersedia, bukan persetujuan untuk merge/deploy, dan tidak menggantikan gerbang pengujian integrasi serta lisensi dalam Pedoman Induk AMANAH SEO.
+
+---
+
+## 6. Keputusan navigasi visual — 2026-10-14
+
+**Status: DISETUJUI PENGGUNA — menggantikan tampilan pohon datar pada bagian 2 untuk perilaku sidebar.**
+
+Di bawah satu menu induk WordPress **AMANAH SEO**, sidebar menampilkan tepat tiga kategori yang dapat dibuka/tutup:
+
+```text
+AMANAH SEO
+├── ▼ CORE
+│   ├── Dashboard
+│   ├── Website & Workspace
+│   ├── SEO Intelligence
+│   ├── Priorities & Tasks
+│   ├── Execution & Approval
+│   ├── Monitoring & Results
+│   ├── Reports
+│   └── Settings & Access
+├── ▶ AI
+│   ├── Entity Profile
+│   ├── Authority & Author
+│   ├── Content Analyzer
+│   ├── Article Generation
+│   └── Pengaturan khusus AI (jika diperlukan)
+└── ▶ ENGINE
+    ├── ENGINE Workflow
+    ├── Keyword Research
+    ├── Strategy & Plan
+    ├── Requirements
+    ├── Brief & Blueprint
+    ├── Generation & Evaluation
+    ├── Refinement & Maturity
+    └── Review & Publishing
+```
+
+Perilaku wajib:
+
+1. Hanya satu kategori terbuka pada satu waktu; membuka kategori lain menutup kategori sebelumnya.
+2. CORE terbuka sebagai pilihan awal bila tidak ada kategori halaman aktif yang dapat ditentukan.
+3. Saat halaman AI atau ENGINE dibuka, kategorinya otomatis terbuka dan tautan halaman aktif tetap mengikuti status WordPress.
+4. Memilih kategori hanya mengubah tampilan sidebar; kategori bukan pengganti halaman dan tidak mengubah URL, callback, capability, atau handler fitur yang sudah terdaftar.
+5. Semua submenu yang telah ada harus tetap dapat dijangkau. Submenu lama yang tidak muncul pada ringkasan visual tetap dipertahankan dalam kategori yang sesuai; penyederhanaan navigasi tidak boleh menghapus fitur.
+6. Pengaturan inti, API credentials, hak akses, dan lisensi/entitlement modul dikelola dari CORE. Pengaturan khusus AI hanya ditampilkan bila memang memiliki fungsi khusus yang terpisah.
+7. Tetap satu plugin WordPress dan satu menu induk AMANAH SEO; CORE, AI, dan ENGINE bukan menu induk WordPress terpisah dan bukan plugin terpisah.
+

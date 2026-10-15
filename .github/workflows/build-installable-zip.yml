@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - integration/core-ai-engine-20261012
+      - feature/final-menu-order-20261014
   pull_request:
     branches:
+      - integration/core-ai-engine-20261012
       - main
   workflow_dispatch:
 
