@@ -158,7 +158,7 @@ final class AMANAH_SEO_Module_Licenses {
 			'not_entitled' => __( 'Not Entitled', 'amanah-seo' ),
 			'unconfigured' => __( 'Not Activated', 'amanah-seo' ),
 			'not_activated' => __( 'Not Activated', 'amanah-seo' ),
-			'unknown' => __( 'Server Unreachable / Unverified', 'amanah-seo' ),
+			'unknown' => __( 'Unknown / Unverified', 'amanah-seo' ),
 			'not_checked' => __( 'Not Activated', 'amanah-seo' ),
 		);
 		return $labels[ $status ] ?? __( 'Unverified Status', 'amanah-seo' );
@@ -432,7 +432,7 @@ final class AMANAH_SEO_Module_Licenses {
 			echo '<label class="amanah-seo-license-label" for="amanah-seo-license-' . esc_attr( $module ) . '">' . esc_html__( 'License Key', 'amanah-seo' ) . '</label>';
 			echo '<input class="regular-text" type="password" autocomplete="new-password" required maxlength="512" id="amanah-seo-license-' . esc_attr( $module ) . '" name="license_key" value="">';
 			submit_button( __( 'Activate', 'amanah-seo' ), 'primary', 'submit', false );
-			echo ' <button type="button" class="button" disabled aria-disabled="true" title="' . esc_attr__( 'Server deactivation API is not available in the current repository contract.', 'amanah-seo' ) . '">' . esc_html__( 'Deactivate unavailable', 'amanah-seo' ) . '</button>';
+			echo ' <button type="button" class="button" disabled aria-disabled="true" title="' . esc_attr__( 'Server deactivation API is not available in the current repository contract.', 'amanah-seo' ) . '">' . esc_html__( 'Deactivate', 'amanah-seo' ) . '</button>';
 			echo '<p class="description">' . esc_html__( 'Activation is confirmed only by the licensing server. Server-side deactivation cannot be safely enabled until its API contract is provided.', 'amanah-seo' ) . '</p>';
 			echo '</form></div>';
 		}
@@ -646,6 +646,16 @@ final class AMANAH_SEO_Module_Licenses {
 				wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
 				exit;
 			}
+		}
+		$latest_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
+		$latest_statuses = is_array( $latest_statuses ) ? $latest_statuses : array();
+		$latest = isset( $latest_statuses[ $module ] ) && is_array( $latest_statuses[ $module ] ) ? $latest_statuses[ $module ] : array();
+		$latest_status = isset( $latest['status'] ) && is_string( $latest['status'] ) ? strtolower( $latest['status'] ) : 'unknown';
+		$latest_entitlements = isset( $latest['entitlements'] ) && is_array( $latest['entitlements'] ) ? $latest['entitlements'] : array();
+		$latest_expiry = isset( $latest['expires_at'] ) && is_string( $latest['expires_at'] ) ? trim( $latest['expires_at'] ) : '';
+		if ( ! in_array( $latest_status, array( 'active', 'grace' ), true ) || empty( $latest_entitlements ) || ( '' !== $latest_expiry && 'LIFETIME' !== strtoupper( $latest_expiry ) && ( false === strtotime( $latest_expiry ) || strtotime( $latest_expiry ) < time() ) ) ) {
+			wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_error' => '1' ), admin_url( 'admin.php' ) ) );
+			exit;
 		}
 		wp_safe_redirect( add_query_arg( array( 'page' => 'amanah-seo-access', 'license_saved' => $module ), admin_url( 'admin.php' ) ) );
 		exit;
