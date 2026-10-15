@@ -28,12 +28,12 @@ final class AMANAH_SEO_Admin {
   add_submenu_page('amanah-seo','AMANAH SEO ENGINE','🔍 AMANAH SEO ENGINE','manage_amanah_seo','amanah-seo-engine-workflow',array('AMANAH_SEO_Module_Navigation','engine_dashboard'));
 
   // Feature pages remain registered, but their sidebar entries are hidden by navigation enforcement.
-  add_submenu_page('amanah-seo-core','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
-  add_submenu_page('amanah-seo-core','Temuan','Temuan','manage_amanah_seo','amanah-seo-findings',array(__CLASS__,'findings_page'));
-  add_submenu_page('amanah-seo-core','Pekerjaan','Pekerjaan','manage_amanah_seo','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
-  add_submenu_page('amanah-seo-core','Riwayat','Riwayat','manage_amanah_seo','amanah-seo-history',array(__CLASS__,'history_page'));
-  add_submenu_page('amanah-seo-core','Diagnostik','Diagnostik','manage_amanah_seo','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
-  add_submenu_page(null,'Dashboard','Dashboard','manage_amanah_seo','amanah-seo-dashboard',array(__CLASS__,'dashboard'));
+  add_submenu_page('amanah-seo','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
+  add_submenu_page('amanah-seo','Temuan','Temuan','manage_amanah_seo','amanah-seo-findings',array(__CLASS__,'findings_page'));
+  add_submenu_page('amanah-seo','Pekerjaan','Pekerjaan','manage_amanah_seo','amanah-seo-tasks',array(__CLASS__,'tasks_page'));
+  add_submenu_page('amanah-seo','Riwayat','Riwayat','manage_amanah_seo','amanah-seo-history',array(__CLASS__,'history_page'));
+  add_submenu_page('amanah-seo','Diagnostik','Diagnostik','manage_amanah_seo','amanah-seo-diagnostics',array(__CLASS__,'diagnostics_page'));
+  add_submenu_page('amanah-seo','Dashboard','Dashboard','manage_amanah_seo','amanah-seo-dashboard',array(__CLASS__,'dashboard'));
  }
  private static function guard(){if(!current_user_can('manage_amanah_seo')) wp_die(esc_html__('You are not allowed to access this page.','amanah-seo'),'',array('response'=>403));}
  private static function start($title){self::guard();echo '<div class="wrap"><h1>'.esc_html($title).'</h1>';if(isset($_GET['amanah_notice'])){$n=sanitize_key(wp_unslash($_GET['amanah_notice']));$m=array('saved'=>'Data berhasil disimpan.','error'=>'Data gagal disimpan. Periksa input dan coba lagi.','updated'=>'Status pekerjaan diperbarui.','decision'=>'Keputusan persetujuan dicatat.','evidence_required'=>'Pekerjaan selesai wajib memiliki bukti hasil.','approval_pending'=>'Persetujuan masih menunggu keputusan.','approval_rejected'=>'Persetujuan ditolak. Ajukan kembali setelah pekerjaan direvisi.','workspace_saved'=>'Pengaturan workspace berhasil disimpan.','finding_updated'=>'Status temuan diperbarui.','finding_update_error'=>'Status temuan tidak dapat diperbarui. Pastikan catatan penyelesaian diisi.','self_test_complete'=>'Uji runtime selesai. Lihat hasil pemeriksaan di bawah.','dependency_incomplete'=>'Pekerjaan belum dapat diselesaikan karena dependensinya belum selesai.','invalid_due_date'=>'Format tenggat tidak valid.','dependency_not_found'=>'Pekerjaan dependensi tidak ditemukan.','invalid_task_input'=>'Judul, deskripsi, atau kriteria selesai tidak valid. Periksa panjang dan isi; judul tidak boleh berisi label formulir.','task_field_too_long'=>'Satu atau beberapa kolom pekerjaan melebihi batas panjang.','suspicious_task_title'=>'Judul pekerjaan tampak berisi label formulir. Masukkan judul pekerjaan yang ringkas.');if(isset($m[$n]))echo '<div class="notice notice-'.(in_array($n,array('error','evidence_required','approval_pending','approval_rejected','finding_update_error','invalid_task_input','task_field_too_long','suspicious_task_title','invalid_due_date','dependency_not_found'),true)?'error':'success').' is-dismissible"><p>'.esc_html($m[$n]).'</p></div>';}}
@@ -442,12 +442,12 @@ final class AMANAH_SEO_Module_Navigation {
   if(!current_user_can(self::CAPABILITY)) return;
   // AI and ENGINE dashboards are registered as submenus of the AMANAH SEO parent.
 
-  add_submenu_page('amanah-seo-core','SEO Intelligence','SEO Intelligence',self::CAPABILITY,'amanah-seo-intelligence',array(__CLASS__,'core_placeholder'));
-  add_submenu_page('amanah-seo-core','Execution & Approval','Execution & Approval',self::CAPABILITY,'amanah-seo-execution',array(__CLASS__,'core_placeholder'));
-  add_submenu_page('amanah-seo-core','Monitoring & Results','Monitoring & Results',self::CAPABILITY,'amanah-seo-monitoring',array(__CLASS__,'core_placeholder'));
-  add_submenu_page('amanah-seo-core','Reports','Reports',self::CAPABILITY,'amanah-seo-reports',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','SEO Intelligence','SEO Intelligence',self::CAPABILITY,'amanah-seo-intelligence',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','Execution & Approval','Execution & Approval',self::CAPABILITY,'amanah-seo-execution',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','Monitoring & Results','Monitoring & Results',self::CAPABILITY,'amanah-seo-monitoring',array(__CLASS__,'core_placeholder'));
+  add_submenu_page('amanah-seo','Reports','Reports',self::CAPABILITY,'amanah-seo-reports',array(__CLASS__,'core_placeholder'));
   $routes=array(
-   'amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit',
+   'amanah-entity-profile'=>'Entity Profile (Core Fallback)','amanah-seo-ai'=>'Entity Profile (Legacy Redirect)','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit',
    'amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation',
    'amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer',
    'amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI',
@@ -458,7 +458,28 @@ final class AMANAH_SEO_Module_Navigation {
    'amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity',
    'amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation'
   );
-  foreach($routes as $slug=>$title) add_submenu_page(null,$title,$title,self::CAPABILITY,$slug,array(__CLASS__,'module_placeholder'));
+  // Register hidden feature routes beneath the real AMANAH SEO parent.
+  // CSS hides these rows; a real parent keeps WordPress direct-page authorization intact.
+  global $submenu;
+  foreach($routes as $slug=>$title){
+   $already_registered=false;
+   if(is_array($submenu)){
+    foreach($submenu as $items){
+     if(!is_array($items)) continue;
+     foreach($items as $item){
+      if(isset($item[2]) && $slug===(string)$item[2]){
+       $already_registered=true;
+       break 2;
+      }
+     }
+    }
+   }
+   // Preserve real AI module callbacks (for example Entity Profile and Authority & Author).
+   if(!$already_registered){
+    $callback='amanah-seo-ai'===$slug?array(__CLASS__,'redirect_entity_profile'):array(__CLASS__,'module_placeholder');
+    add_submenu_page('amanah-seo',$title,$title,self::CAPABILITY,$slug,$callback);
+   }
+  }
  }
  private static function start($title){
   if(!current_user_can(self::CAPABILITY)) wp_die(esc_html__('Anda tidak memiliki izin untuk mengakses halaman ini.','amanah-seo'),esc_html__('Akses ditolak','amanah-seo'),array('response'=>403));
@@ -474,14 +495,30 @@ final class AMANAH_SEO_Module_Navigation {
  }
  public static function module_placeholder(){
   $page=isset($_GET['page'])&&is_string($_GET['page'])?sanitize_key(wp_unslash($_GET['page'])):'';
-  $titles=array('amanah-entity-profile'=>'Entity Profile','amanah-seo-ai'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit','amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation','amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer','amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI','amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation','amanah-seo-ai-reports'=>'AI Reports','amanah-seo-engine-keywords'=>'Keyword & Search Intelligence','amanah-seo-engine-requirements'=>'Requirements','amanah-seo-engine-strategy'=>'Strategy & Planning','amanah-seo-engine-brief'=>'Content Brief & Blueprint','amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity','amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation');
+  $titles=array('amanah-entity-profile'=>'Entity Profile','amanah-authority'=>'Authority & Author','amanah-seo-ai-audit'=>'AI Audit','amanah-content-analyzer'=>'Content Analyzer','amanah-seo-ai-content-brief'=>'Content Brief','amanah-content-generation'=>'Article Generation','amanah-seo-ai-faq-generator'=>'FAQ Generator','amanah-seo-ai-content-optimizer'=>'Content Optimizer','amanah-seo-ai-topic-authority'=>'Topic Authority','amanah-seo-ai-internal-links'=>'Internal Link AI','amanah-seo-ai-schema-generator'=>'Schema Generator','amanah-seo-ai-schema-validation'=>'Schema Validation','amanah-seo-ai-reports'=>'AI Reports','amanah-seo-engine-keywords'=>'Keyword & Search Intelligence','amanah-seo-engine-requirements'=>'Requirements','amanah-seo-engine-strategy'=>'Strategy & Planning','amanah-seo-engine-brief'=>'Content Brief & Blueprint','amanah-seo-engine-generation'=>'Generation & Evaluation','amanah-seo-engine-refinement'=>'Refinement & Maturity','amanah-seo-engine-review'=>'Human Review & Approval','amanah-seo-engine-publishing'=>'Publishing Preparation');
   self::start($titles[$page]??'AMANAH SEO AI');
-  if(in_array($page,array('amanah-entity-profile','amanah-seo-ai'),true)){
+  if('amanah-entity-profile'===$page){
    echo '<div class="notice notice-info inline"><p>'.esc_html__('Rute Entity Profile sekarang ditangani oleh AMANAH SEO Core. Integrasi layar dan penyimpanan entitas lama belum dipindahkan; data yang sudah ada tidak dihapus atau diubah.','amanah-seo').'</p></div>';
    if(isset($_GET['entity_id'])&&is_scalar($_GET['entity_id'])) echo '<p>'.esc_html(sprintf(__('Permintaan profil entitas ID %d diterima oleh rute AMANAH SEO.','amanah-seo'),absint($_GET['entity_id']))).'</p>';
   }else echo '<div class="notice notice-info inline"><p>'.esc_html__('Halaman ini merupakan placeholder. Integrasi fitur belum tersedia dan belum ada proses AI yang dijalankan.','amanah-seo').'</p></div>';
   self::end();
  }
+
+ /**
+  * Keep the legacy Entity Profile URL working without replacing the real page callback.
+  * Only redirect to the canonical route; the entity module remains responsible for rendering.
+  */
+ public static function redirect_entity_profile(){
+  if(!current_user_can(self::CAPABILITY)) wp_die(esc_html__('Anda tidak memiliki izin untuk mengakses halaman ini.','amanah-seo'),esc_html__('Akses ditolak','amanah-seo'),array('response'=>403));
+  $url=admin_url('admin.php?page=amanah-entity-profile');
+  if(isset($_GET['entity_id'])&&is_scalar($_GET['entity_id'])){
+   $entity_id=absint(wp_unslash($_GET['entity_id']));
+   if($entity_id>0) $url=add_query_arg('entity_id',$entity_id,$url);
+  }
+  wp_safe_redirect($url);
+  exit;
+ }
+
  public static function core_dashboard(){
   self::start('CORE');
   echo '<p class="description" style="max-width:900px">Kelola workspace, temuan, pekerjaan, dan pengaturan inti AMANAH SEO dari satu area.</p>';
@@ -545,7 +582,9 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-optimizer','title'=>'Content Optimizer','description'=>'Penyempurnaan konten yang sudah ada.'),
    array('group'=>'Authority','slug'=>'amanah-seo-ai-topic-authority','title'=>'Topic Authority','description'=>'Cakupan topik dan kedalaman keahlian.'),
    array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-internal-links','title'=>'Internal Link AI','description'=>'Dukungan perencanaan tautan internal.'),
-   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-generator','title'=>'Schema Manager','description'=>'Akses ke generator dan validasi schema.')
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-generator','title'=>'Schema Manager','description'=>'Akses ke generator dan validasi schema.'),
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-validation','title'=>'Schema Validation','description'=>'Periksa hasil validasi schema secara terpisah.'),
+   array('group'=>'Reporting','slug'=>'amanah-seo-ai-reports','title'=>'AI Reports','description'=>'Area laporan aktivitas dan hasil AI.')
   );
   echo '<div class="amanah-seo-ai-grid">';
   foreach($cards as $card){
@@ -569,7 +608,9 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Requirements','slug'=>'amanah-seo-engine-requirements','title'=>'Requirements','description'=>'Kebutuhan dan batasan sebelum strategi disusun.'),
    array('group'=>'Strategy & Planning','slug'=>'amanah-seo-engine-strategy','title'=>'Strategy & Planning','description'=>'Rencana SEO dan prioritas kerja yang terstruktur.'),
    array('group'=>'Content Workflow','slug'=>'amanah-seo-engine-brief','title'=>'Content Brief & Blueprint','description'=>'Kerangka konten sebelum proses produksi.'),
+   array('group'=>'Content Workflow','slug'=>'amanah-seo-ai-content-brief','title'=>'Content Brief (Legacy Route)','description'=>'Rute kompatibilitas menuju area Content Brief.'),
    array('group'=>'Content Workflow','slug'=>'amanah-seo-engine-generation','title'=>'Generation & Evaluation','description'=>'Tahap produksi dan evaluasi konten.'),
+   array('group'=>'Content Workflow','slug'=>'amanah-content-generation','title'=>'Article Generation (Legacy Route)','description'=>'Rute kompatibilitas menuju area pembuatan artikel.'),
    array('group'=>'Content Workflow','slug'=>'amanah-seo-engine-refinement','title'=>'Refinement & Maturity','description'=>'Penyempurnaan dan penilaian kesiapan konten.'),
    array('group'=>'Review & Approval','slug'=>'amanah-seo-engine-review','title'=>'Human Review & Approval','description'=>'Pemeriksaan manusia dan persetujuan sebelum publikasi.'),
    array('group'=>'Publishing Preparation','slug'=>'amanah-seo-engine-publishing','title'=>'Publishing Preparation','description'=>'Persiapan publikasi tanpa menerbitkan otomatis.')
