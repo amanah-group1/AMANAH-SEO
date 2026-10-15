@@ -214,30 +214,48 @@ final class AMANAH_SEO_Module_Licenses {
 		if ( ! current_user_can( 'manage_amanah_seo' ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage AMANAH SEO module access.', 'amanah-seo' ), '', array( 'response' => 403 ) );
 		}
-		echo '<div class="wrap"><h1>' . esc_html__( 'Settings & Access', 'amanah-seo' ) . '</h1>';
+		echo '<div class="wrap amanah-seo-access">';
+		echo '<style>
+		 .amanah-seo-access{max-width:none;box-sizing:border-box}
+		 .amanah-seo-access .amanah-seo-access-hero{box-sizing:border-box;width:100%;margin:16px 0 24px;padding:26px 30px;background:#eaf4ff;border:1px solid #b8d8f5;border-left:5px solid #2271b1;border-radius:8px}
+		 .amanah-seo-access .amanah-seo-access-hero h1{margin:0 0 10px;color:#123b61;font-size:clamp(22px,2vw,30px);line-height:1.25}
+		 .amanah-seo-access .amanah-seo-access-hero p{max-width:980px;margin:0;font-size:14px;line-height:1.75}
+		 .amanah-seo-access .amanah-seo-license-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1180px;align-items:stretch}
+		 .amanah-seo-access .amanah-seo-license-card{box-sizing:border-box;min-width:0;margin:0;padding:22px;border:1px solid #dcdcde;border-top:3px solid #2271b1;border-radius:6px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+		 .amanah-seo-access .amanah-seo-license-card h2{margin:0 0 12px;font-size:18px}
+		 .amanah-seo-access .amanah-seo-license-state{margin:0 0 8px;color:#50575e}
+		 .amanah-seo-access .amanah-seo-license-label{display:block;margin:18px 0 6px;font-weight:600}
+		 .amanah-seo-access .amanah-seo-license-card .regular-text{width:100%;max-width:100%;box-sizing:border-box;margin:0 0 12px}
+		 @media(max-width:900px){.amanah-seo-access .amanah-seo-license-grid{grid-template-columns:minmax(0,1fr)}}
+		 @media(max-width:782px){.amanah-seo-access .amanah-seo-access-hero{padding:22px 20px}.amanah-seo-access .amanah-seo-license-card{padding:18px}}
+		</style>';
+		echo '<section class="amanah-seo-access-hero" aria-labelledby="amanah-seo-access-title">';
+		echo '<h1 id="amanah-seo-access-title">' . esc_html__( 'Settings & Access', 'amanah-seo' ) . '</h1>';
 		echo '<p>' . esc_html__( 'Manage the separate AMANAH SEO AI and ENGINE module license keys here. Keys are stored encrypted and are never displayed after saving.', 'amanah-seo' ) . '</p>';
+		echo '</section>';
 		if ( isset( $_GET['license_saved'] ) && in_array( sanitize_key( wp_unslash( $_GET['license_saved'] ) ), array( 'ai', 'engine' ), true ) ) {
 			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Module license key stored securely. Entitlement status depends on the configured licensing service.', 'amanah-seo' ) . '</p></div>';
 		}
 		$license_statuses = get_option( 'amanah_seo_module_license_statuses', array() );
 		$license_statuses = is_array( $license_statuses ) ? $license_statuses : array();
+		echo '<div class="amanah-seo-license-grid">';
 		foreach ( array( 'ai' => 'AMANAH SEO AI', 'engine' => 'AMANAH SEO ENGINE' ) as $module => $label ) {
 			$configured = null !== self::get_license( $module );
 			$status = isset( $license_statuses[ $module ]['status'] ) ? sanitize_key( $license_statuses[ $module ]['status'] ) : 'not_checked';
-			echo '<div class="card" style="max-width:900px;margin:20px 0;padding:20px">';
+			echo '<section class="amanah-seo-license-card">';
 			echo '<h2>' . esc_html( $label ) . '</h2>';
-			echo '<p>' . esc_html( $configured ? 'License key is stored.' : 'No license key is stored.' ) . '</p>';
-			echo '<p>' . esc_html( 'License service status: ' . $status ) . '</p>';
+			echo '<p class="amanah-seo-license-state">' . esc_html( $configured ? 'License key is stored.' : 'No license key is stored.' ) . '</p>';
+			echo '<p class="amanah-seo-license-state">' . esc_html( 'License service status: ' . $status ) . '</p>';
 			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
 			echo '<input type="hidden" name="action" value="amanah_seo_save_module_license">';
 			echo '<input type="hidden" name="module" value="' . esc_attr( $module ) . '">';
 			wp_nonce_field( 'amanah_seo_save_module_license_' . $module );
-			echo '<label for="amanah-seo-license-' . esc_attr( $module ) . '">' . esc_html__( 'License Key', 'amanah-seo' ) . '</label><br>';
-			echo '<input class="regular-text" type="password" autocomplete="new-password" required maxlength="512" id="amanah-seo-license-' . esc_attr( $module ) . '" name="license_key" value=""> ';
+			echo '<label class="amanah-seo-license-label" for="amanah-seo-license-' . esc_attr( $module ) . '">' . esc_html__( 'License Key', 'amanah-seo' ) . '</label>';
+			echo '<input class="regular-text" type="password" autocomplete="new-password" required maxlength="512" id="amanah-seo-license-' . esc_attr( $module ) . '" name="license_key" value="">';
 			submit_button( __( 'Save License Key', 'amanah-seo' ), 'primary', 'submit', false );
-			echo '</form></div>';
+			echo '</form></section>';
 		}
-		echo '</div>';
+		echo '</div></div>';
 	}
 
 	private static function activate_ai_license( string $license_key, bool $validate_existing = false ): array {

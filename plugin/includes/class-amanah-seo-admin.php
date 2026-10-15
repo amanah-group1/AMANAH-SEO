@@ -23,9 +23,9 @@ final class AMANAH_SEO_Admin {
 
   // Keep the requested submenu order. Sales Page is the parent callback, not a submenu.
   add_submenu_page('amanah-seo','Settings & Access','⚙️ Settings & Access','manage_amanah_seo','amanah-seo-access',array('AMANAH_SEO_Module_Licenses','render'));
-  add_submenu_page('amanah-seo','CORE','🧩 CORE','manage_amanah_seo','amanah-seo-core',array('AMANAH_SEO_Module_Navigation','core_dashboard'));
-  add_submenu_page('amanah-seo','AMANAH SEO AI','🤖 AMANAH SEO AI','manage_amanah_seo','amanah-seo-ai-tools',array('AMANAH_SEO_Module_Navigation','ai_dashboard'));
-  add_submenu_page('amanah-seo','AMANAH SEO ENGINE','🔍 AMANAH SEO ENGINE','manage_amanah_seo','amanah-seo-engine-workflow',array('AMANAH_SEO_Module_Navigation','engine_dashboard'));
+  add_submenu_page('amanah-seo','CORE','🧩 CORE','manage_amanah_seo','amanah-seo-core',array(__CLASS__,'core_dashboard'));
+  add_submenu_page('amanah-seo','AMANAH SEO AI','🤖 AMANAH SEO AI','manage_amanah_seo','amanah-seo-ai-tools',array(__CLASS__,'ai_dashboard'));
+  add_submenu_page('amanah-seo','AMANAH SEO ENGINE','🔍 AMANAH SEO ENGINE','manage_amanah_seo','amanah-seo-engine-workflow',array(__CLASS__,'engine_dashboard'));
 
   // Feature pages remain registered, but their sidebar entries are hidden by navigation enforcement.
   add_submenu_page('amanah-seo-core','Website & Workspace','Website & Workspace','manage_amanah_seo','amanah-seo-workspace',array(__CLASS__,'workspace_page'));
@@ -577,9 +577,39 @@ final class AMANAH_SEO_Module_Navigation {
   }else echo '<div class="notice notice-info inline"><p>'.esc_html__('Halaman ini merupakan placeholder. Integrasi fitur belum tersedia dan belum ada proses AI yang dijalankan.','amanah-seo').'</p></div>';
   self::end();
  }
+ private static function module_dashboard_styles(){
+  echo '<style>
+   .amanah-seo-module-dashboard{width:100%;max-width:none;box-sizing:border-box}
+   .amanah-seo-module-hero{box-sizing:border-box;width:100%;margin:16px 0 24px;padding:28px 32px;background:#eaf4ff;border:1px solid #b8d8f5;border-left:5px solid #2271b1;border-radius:8px;line-height:1.7}
+   .amanah-seo-module-hero h2{font-size:clamp(22px,2vw,30px);line-height:1.25;margin:0 0 12px;color:#123b61}
+   .amanah-seo-module-hero p{font-size:15px;line-height:1.75;margin:0}
+   .amanah-seo-module-section-title{margin:0 0 6px}
+   .amanah-seo-module-section-description{margin:0 0 18px}
+   .amanah-seo-module-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;width:100%;align-items:stretch}
+   .amanah-seo-module-card{box-sizing:border-box;min-width:0;margin:0;padding:18px;display:flex;flex-direction:column;height:100%;border:1px solid #dcdcde;border-top:3px solid #2271b1;border-radius:6px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+   .amanah-seo-module-card .amanah-seo-module-group{margin:0 0 8px;color:#646970;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+   .amanah-seo-module-card h3{margin:0 0 10px;font-size:16px;line-height:1.4}
+   .amanah-seo-module-card .amanah-seo-module-description{flex:1;margin:0 0 16px;overflow-wrap:anywhere}
+   .amanah-seo-module-card .amanah-seo-module-status{margin:0 0 14px;font-size:12px;color:#646970}
+   .amanah-seo-module-card .amanah-seo-module-actions{margin:0}
+   @media(max-width:1500px){.amanah-seo-module-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+   @media(max-width:1200px){.amanah-seo-module-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+   @media(max-width:900px){.amanah-seo-module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+   @media(max-width:782px){.amanah-seo-module-hero{padding:22px 20px}.amanah-seo-module-grid{grid-template-columns:minmax(0,1fr)}}
+  </style>';
+ }
+ 
  public static function core_dashboard(){
   self::start('CORE');
-  echo '<p class="description" style="max-width:900px">Kelola workspace, temuan, pekerjaan, dan pengaturan inti AMANAH SEO dari satu area.</p>';
+  self::module_dashboard_styles();
+  echo '<div class="amanah-seo-module-dashboard">';
+  echo '<section class="amanah-seo-module-hero" aria-labelledby="amanah-seo-core-hero-title">';
+  echo '<h2 id="amanah-seo-core-hero-title">'.esc_html__('Satu pusat kendali untuk pekerjaan SEO Anda.','amanah-seo').'</h2>';
+  echo '<p>'.esc_html__('Kelola workspace, temuan, pekerjaan, dan area inti AMANAH SEO. Setiap area menunjukkan status implementasinya dengan jelas.','amanah-seo').'</p>';
+  echo '</section>';
+  echo '<section aria-labelledby="amanah-seo-core-areas-title">';
+  echo '<h2 id="amanah-seo-core-areas-title" class="amanah-seo-module-section-title">'.esc_html__('Area CORE','amanah-seo').'</h2>';
+  echo '<p class="description amanah-seo-module-section-description">'.esc_html__('Pilih area kerja utama untuk melanjutkan pengelolaan website.','amanah-seo').'</p>';
   $cards=array(
    array('group'=>'Overview','slug'=>'amanah-seo-dashboard','title'=>'Dashboard','description'=>'Ringkasan temuan, pekerjaan, dan tindakan berikutnya.','status'=>'Area tersedia'),
    array('group'=>'Workspace','slug'=>'amanah-seo-workspace','title'=>'Website & Workspace','description'=>'Identitas website dan konteks kerja utama.','status'=>'Area tersedia'),
@@ -589,20 +619,20 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Monitoring','slug'=>'amanah-seo-monitoring','title'=>'Monitoring & Results','description'=>'Area pemantauan dan hasil yang terverifikasi.','status'=>'Belum diimplementasikan'),
    array('group'=>'Reports','slug'=>'amanah-seo-reports','title'=>'Reports','description'=>'Area laporan dan ringkasan hasil.','status'=>'Belum diimplementasikan')
   );
-  echo '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;max-width:1180px;align-items:stretch">';
+  echo '<div class="amanah-seo-module-grid">';
   foreach($cards as $card){
-   echo '<article class="postbox" style="margin:0;padding:16px;display:flex;flex-direction:column;min-width:0">';
-   echo '<p style="margin:0 0 6px;color:#646970;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">'.esc_html($card['group']).'</p>';
-   echo '<h3 style="margin:0 0 8px;font-size:15px">'.esc_html($card['title']).'</h3>';
-   echo '<p style="margin:0 0 12px;flex:1">'.esc_html($card['description']).'</p>';
-   echo '<p style="margin:0 0 10px"><span class="description">'.esc_html($card['status']).'</span></p>';
-   echo '<p style="margin:0"><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page='.$card['slug'])).'">'.esc_html__('Buka area','amanah-seo').'</a></p>';
+   echo '<article class="amanah-seo-module-card">';
+   echo '<p class="amanah-seo-module-group">'.esc_html($card['group']).'</p>';
+   echo '<h3>'.esc_html($card['title']).'</h3>';
+   echo '<p class="amanah-seo-module-description">'.esc_html($card['description']).'</p>';
+   echo '<p class="amanah-seo-module-status">'.esc_html($card['status']).'</p>';
+   echo '<p class="amanah-seo-module-actions"><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page='.$card['slug'])).'">'.esc_html__('Buka area','amanah-seo').'</a></p>';
    echo '</article>';
   }
-  echo '</div>';
+  echo '</div></section></div>';
   self::end();
  }
- public static function ai_dashboard(){
+ function ai_dashboard(){
   self::start('AMANAH SEO AI');
   echo '<style>
    .amanah-seo-ai-dashboard{width:100%;max-width:none;box-sizing:border-box}
@@ -658,7 +688,15 @@ final class AMANAH_SEO_Module_Navigation {
  }
  public static function engine_dashboard(){
   self::start('AMANAH SEO ENGINE');
-  echo '<p class="description" style="max-width:900px">Alur kerja SEO terstruktur dari riset hingga persiapan publikasi. Area yang belum terintegrasi ditandai dengan jelas sebagai placeholder.</p>';
+  self::module_dashboard_styles();
+  echo '<div class="amanah-seo-module-dashboard">';
+  echo '<section class="amanah-seo-module-hero" aria-labelledby="amanah-seo-engine-hero-title">';
+  echo '<h2 id="amanah-seo-engine-hero-title">'.esc_html__('Dari riset hingga kesiapan publikasi.','amanah-seo').'</h2>';
+  echo '<p>'.esc_html__('Ikuti alur kerja SEO yang terstruktur. Area yang belum terintegrasi tetap ditandai sebagai placeholder dan tidak menjalankan proses otomatis.','amanah-seo').'</p>';
+  echo '</section>';
+  echo '<section aria-labelledby="amanah-seo-engine-areas-title">';
+  echo '<h2 id="amanah-seo-engine-areas-title" class="amanah-seo-module-section-title">'.esc_html__('Alur kerja ENGINE','amanah-seo').'</h2>';
+  echo '<p class="description amanah-seo-module-section-description">'.esc_html__('Pilih tahap yang ingin ditinjau atau dikerjakan.','amanah-seo').'</p>';
   $cards=array(
    array('group'=>'Keyword Intelligence','slug'=>'amanah-seo-engine-keywords','title'=>'Keyword & Search Intelligence','description'=>'Riset keyword, search intent, dan pengelompokan peluang.'),
    array('group'=>'Requirements','slug'=>'amanah-seo-engine-requirements','title'=>'Requirements','description'=>'Kebutuhan dan batasan sebelum strategi disusun.'),
@@ -670,17 +708,18 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Review & Approval','slug'=>'amanah-seo-engine-review','title'=>'Human Review & Approval','description'=>'Pemeriksaan manusia dan persetujuan sebelum publikasi.'),
    array('group'=>'Publishing Preparation','slug'=>'amanah-seo-engine-publishing','title'=>'Publishing Preparation','description'=>'Persiapan publikasi tanpa menerbitkan otomatis.')
   );
-  echo '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;max-width:1180px;align-items:stretch">';
+  echo '<div class="amanah-seo-module-grid">';
   foreach($cards as $card){
-   echo '<article class="postbox" style="margin:0;padding:16px;display:flex;flex-direction:column;min-width:0">';
-   echo '<p style="margin:0 0 6px;color:#646970;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">'.esc_html($card['group']).'</p>';
-   echo '<h3 style="margin:0 0 8px;font-size:15px">'.esc_html($card['title']).'</h3>';
-   echo '<p style="margin:0 0 12px;flex:1">'.esc_html($card['description']).'</p>';
-   echo '<p style="margin:0 0 10px"><span class="description">'.esc_html__('Belum diimplementasikan','amanah-seo').'</span></p>';
-   echo '<p style="margin:0"><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page='.$card['slug'])).'">'.esc_html__('Buka area','amanah-seo').'</a></p>';
+   echo '<article class="amanah-seo-module-card">';
+   echo '<p class="amanah-seo-module-group">'.esc_html($card['group']).'</p>';
+   echo '<h3>'.esc_html($card['title']).'</h3>';
+   echo '<p class="amanah-seo-module-description">'.esc_html($card['description']).'</p>';
+   echo '<p class="amanah-seo-module-status">'.esc_html__('Belum diimplementasikan','amanah-seo').'</p>';
+   echo '<p class="amanah-seo-module-actions"><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page='.$card['slug'])).'">'.esc_html__('Buka area','amanah-seo').'</a></p>';
    echo '</article>';
   }
-  echo '</div>';
+  echo '</div></section></div>';
   self::end();
  }
+ 
 }
