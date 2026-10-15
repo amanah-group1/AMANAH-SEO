@@ -18,7 +18,6 @@ final class AMANAH_SEO_Module_Licenses {
 		return in_array( $module, array( 'ai', 'engine' ), true );
 	}
 
-	/** Convert validated server state into a safe, readable admin label. */
 	/** Return true only when the server-validated product has usable entitlements. */
 	public static function is_module_active( string $module ): bool {
 		if ( ! self::valid_module( $module ) ) {
@@ -54,7 +53,7 @@ final class AMANAH_SEO_Module_Licenses {
 					'reason' => isset( $data['reason'] ) && is_string( $data['reason'] ) ? $data['reason'] : '',
 				);
 				self::save_license_status( 'engine', $record );
-			} catch ( \\Throwable $exception ) {
+			} catch ( \Throwable $exception ) {
 				$record = array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'service_unavailable' );
 				self::save_license_status( 'engine', $record );
 			}
@@ -142,6 +141,7 @@ final class AMANAH_SEO_Module_Licenses {
 		return $result;
 	}
 
+	/** Convert validated server state into a safe, readable admin label. */
 	private static function status_label( array $record ): string {
 		$status = isset( $record['status'] ) && is_string( $record['status'] ) ? strtolower( $record['status'] ) : 'not_activated';
 		$reason = isset( $record['reason'] ) && is_string( $record['reason'] ) ? $record['reason'] : '';
