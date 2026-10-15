@@ -85,7 +85,27 @@ final class AMANAH_SEO_Module_Licenses {
 
 	/** Redirect direct admin-page requests for locked modules to the sales page. */
 	public static function enforce_admin_module_access(): void {
-		if ( ! is_admin() || ! isset( $_GET['page'] ) || ! is_string( $_GET['page'] ) ) {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$action = isset( $_REQUEST['action'] ) && is_string( $_REQUEST['action'] ) ? sanitize_key( wp_unslash( $_REQUEST['action'] ) ) : '';
+		$ai_action = 0 === strpos( $action, 'amanah_' ) && 0 !== strpos( $action, 'amanah_seo_' );
+		$engine_action = 0 === strpos( $action, 'amanah_seo_engine_' );
+		if ( $ai_action && ! self::is_module_active( 'ai' ) ) {
+			if ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) {
+				wp_send_json_error( array( 'code' => 'amanah_seo_license_required', 'message' => __( 'AMANAH SEO AI requires a valid active license.', 'amanah-seo' ) ), 403 );
+			}
+			wp_die( esc_html__( 'AMANAH SEO AI requires a valid active license.', 'amanah-seo' ), '', array( 'response' => 403 ) );
+		}
+		if ( $engine_action && ! self::is_module_active( 'engine' ) ) {
+			if ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) {
+				wp_send_json_error( array( 'code' => 'amanah_seo_license_required', 'message' => __( 'AMANAH SEO ENGINE requires a valid active license.', 'amanah-seo' ) ), 403 );
+			}
+			wp_die( esc_html__( 'AMANAH SEO ENGINE requires a valid active license.', 'amanah-seo' ), '', array( 'response' => 403 ) );
+		}
+
+		if ( ! isset( $_GET['page'] ) || ! is_string( $_GET['page'] ) ) {
 			return;
 		}
 		$page = sanitize_key( wp_unslash( $_GET['page'] ) );
