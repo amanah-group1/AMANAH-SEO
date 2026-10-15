@@ -96,22 +96,55 @@ final class AMANAH_SEO_Admin {
  }
  public static function sales_page(){
   self::start('AMANAH SEO');
-  echo '<div class="amanah-seo-sales" style="max-width:1180px">';
-  echo '<section style="background:linear-gradient(135deg,#102b4e 0%,#175b83 58%,#218b91 100%);color:#fff;padding:38px 34px;border-radius:12px;margin:18px 0 24px">';
-  echo '<p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ccecf7">SEO WORKSPACE FOR WORDPRESS</p>';
-  echo '<h1 style="font-size:34px;line-height:1.2;color:#fff;margin:0 0 14px">AMANAH SEO</h1>';
-  echo '<p style="font-size:17px;line-height:1.7;max-width:820px;margin:0 0 22px;color:#f1f8fb">Satu pusat kendali untuk memahami kondisi website, menentukan prioritas SEO, dan mengelola pekerjaan secara terstruktur—langsung dari WordPress.</p>';
-  echo '<a class="button button-primary" style="background:#fff;border-color:#fff;color:#123b59" href="'.esc_url(admin_url('admin.php?page=amanah-seo-workspace')).'">Mulai dari Website &amp; Workspace</a>';
+  echo '<style>
+   .amanah-seo-sales{max-width:1240px}
+   .amanah-seo-sales .amanah-sales-hero{background:linear-gradient(125deg,#0b1f3a 0%,#124f78 58%,#087e83 100%);color:#fff;padding:clamp(28px,5vw,58px);border-radius:14px;margin:18px 0 30px}
+   .amanah-seo-sales .amanah-sales-eyebrow{margin:0 0 14px;color:#a9e9ed;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+   .amanah-seo-sales .amanah-sales-hero h1{max-width:900px;font-size:clamp(30px,4vw,46px);line-height:1.13;color:#fff;margin:0 0 20px}
+   .amanah-seo-sales .amanah-sales-hero p{max-width:850px;font-size:17px;line-height:1.8;color:#edf7fb;margin:0 0 16px}
+   .amanah-seo-sales .amanah-sales-cta{display:inline-block!important;height:auto!important;padding:12px 18px!important;background:#fff!important;border-color:#fff!important;color:#123b59!important;font-weight:700!important}
+   .amanah-seo-sales .amanah-sales-section{margin:32px 0}
+   .amanah-seo-sales .amanah-sales-section>h2{font-size:clamp(23px,3vw,30px);line-height:1.3;margin:0 0 12px;color:#102b4e}
+   .amanah-seo-sales .amanah-sales-lead{max-width:900px;font-size:15px;line-height:1.8}
+   .amanah-seo-sales .amanah-sales-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:22px 0}
+   .amanah-seo-sales .amanah-sales-card{box-sizing:border-box;display:flex;flex-direction:column;min-width:0;margin:0;padding:24px;border:1px solid #dcdcde;border-top:4px solid #2271b1;border-radius:9px;background:#fff;box-shadow:0 2px 8px rgba(16,43,78,.05)}
+   .amanah-seo-sales .amanah-sales-card h3{font-size:21px;line-height:1.35;margin:0 0 12px}
+   .amanah-seo-sales .amanah-sales-card p{line-height:1.75}
+   .amanah-seo-sales .amanah-sales-card .amanah-sales-card-bottom{margin-top:auto;padding-top:8px}
+   .amanah-seo-sales .amanah-sales-card-engine{border-top-color:#07847f}
+   .amanah-seo-sales .amanah-sales-card-core{border-top-color:#68788b}
+   .amanah-seo-sales .amanah-sales-note{background:#f0f6fc;border-left:4px solid #2271b1;border-radius:5px;padding:18px 22px;line-height:1.8}
+   .amanah-seo-sales .amanah-sales-final{padding:28px;background:#102b4e;color:#fff;border-radius:10px}
+   .amanah-seo-sales .amanah-sales-final h2{color:#fff;font-size:26px;margin:0 0 10px}
+   .amanah-seo-sales .amanah-sales-final p{color:#edf7fb;line-height:1.8}
+   @media(max-width:950px){.amanah-seo-sales .amanah-sales-grid{grid-template-columns:1fr 1fr}}
+   @media(max-width:650px){.amanah-seo-sales .amanah-sales-grid{grid-template-columns:1fr}.amanah-seo-sales .amanah-sales-card{padding:20px}}
+  </style>';
+  echo '<div class="amanah-seo-sales">';
+  echo '<section class="amanah-sales-hero" aria-labelledby="amanah-sales-title">';
+  echo '<p class="amanah-sales-eyebrow">SEO WORKSPACE FOR WORDPRESS · SIAP MENGHADAPI ERA AI</p>';
+  echo '<h1 id="amanah-sales-title">'.esc_html__('AI Sudah Mengubah Cara Dunia Mencari Informasi. Apakah Bisnis Anda Siap Ditemukan?','amanah-seo').'</h1>';
+  echo '<p><strong>'.esc_html__('Ketika AI mulai menjadi tempat orang mencari jawaban, apakah bisnis Anda akan ikut ditemukan — atau justru semakin tidak terlihat?','amanah-seo').'</strong></p>';
+  echo '<p>'.esc_html__('Orang tidak lagi hanya mengetik kata kunci dan membuka daftar tautan. Mereka juga bertanya kepada AI, mencari rekomendasi, membandingkan pilihan, dan mengandalkan jawaban langsung. Website saja bukan jaminan bisnis Anda akan disebut dalam jawaban AI.','amanah-seo').'</p>';
+  echo '<p>'.esc_html__('AMANAH SEO membantu Anda membangun fondasi digital dan mengelola alur kerja SEO secara lebih terstruktur, dalam satu platform WordPress dengan modul AI dan ENGINE.','amanah-seo').'</p>';
+  echo '<a class="button button-primary amanah-sales-cta" href="#pilih-modul">'.esc_html__('PERSIAPKAN WEBSITE SAYA UNTUK ERA AI','amanah-seo').' ↓</a>';
   echo '</section>';
-  echo '<h2 style="font-size:22px">Satu platform. Tiga area utama.</h2>';
-  echo '<p style="max-width:850px">Gunakan CORE untuk mengelola workspace dan pekerjaan inti. Area AI dan ENGINE disediakan sebagai modul terpisah yang dikelola dari AMANAH SEO; akses fitur modul mengikuti status aktivasi dan lisensinya.</p>';
-  echo '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:20px 0 26px">';
-  echo '<article class="postbox" style="padding:22px;margin:0"><p style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#2271b1;margin:0 0 8px">01 · CORE</p><h3 style="font-size:19px;margin:0 0 10px">Kelola dan prioritaskan</h3><p>Atur website dan workspace, tinjau temuan, susun pekerjaan, serta pantau persetujuan dan riwayat melalui satu area inti.</p><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-workspace')).'">Buka Workspace</a></article>';
-  echo '<article class="postbox" style="padding:22px;margin:0"><p style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#2271b1;margin:0 0 8px">02 · AI</p><h3 style="font-size:19px;margin:0 0 10px">Dukungan kecerdasan buatan</h3><p>Area untuk profil entitas, analisis konten, dan pembuatan konten berbantuan AI. Ketersediaan mengikuti implementasi dan lisensi modul AI.</p><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-ai-tools')).'">Lihat Area AI</a></article>';
-  echo '<article class="postbox" style="padding:22px;margin:0"><p style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#2271b1;margin:0 0 8px">03 · ENGINE</p><h3 style="font-size:19px;margin:0 0 10px">Alur kerja SEO terstruktur</h3><p>Area untuk riset keyword, perencanaan, alur konten, evaluasi, dan pemantauan SEO. Fitur yang belum tersedia tetap ditandai sebagai belum diimplementasikan.</p><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-engine-workflow')).'">Lihat Area ENGINE</a></article>';
+  echo '<section class="amanah-sales-section" aria-labelledby="amanah-sales-question">';
+  echo '<h2 id="amanah-sales-question">'.esc_html__('Saat Orang Bertanya kepada AI, Apakah Bisnis Anda Punya Peluang untuk Ditemukan?','amanah-seo').'</h2>';
+  echo '<p class="amanah-sales-lead">'.esc_html__('Identitas bisnis yang jelas, informasi yang konsisten, konten yang relevan, dan fondasi teknis yang baik merupakan bagian dari upaya membangun kehadiran digital. Karena itu, jangan hanya memikirkan artikel berikutnya. Pikirkan juga bagaimana bisnis Anda dipahami, bagaimana konten direncanakan, dan bagaimana pekerjaan SEO dievaluasi.','amanah-seo').'</p>';
+  echo '<div class="amanah-sales-note"><strong>'.esc_html__('Jangan tunggu sampai perubahan AI membuat Anda tertinggal.','amanah-seo').'</strong> '.esc_html__('Mulailah menata fondasi digital dan sistem kerja SEO Anda sekarang — tanpa mengandalkan janji peringkat atau rekomendasi AI yang tidak dapat dijamin.','amanah-seo').'</div>';
+  echo '</section>';
+  echo '<section id="pilih-modul" class="amanah-sales-section" aria-labelledby="amanah-sales-modules">';
+  echo '<h2 id="amanah-sales-modules">'.esc_html__('Satu Platform. Pilih Modul yang Anda Butuhkan.','amanah-seo').'</h2>';
+  echo '<p class="amanah-sales-lead">'.esc_html__('Mulai dengan AMANAH SEO Core, lalu pilih modul AI, ENGINE, atau keduanya. Masing-masing modul memiliki lisensi tersendiri yang dikelola melalui Settings & Access.','amanah-seo').'</p>';
+  echo '<div class="amanah-sales-grid">';
+  echo '<article class="amanah-sales-card amanah-sales-card-core"><p style="margin:0 0 8px;color:#68788b;font-size:12px;font-weight:800;letter-spacing:.08em">01 · CORE</p><h3>'.esc_html__('Mulai dengan AMANAH SEO','amanah-seo').'</h3><p>'.esc_html__('Kelola website dan workspace, tinjau temuan, susun pekerjaan, serta atur tindak lanjut melalui area inti AMANAH SEO. Core dapat dipasang tanpa lisensi Core.','amanah-seo').'</p><div class="amanah-sales-card-bottom"><a class="button button-secondary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-workspace')).'">'.esc_html__('Buka Website & Workspace','amanah-seo').'</a></div></article>';
+  echo '<article class="amanah-sales-card"><p style="margin:0 0 8px;color:#2271b1;font-size:12px;font-weight:800;letter-spacing:.08em">02 · MODUL AI</p><h3>'.esc_html__('AMANAH SEO AI','amanah-seo').'</h3><p>'.esc_html__('Untuk alur kerja seputar identitas entitas, otoritas dan penulis, analisis serta optimasi konten, topical authority, internal linking, schema, dan laporan AI.','amanah-seo').'</p><p class="description">'.esc_html__('Akses fitur mengikuti implementasi dan lisensi modul AI.','amanah-seo').'</p><div class="amanah-sales-card-bottom"><a class="button button-primary" href="'.esc_url(admin_url('admin.php?page=amanah-seo-ai-tools')).'">'.esc_html__('Jelajahi AMANAH SEO AI','amanah-seo').' →</a></div></article>';
+  echo '<article class="amanah-sales-card amanah-sales-card-engine"><p style="margin:0 0 8px;color:#07847f;font-size:12px;font-weight:800;letter-spacing:.08em">03 · MODUL ENGINE</p><h3>'.esc_html__('AMANAH SEO ENGINE','amanah-seo').'</h3><p>'.esc_html__('Untuk alur kerja riset keyword, kebutuhan konten, strategi, Content Brief & Blueprint, evaluasi, penyempurnaan, human review, dan persiapan publikasi.','amanah-seo').'</p><p class="description">'.esc_html__('Akses fitur mengikuti implementasi dan lisensi modul ENGINE.','amanah-seo').'</p><div class="amanah-sales-card-bottom"><a class="button button-primary" style="background:#087e83;border-color:#087e83" href="'.esc_url(admin_url('admin.php?page=amanah-seo-engine-workflow')).'">'.esc_html__('Jelajahi AMANAH SEO ENGINE','amanah-seo').' →</a></div></article>';
   echo '</div>';
-  echo '<section style="background:#f0f6fc;border-left:4px solid #2271b1;padding:16px 20px;margin:0 0 20px"><h2 style="margin:0 0 8px;font-size:17px">Dibangun dengan kendali pengguna</h2><p style="margin:0">AMANAH SEO membantu mengatur temuan, prioritas, dan alur kerja. Halaman ini tidak menjalankan perubahan SEO, membuat konten, atau menerbitkan apa pun secara otomatis.</p></section>';
-  echo '<p style="color:#646970;font-size:12px">Status dan kemampuan aktual mengikuti versi plugin, modul yang aktif, serta lisensi yang berlaku.</p>';
+  echo '</section>';
+  echo '<section class="amanah-sales-final"><h2>'.esc_html__('AI Mengubah Permainan. Persiapkan Sistem Kerja Anda.','amanah-seo').'</h2><p>'.esc_html__('Anda tidak dapat mengendalikan bagaimana setiap sistem AI memilih dan menyajikan informasi, dan penggunaan plugin tidak menjamin bisnis akan direkomendasikan. Namun, Anda dapat memperkuat fondasi digital, meningkatkan kualitas informasi, dan membangun proses SEO yang lebih terarah.','amanah-seo').'</p><a class="button button-primary amanah-sales-cta" href="'.esc_url(admin_url('admin.php?page=amanah-seo-access')).'">'.esc_html__('KELOLA MODUL & LISENSI','amanah-seo').' →</a></section>';
+  echo '<p style="color:#646970;font-size:12px;line-height:1.7;margin-top:16px">'.esc_html__('Catatan: kemampuan aktual mengikuti versi plugin dan status implementasi masing-masing fitur. Modul AI dan ENGINE memerlukan lisensi modul masing-masing; AMANAH SEO Core tidak memerlukan lisensi Core.','amanah-seo').'</p>';
   echo '</div>';
   self::end();
  }
