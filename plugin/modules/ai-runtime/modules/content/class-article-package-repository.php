@@ -1,0 +1,10 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+class AMANAH_SEO_AI_Article_Package_Repository {
+	private function table(){global $wpdb;return $wpdb->prefix.'amanah_article_packages';}
+	public function next_version($brief_id){global $wpdb;$v=$wpdb->get_var($wpdb->prepare('SELECT MAX(version) FROM '.$this->table().' WHERE content_brief_id=%d',$brief_id));return max(1,absint($v)+1);}
+	public function save(AMANAH_SEO_AI_Article_Package $package){global $wpdb;$now=current_time('mysql',true);$data=array('package_id'=>$package->get_package_id(),'content_brief_id'=>$package->get_content_brief_id(),'version'=>$package->get_version(),'parent_version'=>$package->get_parent_version(),'status'=>$package->get_status(),'package'=>wp_json_encode($package->get_package()),'quality_evaluation'=>wp_json_encode($package->get_quality_evaluation()),'traceability'=>wp_json_encode($package->get_traceability()),'created_at'=>$now,'updated_at'=>$now);return false!==$wpdb->insert($this->table(),$data,array('%s','%d','%d','%d','%s','%s','%s','%s','%s','%s'));}
+	public function update(AMANAH_SEO_AI_Article_Package $package){global $wpdb;$now=current_time('mysql',true);return false!==$wpdb->update($this->table(),array('status'=>$package->get_status(),'quality_evaluation'=>wp_json_encode($package->get_quality_evaluation()),'traceability'=>wp_json_encode($package->get_traceability()),'updated_at'=>$now),array('package_id'=>$package->get_package_id(),'version'=>$package->get_version()),array('%s','%s','%s','%s'),array('%s','%d'));}
+	public function latest($brief_id){global $wpdb;$row=$wpdb->get_row($wpdb->prepare('SELECT * FROM '.$this->table().' WHERE content_brief_id=%d ORDER BY version DESC LIMIT 1',$brief_id),ARRAY_A);return $row?$this->from_row($row):null;}
+	private function from_row($r){return new AMANAH_SEO_AI_Article_Package($r['package_id'],$r['content_brief_id'],$r['version'],null===$r['parent_version']?null:$r['parent_version'],$r['status'],json_decode($r['package'],true)?:array(),json_decode($r['quality_evaluation'],true)?:array(),json_decode($r['traceability'],true)?:array());}
+}

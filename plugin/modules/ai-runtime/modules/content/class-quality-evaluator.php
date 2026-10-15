@@ -1,0 +1,9 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+class AMANAH_SEO_AI_Quality_Evaluator {
+	private $ai_client;
+	private $dimensions=array('content_identity','search_intent_satisfaction','topic_coverage','content_completeness','factual_integrity','entity_context','article_structure','readability_user_experience','semantic_seo','value_differentiation','faq_quality','ai_search_readiness');
+	public function __construct($ai_client){$this->ai_client=$ai_client;}
+	public function evaluate(array $package,array $context,$user_id){$response=$this->ai_client->generate('content_generation_quality',array('article_package'=>$package,'context'=>$context,'dimensions'=>$this->dimensions),$user_id);$result=isset($response['result'])&&is_array($response['result'])?$response['result']:array();return $this->normalize(isset($result['quality_evaluation'])&&is_array($result['quality_evaluation'])?$result['quality_evaluation']:array());}
+	private function normalize(array $e){$score=isset($e['score'])?max(0,min(100,absint($e['score']))):0;$severity=isset($e['severity'])&&is_string($e['severity'])?sanitize_key($e['severity']):'high';$gate='pass'===$severity?'READY_FOR_HUMAN_REVIEW':('medium'===$severity?'IMPROVEMENT_RECOMMENDED':'NEEDS_REFINEMENT');if('critical'===$severity)$gate='NOT_READY';return array('score'=>$score,'weaknesses'=>isset($e['weaknesses'])&&is_array($e['weaknesses'])?$e['weaknesses']:array(),'recommendations'=>isset($e['recommendations'])&&is_array($e['recommendations'])?$e['recommendations']:array(),'faq_suggestions'=>isset($e['faq_suggestions'])&&is_array($e['faq_suggestions'])?$e['faq_suggestions']:array(),'dimensions'=>isset($e['dimensions'])&&is_array($e['dimensions'])?$e['dimensions']:array(),'severity'=>$severity,'gate'=>$gate);}
+}
