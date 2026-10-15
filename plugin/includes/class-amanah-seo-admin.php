@@ -98,17 +98,10 @@ final class AMANAH_SEO_Admin {
  public static function sales_page(){
   self::start('AMANAH SEO');
   echo '<style>
-   /* Sales page: use 80% of the available admin content area and center it. */
-   .wrap:has(> .amanah-seo-sales){width:80%;max-width:none;margin-left:auto;margin-right:auto;box-sizing:border-box}
+   /* Keep the original sales-page design; only size and center its WordPress wrapper. */
+   .wrap:has(.amanah-seo-sales){width:80%;max-width:none;margin-left:auto;margin-right:auto;box-sizing:border-box}
    .amanah-seo-sales{width:100%;max-width:none;margin:0 auto;box-sizing:border-box}
-   .amanah-seo-sales .amanah-sales-hero{text-align:center}
-   .amanah-seo-sales .amanah-sales-hero h1,
-   .amanah-seo-sales .amanah-sales-hero p{margin-left:auto;margin-right:auto}
-   .amanah-seo-sales .amanah-sales-section>h2,
-   .amanah-seo-sales .amanah-sales-lead{text-align:center;margin-left:auto;margin-right:auto}
-   .amanah-seo-sales .amanah-sales-note{text-align:center}
-   .amanah-seo-sales .amanah-sales-final{text-align:center}
-   @media(max-width:782px){.wrap:has(> .amanah-seo-sales){width:94%}}
+   @media(max-width:782px){.wrap:has(.amanah-seo-sales){width:94%}}
    .amanah-seo-sales .amanah-sales-hero{background:linear-gradient(125deg,#0b1f3a 0%,#124f78 58%,#087e83 100%);color:#fff;padding:clamp(28px,5vw,58px);border-radius:14px;margin:18px 0 30px}
    .amanah-seo-sales .amanah-sales-eyebrow{margin:0 0 14px;color:#a9e9ed;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
    .amanah-seo-sales .amanah-sales-hero h1{max-width:900px;font-size:clamp(30px,4vw,46px);line-height:1.13;color:#fff;margin:0 0 20px}
