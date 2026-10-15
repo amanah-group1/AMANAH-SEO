@@ -4,8 +4,7 @@ defined( 'ABSPATH' ) || exit;
 final class AMANAH_SEO_Admin {
  private static $statuses=array('not_started'=>'Belum dimulai','ready'=>'Siap','in_progress'=>'Berjalan','awaiting_approval'=>'Menunggu persetujuan','blocked'=>'Terhambat','failed'=>'Gagal','completed'=>'Selesai','cancelled'=>'Dibatalkan');
  public static function register() {
-  // Ensure the AMANAH SEO parent menu resolves to page=amanah-seo after legacy menu registrations.
-  add_action('admin_menu',array(__CLASS__,'menu'),9998);
+  add_action('admin_menu',array(__CLASS__,'menu'));
   add_action('admin_menu',array('AMANAH_SEO_Module_Navigation','menu'),30);
   add_action('admin_post_amanah_seo_run_self_test',array(__CLASS__,'run_self_test'));
   add_action('admin_post_amanah_seo_save_workspace',array(__CLASS__,'save_workspace'));
