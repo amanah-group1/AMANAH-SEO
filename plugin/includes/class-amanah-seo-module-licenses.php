@@ -284,11 +284,16 @@ final class AMANAH_SEO_Module_Licenses {
 		echo '<h2 id="amanah-seo-access-ai-title">' . esc_html__( 'AI Provider & Model', 'amanah-seo' ) . '</h2>';
 		echo '<p>' . esc_html__( 'Atur provider AI, model, dan API key dari satu halaman AMANAH SEO. API key yang sudah tersimpan tidak ditampilkan kembali.', 'amanah-seo' ) . '</p>';
 		if ( class_exists( 'AMANAH_SEO_AI_AI_Settings' ) && class_exists( 'AMANAH_SEO_AI_AI_Credentials' ) && class_exists( 'AMANAH_SEO_AI_AI_Model_Catalog' ) && class_exists( 'AMANAH_SEO_AI_AI_Settings_Controller' ) ) {
-			$ai_settings = new AMANAH_SEO_AI_AI_Settings();
-			$ai_credentials = new AMANAH_SEO_AI_AI_Credentials( $ai_settings );
-			$ai_catalog = new AMANAH_SEO_AI_AI_Model_Catalog();
-			$ai_controller = new AMANAH_SEO_AI_AI_Settings_Controller( $ai_settings, $ai_credentials, $ai_catalog );
-			$ai_controller->render();
+			try {
+				$ai_settings = new AMANAH_SEO_AI_AI_Settings();
+				$ai_credentials = new AMANAH_SEO_AI_AI_Credentials( $ai_settings );
+				$ai_catalog = new AMANAH_SEO_AI_AI_Model_Catalog();
+				$ai_controller = new AMANAH_SEO_AI_AI_Settings_Controller( $ai_settings, $ai_credentials, $ai_catalog );
+				$ai_controller->render();
+			} catch ( Throwable $exception ) {
+				error_log( '[AMANAH SEO] AI settings panel failed to render: ' . $exception->getMessage() );
+				echo '<div class="notice notice-warning inline"><p>' . esc_html__( 'Pengaturan AI belum dapat ditampilkan. Periksa log error WordPress.', 'amanah-seo' ) . '</p></div>';
+			}
 		} else {
 			echo '<div class="notice notice-warning inline"><p>' . esc_html__( 'Komponen pengaturan AI belum tersedia pada runtime plugin ini.', 'amanah-seo' ) . '</p></div>';
 		}
