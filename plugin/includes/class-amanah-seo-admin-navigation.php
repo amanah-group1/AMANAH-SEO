@@ -54,7 +54,7 @@ final class AMANAH_SEO_Admin_Navigation {
 				$slug = isset( $item[2] ) ? (string) $item[2] : '';
 				if ( ! in_array( $slug, $allowed, true ) ) {
 					$href = 'admin.php?page=' . $slug;
-					$css[] = '#adminmenu .wp-submenu a[href="' . esc_attr( $href ) . '"]{display:none!important}';
+					$css[] = '#adminmenu .wp-submenu li:has(> a[href="' . esc_attr( $href ) . '"]){display:none!important}';
 				}
 			}
 		}
@@ -65,7 +65,7 @@ final class AMANAH_SEO_Admin_Navigation {
 				foreach ( $submenu[ $parent_slug ] as $item ) {
 					$slug = isset( $item[2] ) ? (string) $item[2] : '';
 					$href = 'admin.php?page=' . $slug;
-					$css[] = '#adminmenu .wp-submenu a[href="' . esc_attr( $href ) . '"]{display:none!important}';
+					$css[] = '#adminmenu .wp-submenu li:has(> a[href="' . esc_attr( $href ) . '"]){display:none!important}';
 				}
 			}
 		}
