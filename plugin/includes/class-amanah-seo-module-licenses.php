@@ -10,6 +10,8 @@ final class AMANAH_SEO_Module_Licenses {
 
 	public static function register() {
 		add_action( 'admin_post_amanah_seo_save_module_license', array( __CLASS__, 'save' ) );
+		add_action( 'admin_init', array( __CLASS__, 'enforce_admin_module_access' ), 1 );
+		add_filter( 'rest_pre_dispatch', array( __CLASS__, 'enforce_rest_module_access' ), 10, 3 );
 	}
 
 	private static function valid_module( $module ): bool {
@@ -17,6 +19,109 @@ final class AMANAH_SEO_Module_Licenses {
 	}
 
 	/** Convert validated server state into a safe, readable admin label. */
+	/** Return true only when the server-validated product has usable entitlements. */
+	public static function is_module_active( string $module ): bool {
+		if ( ! self::valid_module( $module ) ) {
+			return false;
+		}
+
+		if ( 'ai' === $module ) {
+			$key = self::get_license( 'ai' );
+			if ( ! is_string( $key ) || '' === $key ) {
+				return false;
+			}
+			$all = get_option( 'amanah_seo_module_license_statuses', array() );
+			$all = is_array( $all ) ? $all : array();
+			$record = isset( $all['ai'] ) && is_array( $all['ai'] ) ? $all['ai'] : array();
+			$validated = isset( $record['validated_at'] ) && is_string( $record['validated_at'] ) ? strtotime( $record['validated_at'] ) : false;
+			if ( false === $validated || time() - $validated >= DAY_IN_SECONDS ) {
+				$refreshed = self::activate_ai_license( $key, true );
+				$refreshed = self::apply_ai_grace_fallback( $refreshed, $record );
+				self::save_license_status( 'ai', $refreshed );
+				$record = $refreshed;
+			}
+		} else {
+			try {
+				$services = \\Amanah\\SEOEngine\\Core\\Bootstrap\\Plugin::boot();
+				$state = $services->get( 'license_client' )->validate();
+				$data = method_exists( $state, 'toArray' ) ? $state->toArray() : array();
+				$record = array(
+					'status' => isset( $data['status'] ) && is_string( $data['status'] ) ? strtolower( $data['status'] ) : 'unknown',
+					'entitlements' => $state->getEntitlements(),
+					'validated_at' => isset( $data['validated_at'] ) && is_string( $data['validated_at'] ) ? $data['validated_at'] : '',
+					'expires_at' => isset( $data['expiration'] ) && is_string( $data['expiration'] ) ? $data['expiration'] : '',
+					'plan' => isset( $data['plan'] ) && is_string( $data['plan'] ) ? $data['plan'] : '',
+					'reason' => isset( $data['reason'] ) && is_string( $data['reason'] ) ? $data['reason'] : '',
+				);
+				self::save_license_status( 'engine', $record );
+			} catch ( \\Throwable $exception ) {
+				$record = array( 'status' => 'unknown', 'entitlements' => array(), 'reason' => 'service_unavailable' );
+				self::save_license_status( 'engine', $record );
+			}
+		}
+
+		if ( ! in_array( $record['status'] ?? '', array( 'active', 'grace' ), true ) || empty( $record['entitlements'] ) || ! is_array( $record['entitlements'] ) ) {
+			return false;
+		}
+		$expires = isset( $record['expires_at'] ) && is_string( $record['expires_at'] ) ? trim( $record['expires_at'] ) : '';
+		if ( '' !== $expires && 'LIFETIME' !== strtoupper( $expires ) ) {
+			$expiry = strtotime( $expires );
+			if ( false === $expiry || $expiry < time() ) {
+				return false;
+			}
+		}
+		if ( 'grace' === $record['status'] ) {
+			$until = isset( $record['grace_until'] ) && is_string( $record['grace_until'] ) ? strtotime( $record['grace_until'] ) : false;
+			if ( false === $until || $until < time() ) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static function has_any_active_module(): bool {
+		return self::is_module_active( 'ai' ) || self::is_module_active( 'engine' );
+	}
+
+	/** Redirect direct admin-page requests for locked modules to the sales page. */
+	public static function enforce_admin_module_access(): void {
+		if ( ! is_admin() || ! isset( $_GET['page'] ) || ! is_string( $_GET['page'] ) ) {
+			return;
+		}
+		$page = sanitize_key( wp_unslash( $_GET['page'] ) );
+		if ( in_array( $page, array( 'amanah-seo', 'amanah-seo-access' ), true ) ) {
+			return;
+		}
+		$module = '';
+		if ( 0 === strpos( $page, 'amanah-seo-engine-' ) ) {
+			$module = 'engine';
+		} elseif ( 0 === strpos( $page, 'amanah-seo-ai-' ) || 0 === strpos( $page, 'amanah-entity-' ) || 0 === strpos( $page, 'amanah-authority' ) || 0 === strpos( $page, 'amanah-content-' ) || 0 === strpos( $page, 'amanah-faq-' ) || 0 === strpos( $page, 'amanah-schema-' ) ) {
+			$module = 'ai';
+		} elseif ( in_array( $page, array( 'amanah-seo-core', 'amanah-seo-dashboard', 'amanah-seo-workspace', 'amanah-seo-findings', 'amanah-seo-tasks', 'amanah-seo-history', 'amanah-seo-diagnostics' ), true ) ) {
+			if ( ! self::has_any_active_module() ) {
+				wp_safe_redirect( admin_url( 'admin.php?page=amanah-seo' ) );
+				exit;
+			}
+			return;
+		}
+		if ( '' !== $module && ! self::is_module_active( $module ) ) {
+			wp_safe_redirect( add_query_arg( 'locked_module', $module, admin_url( 'admin.php?page=amanah-seo' ) ) );
+			exit;
+		}
+	}
+
+	/** Protect AI REST endpoints even when their UI pages are bypassed. */
+	public static function enforce_rest_module_access( $result, $server, $request ) {
+		if ( null !== $result || ! is_object( $request ) || ! method_exists( $request, 'get_route' ) ) {
+			return $result;
+		}
+		$route = (string) $request->get_route();
+		if ( 0 === strpos( $route, '/amanah/v1/' ) && ! self::is_module_active( 'ai' ) ) {
+			return new WP_Error( 'amanah_seo_license_required', __( 'AMANAH SEO AI requires a valid active license for this operation.', 'amanah-seo' ), array( 'status' => 403 ) );
+		}
+		return $result;
+	}
+
 	private static function status_label( array $record ): string {
 		$status = isset( $record['status'] ) && is_string( $record['status'] ) ? strtolower( $record['status'] ) : 'not_activated';
 		$reason = isset( $record['reason'] ) && is_string( $record['reason'] ) ? $record['reason'] : '';
