@@ -545,7 +545,9 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-optimizer','title'=>'Content Optimizer','description'=>'Penyempurnaan konten yang sudah ada.'),
    array('group'=>'Authority','slug'=>'amanah-seo-ai-topic-authority','title'=>'Topic Authority','description'=>'Cakupan topik dan kedalaman keahlian.'),
    array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-internal-links','title'=>'Internal Link AI','description'=>'Dukungan perencanaan tautan internal.'),
-   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-generator','title'=>'Schema Manager','description'=>'Akses ke generator dan validasi schema.')
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-generator','title'=>'Schema Manager','description'=>'Akses ke generator dan validasi schema.'),
+   array('group'=>'Technical SEO','slug'=>'amanah-seo-ai-schema-validation','title'=>'Schema Validation','description'=>'Periksa hasil validasi schema secara terpisah.'),
+   array('group'=>'Reporting','slug'=>'amanah-seo-ai-reports','title'=>'AI Reports','description'=>'Area laporan aktivitas dan hasil AI.')
   );
   echo '<div class="amanah-seo-ai-grid">';
   foreach($cards as $card){
@@ -569,7 +571,9 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Requirements','slug'=>'amanah-seo-engine-requirements','title'=>'Requirements','description'=>'Kebutuhan dan batasan sebelum strategi disusun.'),
    array('group'=>'Strategy & Planning','slug'=>'amanah-seo-engine-strategy','title'=>'Strategy & Planning','description'=>'Rencana SEO dan prioritas kerja yang terstruktur.'),
    array('group'=>'Content Workflow','slug'=>'amanah-seo-engine-brief','title'=>'Content Brief & Blueprint','description'=>'Kerangka konten sebelum proses produksi.'),
+   array('group'=>'Content Workflow','slug'=>'amanah-seo-ai-content-brief','title'=>'Content Brief (Legacy Route)','description'=>'Rute kompatibilitas menuju area Content Brief.'),
    array('group'=>'Content Workflow','slug'=>'amanah-seo-engine-generation','title'=>'Generation & Evaluation','description'=>'Tahap produksi dan evaluasi konten.'),
+   array('group'=>'Content Workflow','slug'=>'amanah-content-generation','title'=>'Article Generation (Legacy Route)','description'=>'Rute kompatibilitas menuju area pembuatan artikel.'),
    array('group'=>'Content Workflow','slug'=>'amanah-seo-engine-refinement','title'=>'Refinement & Maturity','description'=>'Penyempurnaan dan penilaian kesiapan konten.'),
    array('group'=>'Review & Approval','slug'=>'amanah-seo-engine-review','title'=>'Human Review & Approval','description'=>'Pemeriksaan manusia dan persetujuan sebelum publikasi.'),
    array('group'=>'Publishing Preparation','slug'=>'amanah-seo-engine-publishing','title'=>'Publishing Preparation','description'=>'Persiapan publikasi tanpa menerbitkan otomatis.')
