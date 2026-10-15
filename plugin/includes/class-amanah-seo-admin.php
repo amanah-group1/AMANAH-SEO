@@ -539,6 +539,8 @@ final class AMANAH_SEO_Module_Navigation {
    array('group'=>'Entity & Authority','slug'=>'amanah-authority','title'=>'Authority & Author','description'=>'Kredibilitas penulis dan keahlian.'),
    array('group'=>'Intelligence','slug'=>'amanah-seo-ai-audit','title'=>'AI Audit','description'=>'Area audit SEO berbantuan AI.'),
    array('group'=>'Content AI','slug'=>'amanah-content-analyzer','title'=>'Content Analyzer','description'=>'Analisis kualitas dan konteks konten.'),
+   array('group'=>'Content AI','slug'=>'amanah-seo-ai-content-brief','title'=>'Content Brief','description'=>'Susun brief konten yang terarah sebelum proses produksi.'),
+   array('group'=>'Content AI','slug'=>'amanah-content-generation','title'=>'Article Generation','description'=>'Buat draf artikel berdasarkan brief konten yang telah disetujui.'),
 
 
    array('group'=>'Content AI','slug'=>'amanah-seo-ai-faq-generator','title'=>'FAQ Generator','description'=>'Perencanaan pertanyaan dan jawaban.'),
